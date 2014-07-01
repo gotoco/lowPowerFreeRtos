@@ -1,0 +1,2134 @@
+Archive member included because of file (symbol)
+
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+                              out/command.o (_ZNSt8__detail15_List_node_base7_M_hookEPS0_)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+                              out/command.o (__aeabi_atexit)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o (atexit)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-cxa_atexit.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o) (__cxa_atexit)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o (exit)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o (__libc_fini_array)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o) (_global_impure_ptr)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o (__libc_init_array)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+                              out/heap_3.o (malloc)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o) (_malloc_r)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memcpy.o)
+                              out/queue.o (memcpy)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memset.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o (memset)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mlock.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o) (__malloc_lock)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+                              out/syscalls.o (errno)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-stpcpy.o)
+                              out/main.o (stpcpy)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o)
+                              out/tasks.o (strcat)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcpy.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o) (strcpy)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strlen.o)
+                              out/main.o (strlen)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncmp.o)
+                              out/command.o (strncmp)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncpy.o)
+                              out/tasks.o (strncpy)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strtok_r.o)
+                              out/command.o (strtok_r)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o) (__register_exitproc)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o) (__call_exitprocs)
+/home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o) (_free_r)
+
+Allocating common symbols
+Common symbol       size              file
+
+errno               0x4               /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+xQueueRegistry      0x28              out/queue.o
+
+Discarded input sections
+
+ .text          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+ .text          0x00000000       0x68 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .ARM.extab     0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .ARM.exidx     0x00000000        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .data          0x00000000        0x0 out/startup_ARMv7-M_E_.o
+ .bss           0x00000000        0x0 out/startup_ARMv7-M_E_.o
+ .text          0x00000000        0x0 out/printf-stdarg.o
+ .data          0x00000000        0x0 out/printf-stdarg.o
+ .bss           0x00000000        0x0 out/printf-stdarg.o
+ .text          0x00000000        0x0 out/syscalls.o
+ .data          0x00000000        0x0 out/syscalls.o
+ .bss           0x00000000        0x0 out/syscalls.o
+ .text._close_r
+                0x00000000        0x6 out/syscalls.o
+ .text._execve_r
+                0x00000000       0x10 out/syscalls.o
+ .text._exit    0x00000000        0x2 out/syscalls.o
+ .text._fork_r  0x00000000       0x10 out/syscalls.o
+ .text._fstat_r
+                0x00000000        0xa out/syscalls.o
+ .text._getpid_r
+                0x00000000        0x4 out/syscalls.o
+ .text._isatty_r
+                0x00000000        0x4 out/syscalls.o
+ .text._kill_r  0x00000000       0x10 out/syscalls.o
+ .text._link_r  0x00000000       0x10 out/syscalls.o
+ .text._lseek_r
+                0x00000000        0x4 out/syscalls.o
+ .text._open_r  0x00000000        0x6 out/syscalls.o
+ .text._read_r  0x00000000        0x4 out/syscalls.o
+ .text._stat_r  0x00000000        0xa out/syscalls.o
+ .text._times_r
+                0x00000000        0x6 out/syscalls.o
+ .text._unlink_r
+                0x00000000       0x10 out/syscalls.o
+ .text._wait_r  0x00000000       0x10 out/syscalls.o
+ .text._write_r
+                0x00000000        0x4 out/syscalls.o
+ .data.environ  0x00000000        0x4 out/syscalls.o
+ .bss.environ_initial
+                0x00000000        0x4 out/syscalls.o
+ .text          0x00000000        0x0 out/vectors_STM32L1xx_md.o
+ .data          0x00000000        0x0 out/vectors_STM32L1xx_md.o
+ .bss           0x00000000        0x0 out/vectors_STM32L1xx_md.o
+ .text          0x00000000        0x0 out/croutine.o
+ .data          0x00000000        0x0 out/croutine.o
+ .bss           0x00000000        0x0 out/croutine.o
+ .text.xCoRoutineCreate
+                0x00000000       0xc8 out/croutine.o
+ .text.vCoRoutineAddToDelayedList
+                0x00000000       0x4c out/croutine.o
+ .text.vCoRoutineSchedule
+                0x00000000      0x158 out/croutine.o
+ .text.xCoRoutineRemoveFromEventList
+                0x00000000       0x34 out/croutine.o
+ .bss.xDelayedCoRoutineList1
+                0x00000000       0x14 out/croutine.o
+ .bss.xPassedTicks
+                0x00000000        0x4 out/croutine.o
+ .bss.xPendingReadyCoRoutineList
+                0x00000000       0x14 out/croutine.o
+ .bss.pxCurrentCoRoutine
+                0x00000000        0x4 out/croutine.o
+ .bss.xDelayedCoRoutineList2
+                0x00000000       0x14 out/croutine.o
+ .bss.xCoRoutineTickCount
+                0x00000000        0x4 out/croutine.o
+ .bss.xLastTickCount
+                0x00000000        0x4 out/croutine.o
+ .bss.pxDelayedCoRoutineList
+                0x00000000        0x4 out/croutine.o
+ .bss.pxReadyCoRoutineLists
+                0x00000000       0x28 out/croutine.o
+ .bss.uxTopCoRoutineReadyPriority
+                0x00000000        0x4 out/croutine.o
+ .bss.pxOverflowDelayedCoRoutineList
+                0x00000000        0x4 out/croutine.o
+ .text          0x00000000        0x0 out/list.o
+ .data          0x00000000        0x0 out/list.o
+ .bss           0x00000000        0x0 out/list.o
+ .text          0x00000000        0x0 out/queue.o
+ .data          0x00000000        0x0 out/queue.o
+ .bss           0x00000000        0x0 out/queue.o
+ .text.xQueueReceiveFromISR
+                0x00000000       0x4e out/queue.o
+ .text.uxQueueMessagesWaiting
+                0x00000000       0x12 out/queue.o
+ .text.uxQueueMessagesWaitingFromISR
+                0x00000000        0x4 out/queue.o
+ .text.vQueueDelete
+                0x00000000       0x38 out/queue.o
+ .text.ucQueueGetQueueNumber
+                0x00000000        0x6 out/queue.o
+ .text.vQueueSetQueueNumber
+                0x00000000        0x6 out/queue.o
+ .text.ucQueueGetQueueType
+                0x00000000        0x6 out/queue.o
+ .text.xQueueIsQueueEmptyFromISR
+                0x00000000        0xc out/queue.o
+ .text.xQueueIsQueueFullFromISR
+                0x00000000        0xe out/queue.o
+ .text.vQueueAddToRegistry
+                0x00000000       0x28 out/queue.o
+ COMMON         0x00000000       0x28 out/queue.o
+ .text          0x00000000        0x0 out/tasks.o
+ .data          0x00000000        0x0 out/tasks.o
+ .bss           0x00000000        0x0 out/tasks.o
+ .text.vTaskDelete
+                0x00000000       0x70 out/tasks.o
+ .text.uxTaskPriorityGet
+                0x00000000       0x1c out/tasks.o
+ .text.vTaskPrioritySet
+                0x00000000       0x98 out/tasks.o
+ .text.xTaskIsTaskSuspended
+                0x00000000       0x2c out/tasks.o
+ .text.vTaskResume
+                0x00000000       0x68 out/tasks.o
+ .text.xTaskResumeFromISR
+                0x00000000       0x7c out/tasks.o
+ .text.vTaskEndScheduler
+                0x00000000       0x18 out/tasks.o
+ .text.xTaskGetTickCountFromISR
+                0x00000000       0x1c out/tasks.o
+ .text.uxTaskGetNumberOfTasks
+                0x00000000        0xc out/tasks.o
+ .text.vTaskDelayUntil
+                0x00000000       0x60 out/tasks.o
+ .text.vTaskSuspend
+                0x00000000       0x78 out/tasks.o
+ .text.uxTaskGetTaskNumber
+                0x00000000        0x6 out/tasks.o
+ .text.vTaskSetTaskNumber
+                0x00000000        0x6 out/tasks.o
+ .text          0x00000000        0x0 out/timers.o
+ .data          0x00000000        0x0 out/timers.o
+ .bss           0x00000000        0x0 out/timers.o
+ .text          0x00000000        0x0 out/port.o
+ .data          0x00000000        0x0 out/port.o
+ .bss           0x00000000        0x0 out/port.o
+ .text.vPortEndScheduler
+                0x00000000        0x2 out/port.o
+ .rodata.ulKernelPriority
+                0x00000000        0x4 out/port.o
+ .text          0x00000000        0x0 out/heap_3.o
+ .data          0x00000000        0x0 out/heap_3.o
+ .bss           0x00000000        0x0 out/heap_3.o
+ .text          0x00000000        0x0 out/ff.o
+ .data          0x00000000        0x0 out/ff.o
+ .bss           0x00000000        0x0 out/ff.o
+ .text.mem_cpy  0x00000000       0x12 out/ff.o
+ .text.st_clust
+                0x00000000       0x12 out/ff.o
+ .text.sync     0x00000000       0xb6 out/ff.o
+ .text.dir_register
+                0x00000000       0x5e out/ff.o
+ .text.remove_chain
+                0x00000000       0x5c out/ff.o
+ .text.f_open   0x00000000      0x144 out/ff.o
+ .text.f_read   0x00000000      0x182 out/ff.o
+ .text.f_write  0x00000000      0x1ba out/ff.o
+ .text.f_sync   0x00000000       0xa8 out/ff.o
+ .text.f_close  0x00000000        0xe out/ff.o
+ .text.f_lseek  0x00000000      0x16c out/ff.o
+ .text.f_stat   0x00000000       0x48 out/ff.o
+ .text.f_getfree
+                0x00000000       0xea out/ff.o
+ .text.f_truncate
+                0x00000000       0x9c out/ff.o
+ .text.f_unlink
+                0x00000000       0xd6 out/ff.o
+ .text.f_mkdir  0x00000000      0x19e out/ff.o
+ .text.f_chmod  0x00000000       0x5e out/ff.o
+ .text.f_utime  0x00000000       0x60 out/ff.o
+ .text.f_rename
+                0x00000000      0x12a out/ff.o
+ .text          0x00000000        0x0 out/syscall.o
+ .data          0x00000000        0x0 out/syscall.o
+ .bss           0x00000000        0x0 out/syscall.o
+ .text          0x00000000        0x0 out/main.o
+ .data          0x00000000        0x0 out/main.o
+ .bss           0x00000000        0x0 out/main.o
+ .data.danaZMSP
+                0x00000000        0x1 out/main.o
+ .text          0x00000000        0x0 out/overrides.o
+ .data          0x00000000        0x0 out/overrides.o
+ .bss           0x00000000        0x0 out/overrides.o
+ .text.__cxa_pure_virtual
+                0x00000000       0x1c out/overrides.o
+ .rodata.str1.1
+                0x00000000       0x5a out/overrides.o
+ .text          0x00000000        0x0 out/mmc.o
+ .data          0x00000000        0x0 out/mmc.o
+ .bss           0x00000000        0x0 out/mmc.o
+ .text._ZL12prvQueryCardhmPhj.constprop.2
+                0x00000000       0x60 out/mmc.o
+ .text.disk_ioctl
+                0x00000000      0x1b8 out/mmc.o
+ .text.get_fattime
+                0x00000000        0x4 out/mmc.o
+ .group         0x00000000        0x8 out/command.o
+ .group         0x00000000        0x8 out/command.o
+ .text          0x00000000        0x0 out/command.o
+ .data          0x00000000        0x0 out/command.o
+ .bss           0x00000000        0x0 out/command.o
+ .text._Z23commandArgumentsToPairsPPKcmP19CommandArgumentPairj
+                0x00000000       0x6a out/command.o
+ .text          0x00000000        0x0 out/gpio.o
+ .data          0x00000000        0x0 out/gpio.o
+ .bss           0x00000000        0x0 out/gpio.o
+ .text          0x00000000        0x0 out/helper.o
+ .data          0x00000000        0x0 out/helper.o
+ .bss           0x00000000        0x0 out/helper.o
+ .text          0x00000000        0x0 out/i2c.o
+ .data          0x00000000        0x0 out/i2c.o
+ .bss           0x00000000        0x0 out/i2c.o
+ .text._Z7i2cReadhPhj
+                0x00000000       0x74 out/i2c.o
+ .text          0x00000000        0x0 out/rcc.o
+ .data          0x00000000        0x0 out/rcc.o
+ .bss           0x00000000        0x0 out/rcc.o
+ .text          0x00000000        0x0 out/spi.o
+ .data          0x00000000        0x0 out/spi.o
+ .bss           0x00000000        0x0 out/spi.o
+ .text          0x00000000        0x0 out/usart.o
+ .data          0x00000000        0x0 out/usart.o
+ .bss           0x00000000        0x0 out/usart.o
+ .text          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .text._ZNSt8__detail15_List_node_base4swapERS0_S1_
+                0x00000000       0x50 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.extab.text._ZNSt8__detail15_List_node_base4swapERS0_S1_
+                0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.exidx.text._ZNSt8__detail15_List_node_base4swapERS0_S1_
+                0x00000000        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .text._ZNSt8__detail15_List_node_base11_M_transferEPS0_S1_
+                0x00000000       0x20 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.extab.text._ZNSt8__detail15_List_node_base11_M_transferEPS0_S1_
+                0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.exidx.text._ZNSt8__detail15_List_node_base11_M_transferEPS0_S1_
+                0x00000000        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .text._ZNSt8__detail15_List_node_base10_M_reverseEv
+                0x00000000       0x14 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.extab.text._ZNSt8__detail15_List_node_base10_M_reverseEv
+                0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.exidx.text._ZNSt8__detail15_List_node_base10_M_reverseEv
+                0x00000000        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.extab.text._ZNSt8__detail15_List_node_base7_M_hookEPS0_
+                0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .text._ZNSt8__detail15_List_node_base9_M_unhookEv
+                0x00000000        0xc /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.extab.text._ZNSt8__detail15_List_node_base9_M_unhookEv
+                0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.exidx.text._ZNSt8__detail15_List_node_base9_M_unhookEv
+                0x00000000        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .text          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+ .ARM.extab.text.__aeabi_atexit
+                0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-cxa_atexit.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-cxa_atexit.o)
+ .text          0x00000000       0x20 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+ .text          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memcpy.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memcpy.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memset.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memset.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mlock.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mlock.o)
+ .text          0x00000000       0xec /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-stpcpy.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-stpcpy.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcpy.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcpy.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strlen.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strlen.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncmp.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncmp.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncpy.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncpy.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strtok_r.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strtok_r.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+ .text          0x00000000       0xd8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+ .text          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtend.o
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtend.o
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtend.o
+ .eh_frame      0x00000000        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtend.o
+ .jcr           0x00000000        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtend.o
+ .text          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtn.o
+ .data          0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtn.o
+ .bss           0x00000000        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+rom              0x08000000         0x00020000         xr
+eeprom           0x08080000         0x00001000         r
+ram              0x20000000         0x00004000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+LOAD out/startup_ARMv7-M_E_.o
+LOAD out/printf-stdarg.o
+LOAD out/syscalls.o
+LOAD out/vectors_STM32L1xx_md.o
+LOAD out/croutine.o
+LOAD out/list.o
+LOAD out/queue.o
+LOAD out/tasks.o
+LOAD out/timers.o
+LOAD out/port.o
+LOAD out/heap_3.o
+LOAD out/ff.o
+LOAD out/syscall.o
+LOAD out/main.o
+LOAD out/overrides.o
+LOAD out/mmc.o
+LOAD out/command.o
+LOAD out/gpio.o
+LOAD out/helper.o
+LOAD out/i2c.o
+LOAD out/rcc.o
+LOAD out/spi.o
+LOAD out/usart.o
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libm.a
+START GROUP
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/libgcc.a
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libc.a
+END GROUP
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtend.o
+LOAD /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtn.o
+                0x00000400                __main_stack_size = 0x400
+                0x00000400                __process_stack_size = 0x400
+                [0x00000400]                PROVIDE (__main_stack_size, __main_stack_size)
+                [0x00000400]                PROVIDE (__process_stack_size, __process_stack_size)
+                0x08000000                __rom_start = ORIGIN (rom)
+                0x00020000                __rom_size = 0x20000
+                0x08020000                __rom_end = (__rom_start + __rom_size)
+                [0x08000000]                PROVIDE (__rom_start, __rom_start)
+                [0x00020000]                PROVIDE (__rom_size, __rom_size)
+                [0x08020000]                PROVIDE (__rom_end, __rom_end)
+                0x08080000                __eeprom_start = ORIGIN (eeprom)
+                0x00001000                __eeprom_size = 0x1000
+                0x08081000                __eeprom_end = (__eeprom_start + __eeprom_size)
+                [0x08080000]                PROVIDE (__eeprom_start, __eeprom_start)
+                [0x00001000]                PROVIDE (__eeprom_size, __eeprom_size)
+                [0x08081000]                PROVIDE (__eeprom_end, __eeprom_end)
+                0x20000000                __ram_start = ORIGIN (ram)
+                0x00004000                __ram_size = 0x4000
+                0x20004000                __ram_end = (__ram_start + __ram_size)
+                [0x20000000]                PROVIDE (__ram_start, __ram_start)
+                [0x00004000]                PROVIDE (__ram_size, __ram_size)
+                [0x20004000]                PROVIDE (__ram_end, __ram_end)
+
+.text           0x08000000     0x40e4
+                0x08000000                . = ALIGN (0x4)
+                0x08000000                __text_start = .
+                [0x08000000]                PROVIDE (__text_start, __text_start)
+                0x08000000                . = ALIGN (0x4)
+                0x08000000                __vectors_start = .
+                [0x08000000]                PROVIDE (__vectors_start, __vectors_start)
+                0x08000000                . = ALIGN (0x4)
+ *(.vectors)
+ .vectors       0x08000000       0xf4 out/vectors_STM32L1xx_md.o
+                0x08000000                vectors
+                0x080000f4                . = ALIGN (0x4)
+                0x080000f4                __vectors_end = .
+                [0x080000f4]                PROVIDE (__vectors_end, __vectors_end)
+                0x080000f4                . = ALIGN (0x4)
+ *(.text .text.* .gnu.linkonce.t.*)
+ .text          0x080000f4       0x54 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+ .text          0x08000148       0x98 out/startup_ARMv7-M_E_.o
+                0x08000148                Reset_Handler
+                0x080001b4                __default_low_level_init
+                0x080001b4                low_level_init_1
+                0x080001b4                low_level_init_0
+ .text.printchar
+                0x080001e0       0x14 out/printf-stdarg.o
+ .text.prints   0x080001f4       0x88 out/printf-stdarg.o
+ .text.printi   0x0800027c       0x9e out/printf-stdarg.o
+ *fill*         0x0800031a        0x2 00
+ .text.print    0x0800031c      0x138 out/printf-stdarg.o
+ .text.printf   0x08000454       0x1a out/printf-stdarg.o
+                0x08000454                printf
+ .text.sprintf  0x0800046e       0x1e out/printf-stdarg.o
+                0x0800046e                sprintf
+ .text.vsprintf
+                0x0800048c       0x10 out/printf-stdarg.o
+                0x0800048c                vsprintf
+ .text._sbrk_r  0x0800049c       0x28 out/syscalls.o
+                0x0800049c                _sbrk_r
+ .text.__Default_Handler
+                0x080004c4        0xa out/vectors_STM32L1xx_md.o
+                0x080004c4                RTC_Alarm_IRQHandler
+                0x080004c4                EXTI2_IRQHandler
+                0x080004c4                DebugMon_Handler
+                0x080004c4                HardFault_Handler
+                0x080004c4                TIM10_IRQHandler
+                0x080004c4                USB_HP_IRQHandler
+                0x080004c4                PVD_IRQHandler
+                0x080004c4                __Reserved_0x1C_Handler
+                0x080004c4                NMI_Handler
+                0x080004c4                EXTI3_IRQHandler
+                0x080004c4                __Default_Handler
+                0x080004c4                __Reserved_0x20_Handler
+                0x080004c4                EXTI0_IRQHandler
+                0x080004c4                I2C2_EV_IRQHandler
+                0x080004c4                UsageFault_Handler
+                0x080004c4                SPI1_IRQHandler
+                0x080004c4                USB_FS_WKUP_IRQHandler
+                0x080004c4                ADC1_IRQHandler
+                0x080004c4                USART3_IRQHandler
+                0x080004c4                DMA1_Channel7_IRQHandler
+                0x080004c4                LCD_IRQHandler
+                0x080004c4                TIM4_IRQHandler
+                0x080004c4                __Reserved_0x34_Handler
+                0x080004c4                I2C1_EV_IRQHandler
+                0x080004c4                DMA1_Channel6_IRQHandler
+                0x080004c4                TIM3_IRQHandler
+                0x080004c4                RCC_IRQHandler
+                0x080004c4                DMA1_Channel1_IRQHandler
+                0x080004c4                EXTI15_10_IRQHandler
+                0x080004c4                TIM7_IRQHandler
+                0x080004c4                __Reserved_0x28_Handler
+                0x080004c4                EXTI9_5_IRQHandler
+                0x080004c4                TIM9_IRQHandler
+                0x080004c4                TAMPER_STAMP_IRQHandler
+                0x080004c4                RTC_WKUP_IRQHandler
+                0x080004c4                SPI2_IRQHandler
+                0x080004c4                MemManage_Handler
+                0x080004c4                __Reserved_0x24_Handler
+                0x080004c4                DMA1_Channel5_IRQHandler
+                0x080004c4                USB_LP_IRQHandler
+                0x080004c4                EXTI4_IRQHandler
+                0x080004c4                DMA1_Channel3_IRQHandler
+                0x080004c4                COMP_IRQHandler
+                0x080004c4                WWDG_IRQHandler
+                0x080004c4                TIM2_IRQHandler
+                0x080004c4                DAC_IRQHandler
+                0x080004c4                EXTI1_IRQHandler
+                0x080004c4                TIM11_IRQHandler
+                0x080004c4                USART2_IRQHandler
+                0x080004c4                I2C2_ER_IRQHandler
+                0x080004c4                DMA1_Channel2_IRQHandler
+                0x080004c4                FLASH_IRQHandler
+                0x080004c4                BusFault_Handler
+                0x080004c4                I2C1_ER_IRQHandler
+ .text.vListInitialise
+                0x080004ce       0x16 out/list.o
+                0x080004ce                vListInitialise
+ .text.vListInitialiseItem
+                0x080004e4        0x6 out/list.o
+                0x080004e4                vListInitialiseItem
+ .text.vListInsertEnd
+                0x080004ea       0x1a out/list.o
+                0x080004ea                vListInsertEnd
+ .text.vListInsert
+                0x08000504       0x30 out/list.o
+                0x08000504                vListInsert
+ .text.vListRemove
+                0x08000534       0x20 out/list.o
+                0x08000534                vListRemove
+ .text.prvCopyDataFromQueue
+                0x08000554       0x28 out/queue.o
+ .text.prvUnlockQueue
+                0x0800057c       0x68 out/queue.o
+ .text.prvCopyDataToQueue
+                0x080005e4       0x58 out/queue.o
+ .text.xQueueGenericReset
+                0x0800063c       0x5c out/queue.o
+                0x0800063c                xQueueGenericReset
+ .text.xQueueGenericCreate
+                0x08000698       0x4a out/queue.o
+                0x08000698                xQueueGenericCreate
+ .text.xQueueGenericSend
+                0x080006e2       0xe4 out/queue.o
+                0x080006e2                xQueueGenericSend
+ .text.xQueueCreateMutex
+                0x080007c6       0x4c out/queue.o
+                0x080007c6                xQueueCreateMutex
+ .text.xQueueGenericSendFromISR
+                0x08000812       0x54 out/queue.o
+                0x08000812                xQueueGenericSendFromISR
+ .text.xQueueGenericReceive
+                0x08000866      0x114 out/queue.o
+                0x08000866                xQueueGenericReceive
+ *fill*         0x0800097a        0x2 00
+ .text.prvGenerateRunTimeStatsForTasksInList
+                0x0800097c       0x98 out/tasks.o
+ .text.prvListTaskWithinSingleList
+                0x08000a14       0x84 out/tasks.o
+ .text.prvAddCurrentTaskToDelayedList
+                0x08000a98       0x50 out/tasks.o
+ .text.xTaskGenericCreate
+                0x08000ae8      0x1ac out/tasks.o
+                0x08000ae8                xTaskGenericCreate
+ .text.vTaskStartScheduler
+                0x08000c94       0x50 out/tasks.o
+                0x08000c94                vTaskStartScheduler
+ .text.vTaskSuspendAll
+                0x08000ce4       0x10 out/tasks.o
+                0x08000ce4                vTaskSuspendAll
+ .text.xTaskGetTickCount
+                0x08000cf4       0x18 out/tasks.o
+                0x08000cf4                xTaskGetTickCount
+ .text.vTaskIncrementTick
+                0x08000d0c       0xdc out/tasks.o
+                0x08000d0c                vTaskIncrementTick
+ .text.xTaskResumeAll
+                0x08000de8       0xcc out/tasks.o
+                0x08000de8                xTaskResumeAll
+ .text.vTaskGetRunTimeStats
+                0x08000eb4       0xb8 out/tasks.o
+                0x08000eb4                vTaskGetRunTimeStats
+ .text.vTaskList
+                0x08000f6c       0x9c out/tasks.o
+                0x08000f6c                vTaskList
+ .text.prvIdleTask
+                0x08001008       0x60 out/tasks.o
+ .text.vTaskDelay
+                0x08001068       0x38 out/tasks.o
+                0x08001068                vTaskDelay
+ .text.vTaskSwitchContext
+                0x080010a0       0x8c out/tasks.o
+                0x080010a0                vTaskSwitchContext
+ .text.vTaskPlaceOnEventList
+                0x0800112c       0x44 out/tasks.o
+                0x0800112c                vTaskPlaceOnEventList
+ .text.xTaskRemoveFromEventList
+                0x08001170       0x64 out/tasks.o
+                0x08001170                xTaskRemoveFromEventList
+ .text.vTaskSetTimeOutState
+                0x080011d4       0x18 out/tasks.o
+                0x080011d4                vTaskSetTimeOutState
+ .text.xTaskCheckForTimeOut
+                0x080011ec       0x54 out/tasks.o
+                0x080011ec                xTaskCheckForTimeOut
+ .text.vTaskMissedYield
+                0x08001240        0xc out/tasks.o
+                0x08001240                vTaskMissedYield
+ .text.xTaskGetCurrentTaskHandle
+                0x0800124c        0xc out/tasks.o
+                0x0800124c                xTaskGetCurrentTaskHandle
+ .text.vTaskPriorityInherit
+                0x08001258       0x68 out/tasks.o
+                0x08001258                vTaskPriorityInherit
+ .text.vTaskPriorityDisinherit
+                0x080012c0       0x48 out/tasks.o
+                0x080012c0                vTaskPriorityDisinherit
+ .text.prvPortStartFirstTask
+                0x08001308       0x14 out/port.o
+ .text.pxPortInitialiseStack
+                0x0800131c       0x16 out/port.o
+                0x0800131c                pxPortInitialiseStack
+ *fill*         0x08001332        0x2 00
+ .text.SVC_Handler
+                0x08001334       0x20 out/port.o
+                0x08001334                SVC_Handler
+ .text.xPortStartScheduler
+                0x08001354       0x48 out/port.o
+                0x08001354                xPortStartScheduler
+ .text.vPortYieldFromISR
+                0x0800139c       0x10 out/port.o
+                0x0800139c                vPortYieldFromISR
+ .text.vPortEnterCritical
+                0x080013ac       0x18 out/port.o
+                0x080013ac                vPortEnterCritical
+ .text.vPortExitCritical
+                0x080013c4       0x18 out/port.o
+                0x080013c4                vPortExitCritical
+ .text.PendSV_Handler
+                0x080013dc       0x3c out/port.o
+                0x080013dc                PendSV_Handler
+ .text.SysTick_Handler
+                0x08001418       0x24 out/port.o
+                0x08001418                SysTick_Handler
+ .text.pvPortMalloc
+                0x0800143c       0x18 out/heap_3.o
+                0x0800143c                pvPortMalloc
+ .text.vPortFree
+                0x08001454       0x1a out/heap_3.o
+                0x08001454                vPortFree
+ .text.get_fileinfo
+                0x0800146e       0x82 out/ff.o
+ .text.move_window
+                0x080014f0       0x7c out/ff.o
+ .text.ld_clust.isra.0
+                0x0800156c       0x1c out/ff.o
+ .text.check_fs
+                0x08001588       0x88 out/ff.o
+ .text.chk_mounted
+                0x08001610      0x33c out/ff.o
+ .text.validate
+                0x0800194c       0x36 out/ff.o
+ .text.unlock_fs
+                0x08001982       0x1a out/ff.o
+ .text.clust2sect
+                0x0800199c       0x18 out/ff.o
+                0x0800199c                clust2sect
+ .text.get_fat  0x080019b4       0xca out/ff.o
+                0x080019b4                get_fat
+ .text.dir_sdi  0x08001a7e       0x88 out/ff.o
+ .text.put_fat  0x08001b06       0xf6 out/ff.o
+                0x08001b06                put_fat
+ .text.create_chain
+                0x08001bfc       0x9a out/ff.o
+ .text.dir_next
+                0x08001c96      0x100 out/ff.o
+ *fill*         0x08001d96        0x2 00
+ .text.follow_path
+                0x08001d98      0x18c out/ff.o
+ .text.dir_read
+                0x08001f24       0x48 out/ff.o
+ .text.f_mount  0x08001f6c       0x40 out/ff.o
+                0x08001f6c                f_mount
+ .text.f_opendir
+                0x08001fac       0x6c out/ff.o
+                0x08001fac                f_opendir
+ .text.f_readdir
+                0x08002018       0x58 out/ff.o
+                0x08002018                f_readdir
+ .text.ff_cre_syncobj
+                0x08002070       0x14 out/syscall.o
+                0x08002070                ff_cre_syncobj
+ .text.ff_del_syncobj
+                0x08002084        0x4 out/syscall.o
+                0x08002084                ff_del_syncobj
+ .text.ff_req_grant
+                0x08002088       0x1a out/syscall.o
+                0x08002088                ff_req_grant
+ .text.ff_rel_grant
+                0x080020a2        0xa out/syscall.o
+                0x080020a2                ff_rel_grant
+ .text._ZL16_tasklistHandlerPPKcmPcj
+                0x080020ac       0x54 out/main.o
+ .text._ZL20_runtimestatsHandlerPPKcmPcj
+                0x08002100       0x54 out/main.o
+ .text._ZL11_dirHandlerPPKcmPcj
+                0x08002154       0x88 out/main.o
+ .text._ZL14_heartbeatTaskPv
+                0x080021dc       0x30 out/main.o
+ .text.startup.main
+                0x0800220c       0xe8 out/main.o
+                0x0800220c                main
+ .text.startup._GLOBAL__sub_I_danaZMSP
+                0x080022f4       0x14 out/main.o
+ .text._Znwj    0x08002308        0x4 out/overrides.o
+                0x08002308                _Znwj
+ .text._ZdlPv   0x0800230c        0x8 out/overrides.o
+                0x0800230c                _ZdlPv
+ .text._ZL15prvDeselectCardv
+                0x08002314       0x18 out/mmc.o
+ .text._ZL19prvWaitForCardReadyv
+                0x0800232c       0x3c out/mmc.o
+ .text._ZL14prvSendCommandhm
+                0x08002368       0xc0 out/mmc.o
+ .text._ZL17prvWriteDataBlockPKhh
+                0x08002428       0x8c out/mmc.o
+ .text._ZL19prvReceiveDataBlockPhj.constprop.1
+                0x080024b4       0x5a out/mmc.o
+ *fill*         0x0800250e        0x2 00
+ .text.disk_initialize
+                0x08002510      0x15c out/mmc.o
+                0x08002510                disk_initialize
+ .text.disk_status
+                0x0800266c       0x18 out/mmc.o
+                0x0800266c                disk_status
+ .text.disk_read
+                0x08002684       0x88 out/mmc.o
+                0x08002684                disk_read
+ .text.disk_write
+                0x0800270c       0xac out/mmc.o
+                0x0800270c                disk_write
+ .text._ZL12_helpHandlerPPKcmPcj
+                0x080027b8       0x48 out/command.o
+ .text._ZNSt4listIPK17CommandDefinitionSaIS2_EED2Ev
+                0x08002800       0x16 out/command.o
+                0x08002800                _ZNSt4listIPK17CommandDefinitionSaIS2_EED2Ev
+                0x08002800                _ZNSt4listIPK17CommandDefinitionSaIS2_EED1Ev
+ *fill*         0x08002816        0x2 00
+ .text._Z19commandProcessInputPcS_j
+                0x08002818       0xa8 out/command.o
+                0x08002818                _Z19commandProcessInputPcS_j
+ .text._ZNSt4listIPK17CommandDefinitionSaIS2_EE9push_backERKS2_
+                0x080028c0       0x22 out/command.o
+                0x080028c0                _ZNSt4listIPK17CommandDefinitionSaIS2_EE9push_backERKS2_
+ *fill*         0x080028e2        0x2 00
+ .text._Z15commandRegisterPK17CommandDefinition
+                0x080028e4       0x14 out/command.o
+                0x080028e4                _Z15commandRegisterPK17CommandDefinition
+ .text.startup._GLOBAL__sub_I__commands
+                0x080028f8       0x30 out/command.o
+ .text._Z14gpioInitializev
+                0x08002928       0x10 out/gpio.o
+                0x08002928                _Z14gpioInitializev
+ .text._Z16gpioConfigurePinP12GPIO_TypeDef7GpioPin17GpioConfiguration
+                0x08002938       0x80 out/gpio.o
+                0x08002938                _Z16gpioConfigurePinP12GPIO_TypeDef7GpioPin17GpioConfiguration
+ .text.configureTimerForRuntimestats
+                0x080029b8       0x54 out/helper.o
+                0x080029b8                configureTimerForRuntimestats
+ .text.TIM6_IRQHandler
+                0x08002a0c       0x2c out/helper.o
+                0x08002a0c                TIM6_IRQHandler
+ .text._Z13i2cInitializev
+                0x08002a38       0x70 out/i2c.o
+                0x08002a38                _Z13i2cInitializev
+ .text._Z8i2cWritehPKhj
+                0x08002aa8       0x74 out/i2c.o
+                0x08002aa8                _Z8i2cWritehPKhj
+ .text.rccGetCoreFrequency
+                0x08002b1c        0xc out/rcc.o
+                0x08002b1c                rccGetCoreFrequency
+ .text._Z11rccStartPll11rccPllInputmm
+                0x08002b28       0xc8 out/rcc.o
+                0x08002b28                _Z11rccStartPll11rccPllInputmm
+ .text._Z13spiInitializev
+                0x08002bf0       0x44 out/spi.o
+                0x08002bf0                _Z13spiInitializev
+ .text._Z14spiSetBaudRatem
+                0x08002c34       0x34 out/spi.o
+                0x08002c34                _Z14spiSetBaudRatem
+ .text._Z11spiTransferPKhPhj
+                0x08002c68       0x44 out/spi.o
+                0x08002c68                _Z11spiTransferPKhPhj
+ .text._ZL7_txTaskPv
+                0x08002cac       0x5c out/usart.o
+ .text._Z15usartInitializev
+                0x08002d08      0x108 out/usart.o
+                0x08002d08                _Z15usartInitializev
+ .text.usartSendCharacter
+                0x08002e10       0x18 out/usart.o
+                0x08002e10                usartSendCharacter
+ .text._Z15usartSendStringPKcm
+                0x08002e28       0x5c out/usart.o
+                0x08002e28                _Z15usartSendStringPKcm
+ .text._Z11usartPrintfmPKcz
+                0x08002e84       0x40 out/usart.o
+                0x08002e84                _Z11usartPrintfmPKcz
+ .text._ZL7_rxTaskPv
+                0x08002ec4       0x90 out/usart.o
+ .text.DMA1_Channel4_IRQHandler
+                0x08002f54       0x3c out/usart.o
+                0x08002f54                DMA1_Channel4_IRQHandler
+ .text.USART1_IRQHandler
+                0x08002f90       0x90 out/usart.o
+                0x08002f90                USART1_IRQHandler
+ .text._ZNSt8__detail15_List_node_base7_M_hookEPS0_
+                0x08003020       0x10 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+                0x08003020                _ZNSt8__detail15_List_node_base7_M_hookEPS0_
+ .text.__aeabi_atexit
+                0x08003030        0xc /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+                0x08003030                __aeabi_atexit
+ .text          0x0800303c        0xc /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o)
+                0x0800303c                atexit
+ .text          0x08003048       0x14 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-cxa_atexit.o)
+                0x08003048                __cxa_atexit
+ .text          0x0800305c       0x2c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+                0x0800305c                __libc_fini_array
+ .text          0x08003088       0x48 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+                0x08003088                __libc_init_array
+ .text          0x080030d0       0x28 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+                0x080030d0                malloc
+                0x080030e4                free
+ .text          0x080030f8      0x51c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                0x080030f8                _malloc_r
+ .text          0x08003614       0x84 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memcpy.o)
+                0x08003614                memcpy
+ .text          0x08003698       0x90 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memset.o)
+                0x08003698                memset
+ .text          0x08003728        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mlock.o)
+                0x08003728                __malloc_lock
+                0x0800372c                __malloc_unlock
+ .text          0x08003730       0x58 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-stpcpy.o)
+                0x08003730                stpcpy
+ .text          0x08003788       0x4c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o)
+                0x08003788                strcat
+ .text          0x080037d4       0xbc /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcpy.o)
+                0x080037d4                strcpy
+ .text          0x08003890       0x60 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strlen.o)
+                0x08003890                strlen
+ .text          0x080038f0       0xa4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncmp.o)
+                0x080038f0                strncmp
+ .text          0x08003994       0x68 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncpy.o)
+                0x08003994                strncpy
+ .text          0x080039fc       0x64 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strtok_r.o)
+                0x080039fc                __strtok_r
+                0x08003a5c                strtok_r
+ .text          0x08003a60       0xa8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+                0x08003a60                __register_exitproc
+ .text.startup  0x08003b08       0x14 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+ .text          0x08003b1c      0x22c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+                0x08003b1c                _malloc_trim_r
+                0x08003bbc                _free_r
+                0x08003d48                . = ALIGN (0x4)
+ *(.glue_7t .glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ .glue_7t       0x00000000        0x0 linker stubs
+                0x08003d48                . = ALIGN (0x4)
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata.str1.1
+                0x08003d48        0x7 out/printf-stdarg.o
+ .rodata.str1.1
+                0x08003d4f       0x59 out/tasks.o
+                                 0x5c (size before relaxing)
+ .rodata.str1.1
+                0x08003da8        0xf out/ff.o
+ .rodata._ZZL20_runtimestatsHandlerPPKcmPcjE6header
+                0x08003db7       0x3e out/main.o
+ *fill*         0x08003df5        0x3 00
+ .rodata._ZL21_dirCommandDefinition
+                0x08003df8       0x10 out/main.o
+ .rodata.str1.1
+                0x08003e08      0x12e out/main.o
+                                0x131 (size before relaxing)
+ .rodata._ZZL16_tasklistHandlerPPKcmPcjE6header
+                0x08003f36       0x46 out/main.o
+ .rodata._ZL26_tasklistCommandDefinition
+                0x08003f7c       0x10 out/main.o
+ .rodata._ZL30_runtimestatsCommandDefinition
+                0x08003f8c       0x10 out/main.o
+ .rodata        0x08003f9c        0x2 out/mmc.o
+ *fill*         0x08003f9e        0x2 00
+ .rodata.._100  0x08003fa0        0x4 out/command.o
+ .rodata.str1.1
+                0x08003fa4       0x2f out/command.o
+ *fill*         0x08003fd3        0x1 00
+ .rodata._ZL22_helpCommandDefinition
+                0x08003fd4       0x10 out/command.o
+ .rodata._ZZ11rccStartPll11rccPllInputmmE4muls
+                0x08003fe4        0x9 out/rcc.o
+ .rodata.str1.1
+                0x08003fed       0xaf out/usart.o
+ .rodata        0x0800409c        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+                0x0800409c                _global_impure_ptr
+ .rodata.str1.4
+                0x080040a0        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+                0x080040a4                . = ALIGN (0x4)
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x080040a4                . = ALIGN (0x4)
+ *(.gcc_except_table)
+                0x080040a4                . = ALIGN (0x4)
+ *(.eh_frame_hdr)
+                0x080040a4                . = ALIGN (0x4)
+ *(.eh_frame)
+ .eh_frame      0x080040a4        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+                0x080040a4                . = ALIGN (0x4)
+                0x080040a4                __data_array_start = .
+                [0x080040a4]                PROVIDE (__data_array_start, __data_array_start)
+                0x080040a4        0x4 LONG 0x80040f0 LOADADDR (.data)
+                0x080040a8        0x4 LONG 0x20000000 ADDR (.data)
+                0x080040ac        0x4 LONG 0x20000858 (ADDR (.data) + SIZEOF (.data))
+                0x080040b0                . = ALIGN (0x4)
+                0x080040b0                __data_array_end = .
+                [0x080040b0]                PROVIDE (__data_array_end, __data_array_end)
+                0x080040b0                . = ALIGN (0x4)
+                0x080040b0                __bss_array_start = .
+                [0x080040b0]                PROVIDE (__bss_array_start, __bss_array_start)
+                0x080040b0        0x4 LONG 0x20000858 ADDR (.bss)
+                0x080040b4        0x4 LONG 0x20000f04 (ADDR (.bss) + SIZEOF (.bss))
+                0x080040b8                . = ALIGN (0x4)
+                0x080040b8                __bss_array_end = .
+                [0x080040b8]                PROVIDE (__bss_array_end, __bss_array_end)
+                0x080040b8                . = ALIGN (0x4)
+ *(.init)
+ .init          0x080040b8        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+                0x080040b8                _init
+ .init          0x080040bc        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtn.o
+                0x080040c4                . = ALIGN (0x4)
+                0x080040c4                __preinit_array_start = .
+ *(.preinit_array)
+                0x080040c4                . = ALIGN (0x4)
+                0x080040c4                __preinit_array_end = .
+                0x080040c4                __init_array_start = .
+ *(SORT(.init_array.*))
+ .init_array.00000
+                0x080040c4        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+                0x080040c8                . = ALIGN (0x4)
+ *(.init_array)
+ .init_array    0x080040c8        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+ .init_array    0x080040cc        0x4 out/main.o
+ .init_array    0x080040d0        0x4 out/command.o
+                0x080040d4                . = ALIGN (0x4)
+                0x080040d4                __init_array_end = .
+ *(.fini)
+ .fini          0x080040d4        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+                0x080040d4                _fini
+ .fini          0x080040d8        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtn.o
+                0x080040e0                . = ALIGN (0x4)
+                0x080040e0                __fini_array_start = .
+ *(.fini_array)
+ .fini_array    0x080040e0        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+                0x080040e4                . = ALIGN (0x4)
+ *(SORT(.fini_array.*))
+                0x080040e4                . = ALIGN (0x4)
+                0x080040e4                __fini_array_end = .
+                0x080040e4                . = ALIGN (0x4)
+                0x080040e4                __text_end = .
+                [0x080040e4]                PROVIDE (__text_end, __text_end)
+
+.vfp11_veneer   0x080040e4        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x080040e4        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+                0x080040e4                . = ALIGN (0x4)
+                0x080040e4                __exidx_start = .
+                [0x080040e4]                PROVIDE (__exidx_start, __exidx_start)
+
+.ARM.exidx      0x080040e4        0x8
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx.text._ZNSt8__detail15_List_node_base7_M_hookEPS0_
+                0x080040e4        0x8 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.exidx.text.__aeabi_atexit
+                0x080040ec        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+                                  0x8 (size before relaxing)
+                0x080040ec                . = ALIGN (0x4)
+                0x080040ec                __exidx_end = .
+                [0x080040ec]                PROVIDE (__exidx_end, __exidx_end)
+
+.data           0x20000000      0x858 load address 0x080040f0
+                0x20000000                . = ALIGN (0x4)
+                0x080040f0                __data_init_start = LOADADDR (.data)
+                [0x080040f0]                PROVIDE (__data_init_start, __data_init_start)
+                0x20000000                __data_start = .
+                [0x20000000]                PROVIDE (__data_start, __data_start)
+                0x20000000                . = ALIGN (0x4)
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x20000000        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+                0x20000000                __dso_handle
+ .data.current_heap_end.4319
+                0x20000004        0x4 out/syscalls.o
+ .data.xNextTaskUnblockTime
+                0x20000008        0x4 out/tasks.o
+ .data.uxCriticalNesting
+                0x2000000c        0x4 out/port.o
+ .data._ZL11xDiskStatus
+                0x20000010        0x1 out/mmc.o
+ *fill*         0x20000011        0x3 00
+ .data._ZL14_coreFrequency
+                0x20000014        0x4 out/rcc.o
+ .data          0x20000018      0x430 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+                0x20000018                _impure_ptr
+ .data          0x20000448      0x410 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                0x20000448                __malloc_av_
+                0x20000850                __malloc_sbrk_base
+                0x20000854                __malloc_trim_threshold
+                0x20000858                . = ALIGN (0x4)
+                0x20000858                __data_end = .
+                [0x20000858]                PROVIDE (__data_end, __data_end)
+
+.jcr            0x20000858        0x0 load address 0x08004948
+ .jcr           0x20000858        0x0 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+
+.bss            0x20000858      0x6ac
+                0x20000858                . = ALIGN (0x4)
+                0x20000858                __bss_start = .
+                [0x20000858]                PROVIDE (__bss_start, __bss_start)
+                0x20000858                . = ALIGN (0x4)
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x20000858       0x1c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+ .bss.xPendingReadyList
+                0x20000874       0x14 out/tasks.o
+ .bss.pcStatusString.6645
+                0x20000888       0x2a out/tasks.o
+ *fill*         0x200008b2        0x2 00
+ .bss.uxTasksDeleted
+                0x200008b4        0x4 out/tasks.o
+ .bss.uxTopReadyPriority
+                0x200008b8        0x4 out/tasks.o
+ .bss.xTickCount
+                0x200008bc        0x4 out/tasks.o
+ .bss.pxReadyTasksLists
+                0x200008c0       0x64 out/tasks.o
+ .bss.pxOverflowDelayedTaskList
+                0x20000924        0x4 out/tasks.o
+ .bss.xTasksWaitingTermination
+                0x20000928       0x14 out/tasks.o
+ .bss.pxDelayedTaskList
+                0x2000093c        0x4 out/tasks.o
+ .bss.uxCurrentNumberOfTasks
+                0x20000940        0x4 out/tasks.o
+ .bss.xSchedulerRunning
+                0x20000944        0x4 out/tasks.o
+ .bss.ulTaskSwitchedInTime
+                0x20000948        0x4 out/tasks.o
+ .bss.xMissedYield
+                0x2000094c        0x4 out/tasks.o
+ .bss.pxCurrentTCB
+                0x20000950        0x4 out/tasks.o
+                0x20000950                pxCurrentTCB
+ .bss.pcStatsString
+                0x20000954       0x32 out/tasks.o
+ *fill*         0x20000986        0x2 00
+ .bss.xSuspendedTaskList
+                0x20000988       0x14 out/tasks.o
+ .bss.xDelayedTaskList1
+                0x2000099c       0x14 out/tasks.o
+ .bss.xDelayedTaskList2
+                0x200009b0       0x14 out/tasks.o
+ .bss.uxTaskNumber
+                0x200009c4        0x4 out/tasks.o
+ .bss.uxSchedulerSuspended
+                0x200009c8        0x4 out/tasks.o
+ .bss.uxMissedTicks
+                0x200009cc        0x4 out/tasks.o
+ .bss.xNumOfOverflows
+                0x200009d0        0x4 out/tasks.o
+ .bss.uxTopUsedPriority
+                0x200009d4        0x4 out/tasks.o
+ .bss.Fsid      0x200009d8        0x2 out/ff.o
+ *fill*         0x200009da        0x2 00
+ .bss.FatFs     0x200009dc        0x4 out/ff.o
+ .bss.pointer   0x200009e0        0x4 out/main.o
+                0x200009e0                pointer
+ .bss._ZL11_fileSystem
+                0x200009e4      0x234 out/main.o
+ .bss._ZZ15disk_initializeE11initialized
+                0x20000c18        0x1 out/mmc.o
+ .bss._ZL18ucInsertedCardType
+                0x20000c19        0x1 out/mmc.o
+ *fill*         0x20000c1a        0x2 00
+ .bss._commands
+                0x20000c1c        0x8 out/command.o
+                0x20000c1c                _commands
+ .bss.tim6OverflowCount
+                0x20000c24        0x2 out/helper.o
+                0x20000c24                tim6OverflowCount
+ .bss._ZL13_outputBuffer
+                0x20000c26      0x200 out/usart.o
+ *fill*         0x20000e26        0x2 00
+ .bss._ZL8_rxQueue
+                0x20000e28        0x4 out/usart.o
+ .bss._ZZ17USART1_IRQHandlerE7message
+                0x20000e2c       0x18 out/usart.o
+ .bss._ZL8_txQueue
+                0x20000e44        0x4 out/usart.o
+ .bss._ZL12_inputBuffer
+                0x20000e48       0x80 out/usart.o
+ .bss._ZL15_dmaTxSemaphore
+                0x20000ec8        0x4 out/usart.o
+ .bss           0x20000ecc       0x34 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                0x20000ecc                __malloc_top_pad
+                0x20000ed0                __malloc_current_mallinfo
+                0x20000ef8                __malloc_max_sbrked_mem
+                0x20000efc                __malloc_max_total_mem
+                0x20000f00                . = ALIGN (0x4)
+ *(COMMON)
+ COMMON         0x20000f00        0x4 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+                0x20000f00                errno
+                0x20000f04                . = ALIGN (0x4)
+                0x20000f04                __bss_end = .
+                [0x20000f04]                PROVIDE (__bss_end, __bss_end)
+
+.stack          0x20000f04      0x804
+                0x20000f08                . = ALIGN (0x8)
+ *fill*         0x20000f04        0x4 00
+                0x20000f08                __stack_start = .
+                [0x20000f08]                PROVIDE (__stack_start, __stack_start)
+                0x20000f08                . = ALIGN (0x8)
+                0x20000f08                __main_stack_start = .
+                [0x20000f08]                PROVIDE (__main_stack_start, __main_stack_start)
+                0x20001308                . = (. + __main_stack_size)
+ *fill*         0x20000f08      0x400 00
+                0x20001308                . = ALIGN (0x8)
+                0x20001308                __main_stack_end = .
+                [0x20001308]                PROVIDE (__main_stack_end, __main_stack_end)
+                0x20001308                . = ALIGN (0x8)
+                0x20001308                __process_stack_start = .
+                [0x20001308]                PROVIDE (__process_stack_start, __process_stack_start)
+                0x20001708                . = (. + __process_stack_size)
+ *fill*         0x20001308      0x400 00
+                0x20001708                . = ALIGN (0x8)
+                0x20001708                __process_stack_end = .
+                [0x20001708]                PROVIDE (__process_stack_end, __process_stack_end)
+                0x20001708                . = ALIGN (0x8)
+                0x20001708                __stack_end = .
+                [0x20001708]                PROVIDE (__stack_end, __stack_end)
+                0x20001708                . = ALIGN (0x4)
+                0x20001708                __heap_start = .
+                [0x20001708]                PROVIDE (__heap_start, __heap_start)
+                0x20001708                . = ALIGN (0x4)
+                0x20004000                __heap_end = __ram_end
+                [0x20004000]                PROVIDE (__heap_end, __heap_end)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x808
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 out/startup_ARMv7-M_E_.o
+ .debug_aranges
+                0x00000020       0x50 out/printf-stdarg.o
+ .debug_aranges
+                0x00000070       0xa8 out/syscalls.o
+ .debug_aranges
+                0x00000118       0x20 out/vectors_STM32L1xx_md.o
+ .debug_aranges
+                0x00000138       0x38 out/croutine.o
+ .debug_aranges
+                0x00000170       0x40 out/list.o
+ .debug_aranges
+                0x000001b0       0xb0 out/queue.o
+ .debug_aranges
+                0x00000260      0x130 out/tasks.o
+ .debug_aranges
+                0x00000390       0x68 out/port.o
+ .debug_aranges
+                0x000003f8       0x28 out/heap_3.o
+ .debug_aranges
+                0x00000420      0x140 out/ff.o
+ .debug_aranges
+                0x00000560       0x38 out/syscall.o
+ .debug_aranges
+                0x00000598       0x48 out/main.o
+ .debug_aranges
+                0x000005e0       0x30 out/overrides.o
+ .debug_aranges
+                0x00000610       0x78 out/mmc.o
+ .debug_aranges
+                0x00000688       0x50 out/command.o
+ .debug_aranges
+                0x000006d8       0x28 out/gpio.o
+ .debug_aranges
+                0x00000700       0x28 out/helper.o
+ .debug_aranges
+                0x00000728       0x30 out/i2c.o
+ .debug_aranges
+                0x00000758       0x28 out/rcc.o
+ .debug_aranges
+                0x00000780       0x30 out/spi.o
+ .debug_aranges
+                0x000007b0       0x58 out/usart.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000    0x12683
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000       0x57 out/startup_ARMv7-M_E_.o
+ .debug_info    0x00000057      0x3cc out/printf-stdarg.o
+ .debug_info    0x00000423     0x10be out/syscalls.o
+ .debug_info    0x000014e1       0xae out/vectors_STM32L1xx_md.o
+ .debug_info    0x0000158f      0x554 out/croutine.o
+ .debug_info    0x00001ae3      0x2d4 out/list.o
+ .debug_info    0x00001db7      0x9f5 out/queue.o
+ .debug_info    0x000027ac     0x145b out/tasks.o
+ .debug_info    0x00003c07       0xa3 out/timers.o
+ .debug_info    0x00003caa      0x22f out/port.o
+ .debug_info    0x00003ed9      0x118 out/heap_3.o
+ .debug_info    0x00003ff1     0x1dba out/ff.o
+ .debug_info    0x00005dab      0x1c2 out/syscall.o
+ .debug_info    0x00005f6d     0x1b51 out/main.o
+ .debug_info    0x00007abe      0x114 out/overrides.o
+ .debug_info    0x00007bd2     0x16df out/mmc.o
+ .debug_info    0x000092b1     0x2ffc out/command.o
+ .debug_info    0x0000c2ad     0x10a3 out/gpio.o
+ .debug_info    0x0000d350      0x91c out/helper.o
+ .debug_info    0x0000dc6c     0x13e5 out/i2c.o
+ .debug_info    0x0000f051      0x409 out/rcc.o
+ .debug_info    0x0000f45a     0x13f3 out/spi.o
+ .debug_info    0x0001084d     0x1e36 out/usart.o
+
+.debug_abbrev   0x00000000     0x2a48
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x14 out/startup_ARMv7-M_E_.o
+ .debug_abbrev  0x00000014      0x19d out/printf-stdarg.o
+ .debug_abbrev  0x000001b1      0x261 out/syscalls.o
+ .debug_abbrev  0x00000412       0x88 out/vectors_STM32L1xx_md.o
+ .debug_abbrev  0x0000049a      0x211 out/croutine.o
+ .debug_abbrev  0x000006ab       0xdc out/list.o
+ .debug_abbrev  0x00000787      0x21b out/queue.o
+ .debug_abbrev  0x000009a2      0x2f1 out/tasks.o
+ .debug_abbrev  0x00000c93       0x51 out/timers.o
+ .debug_abbrev  0x00000ce4      0x156 out/port.o
+ .debug_abbrev  0x00000e3a       0xb7 out/heap_3.o
+ .debug_abbrev  0x00000ef1      0x2e6 out/ff.o
+ .debug_abbrev  0x000011d7       0xe8 out/syscall.o
+ .debug_abbrev  0x000012bf      0x330 out/main.o
+ .debug_abbrev  0x000015ef       0xbd out/overrides.o
+ .debug_abbrev  0x000016ac      0x2c2 out/mmc.o
+ .debug_abbrev  0x0000196e      0x719 out/command.o
+ .debug_abbrev  0x00002087      0x141 out/gpio.o
+ .debug_abbrev  0x000021c8      0x14f out/helper.o
+ .debug_abbrev  0x00002317      0x14f out/i2c.o
+ .debug_abbrev  0x00002466      0x198 out/rcc.o
+ .debug_abbrev  0x000025fe      0x17a out/spi.o
+ .debug_abbrev  0x00002778      0x2d0 out/usart.o
+
+.debug_line     0x00000000     0x742a
+ *(.debug_line)
+ .debug_line    0x00000000       0x71 out/startup_ARMv7-M_E_.o
+ .debug_line    0x00000071      0x224 out/printf-stdarg.o
+ .debug_line    0x00000295      0x3ec out/syscalls.o
+ .debug_line    0x00000681       0x46 out/vectors_STM32L1xx_md.o
+ .debug_line    0x000006c7      0x4f0 out/croutine.o
+ .debug_line    0x00000bb7      0x493 out/list.o
+ .debug_line    0x0000104a      0x6c5 out/queue.o
+ .debug_line    0x0000170f      0x9bb out/tasks.o
+ .debug_line    0x000020ca      0x408 out/timers.o
+ .debug_line    0x000024d2      0x4bb out/port.o
+ .debug_line    0x0000298d      0x453 out/heap_3.o
+ .debug_line    0x00002de0      0xe2e out/ff.o
+ .debug_line    0x00003c0e      0x46c out/syscall.o
+ .debug_line    0x0000407a      0x786 out/main.o
+ .debug_line    0x00004800      0x40c out/overrides.o
+ .debug_line    0x00004c0c      0x71f out/mmc.o
+ .debug_line    0x0000532b      0xa78 out/command.o
+ .debug_line    0x00005da3      0x1c8 out/gpio.o
+ .debug_line    0x00005f6b      0x3a4 out/helper.o
+ .debug_line    0x0000630f      0x3d5 out/i2c.o
+ .debug_line    0x000066e4      0x209 out/rcc.o
+ .debug_line    0x000068ed      0x3a4 out/spi.o
+ .debug_line    0x00006c91      0x799 out/usart.o
+
+.debug_frame    0x00000000     0x1c04
+ *(.debug_frame)
+ .debug_frame   0x00000000      0x124 out/printf-stdarg.o
+ .debug_frame   0x00000124      0x130 out/syscalls.o
+ .debug_frame   0x00000254       0x24 out/vectors_STM32L1xx_md.o
+ .debug_frame   0x00000278       0xb0 out/croutine.o
+ .debug_frame   0x00000328       0x6c out/list.o
+ .debug_frame   0x00000394      0x220 out/queue.o
+ .debug_frame   0x000005b4      0x428 out/tasks.o
+ .debug_frame   0x000009dc       0xc8 out/port.o
+ .debug_frame   0x00000aa4       0x48 out/heap_3.o
+ .debug_frame   0x00000aec      0x51c out/ff.o
+ .debug_frame   0x00001008       0x68 out/syscall.o
+ .debug_frame   0x00001070       0xec out/main.o
+ .debug_frame   0x0000115c       0x4c out/overrides.o
+ .debug_frame   0x000011a8      0x1ac out/mmc.o
+ .debug_frame   0x00001354      0x114 out/command.o
+ .debug_frame   0x00001468       0x44 out/gpio.o
+ .debug_frame   0x000014ac       0x50 out/helper.o
+ .debug_frame   0x000014fc       0x6c out/i2c.o
+ .debug_frame   0x00001568       0x4c out/rcc.o
+ .debug_frame   0x000015b4       0x70 out/spi.o
+ .debug_frame   0x00001624      0x140 out/usart.o
+ .debug_frame   0x00001764       0x6c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .debug_frame   0x000017d0       0x20 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+ .debug_frame   0x000017f0       0x20 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o)
+ .debug_frame   0x00001810       0x28 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-cxa_atexit.o)
+ .debug_frame   0x00001838       0x28 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+ .debug_frame   0x00001860       0x2c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+ .debug_frame   0x0000188c       0x2c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+ .debug_frame   0x000018b8       0x30 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+ .debug_frame   0x000018e8       0x38 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+ .debug_frame   0x00001920       0x2c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memcpy.o)
+ .debug_frame   0x0000194c       0x2c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memset.o)
+ .debug_frame   0x00001978       0x30 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mlock.o)
+ .debug_frame   0x000019a8       0x68 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+ .debug_frame   0x00001a10       0x28 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-stpcpy.o)
+ .debug_frame   0x00001a38       0x2c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o)
+ .debug_frame   0x00001a64       0x20 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcpy.o)
+ .debug_frame   0x00001a84       0x20 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strlen.o)
+ .debug_frame   0x00001aa4       0x2c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncmp.o)
+ .debug_frame   0x00001ad0       0x2c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncpy.o)
+ .debug_frame   0x00001afc       0x3c /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strtok_r.o)
+ .debug_frame   0x00001b38       0x34 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+ .debug_frame   0x00001b6c       0x48 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00001bb4       0x50 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+
+.debug_str      0x00000000     0x7d31
+ *(.debug_str)
+ .debug_str     0x00000000       0xf2 out/printf-stdarg.o
+                                0x127 (size before relaxing)
+ .debug_str     0x000000f2      0x5f4 out/syscalls.o
+                                0x737 (size before relaxing)
+ .debug_str     0x000006e6       0x42 out/vectors_STM32L1xx_md.o
+                                 0xb7 (size before relaxing)
+ .debug_str     0x00000728      0x351 out/croutine.o
+                                0x453 (size before relaxing)
+ .debug_str     0x00000a79       0xa3 out/list.o
+                                0x242 (size before relaxing)
+ .debug_str     0x00000b1c      0x3db out/queue.o
+                                0x5b8 (size before relaxing)
+ .debug_str     0x00000ef7      0x893 out/tasks.o
+                                0xb21 (size before relaxing)
+ .debug_str     0x0000178a       0x12 out/timers.o
+                                0x113 (size before relaxing)
+ .debug_str     0x0000179c      0x122 out/port.o
+                                0x256 (size before relaxing)
+ .debug_str     0x000018be       0x4f out/heap_3.o
+                                0x157 (size before relaxing)
+ .debug_str     0x0000190d      0x344 out/ff.o
+                                0x5e7 (size before relaxing)
+ .debug_str     0x00001c51       0x48 out/syscall.o
+                                0x17e (size before relaxing)
+ .debug_str     0x00001c99     0x2fb2 out/main.o
+                               0x33df (size before relaxing)
+ .debug_str     0x00004c4b       0x4b out/overrides.o
+                                0x15a (size before relaxing)
+ .debug_str     0x00004c96      0x22e out/mmc.o
+                               0x2c3c (size before relaxing)
+ .debug_str     0x00004ec4     0x2546 out/command.o
+                               0x2eb9 (size before relaxing)
+ .debug_str     0x0000740a       0xbb out/gpio.o
+                               0x2a8d (size before relaxing)
+ .debug_str     0x000074c5      0x3e1 out/helper.o
+                                0x687 (size before relaxing)
+ .debug_str     0x000078a6       0x8e out/i2c.o
+                               0x2bed (size before relaxing)
+ .debug_str     0x00007934      0x12e out/rcc.o
+                                0x2f6 (size before relaxing)
+ .debug_str     0x00007a62       0xd3 out/spi.o
+                               0x2c25 (size before relaxing)
+ .debug_str     0x00007b35      0x1fc out/usart.o
+                               0x3684 (size before relaxing)
+
+.debug_loc      0x00000000     0x6791
+ *(.debug_loc)
+ .debug_loc     0x00000000      0x6ac out/printf-stdarg.o
+ .debug_loc     0x000006ac      0x1a2 out/syscalls.o
+ .debug_loc     0x0000084e      0x1e2 out/croutine.o
+ .debug_loc     0x00000a30       0x4a out/list.o
+ .debug_loc     0x00000a7a      0x7df out/queue.o
+ .debug_loc     0x00001259      0xc3a out/tasks.o
+ .debug_loc     0x00001e93       0x87 out/port.o
+ .debug_loc     0x00001f1a       0x9a out/heap_3.o
+ .debug_loc     0x00001fb4     0x2c2f out/ff.o
+ .debug_loc     0x00004be3       0xf7 out/syscall.o
+ .debug_loc     0x00004cda      0x429 out/main.o
+ .debug_loc     0x00005103       0x51 out/overrides.o
+ .debug_loc     0x00005154      0x893 out/mmc.o
+ .debug_loc     0x000059e7      0x590 out/command.o
+ .debug_loc     0x00005f77      0x15a out/gpio.o
+ .debug_loc     0x000060d1       0x40 out/helper.o
+ .debug_loc     0x00006111      0x115 out/i2c.o
+ .debug_loc     0x00006226      0x160 out/rcc.o
+ .debug_loc     0x00006386      0x109 out/spi.o
+ .debug_loc     0x0000648f      0x302 out/usart.o
+
+.debug_macinfo  0x00000000   0x476a55
+ *(.debug_macinfo)
+ .debug_macinfo
+                0x00000000     0x2426 out/printf-stdarg.o
+ .debug_macinfo
+                0x00002426     0x51e5 out/syscalls.o
+ .debug_macinfo
+                0x0000760b     0x2286 out/vectors_STM32L1xx_md.o
+ .debug_macinfo
+                0x00009891    0x3b87c out/croutine.o
+ .debug_macinfo
+                0x0004510d    0x3aeb6 out/list.o
+ .debug_macinfo
+                0x0007ffc3    0x3b682 out/queue.o
+ .debug_macinfo
+                0x000bb645    0x3be55 out/tasks.o
+ .debug_macinfo
+                0x000f749a    0x3bfdd out/timers.o
+ .debug_macinfo
+                0x00133477    0x3b3af out/port.o
+ .debug_macinfo
+                0x0016e826    0x3b255 out/heap_3.o
+ .debug_macinfo
+                0x001a9a7b    0x3c737 out/ff.o
+ .debug_macinfo
+                0x001e61b2    0x3bf12 out/syscall.o
+ .debug_macinfo
+                0x002220c4    0x3e5fa out/main.o
+ .debug_macinfo
+                0x002606be    0x3a9cd out/overrides.o
+ .debug_macinfo
+                0x0029b08b    0x3d8fe out/mmc.o
+ .debug_macinfo
+                0x002d8989    0x3e963 out/command.o
+ .debug_macinfo
+                0x003172ec    0x2f0f6 out/gpio.o
+ .debug_macinfo
+                0x003463e2    0x39805 out/helper.o
+ .debug_macinfo
+                0x0037fbe7    0x3b479 out/i2c.o
+ .debug_macinfo
+                0x003bb060    0x36c91 out/rcc.o
+ .debug_macinfo
+                0x003f1cf1    0x3c1e1 out/spi.o
+ .debug_macinfo
+                0x0042ded2    0x48b83 out/usart.o
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.note.gnu.arm.ident
+ *(.note.gnu.arm.ident)
+
+.ARM.attributes
+                0x00000000       0x29
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x1d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+ .ARM.attributes
+                0x0000001d       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+ .ARM.attributes
+                0x0000004a       0x1b /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .ARM.attributes
+                0x00000065       0x21 out/startup_ARMv7-M_E_.o
+ .ARM.attributes
+                0x00000086       0x33 out/printf-stdarg.o
+ .ARM.attributes
+                0x000000b9       0x33 out/syscalls.o
+ .ARM.attributes
+                0x000000ec       0x33 out/vectors_STM32L1xx_md.o
+ .ARM.attributes
+                0x0000011f       0x33 out/croutine.o
+ .ARM.attributes
+                0x00000152       0x33 out/list.o
+ .ARM.attributes
+                0x00000185       0x33 out/queue.o
+ .ARM.attributes
+                0x000001b8       0x33 out/tasks.o
+ .ARM.attributes
+                0x000001eb       0x33 out/timers.o
+ .ARM.attributes
+                0x0000021e       0x33 out/port.o
+ .ARM.attributes
+                0x00000251       0x33 out/heap_3.o
+ .ARM.attributes
+                0x00000284       0x33 out/ff.o
+ .ARM.attributes
+                0x000002b7       0x33 out/syscall.o
+ .ARM.attributes
+                0x000002ea       0x33 out/main.o
+ .ARM.attributes
+                0x0000031d       0x33 out/overrides.o
+ .ARM.attributes
+                0x00000350       0x33 out/mmc.o
+ .ARM.attributes
+                0x00000383       0x33 out/command.o
+ .ARM.attributes
+                0x000003b6       0x33 out/gpio.o
+ .ARM.attributes
+                0x000003e9       0x33 out/helper.o
+ .ARM.attributes
+                0x0000041c       0x33 out/i2c.o
+ .ARM.attributes
+                0x0000044f       0x33 out/rcc.o
+ .ARM.attributes
+                0x00000482       0x33 out/spi.o
+ .ARM.attributes
+                0x000004b5       0x33 out/usart.o
+ .ARM.attributes
+                0x000004e8       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+ .ARM.attributes
+                0x00000515       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+ .ARM.attributes
+                0x00000542       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o)
+ .ARM.attributes
+                0x0000056f       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-cxa_atexit.o)
+ .ARM.attributes
+                0x0000059c       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+ .ARM.attributes
+                0x000005c9       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+ .ARM.attributes
+                0x000005f6       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000623       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000650       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+ .ARM.attributes
+                0x0000067d       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+ .ARM.attributes
+                0x000006aa       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memcpy.o)
+ .ARM.attributes
+                0x000006d7       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memset.o)
+ .ARM.attributes
+                0x00000704       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x00000731       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+ .ARM.attributes
+                0x0000075e       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-stpcpy.o)
+ .ARM.attributes
+                0x0000078b       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o)
+ .ARM.attributes
+                0x000007b8       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcpy.o)
+ .ARM.attributes
+                0x000007e5       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x00000812       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncmp.o)
+ .ARM.attributes
+                0x0000083f       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncpy.o)
+ .ARM.attributes
+                0x0000086c       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strtok_r.o)
+ .ARM.attributes
+                0x00000899       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+ .ARM.attributes
+                0x000008c6       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+ .ARM.attributes
+                0x000008f3       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+ .ARM.attributes
+                0x00000920       0x2d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtend.o
+ .ARM.attributes
+                0x0000094d       0x1d /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtn.o
+
+/DISCARD/
+ *(.note.GNU-stack)
+                0x000040e4                PROVIDE (__text_size, (__text_end - __text_start))
+                0x000000f4                PROVIDE (__vectors_size, (__vectors_end - __vectors_start))
+                0x00000008                PROVIDE (__exidx_size, (__exidx_end - __exidx_start))
+                0x00000858                PROVIDE (__data_size, (__data_end - __data_start))
+                0x000006ac                PROVIDE (__bss_size, (__bss_end - __bss_start))
+                0x00000800                PROVIDE (__stack_size, (__stack_end - __stack_start))
+                0x000028f8                PROVIDE (__heap_size, (__heap_end - __heap_start))
+OUTPUT(out/mg-stm32l_acquisition_supervisor.elf elf32-littlearm)
+
+.debug_ranges   0x00000000      0xfa8
+ .debug_ranges  0x00000000       0x58 out/printf-stdarg.o
+ .debug_ranges  0x00000058       0x98 out/syscalls.o
+ .debug_ranges  0x000000f0       0x10 out/vectors_STM32L1xx_md.o
+ .debug_ranges  0x00000100       0xc8 out/croutine.o
+ .debug_ranges  0x000001c8       0x30 out/list.o
+ .debug_ranges  0x000001f8       0xd0 out/queue.o
+ .debug_ranges  0x000002c8      0x238 out/tasks.o
+ .debug_ranges  0x00000500       0x58 out/port.o
+ .debug_ranges  0x00000558       0x18 out/heap_3.o
+ .debug_ranges  0x00000570      0x2b8 out/ff.o
+ .debug_ranges  0x00000828       0x28 out/syscall.o
+ .debug_ranges  0x00000850       0x80 out/main.o
+ .debug_ranges  0x000008d0       0x20 out/overrides.o
+ .debug_ranges  0x000008f0      0x178 out/mmc.o
+ .debug_ranges  0x00000a68      0x260 out/command.o
+ .debug_ranges  0x00000cc8       0x30 out/gpio.o
+ .debug_ranges  0x00000cf8       0x30 out/helper.o
+ .debug_ranges  0x00000d28       0x38 out/i2c.o
+ .debug_ranges  0x00000d60       0xb0 out/rcc.o
+ .debug_ranges  0x00000e10       0x58 out/spi.o
+ .debug_ranges  0x00000e68      0x140 out/usart.o
+
+.comment        0x00000000       0x70
+ .comment       0x00000000       0x70 out/printf-stdarg.o
+                                 0x71 (size before relaxing)
+ .comment       0x00000000       0x71 out/syscalls.o
+ .comment       0x00000000       0x71 out/vectors_STM32L1xx_md.o
+ .comment       0x00000000       0x71 out/croutine.o
+ .comment       0x00000000       0x71 out/list.o
+ .comment       0x00000000       0x71 out/queue.o
+ .comment       0x00000000       0x71 out/tasks.o
+ .comment       0x00000000       0x71 out/timers.o
+ .comment       0x00000000       0x71 out/port.o
+ .comment       0x00000000       0x71 out/heap_3.o
+ .comment       0x00000000       0x71 out/ff.o
+ .comment       0x00000000       0x71 out/syscall.o
+ .comment       0x00000000       0x71 out/main.o
+ .comment       0x00000000       0x71 out/overrides.o
+ .comment       0x00000000       0x71 out/mmc.o
+ .comment       0x00000000       0x71 out/command.o
+ .comment       0x00000000       0x71 out/gpio.o
+ .comment       0x00000000       0x71 out/helper.o
+ .comment       0x00000000       0x71 out/i2c.o
+ .comment       0x00000000       0x71 out/rcc.o
+ .comment       0x00000000       0x71 out/spi.o
+ .comment       0x00000000       0x71 out/usart.o
+
+Cross Reference Table
+
+Symbol                                            File
+ADC1_IRQHandler                                   out/vectors_STM32L1xx_md.o
+BusFault_Handler                                  out/vectors_STM32L1xx_md.o
+COMP_IRQHandler                                   out/vectors_STM32L1xx_md.o
+DAC_IRQHandler                                    out/vectors_STM32L1xx_md.o
+DMA1_Channel1_IRQHandler                          out/vectors_STM32L1xx_md.o
+DMA1_Channel2_IRQHandler                          out/vectors_STM32L1xx_md.o
+DMA1_Channel3_IRQHandler                          out/vectors_STM32L1xx_md.o
+DMA1_Channel4_IRQHandler                          out/usart.o
+                                                  out/vectors_STM32L1xx_md.o
+DMA1_Channel5_IRQHandler                          out/vectors_STM32L1xx_md.o
+DMA1_Channel6_IRQHandler                          out/vectors_STM32L1xx_md.o
+DMA1_Channel7_IRQHandler                          out/vectors_STM32L1xx_md.o
+DebugMon_Handler                                  out/vectors_STM32L1xx_md.o
+EXTI0_IRQHandler                                  out/vectors_STM32L1xx_md.o
+EXTI15_10_IRQHandler                              out/vectors_STM32L1xx_md.o
+EXTI1_IRQHandler                                  out/vectors_STM32L1xx_md.o
+EXTI2_IRQHandler                                  out/vectors_STM32L1xx_md.o
+EXTI3_IRQHandler                                  out/vectors_STM32L1xx_md.o
+EXTI4_IRQHandler                                  out/vectors_STM32L1xx_md.o
+EXTI9_5_IRQHandler                                out/vectors_STM32L1xx_md.o
+FLASH_IRQHandler                                  out/vectors_STM32L1xx_md.o
+HardFault_Handler                                 out/vectors_STM32L1xx_md.o
+I2C1_ER_IRQHandler                                out/vectors_STM32L1xx_md.o
+I2C1_EV_IRQHandler                                out/vectors_STM32L1xx_md.o
+I2C2_ER_IRQHandler                                out/vectors_STM32L1xx_md.o
+I2C2_EV_IRQHandler                                out/vectors_STM32L1xx_md.o
+LCD_IRQHandler                                    out/vectors_STM32L1xx_md.o
+MemManage_Handler                                 out/vectors_STM32L1xx_md.o
+NMI_Handler                                       out/vectors_STM32L1xx_md.o
+PVD_IRQHandler                                    out/vectors_STM32L1xx_md.o
+PendSV_Handler                                    out/port.o
+                                                  out/vectors_STM32L1xx_md.o
+RCC_IRQHandler                                    out/vectors_STM32L1xx_md.o
+RTC_Alarm_IRQHandler                              out/vectors_STM32L1xx_md.o
+RTC_WKUP_IRQHandler                               out/vectors_STM32L1xx_md.o
+Reset_Handler                                     out/startup_ARMv7-M_E_.o
+                                                  out/vectors_STM32L1xx_md.o
+SPI1_IRQHandler                                   out/vectors_STM32L1xx_md.o
+SPI2_IRQHandler                                   out/vectors_STM32L1xx_md.o
+SVC_Handler                                       out/port.o
+                                                  out/vectors_STM32L1xx_md.o
+SysTick_Handler                                   out/port.o
+                                                  out/vectors_STM32L1xx_md.o
+TAMPER_STAMP_IRQHandler                           out/vectors_STM32L1xx_md.o
+TIM10_IRQHandler                                  out/vectors_STM32L1xx_md.o
+TIM11_IRQHandler                                  out/vectors_STM32L1xx_md.o
+TIM2_IRQHandler                                   out/vectors_STM32L1xx_md.o
+TIM3_IRQHandler                                   out/vectors_STM32L1xx_md.o
+TIM4_IRQHandler                                   out/vectors_STM32L1xx_md.o
+TIM6_IRQHandler                                   out/helper.o
+                                                  out/vectors_STM32L1xx_md.o
+TIM7_IRQHandler                                   out/vectors_STM32L1xx_md.o
+TIM9_IRQHandler                                   out/vectors_STM32L1xx_md.o
+USART1_IRQHandler                                 out/usart.o
+                                                  out/vectors_STM32L1xx_md.o
+USART2_IRQHandler                                 out/vectors_STM32L1xx_md.o
+USART3_IRQHandler                                 out/vectors_STM32L1xx_md.o
+USB_FS_WKUP_IRQHandler                            out/vectors_STM32L1xx_md.o
+USB_HP_IRQHandler                                 out/vectors_STM32L1xx_md.o
+USB_LP_IRQHandler                                 out/vectors_STM32L1xx_md.o
+UsageFault_Handler                                out/vectors_STM32L1xx_md.o
+WWDG_IRQHandler                                   out/vectors_STM32L1xx_md.o
+_Jv_RegisterClasses                               /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+__Default_Handler                                 out/vectors_STM32L1xx_md.o
+__Reserved_0x1C_Handler                           out/vectors_STM32L1xx_md.o
+__Reserved_0x20_Handler                           out/vectors_STM32L1xx_md.o
+__Reserved_0x24_Handler                           out/vectors_STM32L1xx_md.o
+__Reserved_0x28_Handler                           out/vectors_STM32L1xx_md.o
+__Reserved_0x34_Handler                           out/vectors_STM32L1xx_md.o
+__aeabi_atexit                                    /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+                                                  out/command.o
+__bss_array_end                                   out/startup_ARMv7-M_E_.o
+__bss_array_start                                 out/startup_ARMv7-M_E_.o
+__bss_end__                                       /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__bss_start__                                     /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__call_exitprocs                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+__cxa_atexit                                      /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-cxa_atexit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(atexit_arm.o)
+__cxa_pure_virtual                                out/overrides.o
+__data_array_end                                  out/startup_ARMv7-M_E_.o
+__data_array_start                                out/startup_ARMv7-M_E_.o
+__default_low_level_init                          out/startup_ARMv7-M_E_.o
+__deregister_frame_info                           /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+__dso_handle                                      /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+                                                  out/command.o
+__fini_array_end                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+__fini_array_start                                /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+__heap_end                                        out/syscalls.o
+__heap_start                                      out/syscalls.o
+__init_array_end                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+__init_array_start                                /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+__libc_fini                                       /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+__libc_fini_array                                 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+                                                  out/startup_ARMv7-M_E_.o
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__libc_init_array                                 /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+                                                  out/startup_ARMv7-M_E_.o
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__main_stack_end                                  out/vectors_STM32L1xx_md.o
+__malloc_av_                                      /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+__malloc_current_mallinfo                         /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+__malloc_lock                                     /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mlock.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+__malloc_max_sbrked_mem                           /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+__malloc_max_total_mem                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+__malloc_sbrk_base                                /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+__malloc_top_pad                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+__malloc_trim_threshold                           /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+__malloc_unlock                                   /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mlock.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+__preinit_array_end                               /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+__preinit_array_start                             /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+__process_stack_end                               out/startup_ARMv7-M_E_.o
+__ram_start                                       out/usart.o
+__register_exitproc                               /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-cxa_atexit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o)
+__register_frame_info                             /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crtbegin.o
+__stack                                           /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__strtok_r                                        /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strtok_r.o)
+_close_r                                          out/syscalls.o
+_commands                                         out/command.o
+_execve_r                                         out/syscalls.o
+_exit                                             out/syscalls.o
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+_fini                                             /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-fini.o)
+_fork_r                                           out/syscalls.o
+_free_r                                           /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+_fstat_r                                          out/syscalls.o
+_getpid_r                                         out/syscalls.o
+_global_impure_ptr                                /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+_impure_ptr                                       /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-impure.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+_init                                             /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/armv7-m/crti.o
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-init.o)
+_isatty_r                                         out/syscalls.o
+_kill_r                                           out/syscalls.o
+_link_r                                           out/syscalls.o
+_lseek_r                                          out/syscalls.o
+_mainCRTStartup                                   /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+_malloc_r                                         /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+_malloc_trim_r                                    /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+_open_r                                           out/syscalls.o
+_read_r                                           out/syscalls.o
+_reclaim_reent                                    /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+_sbrk_r                                           out/syscalls.o
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-freer.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-mallocr.o)
+_start                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+_stat_r                                           out/syscalls.o
+_times_r                                          out/syscalls.o
+_unlink_r                                         out/syscalls.o
+_wait_r                                           out/syscalls.o
+_wrapup_reent                                     /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+_write_r                                          out/syscalls.o
+atexit                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-atexit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+cleanup_glue                                      /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+clust2sect                                        out/ff.o
+commandArgumentsToPairs(char const**, unsigned long, CommandArgumentPair*, unsigned int) out/command.o
+commandProcessInput(char*, char*, unsigned int)   out/command.o
+                                                  out/usart.o
+commandRegister(CommandDefinition const*)         out/command.o
+                                                  out/main.o
+configureTimerForRuntimestats                     out/helper.o
+                                                  out/tasks.o
+danaZMSP                                          out/main.o
+disk_initialize                                   out/mmc.o
+                                                  out/ff.o
+disk_ioctl                                        out/mmc.o
+                                                  out/ff.o
+disk_read                                         out/mmc.o
+                                                  out/ff.o
+disk_status                                       out/mmc.o
+                                                  out/ff.o
+disk_write                                        out/mmc.o
+                                                  out/ff.o
+environ                                           out/syscalls.o
+environ_initial                                   out/syscalls.o
+errno                                             /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-reent.o)
+                                                  out/syscalls.o
+exit                                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-exit.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+f_chmod                                           out/ff.o
+f_close                                           out/ff.o
+f_getfree                                         out/ff.o
+f_lseek                                           out/ff.o
+f_mkdir                                           out/ff.o
+f_mount                                           out/ff.o
+                                                  out/main.o
+f_open                                            out/ff.o
+f_opendir                                         out/ff.o
+                                                  out/main.o
+f_read                                            out/ff.o
+f_readdir                                         out/ff.o
+                                                  out/main.o
+f_rename                                          out/ff.o
+f_stat                                            out/ff.o
+f_sync                                            out/ff.o
+f_truncate                                        out/ff.o
+f_unlink                                          out/ff.o
+f_utime                                           out/ff.o
+f_write                                           out/ff.o
+ff_cre_syncobj                                    out/syscall.o
+                                                  out/ff.o
+ff_del_syncobj                                    out/syscall.o
+                                                  out/ff.o
+ff_rel_grant                                      out/syscall.o
+                                                  out/ff.o
+ff_req_grant                                      out/syscall.o
+                                                  out/ff.o
+free                                              /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__call_atexit.o)
+                                                  out/heap_3.o
+get_fat                                           out/ff.o
+get_fattime                                       out/mmc.o
+                                                  out/ff.o
+gpioConfigurePin(GPIO_TypeDef*, GpioPin, GpioConfiguration) out/gpio.o
+                                                  out/usart.o
+                                                  out/spi.o
+                                                  out/i2c.o
+                                                  out/mmc.o
+                                                  out/main.o
+gpioInitialize()                                  out/gpio.o
+                                                  out/main.o
+hardware_init_hook                                /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+i2cInitialize()                                   out/i2c.o
+                                                  out/main.o
+i2cRead(unsigned char, unsigned char*, unsigned int) out/i2c.o
+i2cWrite(unsigned char, unsigned char const*, unsigned int) out/i2c.o
+                                                  out/main.o
+low_level_init_0                                  out/startup_ARMv7-M_E_.o
+low_level_init_1                                  out/startup_ARMv7-M_E_.o
+main                                              out/main.o
+                                                  out/startup_ARMv7-M_E_.o
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+malloc                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-malloc.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-__atexit.o)
+                                                  out/heap_3.o
+memcpy                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memcpy.o)
+                                                  out/usart.o
+                                                  out/command.o
+                                                  out/mmc.o
+                                                  out/main.o
+                                                  out/queue.o
+memset                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-memset.o)
+                                                  out/tasks.o
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+operator delete(void*)                            out/overrides.o
+                                                  out/command.o
+operator new(unsigned int)                        out/overrides.o
+                                                  out/command.o
+pointer                                           out/main.o
+printf                                            out/printf-stdarg.o
+                                                  out/overrides.o
+                                                  out/main.o
+put_fat                                           out/ff.o
+pvPortMalloc                                      out/heap_3.o
+                                                  out/usart.o
+                                                  out/command.o
+                                                  out/overrides.o
+                                                  out/main.o
+                                                  out/tasks.o
+                                                  out/queue.o
+                                                  out/croutine.o
+pxCurrentCoRoutine                                out/croutine.o
+pxCurrentTCB                                      out/tasks.o
+                                                  out/port.o
+pxPortInitialiseStack                             out/port.o
+                                                  out/tasks.o
+rccGetCoreFrequency                               out/rcc.o
+                                                  out/usart.o
+                                                  out/spi.o
+                                                  out/i2c.o
+                                                  out/helper.o
+                                                  out/port.o
+rccStartPll(rccPllInput, unsigned long, unsigned long) out/rcc.o
+                                                  out/main.o
+software_init_hook                                /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+spiInitialize()                                   out/spi.o
+                                                  out/mmc.o
+spiSetBaudRate(unsigned long)                     out/spi.o
+                                                  out/mmc.o
+spiTransfer(unsigned char const*, unsigned char*, unsigned int) out/spi.o
+                                                  out/mmc.o
+sprintf                                           out/printf-stdarg.o
+                                                  out/tasks.o
+start                                             /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*) /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+                                                  out/command.o
+std::__detail::_List_node_base::_M_reverse()      /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+std::__detail::_List_node_base::_M_transfer(std::__detail::_List_node_base*, std::__detail::_List_node_base*) /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+std::__detail::_List_node_base::_M_unhook()       /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+std::__detail::_List_node_base::swap(std::__detail::_List_node_base&, std::__detail::_List_node_base&) /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libstdc++.a(list.o)
+std::list<CommandDefinition const*, std::allocator<CommandDefinition const*> >::push_back(CommandDefinition const* const&) out/command.o
+std::list<CommandDefinition const*, std::allocator<CommandDefinition const*> >::~list() out/command.o
+std::list<CommandDefinition const*, std::allocator<CommandDefinition const*> >::~list() out/command.o
+stpcpy                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-stpcpy.o)
+                                                  out/main.o
+strcat                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o)
+                                                  out/tasks.o
+strcpy                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcpy.o)
+                                                  /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strcat.o)
+strlen                                            /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strlen.o)
+                                                  out/usart.o
+                                                  out/command.o
+                                                  out/main.o
+strncmp                                           /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncmp.o)
+                                                  out/command.o
+strncpy                                           /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strncpy.o)
+                                                  out/tasks.o
+strtok_r                                          /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv7-m/libg.a(lib_a-strtok_r.o)
+                                                  out/command.o
+tim6OverflowCount                                 out/helper.o
+                                                  out/tasks.o
+ucQueueGetQueueNumber                             out/queue.o
+ucQueueGetQueueType                               out/queue.o
+ulKernelPriority                                  out/port.o
+usartInitialize()                                 out/usart.o
+                                                  out/main.o
+usartPrintf(unsigned long, char const*, ...)      out/usart.o
+usartSendCharacter                                out/usart.o
+                                                  out/printf-stdarg.o
+usartSendString(char const*, unsigned long)       out/usart.o
+uxQueueMessagesWaiting                            out/queue.o
+uxQueueMessagesWaitingFromISR                     out/queue.o
+uxTaskGetNumberOfTasks                            out/tasks.o
+uxTaskGetTaskNumber                               out/tasks.o
+uxTaskPriorityGet                                 out/tasks.o
+vCoRoutineAddToDelayedList                        out/croutine.o
+vCoRoutineSchedule                                out/croutine.o
+vListInitialise                                   out/list.o
+                                                  out/tasks.o
+                                                  out/queue.o
+                                                  out/croutine.o
+vListInitialiseItem                               out/list.o
+                                                  out/tasks.o
+                                                  out/croutine.o
+vListInsert                                       out/list.o
+                                                  out/tasks.o
+                                                  out/croutine.o
+vListInsertEnd                                    out/list.o
+                                                  out/tasks.o
+                                                  out/croutine.o
+vListRemove                                       out/list.o
+                                                  out/tasks.o
+                                                  out/croutine.o
+vPortEndScheduler                                 out/port.o
+                                                  out/tasks.o
+vPortEnterCritical                                out/port.o
+                                                  out/tasks.o
+                                                  out/queue.o
+vPortExitCritical                                 out/port.o
+                                                  out/tasks.o
+                                                  out/queue.o
+vPortFree                                         out/heap_3.o
+                                                  out/usart.o
+                                                  out/command.o
+                                                  out/overrides.o
+                                                  out/main.o
+                                                  out/tasks.o
+                                                  out/queue.o
+vPortYieldFromISR                                 out/port.o
+                                                  out/usart.o
+                                                  out/tasks.o
+                                                  out/queue.o
+vQueueAddToRegistry                               out/queue.o
+vQueueDelete                                      out/queue.o
+vQueueSetQueueNumber                              out/queue.o
+vTaskDelay                                        out/tasks.o
+                                                  out/main.o
+vTaskDelayUntil                                   out/tasks.o
+vTaskDelete                                       out/tasks.o
+vTaskEndScheduler                                 out/tasks.o
+vTaskGetRunTimeStats                              out/tasks.o
+                                                  out/main.o
+vTaskIncrementTick                                out/tasks.o
+                                                  out/port.o
+vTaskList                                         out/tasks.o
+                                                  out/main.o
+vTaskMissedYield                                  out/tasks.o
+                                                  out/queue.o
+vTaskPlaceOnEventList                             out/tasks.o
+                                                  out/queue.o
+vTaskPriorityDisinherit                           out/tasks.o
+                                                  out/queue.o
+vTaskPriorityInherit                              out/tasks.o
+                                                  out/queue.o
+vTaskPrioritySet                                  out/tasks.o
+vTaskResume                                       out/tasks.o
+vTaskSetTaskNumber                                out/tasks.o
+vTaskSetTimeOutState                              out/tasks.o
+                                                  out/queue.o
+vTaskStartScheduler                               out/tasks.o
+                                                  out/main.o
+vTaskSuspend                                      out/tasks.o
+vTaskSuspendAll                                   out/tasks.o
+                                                  out/heap_3.o
+                                                  out/queue.o
+vTaskSwitchContext                                out/tasks.o
+                                                  out/port.o
+vectors                                           out/vectors_STM32L1xx_md.o
+vsprintf                                          out/printf-stdarg.o
+                                                  out/usart.o
+xCoRoutineCreate                                  out/croutine.o
+xCoRoutineRemoveFromEventList                     out/croutine.o
+xPortStartScheduler                               out/port.o
+                                                  out/tasks.o
+xQueueCreateMutex                                 out/queue.o
+                                                  out/syscall.o
+xQueueGenericCreate                               out/queue.o
+                                                  out/usart.o
+xQueueGenericReceive                              out/queue.o
+                                                  out/usart.o
+                                                  out/syscall.o
+xQueueGenericReset                                out/queue.o
+xQueueGenericSend                                 out/queue.o
+                                                  out/usart.o
+                                                  out/syscall.o
+xQueueGenericSendFromISR                          out/queue.o
+                                                  out/usart.o
+xQueueIsQueueEmptyFromISR                         out/queue.o
+xQueueIsQueueFullFromISR                          out/queue.o
+xQueueReceiveFromISR                              out/queue.o
+xQueueRegistry                                    out/queue.o
+xTaskCheckForTimeOut                              out/tasks.o
+                                                  out/queue.o
+xTaskGenericCreate                                out/tasks.o
+                                                  out/usart.o
+                                                  out/main.o
+xTaskGetCurrentTaskHandle                         out/tasks.o
+                                                  out/queue.o
+xTaskGetTickCount                                 out/tasks.o
+                                                  out/mmc.o
+                                                  out/main.o
+                                                  out/croutine.o
+xTaskGetTickCountFromISR                          out/tasks.o
+xTaskIsTaskSuspended                              out/tasks.o
+xTaskRemoveFromEventList                          out/tasks.o
+                                                  out/queue.o
+xTaskResumeAll                                    out/tasks.o
+                                                  out/heap_3.o
+                                                  out/queue.o
+xTaskResumeFromISR                                out/tasks.o

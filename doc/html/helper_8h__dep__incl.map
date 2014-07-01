@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_free_r_t_o_s_config_8h_source.html" title="D:/1/mg&#45;stm32l_acquisition_supervisor&#45;0.1.0&#45;120906/FreeRTOSConfig.h" alt="" coords="997,80,1475,107"/>
+<area shape="rect" id="node13" href="$main_8cpp.html" title="Main code block." alt="" coords="951,528,1373,555"/>
+<area shape="rect" id="node15" href="$usart_8cpp.html" title="USART driver." alt="" coords="5,528,429,555"/>
+<area shape="rect" id="node33" href="$overrides_8cpp.html" title="Overrides of C++ functions." alt="" coords="1477,229,1928,256"/>
+<area shape="rect" id="node36" href="$helper_8cpp.html" title="Helper functions." alt="" coords="2003,80,2433,107"/>
+<area shape="rect" id="node5" href="$_free_r_t_o_s_8h_source.html" title="D:/1/mg&#45;stm32l_acquisition_supervisor&#45;0.1.0&#45;120906/FreeRTOS/include/FreeRTOS.h" alt="" coords="770,155,1323,181"/>
+<area shape="rect" id="node7" href="$error_8h.html" title="Error codes used in program, functions for error handling." alt="" coords="470,379,876,405"/>
+<area shape="rect" id="node11" href="$command_8cpp.html" title="Command interpreter." alt="" coords="453,528,909,555"/>
+<area shape="rect" id="node19" href="$usart_8h.html" title="Header for usart.cpp." alt="" coords="942,453,1351,480"/>
+<area shape="rect" id="node25" href="$ffconf_8h_source.html" title="D:/1/mg&#45;stm32l_acquisition_supervisor&#45;0.1.0&#45;120906/FatFS/ffconf.h" alt="" coords="952,229,1403,256"/>
+<area shape="rect" id="node9" href="$command_8h.html" title="Header for command.cpp." alt="" coords="425,453,865,480"/>
+<area shape="rect" id="node27" href="$ff_8h_source.html" title="D:/1/mg&#45;stm32l_acquisition_supervisor&#45;0.1.0&#45;120906/FatFS/ff.h" alt="" coords="965,304,1389,331"/>
+</map>

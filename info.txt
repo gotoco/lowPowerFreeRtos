@@ -1,0 +1,6 @@
+project: mg-stm32l_acquisition_supervisor
+chip: STM32L152RB
+compiler: arm-none-eabi-gcc (GNU Tools for ARM Embedded Processors) 4.6.2
+	20120613 (release) [ARM/embedded-4_6-branch revision 188521]
+IDE: Eclipse Juno
+date: 2012-08-23

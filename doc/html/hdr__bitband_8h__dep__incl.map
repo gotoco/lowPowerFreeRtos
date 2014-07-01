@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$config_8h.html" title="Basic configuration of the project." alt="" coords="995,155,1409,181"/>
+<area shape="rect" id="node13" href="$rcc_8cpp.html" title="RCC driver." alt="" coords="2609,229,3020,256"/>
+<area shape="rect" id="node19" href="$hdr__rcc_8h.html" title="Header with definition of bits in RCC control registers." alt="" coords="1753,80,2201,107"/>
+<area shape="rect" id="node65" href="$hdr__dma_8h.html" title="Header with definition of bits in DMA control registers." alt="" coords="2904,304,3363,331"/>
+<area shape="rect" id="node68" href="$hdr__i2c_8h.html" title="Header with definition of bits in I2C control registers." alt="" coords="2183,155,2629,181"/>
+<area shape="rect" id="node71" href="$hdr__spi_8h.html" title="Header with definition of bits in SPI control registers." alt="" coords="5,155,451,181"/>
+<area shape="rect" id="node74" href="$hdr__usart_8h.html" title="Header with definition of bits in USART control registers." alt="" coords="3062,453,3524,480"/>
+<area shape="rect" id="node5" href="$command_8cpp.html" title="Command interpreter." alt="" coords="745,677,1201,704"/>
+<area shape="rect" id="node7" href="$helper_8cpp.html" title="Helper functions." alt="" coords="1114,229,1544,256"/>
+<area shape="rect" id="node9" href="$i2c_8cpp.html" title="I2C driver." alt="" coords="2175,229,2584,256"/>
+<area shape="rect" id="node11" href="$main_8cpp.html" title="Main code block." alt="" coords="1226,677,1648,704"/>
+<area shape="rect" id="node15" href="$spi_8cpp.html" title="SPI driver." alt="" coords="527,229,936,256"/>
+<area shape="rect" id="node17" href="$usart_8cpp.html" title="USART driver." alt="" coords="2120,677,2544,704"/>
+<area shape="rect" id="node21" href="$rcc_8h.html" title="Header for rcc.cpp." alt="" coords="1663,155,2057,181"/>
+<area shape="rect" id="node23" href="$_free_r_t_o_s_config_8h_source.html" title="D:/1/mg&#45;stm32l_acquisition_supervisor&#45;0.1.0&#45;120906/FreeRTOSConfig.h" alt="" coords="1621,229,2099,256"/>
+<area shape="rect" id="node25" href="$_free_r_t_o_s_8h_source.html" title="D:/1/mg&#45;stm32l_acquisition_supervisor&#45;0.1.0&#45;120906/FreeRTOS/include/FreeRTOS.h" alt="" coords="1389,304,1941,331"/>
+<area shape="rect" id="node27" href="$error_8h.html" title="Error codes used in program, functions for error handling." alt="" coords="1295,528,1701,555"/>
+<area shape="rect" id="node36" href="$usart_8h.html" title="Header for usart.cpp." alt="" coords="1834,603,2243,629"/>
+<area shape="rect" id="node42" href="$ffconf_8h_source.html" title="D:/1/mg&#45;stm32l_acquisition_supervisor&#45;0.1.0&#45;120906/FatFS/ffconf.h" alt="" coords="1268,379,1719,405"/>
+<area shape="rect" id="node50" href="$overrides_8cpp.html" title="Overrides of C++ functions." alt="" coords="1793,379,2244,405"/>
+<area shape="rect" id="node29" href="$command_8h.html" title="Header for command.cpp." alt="" coords="1215,603,1656,629"/>
+<area shape="rect" id="node44" href="$ff_8h_source.html" title="D:/1/mg&#45;stm32l_acquisition_supervisor&#45;0.1.0&#45;120906/FatFS/ff.h" alt="" coords="1287,453,1711,480"/>
+</map>

@@ -1,0 +1,32 @@
+<map id="G" name="G">
+<area shape="rect" id="node11" href="$stm32l1xx_8h.html" title="CMSIS Cortex&#45;M3 Device Peripheral Access Layer Header File. This file contains all the peripheral reg..." alt="" coords="539,528,661,555"/>
+<area shape="rect" id="node23" href="$config_8h.html" title="Basic configuration of the project." alt="" coords="5,229,77,256"/>
+<area shape="rect" id="node27" href="$hdr__usart_8h.html" title="Header with definition of bits in USART control registers." alt="" coords="155,304,275,331"/>
+<area shape="rect" id="node30" href="$hdr__gpio_8h.html" title="Header with values of bitfields in GPIO control registers." alt="" coords="513,155,628,181"/>
+<area shape="rect" id="node32" href="$hdr__rcc_8h.html" title="Header with definition of bits in RCC control registers." alt="" coords="295,603,401,629"/>
+<area shape="rect" id="node35" href="$hdr__dma_8h.html" title="Header with definition of bits in DMA control registers." alt="" coords="221,379,336,405"/>
+<area shape="rect" id="node38" href="$gpio_8h.html" title="Header for gpio.cpp." alt="" coords="516,80,577,107"/>
+<area shape="rect" id="node42" href="$rcc_8h.html" title="Header for rcc.cpp." alt="" coords="436,528,489,555"/>
+<area shape="rect" id="node46" href="$usart_8h.html" title="Header for usart.cpp." alt="" coords="855,80,921,107"/>
+<area shape="rect" id="node48" href="$_free_r_t_o_s_8h_source.html" title="FreeRTOS.h" alt="" coords="907,379,1003,405"/>
+<area shape="rect" id="node58" href="$helper_8h.html" title="Helper macros and header for helper.cpp." alt="" coords="848,528,923,555"/>
+<area shape="rect" id="node68" href="$error_8h.html" title="Error codes used in program, functions for error handling." alt="" coords="957,155,1021,181"/>
+<area shape="rect" id="node81" href="$semphr_8h_source.html" title="semphr.h" alt="" coords="1305,379,1388,405"/>
+<area shape="rect" id="node83" href="$queue_8h_source.html" title="queue.h" alt="" coords="1344,453,1419,480"/>
+<area shape="rect" id="node86" href="$command_8h.html" title="Header for command.cpp." alt="" coords="1089,80,1188,107"/>
+<area shape="rect" id="node94" href="$task_8h_source.html" title="task.h" alt="" coords="1463,80,1524,107"/>
+<area shape="rect" id="node13" href="$core__cm3_8h.html" title="CMSIS Cortex&#45;M3 Core Peripheral Access Layer Header File." alt="" coords="426,603,523,629"/>
+<area shape="rect" id="node20" href="$system__stm32l1xx_8h.html" title="CMSIS Cortex&#45;M3 Device Peripheral Access Layer System Header File." alt="" coords="649,603,804,629"/>
+<area shape="rect" id="node16" href="$core__cm_instr_8h.html" title="CMSIS Cortex&#45;M Core Instruction Access Header File." alt="" coords="280,677,397,704"/>
+<area shape="rect" id="node18" href="$core__cm_func_8h.html" title="CMSIS Cortex&#45;M Core Function Access Header File." alt="" coords="422,677,540,704"/>
+<area shape="rect" id="node25" href="$hdr__bitband_8h.html" title="Header for bit&#45;banding." alt="" coords="119,677,253,704"/>
+<area shape="rect" id="node52" href="$projdefs_8h_source.html" title="projdefs.h" alt="" coords="947,453,1032,480"/>
+<area shape="rect" id="node54" href="$_free_r_t_o_s_config_8h_source.html" title="FreeRTOSConfig.h" alt="" coords="736,453,872,480"/>
+<area shape="rect" id="node62" href="$portable_8h_source.html" title="portable.h" alt="" coords="1155,453,1241,480"/>
+<area shape="rect" id="node64" href="$portmacro_8h_source.html" title="portmacro.h" alt="" coords="1141,528,1243,555"/>
+<area shape="rect" id="node66" href="$mpu__wrappers_8h_source.html" title="mpu_wrappers.h" alt="" coords="1317,528,1445,555"/>
+<area shape="rect" id="node74" href="$ff_8h_source.html" title="ff.h" alt="" coords="1047,229,1089,256"/>
+<area shape="rect" id="node76" href="$integer_8h_source.html" title="integer.h" alt="" coords="957,304,1035,331"/>
+<area shape="rect" id="node78" href="$ffconf_8h_source.html" title="ffconf.h" alt="" coords="1060,304,1129,331"/>
+<area shape="rect" id="node97" href="$list_8h_source.html" title="list.h" alt="" coords="1514,155,1565,181"/>
+</map>

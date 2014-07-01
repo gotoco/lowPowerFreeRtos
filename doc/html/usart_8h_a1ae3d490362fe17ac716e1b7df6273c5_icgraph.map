@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$usart_8h.html#a9d38cec8f8126c6f5b8e97b9824827d9" title="Sends one formatted string via USART." alt="" coords="181,5,269,32"/>
+<area shape="rect" id="node5" href="$usart_8cpp.html#a9ef4101447f70985e8df74b451158f1d" title="USART RX task." alt="" coords="318,31,389,57"/>
+<area shape="rect" id="node7" href="$usart_8h.html#a5ccbcfccc60e332b3558c9c89e7b6b70" title="Initializes USART." alt="" coords="437,31,544,57"/>
+<area shape="rect" id="node9" href="$main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main code block." alt="" coords="593,31,647,57"/>
+</map>
