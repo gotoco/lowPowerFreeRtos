@@ -27,8 +27,8 @@
 | LED
 +---------------------------------------------------------------------------------------------------------------------*/
 
-#define LED_GPIO							GPIOB	///< GPIO port to which the LED is connected
-#define LED_pin								GPIO_PIN_7	///< pin number of the LED
+#define LED_GPIO							GPIOC	///< GPIO port to which the LED is connected
+#define LED_pin								GPIO_PIN_8	///< pin number of the LED
 
 /// bit-band "variable" to directly handle the pin
 #define LED_bb								BITBAND(&LED_GPIO->ODR, LED_pin)
