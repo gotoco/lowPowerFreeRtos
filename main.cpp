@@ -108,10 +108,17 @@ int main(void)
 	i2cInitialize();
 
 	enum Error error = usartInitialize();
+<<<<<<< HEAD
 //
 //	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
 //	ASSERT("f_mount()", fresult == FR_OK);
 //
+=======
+
+	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
+	ASSERT("f_mount()", fresult == FR_OK);
+
+>>>>>>> 5fe803c... #: Removing redundant files
 	error = _initializeHeartbeatTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
@@ -209,6 +216,7 @@ static void _heartbeatTask(void *parameters)
 
 	for(;;){
 		vTaskDelay(500/portTICK_RATE_MS);
+<<<<<<< HEAD
 
 		//Test interface
 		LED1_bb ^= 1;
@@ -219,6 +227,9 @@ static void _heartbeatTask(void *parameters)
 		const char* twochars = "test_";
 		usartSendString(twochars, 100);
 
+=======
+		LED_bb ^= 1;
+>>>>>>> 5fe803c... #: Removing redundant files
 	}
 
 }
