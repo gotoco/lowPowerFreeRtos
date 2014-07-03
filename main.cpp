@@ -94,6 +94,7 @@ uint8_t * pointer = (uint8_t*)pvPortMalloc(129*sizeof(uint8_t));
 
 int main(void)
 {
+
 	RCC_APB1ENR_PWREN_bb = 1;
 	PWR->CR = (PWR->CR & (~PWR_CR_VOS)) | PWR_CR_VOS_0;	// set VCORE voltage range 1 (1.8V)
 	while((PWR->CSR & PWR_CSR_VOSF) != 0);	// wait for regulator ready
@@ -108,23 +109,24 @@ int main(void)
 	i2cInitialize();
 
 	enum Error error = usartInitialize();
-<<<<<<< HEAD
-//
-//	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
-//	ASSERT("f_mount()", fresult == FR_OK);
-//
-=======
+
+//	ASSERT("usartInitialize()", error == ERROR_NONE);
+//	usartSendString("testowy string", 1000);
+//	i2cWrite(adresMSP, dana, 1);
+//	pointer = i2cRead(adresMSP, pointer, 1);
+//	usartSendString("1 Znak z MSP", 1000);
+//	usartSendString((char*)pointer, 199);
+
 
 	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
 	ASSERT("f_mount()", fresult == FR_OK);
 
->>>>>>> 5fe803c... #: Removing redundant files
 	error = _initializeHeartbeatTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
-//	commandRegister(&_dirCommandDefinition);
-//	commandRegister(&_runtimestatsCommandDefinition);
-//	commandRegister(&_tasklistCommandDefinition);
+	commandRegister(&_dirCommandDefinition);
+	commandRegister(&_runtimestatsCommandDefinition);
+	commandRegister(&_tasklistCommandDefinition);
 
 	vTaskStartScheduler();
 
@@ -212,29 +214,75 @@ static void _heartbeatTask(void *parameters)
 
 	portTickType xLastHeartBeat;
 
+	Error error = ERROR_NONE;
+
+	uint8_t readData = 0, buffer, *arrayFromSensor, sizeOfArray=0, counter;
+
 	xLastHeartBeat = xTaskGetTickCount();
 
-	for(;;){
-		vTaskDelay(500/portTICK_RATE_MS);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> a337a12... #: remote test
+	/*
+	 * For now we have test procedure with one hardcoded
+	 * slave on I2C bus with 0x48 address
+	 */
+	//TODO: use a list of slaves rather than this shit ;)
 
-		//Test interface
-		LED1_bb ^= 1;
-		LED2_bb ^= LED1_bb;;
-		LED3_bb ^= LED2_bb;
+	/*  Step 1 we send a POWER_UP command to Slaves, then we gave they 2 sec. to prepare themselves
+	 * to make measurements, then they should send a MODULE_READY command if everything go right
+	 * if not while loop will wait longer, if modules are ready we send they START_MEASUR cmd.
+	 */
+	buffer = POWER_UP;
+    i2cWrite(adresMSP, &buffer, 1);
+
+    vTaskDelay(100/portTICK_RATE_MS);
+
+	buffer = ARE_YOU_READY;
+    i2cWrite(adresMSP, &buffer, 1);
+    for(counter=0; counter<1000; counter++);
+	do{
+		readData = *i2cRead(adresMSP, pointer, 1);
+
+		if(readData != MODULE_READY){
+			error = ERROR_MAINBUSS_MODULE_NOT_READY;
+
+	        vTaskDelay(500/portTICK_RATE_MS);
+		}
+
+	}while(error != ERROR_NONE);
+
+	buffer = START_MEASUR;
+    i2cWrite(adresMSP, &buffer, 1);
+
+    /**
+     * Main Task
+     */
+	for(;;)
+	{
+		vTaskDelayUntil(&xLastHeartBeat, 250 / portTICK_RATE_MS);
+
+		buffer = GET_DATA;
+	    i2cWrite(adresMSP, &buffer, 1);
+	    vTaskDelay(1/portTICK_RATE_MS);
+	    readData = *i2cRead(adresMSP, pointer, 1);
+
+	    if(readData == DATA_READY){
+
+	    	buffer = HOW_MUCH;
+	    	i2cWrite(adresMSP, &buffer, 1);
+	        vTaskDelay(1/portTICK_RATE_MS);
+	    	sizeOfArray = *i2cRead(adresMSP, pointer, 1);
+			if(sizeOfArray > 0 && sizeOfArray < 255){
+				arrayFromSensor = (uint8_t *)pvPortMalloc(sizeOfArray * sizeof(uint8_t));
+
+				arrayFromSensor = i2cRead(adresMSP, pointer, sizeOfArray);
+
+				LED_bb ^= 1;
+			}
+	    }
 
 
-		const char* twochars = "test_";
-		usartSendString(twochars, 100);
 
-=======
-		LED_bb ^= 1;
->>>>>>> 5fe803c... #: Removing redundant files
+
 	}
-
 }
 
 /**
@@ -248,9 +296,7 @@ static void _heartbeatTask(void *parameters)
 
 static enum Error _initializeHeartbeatTask(void)
 {
-	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
-	gpioConfigurePin(LED_GPIO, LED_pin_2, GPIO_OUT_PP_2MHz);
-	gpioConfigurePin(LED_GPIO, LED_pin_3, GPIO_OUT_PP_2MHz);
+	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
 
 	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", HEARTBEAT_STACK_SIZE, NULL,
 			HEARTBEAT_TASK_PRIORITY, NULL);
