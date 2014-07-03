@@ -10,7 +10,7 @@
 # toolchain configuration
 #----------------------------------------------------------------------------------------------------------------------#
 
-TOOLCHAIN = /home/grochu/arm/arm-none-eabi-gcc-4_6/bin/arm-none-eabi-
+TOOLCHAIN = arm-none-eabi-
 
 CXX = $(TOOLCHAIN)g++
 CC = $(TOOLCHAIN)gcc
