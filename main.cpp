@@ -31,6 +31,7 @@
 #include "command.h"
 #include "i2c.h"
 #include "comm-cmd.h"
+#include "serial.h"
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local functions' declarations
@@ -93,7 +94,6 @@ uint8_t * pointer = (uint8_t*)pvPortMalloc(129*sizeof(uint8_t));
 
 int main(void)
 {
-
 	RCC_APB1ENR_PWREN_bb = 1;
 	PWR->CR = (PWR->CR & (~PWR_CR_VOS)) | PWR_CR_VOS_0;	// set VCORE voltage range 1 (1.8V)
 	while((PWR->CSR & PWR_CSR_VOSF) != 0);	// wait for regulator ready
@@ -105,19 +105,25 @@ int main(void)
 
 	gpioInitialize();
 
-	i2cInitialize();
+//	i2cInitialize();
+//
+//	enum Error error = usartInitialize();
+//
+//	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
+//	ASSERT("f_mount()", fresult == FR_OK);
+//
+//	error = _initializeHeartbeatTask();
+//	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
+//
+//	commandRegister(&_dirCommandDefinition);
+//	commandRegister(&_runtimestatsCommandDefinition);
+//	commandRegister(&_tasklistCommandDefinition);
 
-	enum Error error = usartInitialize();
 
-	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
-	ASSERT("f_mount()", fresult == FR_OK);
+	enum Error errorSerial = serialInitialize();
 
-	error = _initializeHeartbeatTask();
-	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
-
-	commandRegister(&_dirCommandDefinition);
-	commandRegister(&_runtimestatsCommandDefinition);
-	commandRegister(&_tasklistCommandDefinition);
+	for(;;)
+		serialSendCharacter('c');
 
 	vTaskStartScheduler();
 
@@ -210,8 +216,8 @@ static void _heartbeatTask(void *parameters)
 	for(;;){
 		vTaskDelay(500/portTICK_RATE_MS);
 		LED1_bb ^= 1;
-		LED2_bb ^= 1;
-		LED3_bb ^= LED1_bb;
+		LED2_bb ^= LED1_bb;;
+		LED3_bb ^= LED2_bb;
 	}
 
 }

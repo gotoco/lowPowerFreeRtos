@@ -71,6 +71,27 @@
 #define USARTx_IRQHandler					USART1_IRQHandler
 
 /*---------------------------------------------------------------------------------------------------------------------+
+| SERIAL-UART
++---------------------------------------------------------------------------------------------------------------------*/
+
+#define SERIALx								USART2
+
+#define SERIALx_TX_GPIO						GPIOA
+#define SERIALx_TX_PIN						GPIO_PIN_2
+#define SERIALx_TX_CONFIGURATION			GPIO_AF7_PP_40MHz_PULL_UP
+#define SERIALx_RX_GPIO						GPIOA
+#define SERIALx_RX_PIN						GPIO_PIN_3
+#define SERIALx_RX_CONFIGURATION			GPIO_AF7_PP_40MHz_PULL_UP
+
+#define SERIALx_RX_QUEUE_LENGTH				16
+#define SERIALx_RX_QUEUE_BUFFER_LENGTH		16
+#define SERIALx_TX_QUEUE_LENGTH				16
+
+#define RCC_APBxENR_SERIALxEN_bb			RCC_APB1ENR_USART2EN_bb
+
+#define SERIALx_BAUDRATE					115200
+
+/*---------------------------------------------------------------------------------------------------------------------+
 | SPI
 +---------------------------------------------------------------------------------------------------------------------*/
 
