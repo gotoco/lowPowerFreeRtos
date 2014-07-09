@@ -6,7 +6,7 @@
  *
  * chip: ARMv7-M(E) (Cortex-M3 / Cortex-M4)
  *
- * \author grochu
+ * \author Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
  * \date 2012-07-24
  */
 

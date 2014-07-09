@@ -209,7 +209,9 @@ static void _heartbeatTask(void *parameters)
 
 	for(;;){
 		vTaskDelay(500/portTICK_RATE_MS);
-		LED_bb ^= 1;
+		LED1_bb ^= 1;
+		LED2_bb ^= 1;
+		LED3_bb ^= LED1_bb;
 	}
 
 }
@@ -225,7 +227,9 @@ static void _heartbeatTask(void *parameters)
 
 static enum Error _initializeHeartbeatTask(void)
 {
-	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
+	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
+	gpioConfigurePin(LED_GPIO, LED_pin_2, GPIO_OUT_PP_2MHz);
+	gpioConfigurePin(LED_GPIO, LED_pin_3, GPIO_OUT_PP_2MHz);
 
 	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", HEARTBEAT_STACK_SIZE, NULL,
 			HEARTBEAT_TASK_PRIORITY, NULL);

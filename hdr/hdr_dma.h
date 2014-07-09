@@ -6,7 +6,7 @@
  *
  * chip: STM32F10x, STM32L1xx
  *
- * \author grochu
+ * \author Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
  * \date 2012-08-29
  */
 
