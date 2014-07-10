@@ -46,7 +46,7 @@
 
 enum Error serialInitialize(void)
 {
-	RCC->APB2ENR |= RCC_APB1ENR_USART2EN;
+	RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
 	gpioConfigurePin(GPIOA, GPIO_PIN_2, GPIO_AF7_PP_40MHz_PULL_UP);
 	gpioConfigurePin(GPIOA, GPIO_PIN_3, GPIO_AF7_PP_40MHz_PULL_UP);
 

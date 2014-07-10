@@ -1,0 +1,224 @@
+ARM GAS  /tmp/ccOjIRP9.s 			page 1
+
+
+   1              	# 1 "startup_ARMv7-M_E_.S"
+   1              	/* file: startup_ARMv7-M_E_.S
+   1              	...
+   2              	 *
+   0              	
+   3              	 * ARMv7-M(E) (Cortex-M3 / Cortex-M4) assembly startup code
+   4              	 *
+   5              	 * chip: ARMv7-M(E) (Cortex-M3 / Cortex-M4)
+   6              	 *
+   7              	 * author: Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
+   8              	 * date: 2012-07-12
+   9              	 */
+  10              	
+  11              	/*-----------------------------------------------------------------------------+
+  12              	| includes
+  13              	+-----------------------------------------------------------------------------*/
+  14              	
+  15              	#include "hdr/hdr_special_registers.h"
+   1              	/**
+   2              	 * \file hdr_special_registers.h
+   3              	 * \brief Header with definition of bits in special registers in ARMv7-M(E) core
+   4              	 *
+   5              	 * Header with definition of bits in special registers in ARMv7-M(E) core
+   6              	 *
+   7              	 * chip: ARMv7-M(E) (Cortex-M3 / Cortex-M4)
+   8              	 *
+   9              	 * \author Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
+  10              	 * \date 2012-07-19
+  11              	 */
+  12              	
+  13              	#ifndef HDR_SPECIAL_REGISTERS_H_
+  14              	#define HDR_SPECIAL_REGISTERS_H_
+  15              	
+  16              	/*-------------------------------------------------------------------------------------------------
+  17              	| PRIMASK - Register to mask out configurable exceptions
+  18              	+--------------------------------------------------------------------------------------------------
+  19              	
+  20              	#define PRIMASK_MASK_EXCEPTIONS_bit			0
+  21              	
+  22              	#define PRIMASK_MASK_EXCEPTIONS				(1 << PRIMASK_MASK_EXCEPTIONS_bit)
+  23              	
+  24              	/*-------------------------------------------------------------------------------------------------
+  25              	| FAULTMASK - Register to raise priority to the HardFault level
+  26              	+--------------------------------------------------------------------------------------------------
+  27              	
+  28              	#define FAULTMASK_MASK_EXCEPTIONS_bit		0
+  29              	
+  30              	#define FAULTMASK_MASK_EXCEPTIONS			(1 << FAULTMASK_MASK_EXCEPTIONS_bit)
+  31              	
+  32              	/*-------------------------------------------------------------------------------------------------
+  33              	| CONTROL - The special-purpose control register
+  34              	+--------------------------------------------------------------------------------------------------
+  35              	
+  36              	#define CONTROL_THREAD_UNPRIVILEGED_bit		0
+  37              	#define CONTROL_ALTERNATE_STACK_bit			1
+  38              	
+  39              	#define CONTROL_THREAD_UNPRIVILEGED			(1 << CONTROL_THREAD_UNPRIVILEGED_bit)
+ARM GAS  /tmp/ccOjIRP9.s 			page 2
+
+
+  40              	#define CONTROL_ALTERNATE_STACK				(1 << CONTROL_ALTERNATE_STACK_bit)
+  41              	
+  16              	
+  17              	/*-----------------------------------------------------------------------------+
+  18              	| ARMv7-M(E) (Cortex-M3 / Cortex-M4) startup code
+  19              	+-----------------------------------------------------------------------------*/
+  20              	
+  21              	.text
+  22              	.balign 2
+  23              	.syntax unified
+  24              	.thumb
+  25              	.thumb_func
+  26              	.global Reset_Handler
+  27              	
+  28              	Reset_Handler:
+  29              	
+  30              	// Initialize the process stack pointer
+  31              	
+  32 0000 1B48     		ldr		r0, =__process_stack_end
+  33 0002 80F30988 		msr		PSP, r0
+  34              	
+  35              	// Thread mode uses process stack (PSP) and is privileged
+  36              	
+  37 0006 0220     		movs	r0, #CONTROL_ALTERNATE_STACK
+  38 0008 80F31488 		msr		CONTROL, r0
+  39 000c BFF36F8F 		isb
+  40              	
+  41              	// Branch to low_level_init_0() function (.data and .bss are not initialized!)
+  42              	
+  43 0010 1848     		ldr		r0, =low_level_init_0
+  44 0012 8047     		blx		r0
+  45              	
+  46              	// Initialize sections from data_array (including .data)
+  47              	
+  48 0014 184C     		ldr		r4, =__data_array_start
+  49 0016 194D     		ldr		r5, =__data_array_end
+  50              	
+  51 0018 AC42     	1:	cmp		r4, r5							// outer loop - addresses from data_array
+  52 001a 3DBF     		ittte	lo
+  53 001c 54F8041B 		ldrlo	r1, [r4], #4					// start of source address
+  54 0020 54F8042B 		ldrlo	r2, [r4], #4					// start of destination address
+  55 0024 54F8043B 		ldrlo	r3, [r4], #4					// end of destination address
+  56 0028 07E0     		bhs		3f
+  57              	
+  58 002a 9A42     	2:	cmp		r2, r3							// inner loop - section initialization
+  59 002c 3EBF     		ittt	lo
+  60 002e 51F8040B 		ldrlo	r0, [r1], #4
+  61 0032 42F8040B 		strlo	r0, [r2], #4
+  62 0036 F8E7     		blo		2b
+  63              	
+  64 0038 EEE7     		b		1b								// go back to start
+  65              	
+  66              	3:
+  67              	
+  68              	// Zero-init sections from bss_array (including .bss)
+  69              	
+  70 003a 0020     		movs	r0, #0
+ARM GAS  /tmp/ccOjIRP9.s 			page 3
+
+
+  71 003c 104B     		ldr		r3, =__bss_array_start
+  72 003e 114C     		ldr		r4, =__bss_array_end
+  73              	
+  74 0040 A342     	1:	cmp		r3, r4							// outer loop - addresses from data_array
+  75 0042 3ABF     		itte	lo
+  76 0044 53F8041B 		ldrlo	r1, [r3], #4					// start of destination address
+  77 0048 53F8042B 		ldrlo	r2, [r3], #4					// end of destination address
+  78 004c 05E0     		bhs		3f
+  79              	
+  80 004e 9142     	2:	cmp		r1, r2							// inner loop - section initialization
+  81 0050 3CBF     		itt		lo
+  82 0052 41F8040B 		strlo	r0, [r1], #4
+  83 0056 FAE7     		blo		2b
+  84              	
+  85 0058 F2E7     		b		1b								// go back to start
+  86              	
+  87              	3:
+  88              	
+  89              	// Call C++ constructors for global and static objects
+  90              	
+  91              	#ifdef __USES_CXX
+  92 005a 0B48     		ldr		r0, =__libc_init_array
+  93 005c 8047     		blx		r0
+  94              	#endif
+  95              	
+  96              	// Branch to low_level_init_1() function
+  97              	
+  98 005e 0B48     		ldr		r0, =low_level_init_1
+  99 0060 8047     		blx		r0
+ 100              	
+ 101              	// Branch to main() with link
+ 102              	
+ 103 0062 0B48     		ldr		r0, =main
+ 104 0064 8047     		blx		r0
+ 105              	
+ 106              	// Call C++ destructors for global and static objects
+ 107              	
+ 108              	#ifdef __USES_CXX
+ 109 0066 0B48     		ldr		r0, =__libc_fini_array
+ 110 0068 8047     		blx		r0
+ 111              	#endif
+ 112              	
+ 113              	// On return - loop till the end of the world
+ 114              	
+ 115 006a FEE7     		b		.
+ 116              	
+ 117              	/*-----------------------------------------------------------------------------+
+ 118              	| __default_low_level_init() - replacement for undefined low_level_init_0()
+ 119              	| and/or low_level_init_1(). This function just returns.
+ 120              	+-----------------------------------------------------------------------------*/
+ 121              	
+ 122              	.text
+ 123              	.balign 2
+ 124              	.syntax unified
+ 125              	.thumb
+ 126              	.thumb_func
+ 127              	.global __default_low_level_init
+ARM GAS  /tmp/ccOjIRP9.s 			page 4
+
+
+ 128              	
+ 129              	__default_low_level_init:
+ 130 006c 7047     		bx		lr
+ 131              	
+ 132              	/*-----------------------------------------------------------------------------+
+ 133              	| assign undefined low_level_init_0() and/or low_level_init_1() to
+ 134              	| __default_low_level_init()
+ 135              	+-----------------------------------------------------------------------------*/
+ 136              	
+ 137              	.weak	low_level_init_0
+ 138              	.global	low_level_init_0
+ 139              	.set	low_level_init_0, __default_low_level_init
+ 140              	
+ 141              	.weak	low_level_init_1
+ 142              	.global	low_level_init_1
+ 143 006e 00000000 	.set	low_level_init_1, __default_low_level_init
+ 143      00000000 
+ 143      00000000 
+ 143      00000000 
+ 143      00000000 
+ARM GAS  /tmp/ccOjIRP9.s 			page 5
+
+
+DEFINED SYMBOLS
+startup_ARMv7-M_E_.S:22     .text:00000000 $t
+startup_ARMv7-M_E_.S:28     .text:00000000 Reset_Handler
+startup_ARMv7-M_E_.S:129    .text:0000006c low_level_init_0
+startup_ARMv7-M_E_.S:129    .text:0000006c low_level_init_1
+startup_ARMv7-M_E_.S:129    .text:0000006c __default_low_level_init
+startup_ARMv7-M_E_.S:143    .text:0000006e $d
+                   .debug_aranges:0000000c $d
+
+UNDEFINED SYMBOLS
+__process_stack_end
+__data_array_start
+__data_array_end
+__bss_array_start
+__bss_array_end
+__libc_init_array
+main
+__libc_fini_array

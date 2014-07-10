@@ -1,0 +1,330 @@
+
+out/mg-stm32l_acquisition_supervisor.elf:     file format elf32-littlearm
+out/mg-stm32l_acquisition_supervisor.elf
+architecture: arm, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x08000149
+
+Program Header:
+0x70000001 off    0x00009684 vaddr 0x08001684 paddr 0x08001684 align 2**2
+         filesz 0x00000008 memsz 0x00000008 flags r--
+    LOAD off    0x00008000 vaddr 0x08000000 paddr 0x08000000 align 2**15
+         filesz 0x0000168c memsz 0x0000168c flags r-x
+    LOAD off    0x00010000 vaddr 0x20000000 paddr 0x0800168c align 2**15
+         filesz 0x00000854 memsz 0x00000854 flags rw-
+    LOAD off    0x00010854 vaddr 0x20000854 paddr 0x20000854 align 2**15
+         filesz 0x00000000 memsz 0x0000092c flags rw-
+private flags = 5000002: [Version5 EABI] [has entry point]
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00001684  08000000  08000000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000854  20000000  0800168c  00010000  2**3
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000128  20000854  20000854  00010854  2**2
+                  ALLOC
+  3 .ARM.exidx    00000008  08001684  08001684  00009684  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .stack        00000804  2000097c  2000097c  00010854  2**0
+                  ALLOC
+  5 .debug_aranges 00000828  00000000  00000000  00010858  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00015c69  00000000  00000000  00011080  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000032ef  00000000  00000000  00026ce9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000085f8  00000000  00000000  00029fd8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00001b38  00000000  00000000  000325d0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0005613a  00000000  00000000  00034108  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00007300  00000000  00000000  0008a242  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .ARM.attributes 00000029  00000000  00000000  00091542  2**0
+                  CONTENTS, READONLY
+ 13 .debug_ranges 00000e80  00000000  00000000  0009156b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_macro  00013556  00000000  00000000  000923eb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 15 .comment      00000070  00000000  00000000  000a5941  2**0
+                  CONTENTS, READONLY
+SYMBOL TABLE:
+08000000 l    d  .text	00000000 .text
+20000000 l    d  .data	00000000 .data
+20000854 l    d  .bss	00000000 .bss
+08001684 l    d  .ARM.exidx	00000000 .ARM.exidx
+2000097c l    d  .stack	00000000 .stack
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .debug_loc	00000000 .debug_loc
+00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .comment	00000000 .comment
+00000000 l    df *ABS*	00000000 vectors_STM32L1xx_md.c
+00000000 l    df *ABS*	00000000 crtstuff.c
+08001644 l     O .text	00000000 __EH_FRAME_BEGIN__
+080000f4 l     F .text	00000000 __do_global_dtors_aux
+20000854 l       .bss	00000000 completed.7584
+08001680 l     O .text	00000000 __do_global_dtors_aux_fini_array_entry
+08000118 l     F .text	00000000 frame_dummy
+20000858 l       .bss	00000000 object.7589
+08001668 l     O .text	00000000 __frame_dummy_init_array_entry
+00000000 l    df *ABS*	00000000 syscalls.c
+20000004 l     O .data	00000004 current_heap_end.4447
+00000000 l    df *ABS*	00000000 list.c
+00000000 l    df *ABS*	00000000 queue.c
+0800024c l     F .text	00000058 prvCopyDataToQueue
+00000000 l    df *ABS*	00000000 tasks.c
+20000870 l     O .bss	00000004 uxTopReadyPriority
+20000874 l     O .bss	00000004 xTickCount
+20000878 l     O .bss	00000064 pxReadyTasksLists
+200008dc l     O .bss	00000004 pxOverflowDelayedTaskList
+200008e0 l     O .bss	00000004 pxDelayedTaskList
+200008e4 l     O .bss	00000004 uxCurrentNumberOfTasks
+200008e8 l     O .bss	00000014 xPendingReadyList
+200008fc l     O .bss	00000004 ulTaskSwitchedInTime
+20000900 l     O .bss	00000004 xMissedYield
+20000008 l     O .data	00000004 xNextTaskUnblockTime
+20000908 l     O .bss	00000004 uxSchedulerSuspended
+2000090c l     O .bss	00000004 uxMissedTicks
+20000910 l     O .bss	00000004 xNumOfOverflows
+00000000 l    df *ABS*	00000000 port.c
+080005e8 l       .text	00000000 pxCurrentTCBConst2
+08000664 l       .text	00000000 pxCurrentTCBConst
+2000000c l     O .data	00000004 uxCriticalNesting
+00000000 l    df *ABS*	00000000 heap_3.c
+00000000 l    df *ABS*	00000000 main.cpp
+0800071c l     F .text	00000014 _GLOBAL__sub_I_danaZMSP
+00000000 l    df *ABS*	00000000 overrides.cpp
+00000000 l    df *ABS*	00000000 command.cpp
+0800073c l     F .text	00000048 _ZL12_helpHandlerPPKcmPcj
+080007bc l     F .text	00000030 _GLOBAL__sub_I__commands
+080015ec l     O .text	00000004 ._101
+08001620 l     O .text	00000010 _ZL22_helpCommandDefinition
+00000000 l    df *ABS*	00000000 gpio.cpp
+00000000 l    df *ABS*	00000000 helper.cpp
+00000000 l    df *ABS*	00000000 rcc.cpp
+20000010 l     O .data	00000004 _ZL14_coreFrequency
+08001630 l     O .text	00000009 _ZZ11rccStartPll11rccPllInputmmE4muls
+00000000 l    df *ABS*	00000000 serial.cpp
+00000000 l    df *ABS*	00000000 usart.cpp
+20000924 l     O .bss	00000004 _ZL8_rxQueue
+20000928 l     O .bss	00000018 _ZZ17USART1_IRQHandlerE7message
+20000940 l     O .bss	00000004 _ZL15_dmaTxSemaphore
+00000000 l    df *ABS*	00000000 atexit_arm.cc
+00000000 l    df *ABS*	00000000 list.cc
+00000000 l    df *ABS*	00000000 __atexit.c
+00000000 l    df *ABS*	00000000 cxa_atexit.c
+00000000 l    df *ABS*	00000000 fini.c
+00000000 l    df *ABS*	00000000 init.c
+00000000 l    df *ABS*	00000000 malloc.c
+00000000 l    df *ABS*	00000000 mallocr.c
+00000000 l    df *ABS*	00000000 memcpy.c
+00000000 l    df *ABS*	00000000 mlock.c
+00000000 l    df *ABS*	00000000 strlen.c
+00000000 l    df *ABS*	00000000 __call_atexit.c
+080013a0 l     F .text	00000014 register_fini
+00000000 l    df *ABS*	00000000 atexit.c
+00000000 l    df *ABS*	00000000 mallocr.c
+00000000 l    df *ABS*	00000000 impure.c
+20000018 l     O .data	00000428 impure_data
+00000000 l    df *ABS*	00000000 printf-stdarg.c
+00000000 l    df *ABS*	00000000 croutine.c
+00000000 l    df *ABS*	00000000 timers.c
+00000000 l    df *ABS*	00000000 ff.c
+00000000 l    df *ABS*	00000000 syscall.c
+00000000 l    df *ABS*	00000000 mmc.cpp
+00000000 l    df *ABS*	00000000 i2c.cpp
+00000000 l    df *ABS*	00000000 spi.cpp
+00000000 l    df *ABS*	00000000 exit.c
+00000000 l    df *ABS*	00000000 memset.c
+00000000 l    df *ABS*	00000000 reent.c
+00000000 l    df *ABS*	00000000 strcat.c
+00000000 l    df *ABS*	00000000 strcpy.c
+00000000 l    df *ABS*	00000000 strncmp.c
+00000000 l    df *ABS*	00000000 strncpy.c
+00000000 l    df *ABS*	00000000 strtok_r.c
+08000208  w    F .text	0000000a RTC_Alarm_IRQHandler
+08000208  w    F .text	0000000a EXTI2_IRQHandler
+20000000 g       *ABS*	00000000 __ram_start
+080008c8 g     F .text	000000c8 _Z11rccStartPll11rccPllInputmm
+0800079a  w    F .text	00000022 _ZNSt4listIPK17CommandDefinitionSaIS2_EE9_M_insertIJRKS2_EEEvSt14_List_iteratorIS2_EDpOT_
+08000208  w    F .text	0000000a DebugMon_Handler
+08000614 g     F .text	00000018 vPortExitCritical
+20004000 g       *ABS*	00000000 __ram_end
+08000208  w    F .text	0000000a HardFault_Handler
+08000208  w    F .text	0000000a TIM10_IRQHandler
+0800133c g     F .text	00000002 __malloc_unlock
+08000208  w    F .text	0000000a USB_HP_IRQHandler
+08000890 g     F .text	0000002c TIM6_IRQHandler
+08000668 g     F .text	00000024 SysTick_Handler
+080001b4 g     F .text	00000000 __default_low_level_init
+08000208  w    F .text	0000000a PVD_IRQHandler
+08000208  w    F .text	0000000a __Reserved_0x1C_Handler
+080007ec g     F .text	00000010 _Z14gpioInitializev
+0800062c g     F .text	0000003c PendSV_Handler
+080002a4 g     F .text	00000052 xQueueGenericSendFromISR
+08000208  w    F .text	0000000a NMI_Handler
+0800168c g       *ABS*	00000000 __exidx_end
+08000208  w    F .text	0000000a EXTI3_IRQHandler
+20000904 g     O .bss	00000004 pxCurrentTCB
+20000978 g     O .bss	00000004 errno
+08000208 g     F .text	0000000a __Default_Handler
+08000000 g       .text	00000000 __text_start
+20000918 g     O .bss	00000008 _commands
+080008bc g     F .text	0000000c rccGetCoreFrequency
+080011dc g     F .text	0000015a memcpy
+20001180 g       .stack	00000000 __process_stack_end
+08000208  w    F .text	0000000a __Reserved_0x20_Handler
+08080000 g       *ABS*	00000000 __eeprom_start
+08000208  w    F .text	0000000a EXTI0_IRQHandler
+08000208  w    F .text	0000000a I2C2_EV_IRQHandler
+080006a4 g     F .text	0000001a vPortFree
+20000920 g     O .bss	00000002 tim6OverflowCount
+08001684 g       .text	00000000 __fini_array_end
+08000c8c g     F .text	00000010 malloc
+20000d80 g       .stack	00000000 __process_stack_start
+08000208  w    F .text	0000000a UsageFault_Handler
+08000212 g     F .text	0000001a vListInsertEnd
+2000094c g     O .bss	00000004 __malloc_top_pad
+0800022c g     F .text	00000020 vListRemove
+00000000         *UND*	00000000 __bss_start__
+20000000 g     O .data	00000000 .hidden __dso_handle
+0800168c g       *ABS*	00000000 __data_init_start
+08000208  w    F .text	0000000a SPI1_IRQHandler
+080001e0 g     F .text	00000028 _sbrk_r
+20000948 g     O .bss	00000004 __malloc_max_sbrked_mem
+08001684 g       *ABS*	00000000 __exidx_start
+08001658 g       .text	00000000 __bss_array_end
+08020000 g       *ABS*	00000000 __rom_end
+08000734 g     F .text	00000008 _ZdlPv
+08001640 g     O .text	00000004 _global_impure_ptr
+08000208  w    F .text	0000000a USB_FS_WKUP_IRQHandler
+20000d80 g       .stack	00000000 __main_stack_end
+08000bf8 g     F .text	00000094 __libc_init_array
+2000097c g       .bss	00000000 __bss_end
+08000a04 g     F .text	0000003c DMA1_Channel4_IRQHandler
+08000208  w    F .text	0000000a ADC1_IRQHandler
+0800068c g     F .text	00000018 pvPortMalloc
+08001658 g     F .text	00000000 _init
+08000208  w    F .text	0000000a USART3_IRQHandler
+08000ba8 g     F .text	00000050 __libc_fini_array
+08000208  w    F .text	0000000a DMA1_Channel7_IRQHandler
+08000148 g     F .text	00000000 Reset_Handler
+20000980 g       .stack	00000000 __stack_start
+08000208  w    F .text	0000000a LCD_IRQHandler
+08000990 g     F .text	0000005c _Z16serialInitializev
+08000784  w    F .text	00000016 _ZNSt4listIPK17CommandDefinitionSaIS2_EED2Ev
+080007fc g     F .text	00000094 _Z16gpioConfigurePinP12GPIO_TypeDef7GpioPin17GpioConfiguration
+08000520 g     F .text	00000064 xTaskRemoveFromEventList
+08000208  w    F .text	0000000a TIM4_IRQHandler
+08001650 g       .text	00000000 __bss_array_start
+00000000  w      *UND*	00000000 __deregister_frame_info
+08000208  w    F .text	0000000a __Reserved_0x34_Handler
+08000208  w    F .text	0000000a I2C1_EV_IRQHandler
+08000208  w    F .text	0000000a DMA1_Channel6_IRQHandler
+00000000         *UND*	00000000 __bss_end__
+08001458 g     F .text	00000194 _free_r
+08000208  w    F .text	0000000a TIM3_IRQHandler
+08000208  w    F .text	0000000a RCC_IRQHandler
+08081000 g       *ABS*	00000000 __eeprom_end
+00001000 g       *ABS*	00000000 __eeprom_size
+20000914 g     O .bss	00000004 pointer
+08000208  w    F .text	0000000a DMA1_Channel1_IRQHandler
+20000850 g     O .data	00000004 __malloc_sbrk_base
+080002f8 g     F .text	00000010 vTaskSuspendAll
+00000400 g       *ABS*	00000000 __process_stack_size
+08000208  w    F .text	0000000a EXTI15_10_IRQHandler
+08000ae8 g     F .text	000000ac __register_exitproc
+08000584 g     F .text	00000048 vTaskPriorityDisinherit
+080001b4  w    F .text	00000000 low_level_init_1
+00020000 g       *ABS*	00000000 __rom_size
+20000854 g       .data	00000000 __data_end
+20000950 g     O .bss	00000028 __malloc_current_mallinfo
+0800049c g     F .text	00000084 vTaskSwitchContext
+00000000  w      *UND*	00000000 software_init_hook
+08000b94 g     F .text	00000014 __cxa_atexit
+08000208  w    F .text	0000000a TIM7_IRQHandler
+080000f4 g       .text	00000000 __vectors_end
+08000208  w    F .text	0000000a __Reserved_0x28_Handler
+08000208  w    F .text	0000000a EXTI9_5_IRQHandler
+08000000 g       .text	00000000 __vectors_start
+20001180 g       .stack	00000000 __stack_end
+08000208  w    F .text	0000000a TIM9_IRQHandler
+08000208  w    F .text	0000000a TAMPER_STAMP_IRQHandler
+08000208  w    F .text	0000000a RTC_WKUP_IRQHandler
+20000444 g     O .data	00000408 __malloc_av_
+08001684 g       .text	00000000 __text_end
+08000308 g     F .text	000000d4 vTaskIncrementTick
+08001650 g       .text	00000000 __data_array_end
+08001338 g     F .text	00000002 __malloc_lock
+08001680 g       .text	00000000 __fini_array_start
+08000208  w    F .text	0000000a SPI2_IRQHandler
+20000854 g       .bss	00000000 __bss_start
+08000208  w    F .text	0000000a MemManage_Handler
+080006c0 g     F .text	0000005c main
+20000944 g     O .bss	00000004 __malloc_max_total_mem
+08000208  w    F .text	0000000a __Reserved_0x24_Handler
+080005cc g     F .text	00000020 SVC_Handler
+20000980 g       .stack	00000000 __main_stack_start
+08001674 g       .text	00000000 __init_array_end
+08000cac g     F .text	00000530 _malloc_r
+00000000  w      *UND*	00000000 hardware_init_hook
+00000000  w      *UND*	00000000 __libc_fini
+08000208  w    F .text	0000000a DMA1_Channel5_IRQHandler
+08000208  w    F .text	0000000a USB_LP_IRQHandler
+08000208  w    F .text	0000000a EXTI4_IRQHandler
+080013c0 g     F .text	00000098 _malloc_trim_r
+20004000 g       *ABS*	00000000 __heap_end
+00004000 g       *ABS*	00000000 __ram_size
+08001674 g     F .text	00000000 _fini
+080003dc g     F .text	000000c0 xTaskResumeAll
+080013b4 g     F .text	0000000c atexit
+08000208  w    F .text	0000000a DMA1_Channel3_IRQHandler
+08000208  w    F .text	0000000a COMP_IRQHandler
+20000440 g     O .data	00000004 _impure_ptr
+080005ec g     F .text	00000010 vPortYieldFromISR
+08001664 g       .text	00000000 __preinit_array_end
+08001644 g       .text	00000000 __data_array_start
+08000208  w    F .text	0000000a WWDG_IRQHandler
+0800079a  w    F .text	00000022 _ZNSt4listIPK17CommandDefinitionSaIS2_EE9_M_insertIIRKS2_EEEvSt14_List_iteratorIS2_EDpOT_
+20001180 g       *ABS*	00000000 __heap_start
+08000208  w    F .text	0000000a TIM2_IRQHandler
+08000ad8 g     F .text	0000000e _ZNSt8__detail15_List_node_base7_M_hookEPS0_
+08000208  w    F .text	0000000a DAC_IRQHandler
+00000000  w      *UND*	00000000 __stack
+08000208  w    F .text	0000000a EXTI1_IRQHandler
+08000000 g       *ABS*	00000000 __rom_start
+08000208  w    F .text	0000000a TIM11_IRQHandler
+08000208  w    F .text	0000000a USART2_IRQHandler
+08000730 g     F .text	00000004 _Znwj
+2000084c g     O .data	00000004 __malloc_trim_threshold
+080001b4  w    F .text	00000000 low_level_init_0
+08000208  w    F .text	0000000a I2C2_ER_IRQHandler
+08000208  w    F .text	0000000a DMA1_Channel2_IRQHandler
+00000400 g       *ABS*	00000000 __main_stack_size
+08001664 g       .text	00000000 __init_array_start
+08000208  w    F .text	0000000a FLASH_IRQHandler
+08000000 g     O .text	000000f4 vectors
+08000208  w    F .text	0000000a BusFault_Handler
+08000a40 g     F .text	0000008c USART1_IRQHandler
+08001340 g     F .text	0000005e strlen
+08000208  w    F .text	0000000a I2C1_ER_IRQHandler
+080005fc g     F .text	00000018 vPortEnterCritical
+20000000 g       .data	00000000 __data_start
+00000000  w      *UND*	00000000 _Jv_RegisterClasses
+08001664 g       .text	00000000 __preinit_array_start
+08000784  w    F .text	00000016 _ZNSt4listIPK17CommandDefinitionSaIS2_EED1Ev
+080009ec g     F .text	00000018 serialSendCharacter
+08000acc g     F .text	0000000a __aeabi_atexit
+00000000  w      *UND*	00000000 __register_frame_info
+08000c9c g     F .text	00000010 free
+
+
