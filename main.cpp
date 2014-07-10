@@ -114,7 +114,7 @@ int main(void)
 //
 	error = _initializeHeartbeatTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
-//
+
 //	commandRegister(&_dirCommandDefinition);
 //	commandRegister(&_runtimestatsCommandDefinition);
 //	commandRegister(&_tasklistCommandDefinition);
@@ -209,6 +209,8 @@ static void _heartbeatTask(void *parameters)
 
 	for(;;){
 		vTaskDelay(500/portTICK_RATE_MS);
+
+		//Test interface
 		LED1_bb ^= 1;
 		LED2_bb ^= LED1_bb;;
 		LED3_bb ^= LED2_bb;
