@@ -105,25 +105,19 @@ int main(void)
 
 	gpioInitialize();
 
-//	i2cInitialize();
-//
-//	enum Error error = usartInitialize();
+	i2cInitialize();
+
+	enum Error error = usartInitialize();
 //
 //	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
 //	ASSERT("f_mount()", fresult == FR_OK);
 //
-//	error = _initializeHeartbeatTask();
-//	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
+	error = _initializeHeartbeatTask();
+	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 //
 //	commandRegister(&_dirCommandDefinition);
 //	commandRegister(&_runtimestatsCommandDefinition);
 //	commandRegister(&_tasklistCommandDefinition);
-
-
-	enum Error errorSerial = serialInitialize();
-
-	for(;;)
-		serialSendCharacter('c');
 
 	vTaskStartScheduler();
 
@@ -218,6 +212,11 @@ static void _heartbeatTask(void *parameters)
 		LED1_bb ^= 1;
 		LED2_bb ^= LED1_bb;;
 		LED3_bb ^= LED2_bb;
+
+
+		const char* twochars = "test_";
+		usartSendString(twochars, 100);
+
 	}
 
 }
