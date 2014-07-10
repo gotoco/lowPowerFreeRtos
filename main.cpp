@@ -217,6 +217,9 @@ static void _heartbeatTask(void *parameters)
 	for(;;){
 		vTaskDelay(500/portTICK_RATE_MS);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a337a12... #: remote test
 
 		//Test interface
 		LED1_bb ^= 1;
