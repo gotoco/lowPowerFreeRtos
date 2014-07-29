@@ -5,7 +5,7 @@
  *
  * project: mg-stm32l_acquisition_supervisor; chip: STM32L152RB
  *
- * \author grochu
+ * \author Mazeryt Freager
  * \date 2012-09-06
  */
 
@@ -21,6 +21,7 @@
 #include "hdr/hdr_rcc.h"
 
 #include "config.h"
+#include "bsp.h"
 
 #include "error.h"
 

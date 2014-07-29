@@ -1,7 +1,7 @@
 /**
  * \file i2c.h
  * \brief Header for i2c.cpp
- * \author grochu
+ * \author Mazeryt Freager
  * \date 2012-09-06
  */
 

@@ -6,7 +6,7 @@
  *
  * prefix: error
  *
- * \author grochu
+ * \author Mazeryt Freager
  * \date 2012-08-30
  */
 

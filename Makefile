@@ -83,7 +83,7 @@ CXX_STD = gnu++0x
 
 # C language standard ("c89" / "iso9899:1990", "iso9899:199409",
 # "c99" / "iso9899:1999", "gnu89" - default, "gnu99")
-C_STD = gnu89
+C_STD = gnu99
 
 # extension of C++ files
 CXX_EXT = cpp

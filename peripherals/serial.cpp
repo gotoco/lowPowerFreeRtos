@@ -6,7 +6,7 @@
  *
  * chip: STM32L1xx; prefix: usart
  *
- * \author grochu
+ * \author Mazeryt Freager
  * \date 2014-07-08
  */
 

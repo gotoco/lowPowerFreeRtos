@@ -4,7 +4,7 @@
  *
  * Overrides of C++ functions.
  *
- * \author grochu
+ * \author Mazeryt Freager
  * \date 2012-08-28
  */
 

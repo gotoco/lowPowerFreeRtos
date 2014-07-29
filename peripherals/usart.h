@@ -1,7 +1,7 @@
 /**
  * \file usart.h
  * \brief Header for usart.cpp
- * \author grochu
+ * \author Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
  * \date 2012-08-30
  */
 

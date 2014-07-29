@@ -17,6 +17,7 @@
 #include "task.h"
 
 #include "config.h"
+#include "bsp.h"
 
 #include "gpio.h"
 #include "spi.h"

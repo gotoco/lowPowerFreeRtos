@@ -21,15 +21,15 @@ out/serial.o: peripherals/serial.cpp \
  /home/maciek/gcc-arm-none-eabi/gcc-arm-none-eabi-4_7-2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include/machine/types.h \
  /home/maciek/gcc-arm-none-eabi/gcc-arm-none-eabi-4_7-2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include/sys/stdio.h \
  inc/stm32l1xx.h inc/core_cm3.h inc/core_cmInstr.h inc/core_cmFunc.h \
- inc/system_stm32l1xx.h config.h hdr/hdr_bitband.h peripherals/serial.h \
- error.h \
+ inc/system_stm32l1xx.h configuration/config.h hdr/hdr_bitband.h \
+ peripherals/serial.h configuration/error.h \
  /home/maciek/gcc-arm-none-eabi/gcc-arm-none-eabi-4_7-2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include/c++/4.7.3/cstdint \
  /home/maciek/gcc-arm-none-eabi/gcc-arm-none-eabi-4_7-2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include/c++/4.7.3/arm-none-eabi/armv7-m/bits/c++config.h \
  /home/maciek/gcc-arm-none-eabi/gcc-arm-none-eabi-4_7-2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include/c++/4.7.3/arm-none-eabi/armv7-m/bits/os_defines.h \
  /home/maciek/gcc-arm-none-eabi/gcc-arm-none-eabi-4_7-2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include/c++/4.7.3/arm-none-eabi/armv7-m/bits/cpu_defines.h \
- FreeRTOS/include/FreeRTOS.h FreeRTOS/include/projdefs.h FreeRTOSConfig.h \
- inc/stm32l1xx.h peripherals/rcc.h hdr/hdr_rcc.h hdr/hdr_bitband.h \
- peripherals/helper.h FreeRTOS/include/portable.h \
+ FreeRTOS/include/FreeRTOS.h FreeRTOS/include/projdefs.h \
+ configuration/FreeRTOSConfig.h inc/stm32l1xx.h peripherals/rcc.h \
+ hdr/hdr_rcc.h peripherals/helper.h FreeRTOS/include/portable.h \
  FreeRTOS/portable/GCC/ARM_CM3/portmacro.h \
  FreeRTOS/include/mpu_wrappers.h FreeRTOS/include/projdefs.h FatFS/ff.h \
  FatFS/integer.h FatFS/ffconf.h FreeRTOS/include/semphr.h \
@@ -89,13 +89,13 @@ inc/core_cmFunc.h:
 
 inc/system_stm32l1xx.h:
 
-config.h:
+configuration/config.h:
 
 hdr/hdr_bitband.h:
 
 peripherals/serial.h:
 
-error.h:
+configuration/error.h:
 
 /home/maciek/gcc-arm-none-eabi/gcc-arm-none-eabi-4_7-2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include/c++/4.7.3/cstdint:
 
@@ -109,15 +109,13 @@ FreeRTOS/include/FreeRTOS.h:
 
 FreeRTOS/include/projdefs.h:
 
-FreeRTOSConfig.h:
+configuration/FreeRTOSConfig.h:
 
 inc/stm32l1xx.h:
 
 peripherals/rcc.h:
 
 hdr/hdr_rcc.h:
-
-hdr/hdr_bitband.h:
 
 peripherals/helper.h:
 
