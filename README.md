@@ -1,11 +1,9 @@
-uWatch firmware
+FreeRTOS reference firmware
 ================
 
-uWatch sources project contain following modules:
+Project sources contain following modules:
 
 ```
-#!python
-
 
  -  ./application
         |->  Sources that contains application logic, features, class and so on
