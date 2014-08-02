@@ -13,7 +13,7 @@
 #ifndef ERROR_H_
 #define ERROR_H_
 
-#include <cstdint>
+//#include <cstdint>
 
 #include "FreeRTOS.h"
 #include "projdefs.h"

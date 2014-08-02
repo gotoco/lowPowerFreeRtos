@@ -33,6 +33,7 @@
 #include "i2c.h"
 #include "comm-cmd.h"
 #include "serial.h"
+#include "driver.h"
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local functions' declarations
@@ -46,6 +47,11 @@ static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t ar
 		size_t output_buffer_length);
 static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
 		size_t output_buffer_length);
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| extern functions' declarations
++---------------------------------------------------------------------------------------------------------------------*/
+
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local variables
@@ -87,11 +93,6 @@ static FATFS _fileSystem;
  *
  * Main code block
  */
-const unsigned char dana[] = {0x50};
-const uint8_t adresMSP = 0x48;
-uint8_t danaZMSP = 0x30;
-uint8_t * pointer = (uint8_t*)pvPortMalloc(129*sizeof(uint8_t));
-
 
 int main(void)
 {
@@ -111,14 +112,6 @@ int main(void)
 
 	enum Error error = usartInitialize();
 
-//	ASSERT("usartInitialize()", error == ERROR_NONE);
-//	usartSendString("testowy string", 1000);
-//	i2cWrite(adresMSP, dana, 1);
-//	pointer = i2cRead(adresMSP, pointer, 1);
-//	usartSendString("1 Znak z MSP", 1000);
-//	usartSendString((char*)pointer, 199);
-
-
 	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
 	ASSERT("f_mount()", fresult == FR_OK);
 
@@ -128,6 +121,19 @@ int main(void)
 	commandRegister(&_dirCommandDefinition);
 	commandRegister(&_runtimestatsCommandDefinition);
 	commandRegister(&_tasklistCommandDefinition);
+
+	//Example of using OOC driver
+	const char * name = "name_of_this_driver";
+
+	struct driver_configuration * config = (struct driver_configuration*)malloc(sizeof(struct driver_configuration) );
+
+	config->driver_name = name;
+	config->driver_strategy = SEARCH;
+
+    struct driver_t * drv = new_driver(config);
+
+	drv->init_driver(drv, 2, 2);
+	drv->flush_buffer(drv);
 
 	vTaskStartScheduler();
 
@@ -217,73 +223,16 @@ static void _heartbeatTask(void *parameters)
 
 	Error error = ERROR_NONE;
 
-	uint8_t readData = 0, buffer, *arrayFromSensor, sizeOfArray=0, counter;
-
 	xLastHeartBeat = xTaskGetTickCount();
 
-	/*
-	 * For now we have test procedure with one hardcoded
-	 * slave on I2C bus with 0x48 address
-	 */
-	//TODO: use a list of slaves rather than this shit ;)
+	for(;;) {
 
-	/*  Step 1 we send a POWER_UP command to Slaves, then we gave they 2 sec. to prepare themselves
-	 * to make measurements, then they should send a MODULE_READY command if everything go right
-	 * if not while loop will wait longer, if modules are ready we send they START_MEASUR cmd.
-	 */
-	buffer = POWER_UP;
-    i2cWrite(adresMSP, &buffer, 1);
-
-    vTaskDelay(100/portTICK_RATE_MS);
-
-	buffer = ARE_YOU_READY;
-    i2cWrite(adresMSP, &buffer, 1);
-    for(counter=0; counter<1000; counter++);
-	do{
-		readData = *i2cRead(adresMSP, pointer, 1);
-
-		if(readData != MODULE_READY){
-			error = ERROR_MAINBUSS_MODULE_NOT_READY;
-
-	        vTaskDelay(500/portTICK_RATE_MS);
-		}
-
-	}while(error != ERROR_NONE);
-
-	buffer = START_MEASUR;
-    i2cWrite(adresMSP, &buffer, 1);
-
-    /**
-     * Main Task
-     */
-	for(;;)
-	{
 		vTaskDelayUntil(&xLastHeartBeat, 250 / portTICK_RATE_MS);
 
-		buffer = GET_DATA;
-	    i2cWrite(adresMSP, &buffer, 1);
-	    vTaskDelay(1/portTICK_RATE_MS);
-	    readData = *i2cRead(adresMSP, pointer, 1);
-
-	    if(readData == DATA_READY){
-
-	    	buffer = HOW_MUCH;
-	    	i2cWrite(adresMSP, &buffer, 1);
-	        vTaskDelay(1/portTICK_RATE_MS);
-	    	sizeOfArray = *i2cRead(adresMSP, pointer, 1);
-			if(sizeOfArray > 0 && sizeOfArray < 255){
-				arrayFromSensor = (uint8_t *)pvPortMalloc(sizeOfArray * sizeof(uint8_t));
-
-				arrayFromSensor = i2cRead(adresMSP, pointer, sizeOfArray);
-
-				LED_bb ^= 1;
-			}
-	    }
-
-
-
+		LED_bb ^= 1;
 
 	}
+
 }
 
 /**

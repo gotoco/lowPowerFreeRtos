@@ -50,11 +50,11 @@ AS_DEFS =
 
 # additional directories with source files (absolute or relative paths to
 # folders with source files, current folder is always included)
-SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals
+SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals configuration drivers
 
 # include directories (absolute or relative paths to additional folders with
 # headers, current folder is always included)
-INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals
+INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals configuration drivers
 
 # library directories (absolute or relative paths to additional folders with
 # libraries)
@@ -78,12 +78,12 @@ USES_CXX = 1
 CXX_WARNINGS = -Wall -Wextra
 C_WARNINGS = -Wall -Wstrict-prototypes -Wextra
 
-# C++ language standard ("c++98", "gnu++98" - default, "c++0x", "gnu++0x")
+# C++ language standard ("c++98", "gnu++98" - default, "c++0x", "gnu++0x", "c++11")
 CXX_STD = gnu++0x
 
 # C language standard ("c89" / "iso9899:1990", "iso9899:199409",
-# "c99" / "iso9899:1999", "gnu89" - default, "gnu99")
-C_STD = gnu99
+# "c99" / "iso9899:1999", "gnu89" - default, "gnu99", "c99", "c11")
+C_STD = c11
 
 # extension of C++ files
 CXX_EXT = cpp
