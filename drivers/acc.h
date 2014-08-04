@@ -1,6 +1,18 @@
 #ifndef ACC_H_
 #define ACC_H_
 
+/**
+ * \brief Driver for ACC - MMA955xL
+ *
+ * Complete driver for accelerometer which support a Mailbox communication via SPI.
+ *
+ * \author DuMaM
+ * \date 04.08.2014
+ * \version 0.1
+ * \copyright uBirds
+ * \warning Undone.
+ */
+
 
 #include <stddef.h>
 #include <stdlib.h>
@@ -8,13 +20,17 @@
 
 #include "acc_def.h"
 
-typedef enum {RANDOM, IMMEDIATE, SEARCH} strategy_t;
+typedef enum {RANDOM, IMMEDIATE, SEARCH} strategy_t; // \todo Do czego ten typ?
+typedef enum {Female, Male} Gender_t;
+
 
 //Driver configuration
 
-struct acc_configuration {
+struct acc_config_t {
 	const char * driver_name;
-
+	Gender_t Gender;
+	uint8_t user_height;
+	uint8_t user_weight;
 	strategy_t driver_strategy;
 };
 
@@ -30,10 +46,28 @@ struct acc_configuration {
 
  struct acc_t
  {
+	/* private data */
+    int id
+    strategy_t driver_strategy;
+    uint16_t frame;
+
+    /* publice data */
+    static uint8_t user_height=ACC_PEDO_DEF_HEIGHT;
+    static uint8_t user_weight=ACC_PEDO_DEF_WEIGHT;
+    static uint16_t position[3];
+
     /**
+     * \brief Initiate and configure a ACC.
+     * It sends settings to ACC and configure proper peripherals.
+     * \param [in] Mode in which ACC will be ruing (pedometr or gesture measure)
+     * \param [in] Structure which store data about user to proper set ACC.
+     *
+     * @todo sprawdzic konfiguracje dla pedometru czy jest poprawna, ogolnie dopiescic
      */
-    int (* acc_Init) (struct acc_t *);
-    /**
+     */
+    void (* acc_Init) (struct acc_t *, uint8_t work_mode, acc_config_t &config);
+
+     /**
      */
     int (* acc_Release) (struct acc_t * );
 
@@ -42,6 +76,7 @@ struct acc_configuration {
      * \brief Basic function to send data to ACC.
      * It sends all data ACC via SPI. It's important to placed a Application ID, write command,
      * register offset and number of 8-bit data we send, because ACC ignore our data.
+     *
      * \param [in] Sending data
      * \param [in] Size of (data + transfer informations)
      *
@@ -54,7 +89,8 @@ struct acc_configuration {
      * \brief Basic function to read data from ACC.
      * It receives all data from ACC via SPI. User must take care for size of buffer,
      * because ACC gives Application ID, number of bytes and needed data etc.
-     * It's important to send a few bytes bigger buffer then it's needed.
+     * It's important to send a few bytes bigger buffer(4) then it's needed.
+     *
      * \param [in] Buffer for receiving data
      * \param [in] Size of buffer
      * \return Pointer to table which we sent.
@@ -69,65 +105,117 @@ struct acc_configuration {
      * It sends configuration to selected register, using a Mailbox application format.
      * User doesn't have to take care about additional information for Mailbox, because
      * function is doing it for him. It only required to send a clear configuration data.
+     *
      * \param [in] Application ID to which we're sending configuration.
      * \param [in] Our configuration
      * \param [in] Size of sending configuration
-     * \param [in] Register offset
+     * \param [in] Reading register offset
      *
-     * @\todo errors
+     * @todo errors
      */
     void (* acc_MailboxSendConfig) ( struct acc_t *, uint8_t app_id, uint8_t* config_data, uint8_t size_config, uint8_t offset );
 
 
     /**
      * \brief Receive data from specific ACC application.
-     * It sends configuration to selected register.
-     * \param [in] Application ID to which we're sending configuration.
-     * \param [in] Our configuration
-     * \param [in] Size of sending configuration
+     * It sends read data command to ACC and prepares clear data by itself.
+     * User sends only information about registers from which he want to read data.
      *
-     * @\todo errors
+     * \param [in] Application ID from which we want read data.
+     * \param [in] Buffer for our data
+     * \param [in] Size of buffer
+     * \param [in] Reading register offset
+     *
+     * \return Pointer to our buffer
+     * @todo errors
      */
-    int (* acc_MailboxReadData) ( struct acc_t *, uint8_t app_id, uint8_t *buffer, uint8_t size, uint8_t offset );
+    uint8_t* (* acc_MailboxReadData) ( struct acc_t *, uint8_t app_id, uint8_t *buffer, uint8_t size, uint8_t offset );
+
+
     /**
+     * \brief Ask for data from specific ACC application.
+     * It sends read command to ACC. User sends information about registers
+     * from which he want to read data.
+     *
+     * \param [in] Application ID from which we want read data.
+     * \param [in] Amount of data we want to read
+     * \param [in] Reading register offset
+     *
+     * @todo errors
      */
-    int (* acc_MailboxReadAsk) ( struct acc_t *, uint8_t app_id, uint8_t size, uint16_t offset );
-    /**
+    void (* acc_MailboxReadAsk) ( struct acc_t *, uint8_t app_id, uint8_t amount, uint16_t offset );
+
+
+   /**
+     * \brief Read configuration from specific ACC application register.
+     * It sends read config command to ACC. User sends information about registers
+     * from which he want to read data. Buffer got only data from config so user
+     * doesn't have to take care about informations which ACC returns
+     * during transmission.
+     *
+     * \param [in] Application ID from which we want read configuration.
+     * \param [in] Buffer for configuration
+     * \param [in] Amount of data we want to read
+     * \param [in] Reading register offset
+     *
+     * @todo errors
      */
-    int (* acc_MailboxReadConf) ( struct acc_t *, uint8_t app_id, uint8_t *buffer, uint8_t size, uint8_t offset);
+    void (* acc_MailboxReadConf) ( struct acc_t *, uint8_t app_id, uint8_t *buffer, uint8_t size, uint8_t offset);
+
+
     /**
+     * \brief Wakes up ACC.
+     * It's waking up ACC, from auto sleeping mode. It is need to be send, before
+     * any actions. ACC can auto-wake up only if it registers a motion and defined g-level.
+     */
+    void (* acc_WakeUp) ( struct acc_t * );
+
+
+    /**
+     * \brief Gives a XYZ data.
+     * It communicate with ACC and receives position data from AFE
+     *
+     * \return Pointer to position table from driver structure. Data in table are in format {X, Y, Z}
+     */
+    uint16_t*  (* acc_GetPoss) ( struct acc_t * );
+
+
+    /**
+     * \brief Detect single and double tap.
+     * It communicate with ACC and receives data from Tap Application.
+     * Format single byte:
+     * __   __   __   __   __   __   __   __
+     * TAP  —    ZDir ZEv  YDir YEv  XDir XEv
+     *
+     * TAP - tap detected
+     * Dir - direction of tap (0 positive, 1 negative)
+     * EV  - reports whether a axis event has been detected
+     *
+     * \return Pointer to table where 0 cell are single tap bytes, 1 cell are double tap bytes
+     * @todo sprawdzic czy dziala poprawnie
+     */
+    uint8_t*  (* acc_GetTap) ( struct acc_t * );
+
+
+    /**
+     *
+     *
+     *
      */
     int (* flush_buffer) ( struct acc_t * );
+
+
     /**
      */
     int (* redirect_output) ( struct acc_t * , char*);
     /**
+     *
      */
     int (* stop_redirect) ( struct acc_t * );
 
-	/* private data */
-    int id;
-    long time_out;
-    char* buffer;
-    strategy_t driver_strategy;
-    uint16_t poss[3];
-    uint16_t frame;
-    static uint8_t user_height=ACC_PEDO_DEF_HEIGHT;
-    static uint8_t user_weight=ACC_PEDO_DEF_WEIGHT;
+
+
 };
-
- enum Gender {Female, Male};
-
-
- uint16_t* 	acc_GetPoss();
- uint8_t 	acc_GetTap();
- void		acc_WakeUp();
-
- void		acc_InitAFE();
- void		acc_InitTap();
- void		acc_InitPedometr(uint8_t height, uint8_t weight, enum Gender Man);
-
-
 
 
  extern "C"  struct acc_t * new_driver(struct driver_configuration * );
