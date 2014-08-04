@@ -10,7 +10,8 @@
 #define NO_ERROR 0
 
 
-int init_driver (struct acc_t * self, int id, int buffer_size){
+int acc_init (struct acc_t * self)
+{
 	printf ("init_driver \n");
 
 	return NO_ERROR;
@@ -21,6 +22,19 @@ int release_driver (struct acc_t * self){
 
 	return NO_ERROR;
 }
+
+
+inline uint8_t*
+acc_ReadData(struct acc_t *self, uint8_t* data, uint8_t size)
+{
+	SPIx_SSB_bb=SPIx_SSB_START;
+	uint8_t addres=AAC_SPI_READ_ADDRESS;
+	spiTransfer(&addres, NULL , 1);
+	spiTransfer(NULL, data, number_bytes);
+	SPIx_SSB_bb=SPIx_SSB_END;
+	return data;
+}
+
 
 int send_command (struct acc_t * self, char command){
 	printf ("send_command \n");
@@ -95,19 +109,10 @@ uint8_t command;
  *
  *  Basic function for reading data from ACC. It recives all data from Mailbox
  *
- * \param [in] Buffor for data
- * \param [in] Buffor size */
+ * \param [in] buffer for data
+ * \param [in] buffer size */
 
-inline uint8_t*
-acc_ReadData(uint8_t* data, uint8_t number_bytes)
-{
-	SPIx_SSB_bb=SPIx_SSB_START;
-	uint8_t addres=AAC_SPI_READ_ADDRESS;
-	spiTransfer(&addres, NULL , 1);
-	spiTransfer(NULL, data, number_bytes);
-	SPIx_SSB_bb=SPIx_SSB_END;
-	return data;
-}
+
 
 inline void
 acc_WriteData(uint8_t* data, uint8_t number_bytes)
@@ -170,10 +175,10 @@ acc_MailboxConfAsk(uint8_t app_id, uint8_t size, uint16_t offset)
 }
 
 void
-acc_MailboxReadConf(uint8_t app_id, uint8_t *buffor, uint8_t size, uint8_t offset)
+acc_MailboxReadConf(uint8_t app_id, uint8_t *buffer, uint8_t size, uint8_t offset)
 {
 	acc_MailboxConfAsk( app_id,  size,  offset);
-	acc_ReadData(buffor, size);
+	acc_ReadData(buffer, size);
 }
 
 void
@@ -213,23 +218,23 @@ acc_MailboxReadAsk(uint8_t app_id, uint8_t size, uint16_t offset)
 
 uint16_t* acc_GetPoss()
 {
-	uint8_t poss_buffor[6];
-	acc_MailboxReadData(ACC_ID_AFE, poss_buffor, 6, 0);
-	poss[0]=(poss_buffor[0]<<8)| (poss_buffor[1]);
-	poss[1]=(poss_buffor[2]<<8)| (poss_buffor[3]);
-	poss[2]=(poss_buffor[6]<<8)| (poss_buffor[5]);
+	uint8_t poss_buffer[6];
+	acc_MailboxReadData(ACC_ID_AFE, poss_buffer, 6, 0);
+	poss[0]=(poss_buffer[0]<<8)| (poss_buffer[1]);
+	poss[1]=(poss_buffer[2]<<8)| (poss_buffer[3]);
+	poss[2]=(poss_buffer[6]<<8)| (poss_buffer[5]);
 	return poss;
 }
 
 uint8_t acc_GetTap()
 {
-	uint8_t tap_buffor[2];
-	acc_MailboxReadData(ACC_ID_TAP, tap_buffor, 2, 0);
-	if(tap_buffor[0] & 0x80)
+	uint8_t tap_buffer[2];
+	acc_MailboxReadData(ACC_ID_TAP, tap_buffer, 2, 0);
+	if(tap_buffer[0] & 0x80)
 	{
 		return 1;
 	}
-	else if(tap_buffor[1] & 0x80)
+	else if(tap_buffer[1] & 0x80)
 	{
 		return 2;
 	}
@@ -239,9 +244,9 @@ uint8_t acc_GetTap()
 
 uint16_t acc_GetFarmeCount()
 {
-	uint8_t frame_buffor[2];
-	acc_MailboxReadData(ACC_ID_FRAMEC, frame_buffor, 2, 0);
-	frame=(frame_buffor[0]<<8)| (frame_buffor[1]);
+	uint8_t frame_buffer[2];
+	acc_MailboxReadData(ACC_ID_FRAMEC, frame_buffer, 2, 0);
+	frame=(frame_buffer[0]<<8)| (frame_buffer[1]);
 	return frame;
 }
 
@@ -250,13 +255,13 @@ uint16_t acc_GetFarmeCount()
 void
 acc_InitAFE()
 {
-	uint8_t conf2[8], conf1, buffor[2];
+	uint8_t conf2[8], conf1, buffer[2];
 
 
 	conf1=0x40;
 	acc_MailboxSendConfig(ACC_ID_AFE, &conf1 , 1, 0);
 
-	acc_ReadData(buffor, 2);
+	acc_ReadData(buffer, 2);
 
 	conf2[0]=0x03;
 	conf2[1]=0x03;
@@ -265,13 +270,13 @@ acc_InitAFE()
 	conf2[4]=0x08;
 
 	acc_MailboxSendConfig(ACC_ID_AFE, conf2 , 5, 0x08);
-	acc_ReadData(buffor, 2);
+	acc_ReadData(buffer, 2);
 }
 
 void
 acc_InitTap()
 {
-	uint8_t conf[9], buffor[2];
+	uint8_t conf[9], buffer[2];
 
 
 	conf[0]=0x0B;
@@ -289,7 +294,7 @@ acc_InitTap()
 	conf[8]=0x00;
 
 	acc_MailboxSendConfig(ACC_ID_TAP, conf , 9, 0x00);
-	acc_ReadData(buffor, 2);
+	acc_ReadData(buffer, 2);
 }
 
 void
