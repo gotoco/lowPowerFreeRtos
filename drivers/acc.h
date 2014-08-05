@@ -19,6 +19,7 @@
 #include <stdint.h>
 
 #include "acc_def.h"
+#include "config.h"
 
 typedef enum {RANDOM, IMMEDIATE, SEARCH} strategy_t; // \todo Do czego ten typ?
 typedef enum {Female, Male} Gender_t;
@@ -47,14 +48,15 @@ struct acc_config_t {
  struct acc_t
  {
 	/* private data */
-    int id
+    int id;
     strategy_t driver_strategy;
     uint16_t frame;
 
     /* publice data */
-    static uint8_t user_height=ACC_PEDO_DEF_HEIGHT;
-    static uint8_t user_weight=ACC_PEDO_DEF_WEIGHT;
+    static uint8_t user_height;
+    static uint8_t user_weight;
     static uint16_t position[3];
+    static uint8_t tap[2];
 
     /**
      * \brief Initiate and configure a ACC.
@@ -64,8 +66,8 @@ struct acc_config_t {
      *
      * @todo sprawdzic konfiguracje dla pedometru czy jest poprawna, ogolnie dopiescic
      */
-     */
-    void (* acc_Init) (struct acc_t *, uint8_t work_mode, acc_config_t &config);
+    void (* acc_Init) (struct acc_t *, uint8_t work_mode, acc_config_t *config);
+
 
      /**
      */
@@ -82,7 +84,7 @@ struct acc_config_t {
      *
      * @todo errors
      */
-    inline void (* acc_WriteData) ( struct acc_t *, uint8_t* data, uint8_t number_bytes);
+    void (* acc_WriteData) ( struct acc_t *, uint8_t* data, uint8_t number_bytes);
 
 
     /**
@@ -97,7 +99,7 @@ struct acc_config_t {
      *
      * @todo errors
      */
-    inline uint8_t* (* acc_ReadData) ( struct acc_t *, uint8_t* data, uint8_t size );
+    uint8_t* (* acc_ReadData) ( struct acc_t *, uint8_t* data, uint8_t size );
 
 
     /**
@@ -128,6 +130,9 @@ struct acc_config_t {
      *
      * \return Pointer to our buffer
      * @todo errors
+     * @todo opoznienie w odczycie, najlepiej na przerwaniach licznika, b¹dŸ ustawienie
+     * przerwania od ACC, które œwiadczy o gotowoœci danych
+     *
      */
     uint8_t* (* acc_MailboxReadData) ( struct acc_t *, uint8_t app_id, uint8_t *buffer, uint8_t size, uint8_t offset );
 
@@ -218,7 +223,7 @@ struct acc_config_t {
 };
 
 
- extern "C"  struct acc_t * new_driver(struct driver_configuration * );
+ extern "C"  struct acc_t * new_driver(struct acc_config_t * );
 
 #endif
 

@@ -97,7 +97,7 @@
  #define ACC_PEDO_SLP					1
  #define ACC_PEDO_STEPLEN				0 	//Step length in centimeters, but if 0 it will calculate from height and weight
  #define ACC_PEDO_DEF_HEIGHT			175
- #define ACC_PEDO_DEF_WEIGHT			S70
+ #define ACC_PEDO_DEF_WEIGHT			70
  #define ACC_PEDO_FILSTEP				4	//range 0:6
  #define ACC_PEDO_FILTTIME				3
  #define ACC_PED_SPEED_PERIOD			3	//range 2:5
