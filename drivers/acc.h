@@ -14,20 +14,14 @@
  */
 
 
-#include <stddef.h>
-#include <stdlib.h>
-#include <stdint.h>
-
-#include "acc_def.h"
-#include "config.h"
-
 typedef enum {RANDOM, IMMEDIATE, SEARCH} strategy_t; // \todo Do czego ten typ?
 typedef enum {Female, Male} Gender_t;
 
 
 //Driver configuration
 
-struct acc_config_t {
+struct acc_config_t
+{
 	const char * driver_name;
 	Gender_t Gender;
 	uint8_t user_height;
@@ -53,6 +47,7 @@ struct acc_config_t {
     uint16_t frame;
 
     /* publice data */
+	static Gender_t Gender;
     static uint8_t user_height;
     static uint8_t user_weight;
     static uint16_t position[3];
@@ -150,6 +145,18 @@ struct acc_config_t {
      */
     void (* acc_MailboxReadAsk) ( struct acc_t *, uint8_t app_id, uint8_t amount, uint16_t offset );
 
+	/**
+		* \brief Ask for data from specific ACC application.
+		* It sends read command to ACC. User sends information about registers
+		* from which he want to read data.
+		*
+		* \param [in] Application ID from which we want read data.
+		* \param [in] Amount of data we want to read
+		* \param [in] Reading register offset
+		*
+		* @todo errors
+		*/
+    void( *acc_MailboxConfAsk) (struct acc_t *self, uint8_t app_id, uint8_t size, uint16_t offset);
 
    /**
      * \brief Read configuration from specific ACC application register.
@@ -199,7 +206,7 @@ struct acc_config_t {
      * \return Pointer to table where 0 cell are single tap bytes, 1 cell are double tap bytes
      * @todo sprawdzic czy dziala poprawnie
      */
-    uint8_t*  (* acc_GetTap) ( struct acc_t * );
+    uint8_t  (* acc_GetTap) ( struct acc_t * );
 
 
     /**
@@ -223,7 +230,7 @@ struct acc_config_t {
 };
 
 
- extern "C"  struct acc_t * new_driver(struct acc_config_t * );
+ extern "C"  struct acc_t * new_acc_driver(struct acc_config_t * );
 
 #endif
 

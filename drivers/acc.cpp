@@ -1,9 +1,15 @@
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
+#include "acc_def.h"
+#include "config.h"
 #include "stm32l1xx.h"
 #include "gpio.h"
-#include "spi.h"
+#include "peripherals/spi.h"
 #include "acc.h"
-#include "../hdr/hdr_spi.h"
+#include "hdr/hdr_spi.h"
 #include "config.h"
 #include "bsp.h"
 
@@ -24,18 +30,18 @@ acc_ReadData(struct acc_t *self, uint8_t* data, uint8_t size)
 	SPIx_SSB_bb=SPIx_SSB_START;
 	uint8_t addres=AAC_SPI_READ_ADDRESS;
 	spiTransfer(&addres, NULL , 1);
-	spiTransfer(NULL, data, number_bytes);
+	spiTransfer(NULL, data, size);
 	SPIx_SSB_bb=SPIx_SSB_END;
 	return data;
 }
 
 void
-acc_WriteData(struct acc_t *self, uint8_t* data, uint8_t number_bytes)
+acc_WriteData(struct acc_t *self, uint8_t* data, uint8_t size)
 {
 	SPIx_SSB_bb=SPIx_SSB_START;
 	uint8_t address=ACC_SPI_WRITE_ADDRESS;
 	spiTransfer(&address, NULL , 1);
-	spiTransfer(data, NULL , number_bytes);
+	spiTransfer(data, NULL , size);
 	SPIx_SSB_bb=SPIx_SSB_END;
 }
 
@@ -60,7 +66,7 @@ void acc_MailboxSendConfig( struct acc_t *self, uint8_t app_id, uint8_t* config_
 uint8_t* acc_MailboxReadData( struct acc_t *self, uint8_t app_id, uint8_t *buffer, uint8_t size, uint8_t offset )
 {
 	uint8_t data_buff[4], addres=AAC_SPI_READ_ADDRESS;
-	acc_MailboxReadAsk( app_id,  size,  offset);
+	self->acc_MailboxReadAsk(self, app_id,  size,  offset);
 
 	uint16_t czekaj=ACC_SPI_READ_DEALY;
 	while(czekaj--);  // do poprawy
@@ -74,9 +80,9 @@ uint8_t* acc_MailboxReadData( struct acc_t *self, uint8_t app_id, uint8_t *buffe
 			break;
 		}  // dopisac elsa by obs³ugiwa³ b³êdy gdy dane nie zostan¹ poprawnie odebrane
 	}
-	spiTransfer(NULL, data, size);
+	spiTransfer(NULL, buffer, size);
 	SPIx_SSB_bb=SPIx_SSB_END;
-	return data;
+	return buffer;
 }
 
 void acc_MailboxReadAsk( struct acc_t *self, uint8_t app_id, uint8_t amount, uint16_t offset )
@@ -86,14 +92,25 @@ void acc_MailboxReadAsk( struct acc_t *self, uint8_t app_id, uint8_t amount, uin
 	mail[0]=app_id;
 	mail[1]=(command<<4 | (uint8_t)(offset>>8));
 	mail[2]=(uint8_t)offset;
+	mail[3]=amount;
+	self->acc_WriteData(self, mail , 4);
+}
+
+void
+acc_MailboxConfAsk(struct acc_t *self, uint8_t app_id, uint8_t size, uint16_t offset)
+{
+	uint8_t mail[4];
+	mail[0]=app_id;
+	mail[1]=(ACC_COMMAND_READ_CONF<<4 | (uint8_t)(offset>>8));
+	mail[2]=(uint8_t)offset;
 	mail[3]=size;
-	acc_WriteData(self, mail , 4);
+	self->acc_WriteData(self,mail , 4);
 }
 
 void acc_MailboxReadConf( struct acc_t *self, uint8_t app_id, uint8_t *buffer, uint8_t size, uint8_t offset)
 {
-	acc_MailboxConfAsk(self, app_id,  size,  offset);
-	acc_ReadData(self, buffer, size);
+	self->acc_MailboxConfAsk(self, app_id,  size,  offset);
+	self->acc_ReadData(self, buffer, size);
 }
 
 void acc_WakeUp( struct acc_t *self)
@@ -105,29 +122,29 @@ void acc_WakeUp( struct acc_t *self)
   	mail[2]=(uint8_t)offset;
   	mail[3]=1;
   	mail[4]=0x00;
-  	acc_WriteData(self, mail , 5);
+  	self->acc_WriteData(self, mail , 5);
 }
 
 uint16_t* acc_GetPoss(struct acc_t *self)
 {
 	uint8_t poss_buffer[6];
-	acc_MailboxReadData(self, ACC_ID_AFE, poss_buffer, 6, 0);
+	self->acc_MailboxReadData(self, ACC_ID_AFE, poss_buffer, 6, 0);
 	self->position[0]=(poss_buffer[0]<<8)| (poss_buffer[1]);
 	self->position[1]=(poss_buffer[2]<<8)| (poss_buffer[3]);
 	self->position[2]=(poss_buffer[6]<<8)| (poss_buffer[5]);
 	return self->position;
 }
 
-uint8_t*  acc_GetTap( struct acc_t *self )
+uint8_t  acc_GetTap( struct acc_t *self )
 {
-	acc_MailboxReadData(self, ACC_ID_TAP, self->tap, 2, 0);
+	self->acc_MailboxReadData(self, ACC_ID_TAP, self->tap, 2, 0);
 	if(self->tap[0] & 0x80)
 	{
-		return 1;
+		return (uint8_t)1;
 	}
 	else if(self->tap[1] & 0x80)
 	{
-		return 2;
+		return (uint8_t)2;
 	}
 	else
 		return 0;
@@ -138,8 +155,8 @@ acc_InitAFE(struct acc_t *self)
 {
 	uint8_t conf2[8], conf1, buffer[2];
 	conf1=0x40;
-	acc_MailboxSendConfig(self, ACC_ID_AFE, &conf1 , 1, 0);
-	acc_ReadData(self, buffer, 2);
+	self->acc_MailboxSendConfig(self, ACC_ID_AFE, &conf1 , 1, 0);
+	self->acc_ReadData(self, buffer, 2);
 
 	conf2[0]=0x03;
 	conf2[1]=0x03;
@@ -147,8 +164,8 @@ acc_InitAFE(struct acc_t *self)
 	conf2[3]=0x00;
 	conf2[4]=0x08;
 
-	acc_MailboxSendConfig(self, ACC_ID_AFE, conf2 , 5, 0x08);
-	acc_ReadData(self, buffer, 2);
+	self->acc_MailboxSendConfig(self, ACC_ID_AFE, conf2 , 5, 0x08);
+	self->acc_ReadData(self, buffer, 2);
 }
 
 void
@@ -171,24 +188,24 @@ acc_InitTap(struct acc_t *self)
 
 	conf[8]=0x00;
 
-	acc_MailboxSendConfig(self, ACC_ID_TAP, conf , 9, 0x00);
-	acc_ReadData(self, buffer, 2);
+	self->acc_MailboxSendConfig(self, ACC_ID_TAP, conf , 9, 0x00);
+	self->acc_ReadData(self, buffer, 2);
 }
 
 void
-acc_InitPedometr(struct acc_t *self, uint8_t height, uint8_t weight, enum Gender Man )
+acc_InitPedometr(struct acc_t *self, uint8_t height, uint8_t weight, Gender_t Man )
 {
 
 	uint8_t config_data[16];
 
 	if(height!=0)
-		user_height=height;
+		self->user_height=height;
 	else
-		user_height=ACC_PEDO_DEF_HEIGHT;
+		self->user_height=ACC_PEDO_DEF_HEIGHT;
 	if(weight!=0)
-		user_weight=weight;
+		self->user_weight=weight;
 	else
-		user_weight=ACC_PEDO_DEF_WEIGHT;
+		self->user_weight=ACC_PEDO_DEF_WEIGHT;
 
 	config_data[0]= (ACC_PEDO_SLEEP_MIN >> 8);
 	config_data[1]= (uint8_t)ACC_PEDO_SLEEP_MIN;
@@ -198,8 +215,8 @@ acc_InitPedometr(struct acc_t *self, uint8_t height, uint8_t weight, enum Gender
 	config_data[5]= (uint8_t)ACC_PEDO_SLEEP_THRES;
 	config_data[6]= (ACC_PEDO_CONF<<7) | (ACC_PEDO_ACT<<6) | (ACC_PEDO_SLP<<5);
 	config_data[7]=ACC_PEDO_STEPLEN;
-	config_data[8]=user_height;
-	config_data[9]=user_weight;
+	config_data[8]=self->user_height;
+	config_data[9]=self->user_weight;
 	config_data[10]=ACC_PEDO_FILSTEP;
 	config_data[11]=(Man<<7) | ACC_PEDO_FILTTIME;
 	config_data[12]=ACC_PED_SPEED_PERIOD;
@@ -211,65 +228,37 @@ acc_InitPedometr(struct acc_t *self, uint8_t height, uint8_t weight, enum Gender
 uint16_t acc_GetFarmeCount(struct acc_t *self)
 {
 	uint8_t frame_buffer[2];
-	acc_MailboxReadData(self, ACC_ID_FRAMEC, frame_buffer, 2, 0);
-	frame=(frame_buffer[0]<<8)| (frame_buffer[1]);
-	return frame;
+	self->acc_MailboxReadData(self, ACC_ID_FRAMEC, frame_buffer, 2, 0);
+	self->frame=(frame_buffer[0]<<8)| (frame_buffer[1]);
+	return self->frame;
 }
 
 void acc_ResetApp(struct acc_t *self, uint8_t app_id)
 {
 	uint8_t reset_buff[4];
-	acc_MailboxReadConf(self, app_id, reset_buff, 3,0);
+	self->acc_MailboxReadConf(self, app_id, reset_buff, 3,0);
 	reset_buff[app_id%4]|=(1<<(app_id%8));
-	acc_MailboxSendConfig(self, app_id, reset_buff, 3,0);
+	self->acc_MailboxSendConfig(self, app_id, reset_buff, 3,0);
 }
 
 void acc_ResetAll(struct acc_t *self)
 {
 	uint8_t reset_buff[4];
-	acc_MailboxReadConf(self, ACC_ID_RESET_CLC, reset_buff, 3,0);
+	self->acc_MailboxReadConf(self, ACC_ID_RESET_CLC, reset_buff, 3,0);
 	reset_buff[2]|=1;
-	acc_MailboxSendConfig(self, ACC_ID_RESET_CLC, reset_buff, 3,0);
+	self->acc_MailboxSendConfig(self, ACC_ID_RESET_CLC, reset_buff, 3,0);
 }
 
-void acc_SuspendApp(struct acc_t *self)
+void acc_SuspendApp(struct acc_t *self, uint8_t app_id)
 {
 	uint8_t reset_buff[4];
-	acc_MailboxReadConf(self, app_id, reset_buff, 3, 4);
+	self->acc_MailboxReadConf(self, app_id, reset_buff, 3, 4);
 	reset_buff[app_id%4]|=(1<<(app_id%8));
-	acc_MailboxSendConfig(self, app_id, reset_buff, 3,0);
+	self->acc_MailboxSendConfig(self, app_id, reset_buff, 3,0);
 }
 
-struct acc_t * new_driver(struct acc_config_t * config)
-{
-	printf (config->driver_name);
-	static struct acc_t * drv = NULL;
 
-	if (drv == NULL)
-	{
-		drv = (struct acc_t*) malloc (sizeof (struct acc_t) );
-		drv->acc_Init = &acc_Init;
-		drv->acc_Release = &acc_Release;
-		drv->acc_WriteData = &acc_WriteData;
-		drv->acc_ReadData = &acc_ReadData;
-		drv->acc_Release = &acc_Release;
-		drv->acc_MailboxSendConfig = &acc_MailboxSendConfig;
-		drv->acc_MailboxReadData = &acc_MailboxReadData;
-		drv->acc_MailboxReadAsk = &acc_MailboxReadAsk;
-		drv->acc_MailboxReadConf = &acc_MailboxReadConf;
-		drv->acc_WakeUp = &acc_WakeUp;
-		drv->acc_GetPoss = &acc_GetPoss;
-		drv->acc_GetTap = &acc_GetTap;
-
-		drv->flush_buffer   = &flush_buffer;
-		drv->redirect_output= &redirect_output;
-		drv->stop_redirect  = &stop_redirect;
-		drv->driver_strategy = config->driver_strategy;
-	}
-	return drv;
-}
-
-int release_driver (struct acc_t * self){
+int acc_Release(struct acc_t * self){
 	printf ("release_driver \n");
 
 	return NO_ERROR;
@@ -296,6 +285,35 @@ int stop_redirect (struct acc_t * self){
 
 	return NO_ERROR;
 }
+
+struct acc_t * new_acc_driver(struct acc_config_t * config)
+{
+	printf (config->driver_name);
+	static struct acc_t * drv = NULL;
+
+	if (drv == NULL)
+	{
+		drv = (struct acc_t*) malloc (sizeof (struct acc_t) );
+		drv->acc_Init = &acc_Init;
+		drv->acc_Release = &acc_Release;
+		drv->acc_WriteData = &acc_WriteData;
+		drv->acc_ReadData = &acc_ReadData;
+		drv->acc_MailboxSendConfig = &acc_MailboxSendConfig;
+		drv->acc_MailboxReadData = &acc_MailboxReadData;
+		drv->acc_MailboxReadAsk = &acc_MailboxReadAsk;
+		drv->acc_MailboxReadConf = &acc_MailboxReadConf;
+		drv->acc_WakeUp = &acc_WakeUp;
+		drv->acc_GetPoss = &acc_GetPoss;
+		drv->acc_GetTap = &acc_GetTap;
+
+		drv->flush_buffer   = &flush_buffer;
+		drv->redirect_output= &redirect_output;
+		drv->stop_redirect  = &stop_redirect;
+		drv->driver_strategy = config->driver_strategy;
+	}
+	return drv;
+}
+
 
 
 
