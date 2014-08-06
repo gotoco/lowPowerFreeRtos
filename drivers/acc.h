@@ -14,11 +14,9 @@
  */
 
 
-typedef enum {RANDOM, IMMEDIATE, SEARCH} strategy_t; // \todo Do czego ten typ?
-typedef enum {Female, Male} Gender_t;
-
 
 //Driver configuration
+typedef enum {Female, Male} Gender_t;
 
 struct acc_config_t
 {
@@ -26,7 +24,6 @@ struct acc_config_t
 	Gender_t Gender;
 	uint8_t user_height;
 	uint8_t user_weight;
-	strategy_t driver_strategy;
 };
 
 /**
@@ -43,15 +40,14 @@ struct acc_config_t
  {
 	/* private data */
     int id;
-    strategy_t driver_strategy;
     uint16_t frame;
 
-    /* publice data */
-	static Gender_t Gender;
-    static uint8_t user_height;
-    static uint8_t user_weight;
-    static uint16_t position[3];
-    static uint8_t tap[2];
+    /* public data */
+	 Gender_t Gender;
+     uint8_t user_height;
+     uint8_t user_weight;
+     short int position[3];
+     uint8_t tap[2];
 
     /**
      * \brief Initiate and configure a ACC.
@@ -145,18 +141,20 @@ struct acc_config_t
      */
     void (* acc_MailboxReadAsk) ( struct acc_t *, uint8_t app_id, uint8_t amount, uint16_t offset );
 
-	/**
-		* \brief Ask for data from specific ACC application.
-		* It sends read command to ACC. User sends information about registers
-		* from which he want to read data.
-		*
-		* \param [in] Application ID from which we want read data.
-		* \param [in] Amount of data we want to read
-		* \param [in] Reading register offset
-		*
-		* @todo errors
-		*/
+
+    /**
+	* \brief Ask for settings of specific ACC application.
+	* It sends read command to ACC. User sends information about registers
+	* from which he want to read configuration.
+	*
+	* \param [in] Application ID from which we want read settings.
+	* \param [in] Amount of data we want to read,
+	* \param [in] Reading register offset
+	*
+	* @todo errors
+	*/
     void( *acc_MailboxConfAsk) (struct acc_t *self, uint8_t app_id, uint8_t size, uint16_t offset);
+
 
    /**
      * \brief Read configuration from specific ACC application register.
@@ -189,15 +187,15 @@ struct acc_config_t
      *
      * \return Pointer to position table from driver structure. Data in table are in format {X, Y, Z}
      */
-    uint16_t*  (* acc_GetPoss) ( struct acc_t * );
+    short int*  (* acc_GetPoss) ( struct acc_t * );
 
 
     /**
      * \brief Detect single and double tap.
      * It communicate with ACC and receives data from Tap Application.
      * Format single byte:
-     * __   __   __   __   __   __   __   __
-     * TAP  —    ZDir ZEv  YDir YEv  XDir XEv
+     * ___  ___  ___  ___  ___  ___  ___  ___
+     * TAP   —   ZDir ZEv  YDir YEv  XDir XEv
      *
      * TAP - tap detected
      * Dir - direction of tap (0 positive, 1 negative)
@@ -230,7 +228,7 @@ struct acc_config_t
 };
 
 
- extern "C"  struct acc_t * new_acc_driver(struct acc_config_t * );
+ extern "C"  struct acc_t * new_acc(struct acc_config_t * );
 
 #endif
 

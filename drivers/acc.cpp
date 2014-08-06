@@ -4,13 +4,12 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "acc_def.h"
-#include "config.h"
-#include "stm32l1xx.h"
-#include "gpio.h"
+#include "configuration/config.h"
+#include "inc/stm32l1xx.h"
+#include "peripherals/gpio.h"
 #include "peripherals/spi.h"
 #include "acc.h"
 #include "hdr/hdr_spi.h"
-#include "config.h"
 #include "bsp.h"
 
 #define NO_ERROR 0
@@ -125,13 +124,13 @@ void acc_WakeUp( struct acc_t *self)
   	self->acc_WriteData(self, mail , 5);
 }
 
-uint16_t* acc_GetPoss(struct acc_t *self)
+short int* acc_GetPoss(struct acc_t *self)
 {
 	uint8_t poss_buffer[6];
 	self->acc_MailboxReadData(self, ACC_ID_AFE, poss_buffer, 6, 0);
-	self->position[0]=(poss_buffer[0]<<8)| (poss_buffer[1]);
-	self->position[1]=(poss_buffer[2]<<8)| (poss_buffer[3]);
-	self->position[2]=(poss_buffer[6]<<8)| (poss_buffer[5]);
+	self->position[0]=(short int)(poss_buffer[0]<<8) | (poss_buffer[1]);
+	self->position[1]=(short int)(poss_buffer[2]<<8) | (poss_buffer[3]);
+	self->position[2]=(short int)(poss_buffer[6]<<8) | (poss_buffer[5]);
 	return self->position;
 }
 
@@ -140,11 +139,11 @@ uint8_t  acc_GetTap( struct acc_t *self )
 	self->acc_MailboxReadData(self, ACC_ID_TAP, self->tap, 2, 0);
 	if(self->tap[0] & 0x80)
 	{
-		return (uint8_t)1;
+		return 1;
 	}
 	else if(self->tap[1] & 0x80)
 	{
-		return (uint8_t)2;
+		return 2;
 	}
 	else
 		return 0;
@@ -222,7 +221,7 @@ acc_InitPedometr(struct acc_t *self, uint8_t height, uint8_t weight, Gender_t Ma
 	config_data[12]=ACC_PED_SPEED_PERIOD;
 	config_data[13]=ACC_PEDO_SPEED_COUNT;
 
-	//acc_MailboxSendConfig(ACC_ID_PEDOMETR, config_data,13 ,0);
+	acc_MailboxSendConfig(self, ACC_ID_PEDOMETR, config_data,13 ,0);
 }
 
 uint16_t acc_GetFarmeCount(struct acc_t *self)
@@ -236,17 +235,14 @@ uint16_t acc_GetFarmeCount(struct acc_t *self)
 void acc_ResetApp(struct acc_t *self, uint8_t app_id)
 {
 	uint8_t reset_buff[4];
-	self->acc_MailboxReadConf(self, app_id, reset_buff, 3,0);
+	self->acc_MailboxReadConf(self, ACC_ID_RESET_CLC, reset_buff, 3,0);
 	reset_buff[app_id%4]|=(1<<(app_id%8));
-	self->acc_MailboxSendConfig(self, app_id, reset_buff, 3,0);
+	self->acc_MailboxSendConfig(self, ACC_ID_RESET_CLC, reset_buff, 3,0);
 }
 
 void acc_ResetAll(struct acc_t *self)
 {
-	uint8_t reset_buff[4];
-	self->acc_MailboxReadConf(self, ACC_ID_RESET_CLC, reset_buff, 3,0);
-	reset_buff[2]|=1;
-	self->acc_MailboxSendConfig(self, ACC_ID_RESET_CLC, reset_buff, 3,0);
+	acc_ResetApp(self, 0);
 }
 
 void acc_SuspendApp(struct acc_t *self, uint8_t app_id)
@@ -286,7 +282,7 @@ int stop_redirect (struct acc_t * self){
 	return NO_ERROR;
 }
 
-struct acc_t * new_acc_driver(struct acc_config_t * config)
+struct acc_t * new_acc(struct acc_config_t * config)
 {
 	printf (config->driver_name);
 	static struct acc_t * drv = NULL;
@@ -309,7 +305,9 @@ struct acc_t * new_acc_driver(struct acc_config_t * config)
 		drv->flush_buffer   = &flush_buffer;
 		drv->redirect_output= &redirect_output;
 		drv->stop_redirect  = &stop_redirect;
-		drv->driver_strategy = config->driver_strategy;
+		drv->Gender = config->Gender;
+		drv->user_height=config->user_height;
+		drv->user_weight=config->user_weight;
 	}
 	return drv;
 }
