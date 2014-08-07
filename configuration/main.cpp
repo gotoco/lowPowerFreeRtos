@@ -50,6 +50,8 @@ static enum Error _tasklistHandler(const char **arguments_array, uint32_t argume
 static enum Error _peripLauncher(void);
 static enum Error _sysInit(void);
 static enum Error _schedulerInitAndRun(void);
+static enum Error _accelerometerTask(void *parameters);
+static enum Error _bluetoothTask(void *parameters);
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | extern functions' declarations
@@ -248,6 +250,11 @@ static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_c
 	return error;
 }
 
+/*---------------------------------------------------------------------------------------------------------------------+
+| System Tasks
++---------------------------------------------------------------------------------------------------------------------*/
+
+
 /**
  * \brief Heartbeat task that read measured data from slaves
  *
@@ -273,6 +280,35 @@ static void _heartbeatTask(void *parameters)
 	}
 
 }
+
+/**
+ *  \brief Accelerometer task that initialize acc_driver and then only listen for interrupts
+ *
+ * \return ERROR_NONE if the task was successfully created and added to a ready list, otherwise an error code defined in
+ * the file error.h
+ */
+
+static enum Error _accelerometerTask(void *parameters)
+{
+
+	vTaskSuspend( NULL );	//After initialization suspend this task.
+	for(;;){}
+}
+
+/**
+ *  \brief Bluetooth task that initialize bluetooth_driver and then listen for events and process data from queue
+ *
+ * \return ERROR_NONE if the task was successfully created and added to a ready list, otherwise an error code defined in
+ * the file error.h
+ */
+
+static enum Error _bluetoothTask(void *parameters)
+{
+
+	vTaskSuspend( NULL );
+	for(;;){}
+}
+
 
 /**
  * \brief Initialization of heartbeat task - setup GPIO, create task.
