@@ -47,6 +47,9 @@ static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t ar
 		size_t output_buffer_length);
 static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
 		size_t output_buffer_length);
+static enum Error _peripLauncher(void);
+static enum Error _sysInit(void);
+static enum Error _schedulerInitAndRun(void);
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | extern functions' declarations
@@ -89,13 +92,42 @@ static FATFS _fileSystem;
 +---------------------------------------------------------------------------------------------------------------------*/
 
 /**
- * \brief Main code block
+ * \brief System root Task
  *
  * Main code block
  */
-
 int main(void)
 {
+	enum Error sysError = _sysInit();
+	if (sysError != ERROR_NONE){
+		goto sys_panic;
+	}
+
+	sysError = _peripLauncher();
+	if (sysError != ERROR_NONE){
+		goto sys_panic;
+	}
+
+	_schedulerInitAndRun();
+
+	goto sys_panic;
+
+	sys_panic:
+		while (1) {}
+}
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| local functions
++---------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ *  \brief Initialize uC Core and sysCLK
+ *
+ *  \return ERROR_NONE on success, otherwise appropriate error code from error.h
+ */
+static enum Error _sysInit()
+{
+	Error error = ERROR_NONE;
 
 	RCC_APB1ENR_PWREN_bb = 1;
 	PWR->CR = (PWR->CR & (~PWR_CR_VOS)) | PWR_CR_VOS_0;	// set VCORE voltage range 1 (1.8V)
@@ -106,11 +138,17 @@ int main(void)
 
 	rccStartPll(RCC_PLL_INPUT_HSI, HSI_VALUE, FREQUENCY);
 
-	gpioInitialize();
+	return error;
+}
 
-	i2cInitialize();
-
-	enum Error error = usartInitialize();
+/**
+ *  \brief Initialize tasks and run scheduler.
+ *  At this point RTOS expropriates control from root task.
+ *
+ *  \return: This function should not never escape, if so that something goes wrong and scheduler fail.
+ */
+static enum Error _schedulerInitAndRun(){
+	Error error = ERROR_FreeRTOS_errSCHEDULER_FAIL;
 
 	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
 	ASSERT("f_mount()", fresult == FR_OK);
@@ -122,28 +160,29 @@ int main(void)
 	commandRegister(&_runtimestatsCommandDefinition);
 	commandRegister(&_tasklistCommandDefinition);
 
-	//Example of using OOC driver
-	const char * name = "name_of_this_driver";
-
-	struct driver_configuration * config = (struct driver_configuration*)malloc(sizeof(struct driver_configuration) );
-
-	config->driver_name = name;
-	config->driver_strategy = SEARCH;
-
-    struct driver_t * drv = new_driver(config);
-
-	drv->init_driver(drv, 2, 2);
-	drv->flush_buffer(drv);
-
 	vTaskStartScheduler();
 
-	while (1)
-	{ }
+	return error;
 }
 
-/*---------------------------------------------------------------------------------------------------------------------+
-| local functions
-+---------------------------------------------------------------------------------------------------------------------*/
+/**
+ *  \brief Launcher for used peripherals
+ *
+ *  \return ERROR_NONE on success, otherwise appropriate error code from error.h
+ */
+static enum Error _peripLauncher()
+{
+	Error error = ERROR_NONE;
+
+	gpioInitialize();
+
+	i2cInitialize();
+
+	error = usartInitialize();
+
+	out:
+		return error;
+}
 
 /**
  * \brief Handler of 'dir' command.

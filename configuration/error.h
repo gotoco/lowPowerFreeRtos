@@ -6,7 +6,7 @@
  *
  * prefix: error
  *
- * \author Mazeryt Freager
+ * \author: Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
  * \date 2012-08-30
  */
 
@@ -29,6 +29,7 @@
 enum Error
 {
 	// --- negative values ---
+	ERROR_FreeRTOS_errSCHEDULER_FAIL,		// Scheduler leak
 
 	// FreeRTOS errors from projdefs.h
 
@@ -40,7 +41,7 @@ enum Error
 	// pdFAIL == errQUEUE_EMPTY == errQUEUE_FULL == 0 in FreeRTOS
 	ERROR_FreeRTOS_pdFAIL, ERROR_FreeRTOS_errQUEUE_EMPTY = ERROR_FreeRTOS_pdFAIL, ERROR_FreeRTOS_errQUEUE_FULL = ERROR_FreeRTOS_pdFAIL,
 
-	// --- success value 0 ---
+	// --- NOERROR success value 0 ---
 
 	ERROR_NONE = 0,
 
@@ -69,11 +70,15 @@ enum Error
 	ERROR_FatFS_FR_TOO_MANY_OPEN_FILES = FR_TOO_MANY_OPEN_FILES,	/* (18) Number of open files > _FS_SHARE */
 	ERROR_FatFS_FR_INVALID_PARAMETER = FR_INVALID_PARAMETER,		/* (19) Given parameter is invalid */
 
+	// --- PERIPHERALS errors and issues
+
 	// --- communications on MainBus <I2C> errors ---
 	ERROR_MAINBUSS_TARGET_UNREACHABLE,
 	ERROR_MAINBUSS_MODULE_NOT_READY,
 	ERROR_MAINBUSS_DATA_NOT_READY,
 	ERROR_MAINBUSS_BUS_CORRUPTION,
+
+	// --- END OF PERIPHERALS
 
 	// --- positive values ---
 
@@ -84,6 +89,7 @@ enum Error
 	// various
 
 	ERROR_BUFFER_OVERFLOW,
+
 };
 
 /*---------------------------------------------------------------------------------------------------------------------+
