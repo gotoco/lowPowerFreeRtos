@@ -25,7 +25,7 @@ RM = rm -f
 #----------------------------------------------------------------------------------------------------------------------#
 
 # project name
-PROJECT = mg-stm32l_acquisition_supervisor
+PROJECT = uwatch
 
 # core type
 CORE = cortex-m3
