@@ -286,7 +286,7 @@ int stop_redirect (struct acc_t * self){
 	return NO_ERROR;
 }
 
-struct acc_t * new_acc_driver(struct acc_config_t * config)
+struct acc_t * new_acc(struct acc_config_t * config)
 {
 	printf (config->driver_name);
 	static struct acc_t * drv = NULL;
@@ -309,7 +309,6 @@ struct acc_t * new_acc_driver(struct acc_config_t * config)
 		drv->flush_buffer   = &flush_buffer;
 		drv->redirect_output= &redirect_output;
 		drv->stop_redirect  = &stop_redirect;
-		drv->driver_strategy = config->driver_strategy;
 	}
 	return drv;
 }

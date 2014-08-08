@@ -14,7 +14,6 @@
  */
 
 
-typedef enum {RANDOM, IMMEDIATE, SEARCH} strategy_t; // \todo Do czego ten typ?
 typedef enum {Female, Male} Gender_t;
 
 
@@ -26,32 +25,20 @@ struct acc_config_t
 	Gender_t Gender;
 	uint8_t user_height;
 	uint8_t user_weight;
-	strategy_t driver_strategy;
 };
-
-/**
-/+InitDriver(bufferSize: int): int/
-/+ReleaseDriver(): int/
-/+SendCommand(command : char): int/
-/+ReciveCommand(): char/
-/+FlushBuffer(): int/
-/+RedirectOutput(extBuffer: char*): int/
-/+StopRedirect(): int/
- */
 
  struct acc_t
  {
 	/* private data */
     int id;
-    strategy_t driver_strategy;
     uint16_t frame;
 
     /* publice data */
-	static Gender_t Gender;
-    static uint8_t user_height;
-    static uint8_t user_weight;
-    static uint16_t position[3];
-    static uint8_t tap[2];
+	Gender_t Gender;
+    uint8_t user_height;
+    uint8_t user_weight;
+    uint16_t position[3];
+    uint8_t tap[2];
 
     /**
      * \brief Initiate and configure a ACC.
@@ -230,7 +217,7 @@ struct acc_config_t
 };
 
 
- extern "C"  struct acc_t * new_acc_driver(struct acc_config_t * );
+ extern "C"  struct acc_t * new_acc(struct acc_config_t * );
 
 #endif
 
