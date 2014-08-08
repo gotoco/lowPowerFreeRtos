@@ -8,8 +8,8 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-
-void timer_Init(uint8_t timer_number);
+void timerInit(uint8_t timer_number, uint32_t speed_hz, uint32_t period_ms);
+void timerChannelConfig(TIM_TypeDef* timer, uint8_t channel_number,uint8_t mode, uint32_t pulse_us);
 
 
 #endif /* TIMER_H_ */
