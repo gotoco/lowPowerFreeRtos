@@ -101,7 +101,8 @@ static char _outputBuffer[_OUTPUT_BUFFER_SIZE];
  * code defined in the file error.h
  */
 
-enum Error usartInitialize(void) {
+enum Error usartInitialize(void)
+{
 	gpioConfigurePin(USARTx_TX_GPIO, USARTx_TX_PIN, USARTx_TX_CONFIGURATION);
 	gpioConfigurePin(USARTx_RX_GPIO, USARTx_RX_PIN, USARTx_RX_CONFIGURATION);
 
@@ -164,7 +165,8 @@ enum Error usartInitialize(void) {
  * \return ERROR_NONE on success, otherwise an error code defined in the file error.h
  */
 
-enum Error usartPrintf(portTickType ticks_to_wait, const char *format, ...) {
+enum Error usartPrintf(portTickType ticks_to_wait, const char *format, ...)
+{
 	char *buffer = (char*) pvPortMalloc(strlen(format) * 2);
 
 	if (buffer == NULL)
@@ -192,8 +194,7 @@ enum Error usartPrintf(portTickType ticks_to_wait, const char *format, ...) {
  */
 
 void usartSendCharacter(char c) {
-	while (!(USARTx_SR_TXE_bb(USARTx)))
-		;
+	while (!(USARTx_SR_TXE_bb(USARTx)));
 	USARTx->DR = c;
 }
 
@@ -209,7 +210,8 @@ void usartSendCharacter(char c) {
  * \return ERROR_NONE on success, otherwise an error code defined in the file error.h
  */
 
-enum Error usartSendString(const char *string, portTickType ticks_to_wait) {
+enum Error usartSendString(const char *string, portTickType ticks_to_wait)
+{
 	struct _TxMessage message;
 
 	message.length = strlen(string);
@@ -248,7 +250,8 @@ enum Error usartSendString(const char *string, portTickType ticks_to_wait) {
  * USART RX task - handles input.
  */
 
-static void _rxTask(void *parameters) {
+static void _rxTask(void *parameters)
+{
 	size_t input_length = 0;
 
 	(void) parameters;						// suppress warning
@@ -297,7 +300,8 @@ static void _rxTask(void *parameters) {
  * USART TX task - handles output.
  */
 
-static void _txTask(void *parameters) {
+static void _txTask(void *parameters)
+{
 	char *previous_string = NULL;
 
 	(void) parameters;						// suppress warning
@@ -338,7 +342,8 @@ static void _txTask(void *parameters) {
  */
 
 extern "C" void USARTx_DMAx_TX_CH_IRQHandler(void) __attribute__ ((interrupt));
-void USARTx_DMAx_TX_CH_IRQHandler(void) {
+void USARTx_DMAx_TX_CH_IRQHandler(void)
+{
 	signed portBASE_TYPE higher_priority_task_woken;
 
 	xSemaphoreGiveFromISR(_dmaTxSemaphore, &higher_priority_task_woken);
@@ -355,7 +360,8 @@ void USARTx_DMAx_TX_CH_IRQHandler(void) {
  */
 
 extern "C" void USARTx_IRQHandler(void) __attribute((interrupt));
-void USARTx_IRQHandler(void) {
+void USARTx_IRQHandler(void)
+{
 	portBASE_TYPE higher_priority_task_woken = pdFALSE;
 	static struct _RxMessage message;
 

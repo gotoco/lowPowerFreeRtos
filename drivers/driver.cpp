@@ -7,37 +7,43 @@
 #define NO_ERROR 0
 
 
-int init_driver (struct driver_t * self, int id, int buffer_size){
+int init_driver (struct driver_t * self, int id, int buffer_size)
+{
 	printf ("init_driver \n");
 
 	return NO_ERROR;
 }
 
-int release_driver (struct driver_t * self){
+int release_driver (struct driver_t * self)
+{
 	printf ("release_driver \n");
 
 	return NO_ERROR;
 }
 
-int send_command (struct driver_t * self, char command){
+int send_command (struct driver_t * self, char command)
+{
 	printf ("send_command \n");
 
 	return NO_ERROR;
 }
 
-int recive_command (struct driver_t * self){
+int recive_command (struct driver_t * self)
+{
 	printf ("recive_command \n");
 
 	return NO_ERROR;
 }
 
-int flush_buffer (struct driver_t * self){
+int flush_buffer (struct driver_t * self)
+{
 	printf ("flush_buffer \n");
 
 	return NO_ERROR;
 }
 
-int redirect_output (struct driver_t * self, char* external_buffer){
+int redirect_output (struct driver_t * self, char* external_buffer)
+{
 	external_buffer[0] = 'A';
 
 	printf ("redirect_output \n");
@@ -45,7 +51,8 @@ int redirect_output (struct driver_t * self, char* external_buffer){
 	return NO_ERROR;
 }
 
-int stop_redirect (struct driver_t * self){
+int stop_redirect (struct driver_t * self)
+{
 
 	printf ("stop_redirect \n");
 

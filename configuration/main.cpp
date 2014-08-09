@@ -20,20 +20,25 @@
 
 #include "hdr/hdr_rcc.h"
 
+// ./
 #include "config.h"
 #include "bsp.h"
-
 #include "error.h"
+#include "command.h"
+#include "comm-cmd.h"
+#include "task_communication.h"
 
+//Application
+#include "app_messages.h"
+
+//Peripherials
 #include "gpio.h"
 #include "rcc.h"
 #include "helper.h"
 #include "usart.h"
-#include "command.h"
 #include "i2c.h"
-#include "comm-cmd.h"
-#include "serial.h"
-#include "driver.h"
+
+
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local functions' declarations
@@ -52,6 +57,7 @@ static enum Error _sysInit(void);
 static enum Error _schedulerInitAndRun(void);
 static enum Error _accelerometerTask(void *parameters);
 static enum Error _bluetoothTask(void *parameters);
+static enum Error _queuesInitialization(void);
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | extern functions' declarations
@@ -90,13 +96,16 @@ static const struct CommandDefinition _tasklistCommandDefinition =
 static FATFS _fileSystem;
 
 /*---------------------------------------------------------------------------------------------------------------------+
+| global variables
++---------------------------------------------------------------------------------------------------------------------*/
+
+
+/*---------------------------------------------------------------------------------------------------------------------+
 | global functions
 +---------------------------------------------------------------------------------------------------------------------*/
 
 /**
  * \brief System root Task
- *
- * Main code block
  */
 int main(void)
 {
@@ -115,12 +124,41 @@ int main(void)
 	goto sys_panic;
 
 	sys_panic:
-		while (1) {}
+		while (1);
 }
 
 /*---------------------------------------------------------------------------------------------------------------------+
-| local functions
+| local functions implementation
 +---------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ *  \brief Create and initialize global application queues from 'task_communication.h'
+ *
+ *  \return ERROR_NONE on success, otherwise appropriate error code from error.h
+ */
+static enum Error _queuesInitialization()
+{
+	Error error = ERROR_NONE;
+
+    dataSenderBLEQueue 	= xQueueCreate(5, sizeof(bleMessage));
+    if(dataSenderBLEQueue == NULL){
+    	error = ERROR_FreeRTOS_pdFAIL;
+    	goto out;
+    }
+	dataSaverFLASHQueue = xQueueCreate(5, sizeof(flashMessage));
+    if(dataSaverFLASHQueue == NULL){
+    	error = ERROR_FreeRTOS_pdFAIL;
+    	goto out;
+    }
+	commonDataQueue 	= xQueueCreate(10, sizeof(commonMessage));
+	if(commonDataQueue == NULL){
+		error = ERROR_FreeRTOS_pdFAIL;
+		goto out;
+	}
+
+	out:
+		return error;
+}
 
 /**
  *  \brief Initialize uC Core and sysCLK
@@ -161,6 +199,8 @@ static enum Error _schedulerInitAndRun(){
 	commandRegister(&_dirCommandDefinition);
 	commandRegister(&_runtimestatsCommandDefinition);
 	commandRegister(&_tasklistCommandDefinition);
+
+	_queuesInitialization();
 
 	vTaskStartScheduler();
 
@@ -291,8 +331,21 @@ static void _heartbeatTask(void *parameters)
 static enum Error _accelerometerTask(void *parameters)
 {
 
-	vTaskSuspend( NULL );	//After initialization suspend this task.
-	for(;;){}
+	vSemaphoreCreateBinary(xSemaphoreForAccISR);
+
+	if( xSemaphoreForAccISR == NULL ) {
+	/* There was insufficient FreeRTOS heap available for the semaphore to
+	be created successfully. */
+	} else {
+	/* The semaphore can now be used. Its handle is stored in the xSemahore variable. */
+		for(;;){
+			xSemaphoreTake(xSemaphoreForAccISR, portMAX_DELAY );
+
+			/**
+			 * give data from ACC
+			 */
+		}
+	}
 }
 
 /**
@@ -305,10 +358,25 @@ static enum Error _accelerometerTask(void *parameters)
 static enum Error _bluetoothTask(void *parameters)
 {
 
-	vTaskSuspend( NULL );
+	vTaskSuspend(NULL);
 	for(;;){}
 }
 
+static enum Error _dataRouteKeeper(void *parameters){
+	/* Declare the structure that will hold the values received from the queue. */
+	commonMessage xReceivedMessage;
+	portBASE_TYPE xStatus;
+
+	for(;;){
+
+		xStatus = xQueueReceive( commonDataQueue, &xReceivedMessage, 0 );
+
+		if( xStatus == pdPASS ){
+
+		}
+
+	}
+}
 
 /**
  * \brief Initialization of heartbeat task - setup GPIO, create task.
@@ -358,15 +426,13 @@ static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t ar
 
 	enum Error error = ERROR_NONE;
 
-	if ((length + sizeof (header)) < output_buffer_length)
-	{
+	if ((length + sizeof (header)) < output_buffer_length) {
 		memcpy(output_buffer, header, sizeof(header) - 1);
 		memcpy(output_buffer + sizeof(header) - 1, buffer, length + 1);
 		error = ERROR_NONE;
-	}
-	else
+	} else {
 		error = ERROR_BUFFER_OVERFLOW;
-
+	}
 	vPortFree(buffer);
 
 	return error;
@@ -400,13 +466,11 @@ static enum Error _tasklistHandler(const char **arguments_array, uint32_t argume
 
 	enum Error error = ERROR_NONE;
 
-	if ((length + sizeof (header)) < output_buffer_length)
-	{
+	if ((length + sizeof (header)) < output_buffer_length) {
 		memcpy(output_buffer, header, sizeof(header) - 1);
 		memcpy(output_buffer + sizeof(header) - 1, buffer, length + 1);
 		error = ERROR_NONE;
-	}
-	else
+	} else
 		error = ERROR_BUFFER_OVERFLOW;
 
 	vPortFree(buffer);
