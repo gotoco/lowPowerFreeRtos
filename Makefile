@@ -59,14 +59,14 @@ SRCS_DIRS =  configuration hdr Inc FatFS peripherals Drivers/ST/STM32_USB_Device
 INC_DIRS =  configuration hdr Inc FatFS peripherals Drivers/ST/STM32_USB_Device_Library/Class/CDC Drivers/ST/STM32_USB_Device_Library/Core \
 			Drivers Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include Drivers/STM32L1xx_HAL_Driver \
 			 FreeRTOS/include FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang
-			
+
 # library directories (absolute or relative paths to additional folders with
 # libraries)
-LIB_DIRS = 
+LIB_DIRS =
 
 # libraries (additional libraries for linking, e.g. "-lm -lsome_name" to link
 # math library libm.a and libsome_name.a)
-LIBS = 
+LIBS =
 
 # optimization flags ("-O0" - no optimization, "-O1" - optimize, "-O2" -
 # optimize even more, "-Os" - optimize for size or "-O3" - optimize yet more) 
