@@ -10,7 +10,7 @@
 # toolchain configuration
 #----------------------------------------------------------------------------------------------------------------------#
 
-TOOLCHAIN = C:/GNU_Tools_ARM_Embedded/bin/arm-none-eabi-
+TOOLCHAIN = arm-none-eabi-
 
 CXX = $(TOOLCHAIN)g++
 CC = $(TOOLCHAIN)gcc
