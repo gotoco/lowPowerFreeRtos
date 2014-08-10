@@ -55,7 +55,6 @@ enum Error serialInitialize(void)
 	USART2->BRR = (rccGetCoreFrequency() + SERIALx_BAUDRATE / 2) / SERIALx_BAUDRATE;	// calculate baudrate (with rounding)
 	// enable peripheral, transmitter and receiver, enable RXNE interrupt
 	USART2->CR1 = USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;
-
 }
 
 /**
