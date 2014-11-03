@@ -24,35 +24,45 @@ struct driver_configuration {
  */
  struct driver_t {
     /**
+     * \brief Initialization of driver
      */
     int (* init_driver) (struct driver_t * , int, int);
     /**
+     * \brief Cleanup for driver
      */
-    int (* release_driver) (struct driver_t * );
+    int (* release_driver) (struct driver_t ** );
     /**
+     * \brief Dummy method
      */
     int (* send_command) ( struct driver_t * , char);
     /**
+     * \brief Dummy method
      */
     int (* recive_command) ( struct driver_t * );
     /**
+     * \brief Dummy method
      */
     int (* flush_buffer) ( struct driver_t * );
-    /**
-     */
-    int (* redirect_output) ( struct driver_t * , char*);
-    /**
-     */
-    int (* stop_redirect) ( struct driver_t * );
 
 	/* private data */
     int id;
     long time_out;
     char* buffer;
+    /*
+     * \brief Configuration of driver
+     */
     strategy_t driver_strategy;
 };
 
+ /*
+  * \brief Constructor of driver
+  */
  extern "C"  struct driver_t * new_driver(struct driver_configuration * );
+
+ /*
+  * \brief Getter of driver (in example when driver is global, or if we need to inject it)
+  */
+ extern "C"  struct driver_t * get_driver(void);
 
 #endif
 

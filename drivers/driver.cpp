@@ -13,7 +13,7 @@ int init_driver (struct driver_t * self, int id, int buffer_size)
 	return NO_ERROR;
 }
 
-int release_driver (struct driver_t * self)
+int release_driver (struct driver_t ** self)
 {
 	printf ("release_driver \n");
 
@@ -67,13 +67,13 @@ struct driver_t * new_driver(struct driver_configuration * config)
 	if (drv == NULL)
 	{
 		drv = (struct driver_t*) malloc (sizeof (struct driver_t) );
-		drv->init_driver = &init_driver;
+		//Initialize methods
+		drv->init_driver 	= &init_driver;
 		drv->release_driver = &release_driver;
 		drv->send_command   = &send_command;
 		drv->recive_command = &recive_command;
 		drv->flush_buffer   = &flush_buffer;
-		drv->redirect_output= &redirect_output;
-		drv->stop_redirect  = &stop_redirect;
+
 		drv->driver_strategy = config->driver_strategy;
 	}
 	return drv;
