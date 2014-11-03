@@ -392,3 +392,22 @@ void USARTx_IRQHandler(void)
 
 	portEND_SWITCHING_ISR(higher_priority_task_woken);
 }
+
+/**
+ *  \brief Low-level String printing
+ *
+ *  To use only with tests (because not using FreeRTOS) for printing test/debugging messages
+ *
+ *  \param [in] string is the pointer to ZERO TERMINATED string so make sure for ending '\0'
+ */
+void usartSendDebugMsg(const char *string)
+{
+	int length = strlen(string);
+
+	if (length == 0)
+		return;
+
+	for(int i=0; i<length; i++) {
+		usartSendCharacter( (*string+i) );
+	}
+}

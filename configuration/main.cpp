@@ -25,11 +25,6 @@
 #include "bsp.h"
 #include "error.h"
 #include "command.h"
-#include "comm-cmd.h"
-#include "task_communication.h"
-
-//Application
-#include "app_messages.h"
 
 //Peripherials
 #include "gpio.h"
@@ -38,26 +33,21 @@
 #include "usart.h"
 #include "i2c.h"
 
-
+#define ACC_INT_PIN							GPIO_PIN_0
+#define ACC_INT_GPIO						GPIOA
+#define ACC_INT_CONFIGURATION				GPIO_IN_PULL_DOWN
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local functions' declarations
 +---------------------------------------------------------------------------------------------------------------------*/
 
-static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
-		size_t output_buffer_length);
 static void _heartbeatTask(void *parameters);
 static enum Error _initializeHeartbeatTask(void);
-static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
-		size_t output_buffer_length);
-static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
-		size_t output_buffer_length);
+static enum Error _initializeGuardianTask(void);
 static enum Error _peripLauncher(void);
 static enum Error _sysInit(void);
 static enum Error _schedulerInitAndRun(void);
-static enum Error _accelerometerTask(void *parameters);
-static enum Error _bluetoothTask(void *parameters);
-static enum Error _queuesInitialization(void);
+
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | extern functions' declarations
@@ -67,31 +57,6 @@ static enum Error _queuesInitialization(void);
 /*---------------------------------------------------------------------------------------------------------------------+
 | local variables
 +---------------------------------------------------------------------------------------------------------------------*/
-
-static const struct CommandDefinition _dirCommandDefinition =
-{
-		"dir",						// command string
-		1,							// maximum number of arguments
-		_dirHandler,				// callback function
-		"dir: prints contents of selected directory on SD card\r\n"
-				"\t\tusage: dir [path]\r\n",	// string displayed by help function
-};
-
-static const struct CommandDefinition _runtimestatsCommandDefinition =
-{
-		"runtimestats",						// command string
-		0,									// maximum number of arguments
-		_runtimestatsHandler,				// callback function
-		"runtimestats: lists all tasks with their runtime stats\r\n",	// string displayed by help function
-};
-
-static const struct CommandDefinition _tasklistCommandDefinition =
-{
-		"tasklist",							// command string
-		0,									// maximum number of arguments
-		_tasklistHandler,					// callback function
-		"tasklist: lists all tasks with their info\r\n",	// string displayed by help function
-};
 
 static FATFS _fileSystem;
 
@@ -132,35 +97,6 @@ int main(void)
 +---------------------------------------------------------------------------------------------------------------------*/
 
 /**
- *  \brief Create and initialize global application queues from 'task_communication.h'
- *
- *  \return ERROR_NONE on success, otherwise appropriate error code from error.h
- */
-static enum Error _queuesInitialization()
-{
-	Error error = ERROR_NONE;
-
-    dataSenderBLEQueue 	= xQueueCreate(5, sizeof(bleMessage));
-    if(dataSenderBLEQueue == NULL){
-    	error = ERROR_FreeRTOS_pdFAIL;
-    	goto out;
-    }
-	dataSaverFLASHQueue = xQueueCreate(5, sizeof(flashMessage));
-    if(dataSaverFLASHQueue == NULL){
-    	error = ERROR_FreeRTOS_pdFAIL;
-    	goto out;
-    }
-	commonDataQueue 	= xQueueCreate(10, sizeof(commonMessage));
-	if(commonDataQueue == NULL){
-		error = ERROR_FreeRTOS_pdFAIL;
-		goto out;
-	}
-
-	out:
-		return error;
-}
-
-/**
  *  \brief Initialize uC Core and sysCLK
  *
  *  \return ERROR_NONE on success, otherwise appropriate error code from error.h
@@ -196,11 +132,7 @@ static enum Error _schedulerInitAndRun(){
 	error = _initializeHeartbeatTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
-	commandRegister(&_dirCommandDefinition);
-	commandRegister(&_runtimestatsCommandDefinition);
-	commandRegister(&_tasklistCommandDefinition);
-
-	_queuesInitialization();
+	error = _initializeGuardianTask();
 
 	vTaskStartScheduler();
 
@@ -226,69 +158,6 @@ static enum Error _peripLauncher()
 		return error;
 }
 
-/**
- * \brief Handler of 'dir' command.
- *
- * Handler of 'dir' command. Displays contents of selected directory.
- *
- * \param [in] arguments_array is the array with arguments, first elements is the command identification string - "dir"
- * \param [in] arguments_count is the number of arguments in arguments_array
- * \param [out] output_buffer is the pointer to output buffer
- * \param [in] output_buffer_length is the size of output buffer
- *
- * \return ERROR_NONE on success, otherwise an error code defined in the file error.h
- */
-
-static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer, size_t output_buffer_length)
-{
-	static const char *root_path = "/";
-	const char *path;
-
-	if (arguments_count > 1)				// was argument passed to command?
-		path = arguments_array[1];			// yes - use it as a path
-	else
-		path = root_path;					// no - use root path
-
-	DIR dir;
-
-	FRESULT fresult = f_opendir(&dir, path);
-	enum Error error = errorConvert_FRESULT(fresult);
-
-	if (error != ERROR_NONE)
-		return error;
-
-	FILINFO filinfo;
-
-	while (error == ERROR_NONE)
-	{
-		fresult = f_readdir(&dir, &filinfo);
-		error = errorConvert_FRESULT(fresult);
-
-		if (error != ERROR_NONE)
-			return error;
-
-		size_t length = strlen(filinfo.fname);
-
-		if (length == 0)					// end of directory?
-			return error;
-
-		 length += 2 + 1;					// include size of newline (2) and size of optional directory marker '/' (1)
-
-		if (length > output_buffer_length - 1)	// will it fit into buffer (leave space for '\0')?
-			return ERROR_BUFFER_OVERFLOW;
-
-		output_buffer_length -= length;
-
-		output_buffer = stpcpy(output_buffer, filinfo.fname);
-
-		if (filinfo.fattrib & AM_DIR)		// is this a directory?
-			output_buffer = stpcpy(output_buffer, "/");	// append trailing slash to indicate that
-
-		output_buffer = stpcpy(output_buffer, "\r\n");
-	}
-
-	return error;
-}
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | System Tasks
@@ -321,61 +190,33 @@ static void _heartbeatTask(void *parameters)
 
 }
 
+
 /**
- *  \brief Accelerometer task that initialize acc_driver and then only listen for interrupts
+ * \brief Initialization of guardian task - setup GPIO, create task.
+ *
+ * Initialization of Interrupt case PA0 is pulled up
  *
  * \return ERROR_NONE if the task was successfully created and added to a ready list, otherwise an error code defined in
  * the file error.h
  */
 
-static enum Error _accelerometerTask(void *parameters)
+static enum Error _initializeGuardianTask(void)
 {
+	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
 
-	vSemaphoreCreateBinary(xSemaphoreForAccISR);
+	gpioConfigurePin(ACC_INT_GPIO, ACC_INT_PIN, ACC_INT_CONFIGURATION);
 
-	if( xSemaphoreForAccISR == NULL ) {
-	/* There was insufficient FreeRTOS heap available for the semaphore to
-	be created successfully. */
-	} else {
-	/* The semaphore can now be used. Its handle is stored in the xSemahore variable. */
-		for(;;){
-			xSemaphoreTake(xSemaphoreForAccISR, portMAX_DELAY );
+	//setting interupt for PA0;
+	EXTI->IMR|=EXTI_EMR_MR0;
+	EXTI->RTSR|=EXTI_RTSR_TR0;
+	EXTI->FTSR&= ~(EXTI_FTSR_TR0);
 
-			/**
-			 * give data from ACC
-			 */
-		}
-	}
-}
+	//enabling interupt
+	RCC->APB2ENR|=RCC_APB2ENR_SYSCFGEN;
+	SYSCFG->EXTICR[0]=SYSCFG_EXTICR1_EXTI0_PA;
+	NVIC_EnableIRQ(EXTI0_IRQn);
 
-/**
- *  \brief Bluetooth task that initialize bluetooth_driver and then listen for events and process data from queue
- *
- * \return ERROR_NONE if the task was successfully created and added to a ready list, otherwise an error code defined in
- * the file error.h
- */
-
-static enum Error _bluetoothTask(void *parameters)
-{
-
-	vTaskSuspend(NULL);
-	for(;;){}
-}
-
-static enum Error _dataRouteKeeper(void *parameters){
-	/* Declare the structure that will hold the values received from the queue. */
-	commonMessage xReceivedMessage;
-	portBASE_TYPE xStatus;
-
-	for(;;){
-
-		xStatus = xQueueReceive( commonDataQueue, &xReceivedMessage, 0 );
-
-		if( xStatus == pdPASS ){
-
-		}
-
-	}
+	return ERROR_NONE;
 }
 
 /**
@@ -397,83 +238,12 @@ static enum Error _initializeHeartbeatTask(void)
 	return errorConvert_portBASE_TYPE(ret);
 }
 
-/**
- * \brief Handler of 'runtimestats' command.
- *
- * Handler of 'runtimestats' command. Displays all tasks with their info.
- *
- * \param [out] output_buffer is the pointer to output buffer
- * \param [in] output_buffer_length is the size of output buffer
- *
- * \return ERROR_NONE on success, otherwise an error code defined in the file error.h
- */
-
-static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer, size_t output_buffer_length)
+extern "C" void EXTI0_IRQHandler(void) __attribute((interrupt));
+void EXTI0_IRQHandler(void)
 {
-	static const char header[] = "Task\t\tAbs Time\t% Time\r\n--------------------------------------";
+	//Do something
 
-	(void)arguments_array;					// suppress warning
-	(void)arguments_count;					// suppress warning
-
-	char *buffer = (char*)pvPortMalloc(1024);
-
-	if (buffer == NULL)
-		return ERROR_FreeRTOS_errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY;
-
-	vTaskGetRunTimeStats((signed char*)buffer);
-
-	size_t length = strlen(buffer);
-
-	enum Error error = ERROR_NONE;
-
-	if ((length + sizeof (header)) < output_buffer_length) {
-		memcpy(output_buffer, header, sizeof(header) - 1);
-		memcpy(output_buffer + sizeof(header) - 1, buffer, length + 1);
-		error = ERROR_NONE;
-	} else {
-		error = ERROR_BUFFER_OVERFLOW;
-	}
-	vPortFree(buffer);
-
-	return error;
+	//Clear flags
+	EXTI->PR=EXTI_PR_PR0;
 }
 
-/**
- * \brief Handler of 'tasklist' command.
- * Handler of 'tasklist' command. Displays all tasks with their info.
- *
- * \param [out] output_buffer is the pointer to output buffer
- * \param [in] output_buffer_length is the size of output buffer
- *
- * \return ERROR_NONE on success, otherwise an error code defined in the file error.h
- */
-
-static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer, size_t output_buffer_length)
-{
-	static const char header[] = "Task\t\tState\tPri.\tStack\t##\r\n------------------------------------------";
-
-	(void)arguments_array;					// suppress warning
-	(void)arguments_count;					// suppress warning
-
-	char *buffer = (char*)pvPortMalloc(1024);
-
-	if (buffer == NULL)
-		return ERROR_FreeRTOS_errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY;
-
-	vTaskList((signed char*)buffer);
-
-	size_t length = strlen(buffer);
-
-	enum Error error = ERROR_NONE;
-
-	if ((length + sizeof (header)) < output_buffer_length) {
-		memcpy(output_buffer, header, sizeof(header) - 1);
-		memcpy(output_buffer + sizeof(header) - 1, buffer, length + 1);
-		error = ERROR_NONE;
-	} else
-		error = ERROR_BUFFER_OVERFLOW;
-
-	vPortFree(buffer);
-
-	return error;
-}

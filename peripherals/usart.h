@@ -25,6 +25,7 @@ extern "C" {
 #endif
 
 void usartSendCharacter(char c);
+void usartSendDebugMsg(const char *string);
 
 #ifdef __cplusplus
 }
