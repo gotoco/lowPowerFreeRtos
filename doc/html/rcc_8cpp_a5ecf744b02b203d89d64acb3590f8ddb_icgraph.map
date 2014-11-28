@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$helper_8h.html#aa7967d70ce0ab57dc29b3e8e929ab4df" title="configureTimerForRuntimestats" alt="" coords="214,5,437,32"/>
+<area shape="rect" id="node5" href="$i2c_8h.html#ab837a14aa40a98c0ef147784d530ea5e" title="Initializes I2C module." alt="" coords="280,56,371,83"/>
+<area shape="rect" id="node9" href="$spi_8h.html#acad4682377bd6f02f98bd7094306a9d8" title="Sets SPI baud rate." alt="" coords="263,107,387,133"/>
+<area shape="rect" id="node11" href="$usart_8h.html#a5ccbcfccc60e332b3558c9c89e7b6b70" title="Initializes USART." alt="" coords="272,157,379,184"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main code block." alt="" coords="486,107,541,133"/>
+</map>

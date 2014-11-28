@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$command_8h.html" title="Header for command.cpp." alt="" coords="437,80,877,107"/>
+<area shape="rect" id="node5" href="$command_8cpp.html" title="Command interpreter." alt="" coords="5,155,461,181"/>
+<area shape="rect" id="node7" href="$main_8cpp.html" title="Main code block." alt="" coords="486,155,908,181"/>
+<area shape="rect" id="node9" href="$usart_8cpp.html" title="USART driver." alt="" coords="933,155,1357,181"/>
+<area shape="rect" id="node13" href="$usart_8h.html" title="Header for usart.cpp." alt="" coords="902,80,1311,107"/>
+</map>

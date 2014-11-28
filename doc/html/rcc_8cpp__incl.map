@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$stm32l1xx_8h.html" title="CMSIS Cortex&#45;M3 Device Peripheral Access Layer Header File. This file contains all the peripheral reg..." alt="" coords="229,80,328,107"/>
+<area shape="rect" id="node17" href="$hdr__rcc_8h.html" title="Header with definition of bits in RCC control registers." alt="" coords="539,155,645,181"/>
+<area shape="rect" id="node19" href="$hdr__bitband_8h.html" title="Header for bit&#45;banding." alt="" coords="615,229,749,256"/>
+<area shape="rect" id="node22" href="$config_8h.html" title="Basic configuration of the project." alt="" coords="624,80,696,107"/>
+<area shape="rect" id="node25" href="$rcc_8h.html" title="Header for rcc.cpp." alt="" coords="496,80,549,107"/>
+<area shape="rect" id="node7" href="$core__cm3_8h.html" title="CMSIS Cortex&#45;M3 Core Peripheral Access Layer Header File." alt="" coords="86,155,183,181"/>
+<area shape="rect" id="node14" href="$system__stm32l1xx_8h.html" title="CMSIS Cortex&#45;M3 Device Peripheral Access Layer System Header File." alt="" coords="259,155,413,181"/>
+<area shape="rect" id="node10" href="$core__cm_instr_8h.html" title="CMSIS Cortex&#45;M Core Instruction Access Header File." alt="" coords="148,229,265,256"/>
+<area shape="rect" id="node12" href="$core__cm_func_8h.html" title="CMSIS Cortex&#45;M Core Function Access Header File." alt="" coords="5,229,123,256"/>
+</map>

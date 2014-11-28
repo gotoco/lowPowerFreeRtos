@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$command_8cpp.html" title="Command interpreter." alt="" coords="5,80,461,107"/>
+<area shape="rect" id="node5" href="$helper_8cpp.html" title="Helper functions." alt="" coords="486,80,916,107"/>
+<area shape="rect" id="node7" href="$i2c_8cpp.html" title="I2C driver." alt="" coords="941,80,1349,107"/>
+<area shape="rect" id="node9" href="$main_8cpp.html" title="Main code block." alt="" coords="1374,80,1796,107"/>
+<area shape="rect" id="node11" href="$rcc_8cpp.html" title="RCC driver." alt="" coords="1821,80,2232,107"/>
+<area shape="rect" id="node13" href="$spi_8cpp.html" title="SPI driver." alt="" coords="2257,80,2665,107"/>
+<area shape="rect" id="node15" href="$usart_8cpp.html" title="USART driver." alt="" coords="2691,80,3115,107"/>
+</map>

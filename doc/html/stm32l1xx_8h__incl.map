@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$core__cm3_8h.html" title="CMSIS Cortex&#45;M3 Core Peripheral Access Layer Header File." alt="" coords="189,80,285,107"/>
+<area shape="rect" id="node11" href="$system__stm32l1xx_8h.html" title="CMSIS Cortex&#45;M3 Device Peripheral Access Layer System Header File." alt="" coords="311,80,465,107"/>
+<area shape="rect" id="node7" href="$core__cm_instr_8h.html" title="CMSIS Cortex&#45;M Core Instruction Access Header File." alt="" coords="187,155,304,181"/>
+<area shape="rect" id="node9" href="$core__cm_func_8h.html" title="CMSIS Cortex&#45;M Core Function Access Header File." alt="" coords="329,155,447,181"/>
+</map>
