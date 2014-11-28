@@ -27,7 +27,7 @@ Anyway, here goes:
 
 	 	Chapter 1: Indentation
 
-	Tabs are 4 characters
+	* Tabs are 4 characters
 
 // Tabs are 8 characters, and thus indentations are also 8 characters. 
 // There are heretic movements that try to make indentations 4 (or even 2!)
@@ -288,10 +288,27 @@ have a reference count on it, you almost certainly have a bug.
 0. Note that only API functions and macros ending in ‘FromISR’ or ‘FROM_ISR’ should be used
 within an interrupt service routine.
 
-1. Files NOT be shared between threads (data devices can [also depends on the implementation of the driver], 
+1. Files have to be NOT shared between threads (data devices can [also depends on the implementation of the driver],
 but the files - objects FILE - not). 
 
 2. If any thread used is buffered or unbuffered line input stream (or input / output) 
 it is NOT possible to use (in any thread!) Stream output (or input / output) spooled to the line 
 - that's why always should be use a separate stream for in (buffered to the line) and separate for out 
 (full buffering, manual fflush ())
+
+----------------------------------------------------------------------
+
+        C Project Structure Guidelines :
+
+1. A header file only contains extern declarations of variables
+— never static or unqualified variable definitions.
+2. For any given variable, only one header file declares it (SPOT — Single Point of Truth).
+3. A source file never contains extern declarations of variables
+— source files always include the (sole) header that declares them.
+4. For any given variable, exactly one source file defines the variable, preferably initializing it too.
+(Although there is no need to initialize explicitly to zero, it does no harm and can do some good,
+because there can be only one initialized definition of a particular global variable in a program).
+5. The source file that defines the variable also includes the header to ensure that
+the definition and the declaration are consistent.
+6. A function should never need to declare a variable using extern.
+7. Avoid global variables whenever possible — use functions instead.
