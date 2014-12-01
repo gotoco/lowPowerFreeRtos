@@ -476,5 +476,6 @@ enum GpioConfiguration
 
 void gpioInitialize(void);
 void gpioConfigurePin(GPIO_TypeDef *port_ptr, enum GpioPin pin, enum GpioConfiguration configuration);
+void gpioConfigurePort(GPIO_TypeDef *port, enum GpioConfiguration configuration);
 
 #endif /* GPIO_H_ */

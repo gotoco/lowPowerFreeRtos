@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -33,6 +34,12 @@
 #include "helper.h"
 #include "usart.h"
 #include "i2c.h"
+#include "serial.h"
+#include "usart.h"
+#include "lcd.h"
+
+//Application
+#include "lcdprinter.h"
 
 #define ACC_INT_PIN							GPIO_PIN_0
 #define ACC_INT_GPIO						GPIOA
@@ -154,6 +161,17 @@ static enum Error _peripLauncher()
 	i2cInitialize();
 
 	error = usartInitialize();
+	// LED Initialise
+	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
+	LED_bb = 1;
+	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
+	LED1_bb = 1;
+
+	// LCD Initialise
+	LCD_Init();
+
+	// Write on LCD "Ubirds"
+	LCD_WriteChar_example();
 
 	out:
 		return error;

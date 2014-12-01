@@ -46,15 +46,28 @@
 
 enum Error serialInitialize(void)
 {
-	RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
-	gpioConfigurePin(GPIOA, GPIO_PIN_2, GPIO_AF7_PP_40MHz_PULL_UP);
-	gpioConfigurePin(GPIOA, GPIO_PIN_3, GPIO_AF7_PP_40MHz_PULL_UP);
+	gpioConfigurePin(USARTx_TX_GPIO, USARTx_TX_PIN, USARTx_TX_CONFIGURATION);
+	gpioConfigurePin(USARTx_RX_GPIO, USARTx_RX_PIN, USARTx_RX_CONFIGURATION);
 
-	RCC_APB1ENR_USART2EN_bb = 1;			// enable USART in RCC
+	RCC_APBxENR_USARTxEN_bb = 1;			// enable USART in RCC
 
-	USART2->BRR = (rccGetCoreFrequency() + SERIALx_BAUDRATE / 2) / SERIALx_BAUDRATE;	// calculate baudrate (with rounding)
+	USARTx->BRR = (rccGetCoreFrequency() + USARTx_BAUDRATE / 2)/ USARTx_BAUDRATE;	// calculate baudrate (with rounding)
 	// enable peripheral, transmitter and receiver, enable RXNE interrupt
-	USART2->CR1 = USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;
+	USARTx->CR1 = USART_CR1_UE | USART_CR1_RXNEIE | USART_CR1_TE | USART_CR1_RE;
+
+	NVIC_SetPriority(USARTx_IRQn, USARTx_IRQ_PRIORITY);	// set USART priority
+	NVIC_EnableIRQ(USARTx_IRQn);				// enable USART IRQ
+
+
+	/*RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+	gpioConfigurePin(GPIOA, GPIO_PIN_9, GPIO_AF7_PP_40MHz_PULL_UP);
+	gpioConfigurePin(GPIOA, GPIO_PIN_10, GPIO_AF7_PP_40MHz_PULL_UP);
+
+	RCC_APB2ENR_USART1EN_bb = 1;			// enable USART in RCC
+
+	USART1->BRR = (rccGetCoreFrequency() + SERIALx_BAUDRATE / 2) / SERIALx_BAUDRATE;	// calculate baudrate (with rounding)
+	// enable peripheral, transmitter and receiver, enable RXNE interrupt
+	USART1->CR1 = USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;*/
 }
 
 /**
@@ -68,5 +81,5 @@ enum Error serialInitialize(void)
 void serialSendCharacter(char c)
 {
 	while (!(USARTx_SR_TXE_bb(SERIALx)));
-	USART2->DR = c;
+	USART1->DR = c;
 }

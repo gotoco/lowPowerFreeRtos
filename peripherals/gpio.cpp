@@ -88,7 +88,7 @@ void gpioConfigurePin(GPIO_TypeDef *port, enum GpioPin pin, enum GpioConfigurati
 	else
 	{
 		afrx = 1;							// AFRH - pins [8; 15]
-		pin = (enum GpioPin)(((uint32_t)pin) - 8);	// trim pin number
+		pin = (enum GpioPin)((uint32_t)pin - 8);	// trim pin number
 	}
 
 	afr = port->AFR[afrx];				// localize
@@ -96,3 +96,60 @@ void gpioConfigurePin(GPIO_TypeDef *port, enum GpioPin pin, enum GpioConfigurati
 	afr |= (GPIO_GET_AFR(configuration) << (pin * 4));	// apply new setting
 	port->AFR[afrx] = afr;				// save back
 }
+
+/**
+ * \brief Configures port.
+ *
+ * Configures all pins in one port.
+ *
+ * \param [in] port points to the configuration structure of desired port
+ * \param [in] configuration is a combined value of MODER, OTYPER, OSPEEDR, PUPDR and AFRx register bitfields, allowed
+ * values
+ * {GPIO_IN_FLOATING, GPIO_IN_PULL_UP, GPIO_IN_PULL_DOWN, GPIO_OUT_{PP, OD}_{400kHz, 2MHz, 10MHz, 40MHz},
+ * GPIO_OUT_{PP, OD}_{400kHz, 2MHz, 10MHz, 40MHz}_{PULL_UP, PULL_DOWN},
+ * GPIO_[AF0; AF15]_{PP, OD}_{400kHz, 2MHz, 10MHz, 40MHz},
+ * GPIO_[AF0; AF15]_{PP, OD}_{400kHz, 2MHz, 10MHz, 40MHz}_{PULL_UP, PULL_DOWN}, GPIO_ANALOG}
+ */
+
+void gpioConfigurePort(GPIO_TypeDef *port, enum GpioConfiguration configuration)
+{
+	uint32_t moder, otyper, ospeedr, pupdr, afr, afrx;
+	uint8_t i=0;
+
+	moder = port->MODER;				// localize
+	moder &= 0x0000;	// clear current setting
+	for(i=0;i<1;i++)
+	{
+		moder |= (GPIO_GET_MODER(configuration) << (i*2));	// apply new setting
+	}
+	port->MODER = moder;				// save back
+
+
+	otyper = port->OTYPER;				// localize
+	otyper &= 0xFF00;	// clear current setting
+	for(i=0;i<5;i++)
+	{
+		otyper |= (GPIO_GET_OTYPER(configuration) << i);	// apply new setting
+	}
+	port->OTYPER = otyper;				// save back
+
+
+	ospeedr = port->OSPEEDR;			// localize
+	ospeedr &= 0x0000;	// clear current setting
+	for(i=0;i<5;i++)
+	{
+		ospeedr |= (GPIO_GET_OSPEEDR(configuration) << (i * 2));	// apply new setting
+	}
+	port->OSPEEDR = ospeedr;			// save back
+
+
+	pupdr = port->PUPDR;				// localize
+	pupdr &= 0x0000;	// clear current setting
+	for(i=0;i<5;i++)
+	{
+		pupdr |= (GPIO_GET_PUPDR(configuration) << (i * 2));	// apply new setting
+	}
+	port->PUPDR = pupdr;				// save back
+
+}
+
