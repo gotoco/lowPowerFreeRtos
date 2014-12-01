@@ -40,7 +40,8 @@ out/main.o: configuration/main.cpp \
  d:\programy\gnu\ tools\ arm\ embedded\4.8\ 2014q2\arm-none-eabi\include\c++\4.8.4\arm-none-eabi\armv7-m\bits\os_defines.h \
  d:\programy\gnu\ tools\ arm\ embedded\4.8\ 2014q2\arm-none-eabi\include\c++\4.8.4\arm-none-eabi\armv7-m\bits\cpu_defines.h \
  d:\programy\gnu\ tools\ arm\ embedded\4.8\ 2014q2\arm-none-eabi\include\c++\4.8.4\cstddef \
- peripherals/serial.h peripherals/usart.h peripherals/lcd.h
+ peripherals/serial.h peripherals/usart.h peripherals/lcd.h \
+ application/lcdprinter.h
 
 d:\programy\gnu\ tools\ arm\ embedded\4.8\ 2014q2\lib\gcc\arm-none-eabi\4.8.4\include\stdint.h:
 
@@ -171,3 +172,5 @@ peripherals/serial.h:
 peripherals/usart.h:
 
 peripherals/lcd.h:
+
+application/lcdprinter.h:

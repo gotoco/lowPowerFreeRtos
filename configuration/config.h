@@ -109,10 +109,10 @@
 #define I2Cx								I2C1
 
 #define I2Cx_SCL_GPIO						GPIOB
-#define I2Cx_SCL_PIN						GPIO_PIN_8
+#define I2Cx_SCL_PIN						GPIO_PIN_6
 #define I2Cx_SCL_CONFIGURATION				GPIO_AF4_OD_40MHz
 #define I2Cx_SDA_GPIO						GPIOB
-#define I2Cx_SDA_PIN						GPIO_PIN_9
+#define I2Cx_SDA_PIN						GPIO_PIN_7
 #define I2Cx_SDA_CONFIGURATION				GPIO_AF4_OD_40MHz
 
 #define RCC_APBxENR_I2CxEN_bb				RCC_APB1ENR_I2C1EN_bb

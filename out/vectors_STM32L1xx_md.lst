@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
   55              		.global	__Default_Handler
   56              		.thumb
   57              		.thumb_func
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 2
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 2
 
 
   58              		.type	__Default_Handler, %function
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
   90              		.weak	BusFault_Handler
   91              		.thumb_set BusFault_Handler,__Default_Handler
   92              		.weak	UsageFault_Handler
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 3
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 3
 
 
   93              		.thumb_set UsageFault_Handler,__Default_Handler
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  147              		.thumb_set DMA1_Channel7_IRQHandler,__Default_Handler
  148              		.weak	ADC1_IRQHandler
  149              		.thumb_set ADC1_IRQHandler,__Default_Handler
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 4
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 4
 
 
  150              		.weak	USB_HP_IRQHandler
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  204              		.align	2
  205              		.type	vectors, %object
  206              		.size	vectors, 244
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 5
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 5
 
 
  207              	vectors:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  261 00d4 00000000 		.word	USART1_IRQHandler
  262 00d8 00000000 		.word	USART2_IRQHandler
  263 00dc 00000000 		.word	USART3_IRQHandler
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 6
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 6
 
 
  264 00e0 00000000 		.word	EXTI15_10_IRQHandler
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  318 006d 04       		.byte	0x4
  319 006e 07       		.byte	0x7
  320 006f 35120000 		.4byte	.LASF356
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 7
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 7
 
 
  321 0073 09       		.uleb128 0x9
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  375 0026 06       		.uleb128 0x6
  376 0027 40       		.uleb128 0x40
  377 0028 18       		.uleb128 0x18
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 8
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 8
 
 
  378 0029 9742     		.uleb128 0x2117
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  432 0060 21       		.uleb128 0x21
  433 0061 00       		.byte	0
  434 0062 49       		.uleb128 0x49
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 9
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 9
 
 
  435 0063 13       		.uleb128 0x13
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  489 0004 0E000000 		.4byte	.LFE0
  490 0008 00000000 		.4byte	0
  491 000c 00000000 		.4byte	0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 10
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 10
 
 
  492              		.section	.debug_macro,"",%progbits
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  546 004d DE100000 		.4byte	.LASF12
  547 0051 05       		.byte	0x5
  548 0052 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 11
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 11
 
 
  549 0053 50210000 		.4byte	.LASF13
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  603 00bf 9D0C0000 		.4byte	.LASF31
  604 00c3 05       		.byte	0x5
  605 00c4 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 12
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 12
 
 
  606 00c5 55040000 		.4byte	.LASF32
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  660 0131 270C0000 		.4byte	.LASF50
  661 0135 05       		.byte	0x5
  662 0136 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 13
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 13
 
 
  663 0137 A8160000 		.4byte	.LASF51
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  717 01a3 731C0000 		.4byte	.LASF69
  718 01a7 05       		.byte	0x5
  719 01a8 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 14
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 14
 
 
  720 01a9 B20C0000 		.4byte	.LASF70
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  774 0215 3D000000 		.4byte	.LASF88
  775 0219 05       		.byte	0x5
  776 021a 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 15
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 15
 
 
  777 021b 63010000 		.4byte	.LASF89
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  831 0287 861C0000 		.4byte	.LASF107
  832 028b 05       		.byte	0x5
  833 028c 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 16
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 16
 
 
  834 028d 71000000 		.4byte	.LASF108
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  888 02f9 CA0F0000 		.4byte	.LASF126
  889 02fd 05       		.byte	0x5
  890 02fe 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 17
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 17
 
 
  891 02ff 5D0C0000 		.4byte	.LASF127
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  945 036b 021E0000 		.4byte	.LASF145
  946 036f 05       		.byte	0x5
  947 0370 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 18
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 18
 
 
  948 0371 94120000 		.4byte	.LASF146
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1002 03dd 2D1A0000 		.4byte	.LASF164
  1003 03e1 05       		.byte	0x5
  1004 03e2 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 19
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 19
 
 
  1005 03e3 8E020000 		.4byte	.LASF165
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1059 044f 0B150000 		.4byte	.LASF183
  1060 0453 05       		.byte	0x5
  1061 0454 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 20
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 20
 
 
  1062 0455 621E0000 		.4byte	.LASF184
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1116 04c1 89160000 		.4byte	.LASF202
  1117 04c5 05       		.byte	0x5
  1118 04c6 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 21
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 21
 
 
  1119 04c7 410E0000 		.4byte	.LASF203
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1173 0533 D9040000 		.4byte	.LASF221
  1174 0537 05       		.byte	0x5
  1175 0538 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 22
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 22
 
 
  1176 0539 27020000 		.4byte	.LASF222
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1230 05a5 3E120000 		.4byte	.LASF240
  1231 05a9 05       		.byte	0x5
  1232 05aa 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 23
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 23
 
 
  1233 05ab 9B0D0000 		.4byte	.LASF241
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1287 0617 53090000 		.4byte	.LASF259
  1288 061b 05       		.byte	0x5
  1289 061c 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 24
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 24
 
 
  1290 061d B0000000 		.4byte	.LASF260
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1344 0689 1C180000 		.4byte	.LASF278
  1345 068d 05       		.byte	0x5
  1346 068e 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 25
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 25
 
 
  1347 068f F50E0000 		.4byte	.LASF279
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1401 06fb 171F0000 		.4byte	.LASF297
  1402 06ff 05       		.byte	0x5
  1403 0700 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 26
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 26
 
 
  1404 0701 92030000 		.4byte	.LASF298
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1458 076d 360F0000 		.4byte	.LASF316
  1459 0771 05       		.byte	0x5
  1460 0772 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 27
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 27
 
 
  1461 0773 C1170000 		.4byte	.LASF317
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1515 07df 70130000 		.4byte	.LASF335
  1516 07e3 05       		.byte	0x5
  1517 07e4 00       		.uleb128 0
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 28
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 28
 
 
  1518 07e5 5C100000 		.4byte	.LASF336
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1572 0851 36010000 		.4byte	.LASF354
  1573 0855 00       		.byte	0
  1574              		.section	.debug_line,"",%progbits
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 29
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 29
 
 
  1575              	.Ldebug_line0:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1594      4C414343 
  1594      554D5F46 
  1594      4249545F 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 30
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 30
 
 
  1594      5F203332 
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1613              	.LASF101:
  1614 01ba 5F5F5549 		.ascii	"__UINT_LEAST8_MAX__ 255\000"
  1614      4E545F4C 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 31
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 31
 
 
  1614      45415354 
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1633              	.LASF229:
  1634 02a6 5F5F5341 		.ascii	"__SACCUM_EPSILON__ 0x1P-7HK\000"
  1634      4343554D 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 32
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 32
 
 
  1634      5F455053 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1653              	.LASF298:
  1654 0392 5F5F5544 		.ascii	"__UDA_IBIT__ 32\000"
  1654      415F4942 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 33
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 33
 
 
  1654      49545F5F 
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1672      7369676E 
  1673              	.LASF177:
  1674 0470 5F5F4445 		.ascii	"__DEC64_SUBNORMAL_MIN__ 0.000000000000001E-383DD\000"
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 34
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 34
 
 
  1674      4336345F 
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1692      6F727300 
  1693              	.LASF45:
  1694 0585 5F5F5549 		.ascii	"__UINT8_TYPE__ unsigned char\000"
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 35
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 35
 
 
  1694      4E54385F 
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1712      475F5F20 
  1712      3400
  1713              	.LASF253:
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 36
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 36
 
 
  1714 0668 5F5F554C 		.ascii	"__ULACCUM_MAX__ 0XFFFFFFFFFFFFFFFFP-32ULK\000"
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1732      5F207369 
  1732      676E6564 
  1733              	.LASF29:
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 37
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 37
 
 
  1734 076d 5F5F4259 		.ascii	"__BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__\000"
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1752 0885 5F5F4152 		.ascii	"__ARM_FEATURE_SAT 1\000"
  1752      4D5F4645 
  1752      41545552 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 38
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 38
 
 
  1752      455F5341 
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1770      4E5F5F20 
  1771              	.LASF21:
  1772 0972 5F5F5349 		.ascii	"__SIZEOF_DOUBLE__ 8\000"
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 39
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 39
 
 
  1772      5A454F46 
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1790      20632023 
  1790      23204C00 
  1791              	.LASF359:
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 40
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 40
 
 
  1792 0a6e 474E5520 		.ascii	"GNU C 4.8.4 20140526 (release) [ARM/embedded-4_8-br"
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1809      545F4550 
  1809      53494C4F 
  1809      4E5F5F20 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 41
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 41
 
 
  1810              	.LASF18:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1829      5F504F49 
  1829      4E544552 
  1829      5F5F2034 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 42
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 42
 
 
  1830              	.LASF70:
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1849      4D5F4152 
  1849      43485F37 
  1849      4D5F5F20 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 43
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 43
 
 
  1849      3100
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1867      58464646 
  1868              	.LASF193:
  1869 0e5d 5F5F5553 		.ascii	"__USFRACT_MAX__ 0XFFP-8UHR\000"
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 44
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 44
 
 
  1869      46524143 
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1887      545F5F20 
  1887      333100
  1888              	.LASF289:
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 45
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 45
 
 
  1889 0f62 5F5F4441 		.ascii	"__DA_FBIT__ 31\000"
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1908              	.LASF71:
  1909 1030 5F5F4C4F 		.ascii	"__LONG_MAX__ 2147483647L\000"
  1909      4E475F4D 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 46
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 46
 
 
  1909      41585F5F 
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1927      4249545F 
  1927      5F203332 
  1928              	.LASF7:
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 47
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 47
 
 
  1929 1106 5F5F474E 		.ascii	"__GNUC_PATCHLEVEL__ 4\000"
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1947      52494354 
  1947      5F414E53 
  1947      495F5F20 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 48
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 48
 
 
  1947      3100
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1967      53544D73 
  1967      74617273 
  1967      7A615C6C 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 49
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 49
 
 
  1967      6F77506F 
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  1988 1403 5F5F494E 		.ascii	"__INT_FAST16_MAX__ 2147483647\000"
  1988      545F4641 
  1988      53543136 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 50
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 50
 
 
  1988      5F4D4158 
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2008      45505349 
  2008      4C4F4E5F 
  2008      5F203145 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 51
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 51
 
 
  2009              	.LASF311:
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2028      5253494F 
  2028      4E5F5F20 
  2028      22342E38 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 52
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 52
 
 
  2028      2E342032 
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2047      35353335 
  2048              	.LASF178:
  2049 16db 5F5F4445 		.ascii	"__DEC128_MANT_DIG__ 34\000"
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 53
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 53
 
 
  2049      43313238 
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2067      4F4D4943 
  2067      5F4C4F4E 
  2067      475F4C4F 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 54
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 54
 
 
  2068              	.LASF55:
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2087      545F4445 
  2087      4E4F524D 
  2087      5F4D494E 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 55
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 55
 
 
  2087      5F5F2031 
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2105      203000
  2106              	.LASF290:
  2107 19dd 5F5F4441 		.ascii	"__DA_IBIT__ 32\000"
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 56
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 56
 
 
  2107      5F494249 
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2125      495F5645 
  2125      5253494F 
  2125      4E203130 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 57
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 57
 
 
  2126              	.LASF191:
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2147 1bb6 5F5F5546 		.ascii	"__UFRACT_EPSILON__ 0x1P-16UR\000"
  2147      52414354 
  2147      5F455053 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 58
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 58
 
 
  2147      494C4F4E 
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2166              	.LASF155:
  2167 1cb3 5F5F4C44 		.ascii	"__LDBL_MAX_10_EXP__ 308\000"
  2167      424C5F4D 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 59
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 59
 
 
  2167      41585F31 
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2185      454E4F52 
  2185      4D5F5F20 
  2186              	.LASF245:
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 60
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 60
 
 
  2187 1db1 5F5F4C41 		.ascii	"__LACCUM_FBIT__ 31\000"
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2204      5F203078 
  2205              	.LASF3:
  2206 1ec2 5F5F5354 		.ascii	"__STDC_UTF_32__ 1\000"
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 61
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 61
 
 
  2206      44435F55 
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2224      5F4D494E 
  2224      5F5F2028 
  2225              	.LASF252:
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 62
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 62
 
 
  2226 1ff2 5F5F554C 		.ascii	"__ULACCUM_MIN__ 0.0ULK\000"
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2244      4D5F4152 
  2244      43485F50 
  2244      524F4649 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 63
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 63
 
 
  2244      4C452037 
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2262      20333200 
  2263              	.LASF254:
  2264 21c0 5F5F554C 		.ascii	"__ULACCUM_EPSILON__ 0x1P-32ULK\000"
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 64
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 64
 
 
  2264      41434355 
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2282      545F4D41 
  2282      585F5F20 
  2282      30584646 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 65
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 65
 
 
  2283              	.LASF64:
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2302      4336345F 
  2302      4D494E5F 
  2302      5F203145 
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 66
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 66
 
 
  2302      2D333833 
@@ -3927,77 +3927,77 @@ ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 1
  2310      5F203132 
  2310      3700
  2311              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.4 20140526 (release) [ARM/embedded-4_8-br
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 67
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 67
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 vectors_STM32L1xx_md.c
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:54     .text.__Default_Handler:00000000 $t
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 __Default_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 NMI_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 HardFault_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 MemManage_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 BusFault_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 UsageFault_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 __Reserved_0x1C_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 __Reserved_0x20_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 __Reserved_0x24_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 __Reserved_0x28_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 SVC_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DebugMon_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 __Reserved_0x34_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 PendSV_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 SysTick_Handler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 WWDG_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 PVD_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TAMPER_STAMP_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 RTC_WKUP_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 FLASH_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 RCC_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 EXTI0_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 EXTI1_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 EXTI2_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 EXTI3_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 EXTI4_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DMA1_Channel1_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DMA1_Channel2_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DMA1_Channel3_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DMA1_Channel4_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DMA1_Channel5_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DMA1_Channel6_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DMA1_Channel7_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 ADC1_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 USB_HP_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 USB_LP_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 DAC_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 COMP_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 EXTI9_5_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 LCD_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TIM9_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TIM10_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TIM11_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TIM2_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TIM3_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TIM4_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 I2C1_EV_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 I2C1_ER_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 I2C2_EV_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 I2C2_ER_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 SPI1_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 SPI2_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 USART1_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 USART2_IRQHandler
-ARM GAS  C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s 			page 68
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:54     .text.__Default_Handler:00000000 $t
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 __Default_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 NMI_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 HardFault_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 MemManage_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 BusFault_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 UsageFault_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 __Reserved_0x1C_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 __Reserved_0x20_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 __Reserved_0x24_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 __Reserved_0x28_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 SVC_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DebugMon_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 __Reserved_0x34_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 PendSV_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 SysTick_Handler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 WWDG_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 PVD_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TAMPER_STAMP_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 RTC_WKUP_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 FLASH_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 RCC_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 EXTI0_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 EXTI1_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 EXTI2_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 EXTI3_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 EXTI4_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DMA1_Channel1_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DMA1_Channel2_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DMA1_Channel3_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DMA1_Channel4_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DMA1_Channel5_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DMA1_Channel6_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DMA1_Channel7_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 ADC1_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 USB_HP_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 USB_LP_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 DAC_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 COMP_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 EXTI9_5_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 LCD_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TIM9_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TIM10_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TIM11_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TIM2_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TIM3_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TIM4_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 I2C1_EV_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 I2C1_ER_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 I2C2_EV_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 I2C2_ER_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 SPI1_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 SPI2_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 USART1_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 USART2_IRQHandler
+ARM GAS  C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s 			page 68
 
 
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 USART3_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 EXTI15_10_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 RTC_Alarm_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 USB_FS_WKUP_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TIM6_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:59     .text.__Default_Handler:00000000 TIM7_IRQHandler
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:207    .vectors:00000000 vectors
-C:\Users\Adrian\AppData\Local\Temp\cc0bD1nl.s:204    .vectors:00000000 $d
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 USART3_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 EXTI15_10_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 RTC_Alarm_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 USB_FS_WKUP_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TIM6_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:59     .text.__Default_Handler:00000000 TIM7_IRQHandler
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:207    .vectors:00000000 vectors
+C:\Users\Adrian\AppData\Local\Temp\ccvm3jDZ.s:204    .vectors:00000000 $d
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.0.411d8a2c4add02518933faddbcb189b6
 

@@ -22,11 +22,11 @@
 
 void LCD_Init();
 
-void LCD_Conv_Char_Seg(char c,bool point,bool column, uint8_t* digit);
+static void LCD_Conv_Char_Seg(char c,bool point,bool column, uint8_t* digit);
 
 void LCD_WriteChar(char ch, bool point, bool column, uint8_t position);
 
-void LCD_WriteString(char* s);
+void LCD_WriteString(const char* s);
 
 void LCD_WriteUbirds();
 

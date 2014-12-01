@@ -36,6 +36,9 @@
 #include "usart.h"
 #include "lcd.h"
 
+//Application
+#include "lcdprinter.h"
+
 #define ACC_INT_PIN							GPIO_PIN_0
 #define ACC_INT_GPIO						GPIOA
 #define ACC_INT_CONFIGURATION				GPIO_IN_PULL_DOWN
@@ -77,10 +80,6 @@ static FATFS _fileSystem;
  */
 int main(void)
 {
-	char napis[7];
-
-
-
 	enum Error sysError = _sysInit();
 	if (sysError != ERROR_NONE){
 		goto sys_panic;
@@ -91,37 +90,9 @@ int main(void)
 		goto sys_panic;
 	}
 
-	// konfiguracja ledów
-	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
-	LED_bb = 1;
-	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
-	LED1_bb = 1;
-
-	// inicjalizacja wyswietlacza
-	LCD_Init();
-
-
-
-	/*strcpy(napis,"ubirds");
-	strcpy(napis,"elo");
-	LCD_WriteString(napis);*/
-
-
-
-	//LCD_WriteString_example();
-	LCD_WriteChar_example();
-
 	while(1)
 	{
-		/*strcpy(napis,"elo");
-		LCD_WriteString(napis);
 
-		for(int i =0;i<1000000;i++);
-
-		strcpy(napis,"ubirds");
-		LCD_WriteString(napis);
-
-		for(int i =0;i<1000000;i++);*/
 	}
 
 	goto sys_panic;
@@ -186,7 +157,17 @@ static enum Error _peripLauncher()
 {
 	Error error = ERROR_NONE;
 
-	gpioInitialize();
+	// LED Initialise
+	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
+	LED_bb = 1;
+	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
+	LED1_bb = 1;
+
+	// LCD Initialise
+	LCD_Init();
+
+	// Write on LCD "Ubirds"
+	LCD_WriteChar_example();
 
 	out:
 		return error;
