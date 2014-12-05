@@ -32,11 +32,14 @@
 #include "gpio.h"
 #include "rcc.h"
 #include "helper.h"
-#include "usart.h"
 #include "i2c.h"
 #include "serial.h"
 #include "usart.h"
 #include "lcd.h"
+
+//Drivers
+#include "FC30.h"
+#include "MCP980x.h"
 
 //Application
 #include "lcdprinter.h"
@@ -82,6 +85,8 @@ static FATFS _fileSystem;
  */
 int main(void)
 {
+	float temperatura=0;
+
 	enum Error sysError = _sysInit();
 	if (sysError != ERROR_NONE){
 		goto sys_panic;
@@ -92,7 +97,14 @@ int main(void)
 		goto sys_panic;
 	}
 
-	_schedulerInitAndRun();
+	while(1)
+	{
+		for(int i=0;i<100000;i++);
+
+		temperatura=MCP980x_Single_Measure();
+
+		LCD_WriteFloat(&temperatura,2,1);
+	}
 
 	goto sys_panic;
 
@@ -170,8 +182,8 @@ static enum Error _peripLauncher()
 	// LCD Initialise
 	LCD_Init();
 
-	// Write on LCD "Ubirds"
-	LCD_WriteChar_example();
+	// Thermometer Initialise
+	MCP980x_Init();
 
 	out:
 		return error;

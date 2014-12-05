@@ -18,5 +18,7 @@
 void i2cInitialize(void);
 uint8_t* i2cRead(uint8_t address, uint8_t *data, size_t length);
 void i2cWrite(uint8_t address, const uint8_t *data, size_t length);
+void i2cWriteOneByteWhithoutStop(uint8_t address, uint8_t data);
+void i2cReadOneByte(uint8_t address, uint8_t *data);
 
 #endif /* I2C_H_ */

@@ -26,12 +26,12 @@ static void LCD_Conv_Char_Seg(char c,bool point,bool column, uint8_t* digit);
 
 void LCD_WriteChar(char ch, bool point, bool column, uint8_t position);
 
-void LCD_WriteString(const char* s);
+void LCD_WriteString(char* s);
 
-void LCD_WriteUbirds();
+void LCD_WriteFloat(float* f, uint8_t d, uint8_t p);
 
-void LCD_WriteChar_example();
+static void floatToChar(char *ptr, float number, uint8_t d, uint8_t p);
 
-void LCD_WriteString_example();
+
 
 #endif /* LCD_H_ */
