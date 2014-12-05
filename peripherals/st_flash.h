@@ -324,6 +324,11 @@
  void FLASH_PrefetchBufferCmd(FunctionalState NewState);
  void FLASH_ReadAccess64Cmd(FunctionalState NewState);
  void FLASH_SLEEPPowerDownCmd(FunctionalState NewState);
+/**
+ * \brief  Unlock and clean pending flash flags.
+ * 		   After this flash should be ready to write/read data.
+ * 		   Use this to fast prepare to write
+ */
  void FLASH_PrepareDefaultConf(void);
 
  /* FLASH Memory Programming functions *****************************************/
