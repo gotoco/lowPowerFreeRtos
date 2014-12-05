@@ -50,11 +50,11 @@ AS_DEFS =
 
 # additional directories with source files (absolute or relative paths to
 # folders with source files, current folder is always included)
-SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals configuration drivers application
+SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals configuration drivers application drivers/MCP980x
 
 # include directories (absolute or relative paths to additional folders with
 # headers, current folder is always included)
-INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals configuration drivers application
+INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals configuration drivers application drivers/MCP980x
 
 # library directories (absolute or relative paths to additional folders with
 # libraries)

@@ -10,6 +10,7 @@
 #include "lcd.h"
 #include "bsp.h"
 #include <string.h>
+#include <stdlib.h>
 
 /**
   @verbatim
@@ -345,17 +346,91 @@ void LCD_WriteChar(char ch, bool point, bool column, uint8_t position)
  * \param [in] Char table to display
  *
  */
-void LCD_WriteString(const char* s)
+void LCD_WriteString(char* s)
 {
-	int i;
-	for(i=0;*s!='\0' && i<LCD_NUMBER_OF_DIGITS;i++)
+	uint8_t i;
+	uint8_t kropki=0;
+	for(i=0;*s!='\0' && i<LCD_NUMBER_OF_DIGITS+kropki;i++)
 	{
-		LCD_WriteChar(*s,0,0,i+1);
+		if(*(s+1)=='.'){
+			LCD_WriteChar(*s,1,0,i+1);
+			kropki++;
+			s++;
+		}
+		else
+		{
+			LCD_WriteChar(*s,0,0,i+1);
+		}
 		s++;
 	}
-	while(i<LCD_NUMBER_OF_DIGITS)
+	while(i<LCD_NUMBER_OF_DIGITS+kropki)
 	{
 		LCD_WriteChar(' ',0,0,i+1);
 		i++;
 	}
+}
+
+/**
+  * \brief  Converts float to char table with designed precision.
+  *
+  * \param  *ptr   - Pointer to char table.
+  * \param  number - Number to convert.
+  * \param  d 	   - Number of digits before dot.
+  * \param  p	   - Number of digits after dot.
+  */
+static void floatToChar(char *ptr, float number, uint8_t d, uint8_t p)
+{
+	int i;
+	for(i=0;i<p;i++){
+		number*=10;
+	}
+
+	int number_int=(int)(number);
+
+	ptr = ptr + p + d + 1;
+	*ptr = '\0';
+	ptr--;
+
+	// Convert number: ones, tens, hundreds...
+	i= p + d;
+
+	do
+	{
+		if(p && i==d){
+			*ptr='.';
+			ptr--;
+		}
+		*ptr-- = abs(number_int % 10) + '0';
+		number_int /= 10;
+	}
+	while(--i);
+
+	ptr++;
+	while(i<d-1)
+	{
+		if(*ptr != '0')
+		{
+			break;
+		}
+		else *ptr=' ';
+		ptr++;
+		i++;
+	}
+}
+
+
+/**
+ * \brief	Writes float on LCD with designed precision.
+ *
+ * \param 	f - Pointer to number in float
+ * \param 	d - Number of digits before dot.
+ * \param 	p - Number of digits after dot.
+ */
+void LCD_WriteFloat(float* f, uint8_t d, uint8_t p)
+{
+	char tab[10];
+
+	floatToChar(tab,*f,d,p);
+
+	LCD_WriteString(tab);
 }
