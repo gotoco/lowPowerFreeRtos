@@ -39,18 +39,18 @@ volatile uint16_t tim6OverflowCount;
 
 void configureTimerForRuntimestats(void)
 {
-	RCC_APB1ENR_TIM6EN_bb = 1;				// enable timer
-
-	DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_TIM6_STOP;
-
-	TIM6->CNT = 0;							// clear the timer
-	TIM6->PSC = (rccGetCoreFrequency() / 10000) - 1;	// 100us resolution
-	TIM6->ARR = 0xFFFF;						// max autoreload
-	TIM6->DIER = TIM_DIER_UIE;				// enable update interrupt
-	TIM6->CR1 = TIM_CR1_CEN;				// enable ARR buffering, enable timer
-
-	NVIC_SetPriority(TIM6_IRQn, TIM6_IRQ_PRIORITY);
-	NVIC_EnableIRQ(TIM6_IRQn);
+//	RCC_APB1ENR_TIM6EN_bb = 1;				// enable timer
+//
+//	DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_TIM6_STOP;
+//
+//	TIM6->CNT = 0;							// clear the timer
+//	TIM6->PSC = (rccGetCoreFrequency() / 10000) - 1;	// 100us resolution
+//	TIM6->ARR = 0xFFFF;						// max autoreload
+//	TIM6->DIER = TIM_DIER_UIE;				// enable update interrupt
+//	TIM6->CR1 = TIM_CR1_CEN;				// enable ARR buffering, enable timer
+//
+//	NVIC_SetPriority(TIM6_IRQn, TIM6_IRQ_PRIORITY);
+//	NVIC_EnableIRQ(TIM6_IRQn);
 }
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -63,10 +63,10 @@ void configureTimerForRuntimestats(void)
  * TIM6_IRQHandler
  */
 
-extern "C" void TIM6_IRQHandler(void) __attribute__ ((interrupt));
-void TIM6_IRQHandler(void)
-{
-	tim6OverflowCount++;
-
-	TIM6->SR = 0;							// clear UIF which is only bit in this register
-}
+//extern "C" void TIM6_IRQHandler(void) __attribute__ ((interrupt));
+//void TIM6_IRQHandler(void)
+//{
+//	tim6OverflowCount++;
+//
+//	TIM6->SR = 0;							// clear UIF which is only bit in this register
+//}

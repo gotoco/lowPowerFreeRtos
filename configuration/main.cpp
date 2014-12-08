@@ -35,6 +35,7 @@
 #include "serial.h"
 #include "usart.h"
 #include "lcd.h"
+#include "timer.h"
 
 //Drivers
 #include "FC30.h"
@@ -57,6 +58,8 @@ static enum Error _initializeGuardianTask(void);
 static enum Error _peripLauncher(void);
 static enum Error _sysInit(void);
 static enum Error _schedulerInitAndRun(void);
+static void delay(uint32_t ms);
+static void countTicks(void);
 
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -74,6 +77,9 @@ static FATFS _fileSystem;
 | global variables
 +---------------------------------------------------------------------------------------------------------------------*/
 
+uint8_t flag=0;
+uint32_t ticks=0;
+uint8_t delayFlag=0;
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | global functions
@@ -98,7 +104,10 @@ int main(void)
 
 	while(1)
 	{
-		for(int i=0;i<100000;i++);
+
+		delay(1000);
+
+		//for(int i=0;i<200000;i++);
 
 		temperatura=MCP980x_Single_Measure();
 
@@ -132,7 +141,7 @@ static enum Error _sysInit()
 	while (RCC_CR_HSIRDY_bb == 0);
 
 	rccStartPll(RCC_PLL_INPUT_HSI, HSI_VALUE, FREQUENCY);
-
+	Timer_Init();
 	return error;
 }
 
@@ -178,6 +187,10 @@ static enum Error _peripLauncher()
 
 	// Thermometer Initialise
 	MCP980x_Init();
+
+	SysTick_Config(rccGetCoreFrequency()/1000);
+	NVIC_EnableIRQ(SysTick_IRQn);
+	NVIC_SetPriority(SysTick_IRQn, 1);
 
 	out:
 		return error;
@@ -252,7 +265,6 @@ static enum Error _initializeGuardianTask(void)
  * \return ERROR_NONE if the task was successfully created and added to a ready list, otherwise an error code defined in
  * the file error.h
  */
-
 static enum Error _initializeHeartbeatTask(void)
 {
 	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
@@ -263,6 +275,27 @@ static enum Error _initializeHeartbeatTask(void)
 	return errorConvert_portBASE_TYPE(ret);
 }
 
+/**
+ * \brief Counts ticks
+ */
+static void countTicks()
+{
+	ticks++;
+}
+
+/**
+ * \brief Delays designed time in milliseconds
+ *
+ * \param Number of milliseconds to wait
+ */
+static void delay(uint32_t ms)
+{
+	ticks=0;
+	delayFlag=1;
+	while(ticks<ms);
+	delayFlag=0;
+}
+
 extern "C" void EXTI0_IRQHandler(void) __attribute((interrupt));
 void EXTI0_IRQHandler(void)
 {
@@ -270,5 +303,20 @@ void EXTI0_IRQHandler(void)
 
 	//Clear flags
 	EXTI->PR=EXTI_PR_PR0;
+}
+
+extern "C" void TIM2_IRQHandler(void) __attribute((interrupt));
+void TIM2_IRQHandler(void)
+{
+	//Do something
+
+	//Clear flags
+	TIM2->SR = 0;
+}
+
+extern "C" void SysTick_Handler(void) __attribute((interrupt));
+void SysTick_Handler(void)
+{
+	if(delayFlag==1) countTicks();
 }
 
