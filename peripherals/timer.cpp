@@ -15,9 +15,7 @@
 
 /**
  * \brief Initialises Timer2 for down counting mode. When counter reach zero, it generates interrupt signal.
- * 		Each interrupt signal appears after 1ms. To switch on the interrupts, you have to use NVIC functions:
- * 		NVIC_EnableIRQ(SysTick_IRQn);
- *	    NVIC_SetPriority(SysTick_IRQn, 1);
+ * 		Each interrupt signal appears after 1ms.
  */
 void Timer_Init()
 {
@@ -28,10 +26,10 @@ void Timer_Init()
 	TIM2->CR1 |= TIM_CR1_CEN;
 
 	// set prescaller to 1ms resolution
-	TIM2->PSC = (rccGetCoreFrequency() / 1000) - 1;
+	TIM2->PSC = 0;
 
 	// set auto reload value
-	TIM2->ARR = 1000;
+	TIM2->ARR = 32000;
 
 	// set down counting
 	TIM2->CCR1 |= TIM_CR1_DIR;
@@ -44,7 +42,23 @@ void Timer_Init()
 
 	// clear flags
 	TIM2->SR = 0;
+
+	// enabling interrupt
+	NVIC_EnableIRQ(TIM2_IRQn);
+	NVIC_SetPriority(TIM2_IRQn, 1);
 }
+
+/**
+ * \brief Initialises SysTick timer to interrupt every 1 ms.
+ */
+void Systick_Init()
+{
+	SysTick_Config(rccGetCoreFrequency()/1000);
+	NVIC_EnableIRQ(SysTick_IRQn);
+	NVIC_SetPriority(SysTick_IRQn, 1);
+}
+
+
 
 
 

@@ -46,28 +46,28 @@
 
 enum Error serialInitialize(void)
 {
-	gpioConfigurePin(USARTx_TX_GPIO, USARTx_TX_PIN, USARTx_TX_CONFIGURATION);
-	gpioConfigurePin(USARTx_RX_GPIO, USARTx_RX_PIN, USARTx_RX_CONFIGURATION);
+	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
+	RCC->APB2ENR|=RCC_APB2ENR_SYSCFGEN;
 
-	RCC_APBxENR_USARTxEN_bb = 1;			// enable USART in RCC
+	gpioConfigurePin(SERIALx_TX_GPIO, SERIALx_TX_PIN, SERIALx_TX_CONFIGURATION);
+	gpioConfigurePin(SERIALx_RX_GPIO, SERIALx_RX_PIN, SERIALx_RX_CONFIGURATION);
 
-	USARTx->BRR = (rccGetCoreFrequency() + USARTx_BAUDRATE / 2)/ USARTx_BAUDRATE;	// calculate baudrate (with rounding)
+	RCC_APBxENR_SERIALxEN_bb = 1;			// enable USART in RCC
+
+	SERIALx->BRR = (rccGetCoreFrequency() + SERIALx_BAUDRATE / 2)/ SERIALx_BAUDRATE;	// calculate baudrate (with rounding)
 	// enable peripheral, transmitter and receiver, enable RXNE interrupt
-	USARTx->CR1 = USART_CR1_UE | USART_CR1_RXNEIE | USART_CR1_TE | USART_CR1_RE;
+	SERIALx->CR1 = USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;
 
-	NVIC_SetPriority(USARTx_IRQn, USARTx_IRQ_PRIORITY);	// set USART priority
-	NVIC_EnableIRQ(USARTx_IRQn);				// enable USART IRQ
+	/*
+	SERIALx->CR1 |= USART_CR1_RXNEIE;
+	NVIC_SetPriority(SERIALx_IRQn, SERIALx_IRQ_PRIORITY);	// set USART priority
+	NVIC_EnableIRQ(SERIALx_IRQn);				// enable USART IRQ
+	*/
+}
 
-
-	/*RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-	gpioConfigurePin(GPIOA, GPIO_PIN_9, GPIO_AF7_PP_40MHz_PULL_UP);
-	gpioConfigurePin(GPIOA, GPIO_PIN_10, GPIO_AF7_PP_40MHz_PULL_UP);
-
-	RCC_APB2ENR_USART1EN_bb = 1;			// enable USART in RCC
-
-	USART1->BRR = (rccGetCoreFrequency() + SERIALx_BAUDRATE / 2) / SERIALx_BAUDRATE;	// calculate baudrate (with rounding)
-	// enable peripheral, transmitter and receiver, enable RXNE interrupt
-	USART1->CR1 = USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;*/
+void serialDeinit(void)
+{
+	RCC_APBxENR_SERIALxEN_bb = 0;			// disable USART in RCC
 }
 
 /**
@@ -81,5 +81,15 @@ enum Error serialInitialize(void)
 void serialSendCharacter(char c)
 {
 	while (!(USARTx_SR_TXE_bb(SERIALx)));
-	USART1->DR = c;
+	SERIALx->DR = c;
+}
+
+void serialSendString(char *s)
+{
+	while(*s != '\0')
+	{
+		while (!(USARTx_SR_TXE_bb(SERIALx)));
+		serialSendCharacter(*s);
+		s++;
+	}
 }

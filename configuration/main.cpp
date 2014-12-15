@@ -40,9 +40,12 @@
 //Drivers
 #include "FC30.h"
 #include "MCP980x.h"
+#include "M41T56C64.h"
 
 //Application
 #include "lcdprinter.h"
+#include "button.h"
+#include "service.h"
 
 #define ACC_INT_PIN							GPIO_PIN_0
 #define ACC_INT_GPIO						GPIOA
@@ -77,9 +80,13 @@ static FATFS _fileSystem;
 | global variables
 +---------------------------------------------------------------------------------------------------------------------*/
 
-uint8_t flag=0;
+uint32_t delayTicks=0;
 uint32_t ticks=0;
 uint8_t delayFlag=0;
+uint8_t buttonFlag=0;
+uint8_t msFlag=0;
+uint8_t serviceFlag=0;
+char rx;
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | global functions
@@ -90,7 +97,11 @@ uint8_t delayFlag=0;
  */
 int main(void)
 {
-	float temperatura=0;
+	float themperature=0;
+
+	uint8_t time[3];
+
+	char string[20];
 
 	enum Error sysError = _sysInit();
 	if (sysError != ERROR_NONE){
@@ -104,14 +115,27 @@ int main(void)
 
 	while(1)
 	{
+		if(serviceFlag){
+			serviceMode();
+			serviceFlag=0;
+		}
 
-		delay(1000);
+		else if(msFlag){
+			msFlag=0;
 
-		//for(int i=0;i<200000;i++);
+			M41T56C64_ReadTime(time);
+			M41T56C64_ConvertToInt(time);
+			LCD_WriteTime(time);
+		}
 
-		temperatura=MCP980x_Single_Measure();
-
-		LCD_WriteFloat(&temperatura,2,1);
+		/*if(buttonFlag==1){
+			themperature=MCP980x_Single_Measure();
+			LCD_WriteFloat(&themperature,2,1);
+		}
+		else{
+			strcpy(string,"ub.ir.ds");
+			LCD_WriteString(string);
+		}*/
 	}
 
 	goto sys_panic;
@@ -176,21 +200,47 @@ static enum Error _peripLauncher()
 {
 	Error error = ERROR_NONE;
 
+	char string[20];
+
+	gpioInitialize();
+
+	uint8_t time[3];
+
 	// LED Initialise
 	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
 	LED_bb = 1;
 	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
 	LED1_bb = 1;
 
-	// LCD Initialise
+	// LCD Initialize
 	LCD_Init();
 
-	// Thermometer Initialise
-	MCP980x_Init();
+	LCD_WriteString_example();
 
-	SysTick_Config(rccGetCoreFrequency()/1000);
-	NVIC_EnableIRQ(SysTick_IRQn);
-	NVIC_SetPriority(SysTick_IRQn, 1);
+	time[0]=15;
+	time[1]=51;
+	time[2]=20;
+
+	// RTC Initialise
+	M41T56C64_Init(time);
+
+	M41T56C64_ReadTime(time);
+
+	M41T56C64_ConvertToInt(time);
+
+	LCD_WriteTime(time);
+
+	// Thermometer Initialize
+	//MCP980x_Init();
+
+
+	// Timer2 Initialize
+	Timer_Init();
+
+	// Blue button Initialize
+	//_initializeGuardianTask();
+
+	ServicePin_Init();
 
 	out:
 		return error;
@@ -240,7 +290,7 @@ static void _heartbeatTask(void *parameters)
 
 static enum Error _initializeGuardianTask(void)
 {
-	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
+	//gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
 
 	gpioConfigurePin(ACC_INT_GPIO, ACC_INT_PIN, ACC_INT_CONFIGURATION);
 
@@ -280,7 +330,7 @@ static enum Error _initializeHeartbeatTask(void)
  */
 static void countTicks()
 {
-	ticks++;
+	delayTicks++;
 }
 
 /**
@@ -290,9 +340,9 @@ static void countTicks()
  */
 static void delay(uint32_t ms)
 {
-	ticks=0;
+	delayTicks=0;
 	delayFlag=1;
-	while(ticks<ms);
+	while(delayTicks<ms);
 	delayFlag=0;
 }
 
@@ -300,15 +350,33 @@ extern "C" void EXTI0_IRQHandler(void) __attribute((interrupt));
 void EXTI0_IRQHandler(void)
 {
 	//Do something
+	buttonFlag^=1;
 
 	//Clear flags
 	EXTI->PR=EXTI_PR_PR0;
+}
+
+extern "C" void EXTI4_IRQHandler(void) __attribute((interrupt));
+void EXTI4_IRQHandler(void)
+{
+	//Do something
+	serviceFlag=1;
+
+	//Clear flags
+	EXTI->PR=EXTI_PR_PR4;
 }
 
 extern "C" void TIM2_IRQHandler(void) __attribute((interrupt));
 void TIM2_IRQHandler(void)
 {
 	//Do something
+	if(delayFlag==1) countTicks();
+
+	ticks++;
+	if(ticks>=1000){
+		ticks=0;
+		msFlag=1;
+	}
 
 	//Clear flags
 	TIM2->SR = 0;
@@ -319,4 +387,11 @@ void SysTick_Handler(void)
 {
 	if(delayFlag==1) countTicks();
 }
+
+extern "C" void USART1_IRQHandler(void) __attribute((interrupt));
+void USART1_IRQHandler(void)
+{
+
+}
+
 

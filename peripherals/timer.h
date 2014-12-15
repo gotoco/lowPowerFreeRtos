@@ -10,6 +10,6 @@
 
 void Timer_Init();
 
-
+void Systick_Init();
 
 #endif /* TIMER_H_ */

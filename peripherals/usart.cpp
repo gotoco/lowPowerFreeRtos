@@ -359,7 +359,7 @@ void USARTx_DMAx_TX_CH_IRQHandler(void)
  * USART interrupt handler
  */
 
-extern "C" void USARTx_IRQHandler(void) __attribute((interrupt));
+/*extern "C" void USARTx_IRQHandler(void) __attribute((interrupt));
 void USARTx_IRQHandler(void)
 {
 	portBASE_TYPE higher_priority_task_woken = pdFALSE;
@@ -391,7 +391,7 @@ void USARTx_IRQHandler(void)
 	}
 
 	portEND_SWITCHING_ISR(higher_priority_task_woken);
-}
+}*/
 
 /**
  *  \brief Low-level String printing
