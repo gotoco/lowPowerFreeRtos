@@ -6,8 +6,8 @@
  *
  * chip: STM32L1xx
  *
- * \author Mazeryt Freager
- * \date 2012-08-24
+ * \author Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
+ * \date 2012-08-29
  */
 
 #ifndef HDR_RCC_H_

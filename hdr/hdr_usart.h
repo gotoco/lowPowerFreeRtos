@@ -41,6 +41,17 @@
 #define USARTx_SR_FE_bb(base)				BITBAND(&(base)->SR, USART_SR_FE_bit)
 #define USARTx_SR_PE_bb(base)				BITBAND(&(base)->SR, USART_SR_PE_bit)
 
+#define SERIALx_SR_CTS_bb(base)				BITBAND(&(base)->SR, USART_SR_CTS_bit)
+#define SERIALx_SR_LBD_bb(base)				BITBAND(&(base)->SR, USART_SR_LBD_bit)
+#define SERIALx_SR_TXE_bb(base)				BITBAND(&(base)->SR, USART_SR_TXE_bit)
+#define SERIALx_SR_TC_bb(base)				BITBAND(&(base)->SR, USART_SR_TC_bit)
+#define SERIALx_SR_RXNE_bb(base)			BITBAND(&(base)->SR, USART_SR_RXNE_bit)
+#define SERIALx_SR_IDLE_bb(base)			BITBAND(&(base)->SR, USART_SR_IDLE_bit)
+#define SERIALx_SR_ORE_bb(base)				BITBAND(&(base)->SR, USART_SR_ORE_bit)
+#define SERIALx_SR_NF_bb(base)				BITBAND(&(base)->SR, USART_SR_NF_bit)
+#define SERIALx_SR_FE_bb(base)				BITBAND(&(base)->SR, USART_SR_FE_bit)
+#define SERIALx_SR_PE_bb(base)				BITBAND(&(base)->SR, USART_SR_PE_bit)
+
 #define USART1_SR_CTS_bb					USARTx_SR_CTS_bb(USART1)
 #define USART1_SR_LBD_bb					USARTx_SR_LBD_bb(USART1)
 #define USART1_SR_TXE_bb					USARTx_SR_TXE_bb(USART1)

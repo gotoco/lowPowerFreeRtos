@@ -50,23 +50,25 @@ AS_DEFS =
 
 # additional directories with source files (absolute or relative paths to
 # folders with source files, current folder is always included)
-SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals configuration drivers application
+SRCS_DIRS =  Src hdr Inc Middlewares Middlewares/ST Middlewares/ST/STM32_USB_Device_Library/Class/CDC Middlewares/ST/STM32_USB_Device_Library/Core \
+			 Drivers Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include Drivers/STM32L1xx_HAL_Driver
 
 # include directories (absolute or relative paths to additional folders with
 # headers, current folder is always included)
-INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals configuration drivers application
-
+INC_DIRS =  Src hdr Inc Middlewares Middlewares/ST Middlewares/ST/STM32_USB_Device_Library/Class/CDC Middlewares/ST/STM32_USB_Device_Library/Core \
+			Drivers Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include Drivers/STM32L1xx_HAL_Driver
+			
 # library directories (absolute or relative paths to additional folders with
 # libraries)
-LIB_DIRS =
+LIB_DIRS = 
 
 # libraries (additional libraries for linking, e.g. "-lm -lsome_name" to link
 # math library libm.a and libsome_name.a)
-LIBS =
+LIBS = 
 
 # optimization flags ("-O0" - no optimization, "-O1" - optimize, "-O2" -
 # optimize even more, "-Os" - optimize for size or "-O3" - optimize yet more) 
-OPTIMIZATION = -Os
+OPTIMIZATION = -O0
 
 # set to 1 to optimize size by removing unused code and data during link phase
 REMOVE_UNUSED = 1
