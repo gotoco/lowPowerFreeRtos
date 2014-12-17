@@ -15,7 +15,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "inc/stm32l1xx.h"
+#include "stm32l152xb.h"
 
 #include "config.h"
 
@@ -27,7 +27,6 @@
 #include "gpio.h"
 #include "rcc.h"
 #include "usart.h"
-#include "command.h"
 #include "helper.h"
 #include "error.h"
 
@@ -277,8 +276,8 @@ static void _rxTask(void *parameters)
 				{									// yes - start processing
 			_inputBuffer[input_length] = '\0';	// terminate input string
 
-			enum Error error = commandProcessInput(_inputBuffer, _outputBuffer,
-			_OUTPUT_BUFFER_SIZE);	// process input
+			enum Error error = ERROR_NONE;
+//					commandProcessInput(_inputBuffer, _outputBuffer, _OUTPUT_BUFFER_SIZE);	// process input
 
 			if (error == ERROR_NONE)		// input processed successfully?
 				usartSendString(_outputBuffer, 0);
