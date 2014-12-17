@@ -45,17 +45,6 @@ extern PCD_HandleTypeDef hpcd_USB_FS;
 /******************************************************************************/
 
 /**
-* @brief This function handles System tick timer.
-*/
-extern "C" void SysTick_Handler(void) __attribute((interrupt));
-void SysTick_Handler(void)
-{
-
-  HAL_IncTick();
-
-}
-
-/**
 * @brief This function handles USB Low Priority interrupt.
 */
 extern "C" void USB_LP_IRQHandler(void) __attribute((interrupt));
