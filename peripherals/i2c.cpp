@@ -62,7 +62,6 @@ void i2cInitialize(void)
  *
  * \return pointer to received data block (data)
  */
-
 uint8_t* i2cRead(uint8_t address, uint8_t *data, size_t length)
 {
 	uint8_t *data_copy = data;
@@ -119,3 +118,35 @@ void i2cWrite(uint8_t address, const uint8_t *data, size_t length)
 	while (I2Cx_SR1_TxE_bb(I2Cx) == 0 || I2Cx_SR1_BTF_bb(I2Cx) == 1);	// wait for bus not-busy
 	I2Cx_CR1_STOP_bb(I2Cx) = 1;				// request a stop
 }
+
+/**
+ * \brief Transfers one byte of data through I2C without sending stop signal.
+ *
+ * Transfers one byte of data through I2C without sending stop signal.
+ *
+ * \param [in] address is the address of the slave chip
+ * \param [in] byte to send
+ */
+void i2cWriteOneByteWhithoutStop(uint8_t address, uint8_t data)
+{
+	I2Cx_CR1_START_bb(I2Cx) = 1;			// request a start
+	while (I2Cx_SR1_SB_bb(I2Cx) == 0);		// wait for start to finish
+	I2Cx->SR1;								// read of SR1 clears the flag
+	address = address << 1;
+	I2Cx->DR = (address & ~1);				// transfer address (LSB cleared - write)
+	while (I2Cx_SR1_ADDR_bb(I2Cx) == 0);	// wait for address transfer
+	I2Cx->SR1;								// clear the flag
+	I2Cx->SR2;
+
+	while (I2Cx_SR1_TxE_bb(I2Cx) == 0);	// wait for DR empty
+	I2Cx->DR = data;
+
+	while (I2Cx_SR1_TxE_bb(I2Cx) == 0 || I2Cx_SR1_BTF_bb(I2Cx) == 1);	// wait for bus not-busy
+}
+
+
+
+
+
+
+

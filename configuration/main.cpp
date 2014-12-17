@@ -6,6 +6,7 @@
  * project: mg-stm32l_acquisition_supervisor; chip: STM32L152RB
  *
  * \author Mazeryt Freager
+ * \author Adrian Ratajczyk
  * \date 2012-09-06
  */
 
