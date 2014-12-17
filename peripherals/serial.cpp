@@ -15,7 +15,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "inc/stm32l1xx.h"
+#include "stm32l152xb.h"
 
 #include "config.h"
 #include "serial.h"
@@ -29,7 +29,6 @@
 #include "gpio.h"
 #include "rcc.h"
 #include "usart.h"
-#include "command.h"
 #include "helper.h"
 #include "error.h"
 
