@@ -96,19 +96,19 @@ uint32_t rccStartPll(enum rccPllInput pll_input, uint32_t input_frequency, uint3
 			if (frequency > output_frequency)	// resulting frequency too high?
 				continue;
 
-			if (frequency > best_frequency)	// is this configuration better than previously found?
+			if (frequency >= best_frequency)	// is this configuration better than previously found?
 			{
 				best_frequency = frequency;	// yes - store values
 				best_mul_i = mul_i;
 				best_div = div;
 
-				if (best_frequency == output_frequency)	// is this a perfect match?
+				if (best_frequency == output_frequency && pllvco/2 == 48000000)	// is this a perfect match?
 					break;
 			}
 		}
 
-		if (best_frequency == output_frequency)	// is this a perfect match?
-			break;
+//		if (best_frequency == output_frequency && frequency/2 == 48000000)	// is this a perfect match?
+//			break;
 	}
 
 	_flashLatency(best_frequency);			// configure flash latency using found frequency
@@ -123,6 +123,8 @@ uint32_t rccStartPll(enum rccPllInput pll_input, uint32_t input_frequency, uint3
 	while (((RCC->CFGR) & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);	// wait for switch
 
 	_coreFrequency = best_frequency;
+
+//	RCC->APB2ENR |= (RCC_APB2ENR_SYSCFGEN);
 
 	return best_frequency;
 }

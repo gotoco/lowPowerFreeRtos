@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$main_8cpp.html#a9d22a2b5e7ae1f39f7d800be9f004e44" title="Initialization of heartbeat task &#45; setup GPIO, create task." alt="" coords="438,5,613,32"/>
-<area shape="rect" id="node7" href="$usart_8h.html#a5ccbcfccc60e332b3558c9c89e7b6b70" title="Initializes USART." alt="" coords="781,56,888,83"/>
-<area shape="rect" id="node10" href="$usart_8h.html#a1ae3d490362fe17ac716e1b7df6273c5" title="Adds one string to UART TX queue." alt="" coords="262,107,389,133"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main code block." alt="" coords="937,31,991,57"/>
-<area shape="rect" id="node12" href="$usart_8h.html#a9d38cec8f8126c6f5b8e97b9824827d9" title="Sends one formatted string via USART." alt="" coords="481,107,569,133"/>
-<area shape="rect" id="node14" href="$usart_8cpp.html#a9ef4101447f70985e8df74b451158f1d" title="USART RX task." alt="" coords="662,107,733,133"/>
-</map>

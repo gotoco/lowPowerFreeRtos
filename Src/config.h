@@ -24,6 +24,10 @@
 
 #define FREQUENCY							32000000	///< desired target frequency of the core
 
+#define CLOCK_SOURCE						USING_HSE  ///< describe what is clock source of uC
 
+#define USING_HSI							0
+
+#define USING_HSE							1
 
 #endif /* CONFIG_H_ */

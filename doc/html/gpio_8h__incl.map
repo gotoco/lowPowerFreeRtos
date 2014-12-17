@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$stm32l1xx_8h.html" title="CMSIS Cortex&#45;M3 Device Peripheral Access Layer Header File. This file contains all the peripheral reg..." alt="" coords="89,80,212,107"/>
-<area shape="rect" id="node16" href="$hdr__gpio_8h.html" title="Header with values of bitfields in GPIO control registers." alt="" coords="236,80,351,107"/>
-<area shape="rect" id="node5" href="$core__cm3_8h.html" title="CMSIS Cortex&#45;M3 Core Peripheral Access Layer Header File." alt="" coords="102,155,199,181"/>
-<area shape="rect" id="node13" href="$system__stm32l1xx_8h.html" title="CMSIS Cortex&#45;M3 Device Peripheral Access Layer System Header File." alt="" coords="224,155,379,181"/>
-<area shape="rect" id="node9" href="$core__cm_instr_8h.html" title="CMSIS Cortex&#45;M Core Instruction Access Header File." alt="" coords="100,229,217,256"/>
-<area shape="rect" id="node11" href="$core__cm_func_8h.html" title="CMSIS Cortex&#45;M Core Function Access Header File." alt="" coords="242,229,360,256"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$usart_8cpp.html#a1ae3d490362fe17ac716e1b7df6273c5" title="Adds one string to UART TX queue." alt="" coords="345,25,471,52"/>
-<area shape="rect" id="node7" href="$command_8cpp.html#a126fa5abf8bd476d16c268085984edf2" title="Processes command input string." alt="" coords="126,25,295,52"/>
-<area shape="rect" id="node9" href="$usart_8cpp.html#a9d38cec8f8126c6f5b8e97b9824827d9" title="Sends one formatted string via USART." alt="" coords="167,76,255,102"/>
-<area shape="rect" id="node5" href="$error_8h.html#a222b193b1d406cc454108c1d68b9ed2e" title="Converts FreeRTOS portBASE_TYPE to enum Error." alt="" coords="520,25,728,52"/>
-</map>

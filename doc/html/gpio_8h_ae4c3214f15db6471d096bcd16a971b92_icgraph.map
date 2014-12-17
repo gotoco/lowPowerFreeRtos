@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$i2c_8h.html#ab837a14aa40a98c0ef147784d530ea5e" title="Initializes I2C module." alt="" coords="227,5,317,32"/>
-<area shape="rect" id="node7" href="$main_8cpp.html#a9d22a2b5e7ae1f39f7d800be9f004e44" title="Initialization of heartbeat task &#45; setup GPIO, create task." alt="" coords="185,56,359,83"/>
-<area shape="rect" id="node10" href="$spi_8h.html#a0452885ef68bcd4c845fe2bd6b399dc0" title="Initializes SPI." alt="" coords="227,107,317,133"/>
-<area shape="rect" id="node12" href="$usart_8h.html#a5ccbcfccc60e332b3558c9c89e7b6b70" title="Initializes USART." alt="" coords="219,157,325,184"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main code block." alt="" coords="409,56,463,83"/>
-</map>

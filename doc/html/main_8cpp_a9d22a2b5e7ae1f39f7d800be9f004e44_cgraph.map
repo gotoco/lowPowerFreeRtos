@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$gpio_8cpp.html#aae0f183fa97bd7a78402365600c65a62" title="Configures pin." alt="" coords="269,5,398,32"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#aeae1d212e7e7d3d693ff0589bce9c7e3" title="_heartbeatTask" alt="" coords="273,56,394,83"/>
-<area shape="rect" id="node7" href="$error_8h.html#a222b193b1d406cc454108c1d68b9ed2e" title="Converts FreeRTOS portBASE_TYPE to enum Error." alt="" coords="229,107,437,133"/>
-</map>

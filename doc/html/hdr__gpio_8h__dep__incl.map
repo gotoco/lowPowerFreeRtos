@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$gpio_8h.html" title="Header for gpio.cpp." alt="" coords="892,80,1295,107"/>
-<area shape="rect" id="node5" href="$gpio_8cpp.html" title="GPIO driver." alt="" coords="5,155,424,181"/>
-<area shape="rect" id="node13" href="$usart_8cpp.html" title="USART driver." alt="" coords="1763,155,2187,181"/>
-<area shape="rect" id="node7" href="$i2c_8cpp.html" title="I2C driver." alt="" coords="449,155,857,181"/>
-<area shape="rect" id="node9" href="$main_8cpp.html" title="Main code block." alt="" coords="882,155,1304,181"/>
-<area shape="rect" id="node11" href="$spi_8cpp.html" title="SPI driver." alt="" coords="1329,155,1737,181"/>
-</map>
