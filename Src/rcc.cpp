@@ -102,13 +102,11 @@ uint32_t rccStartPll(enum rccPllInput pll_input, uint32_t input_frequency, uint3
 				best_mul_i = mul_i;
 				best_div = div;
 
-				if (best_frequency == output_frequency && pllvco/2 == 48000000)	// is this a perfect match?
+				if (best_frequency == output_frequency && pllvco/2 == 48000000)	// is this a perfect match and deliver 48MHz for USB?
 					break;
 			}
 		}
 
-//		if (best_frequency == output_frequency && frequency/2 == 48000000)	// is this a perfect match?
-//			break;
 	}
 
 	_flashLatency(best_frequency);			// configure flash latency using found frequency
@@ -124,7 +122,7 @@ uint32_t rccStartPll(enum rccPllInput pll_input, uint32_t input_frequency, uint3
 
 	_coreFrequency = best_frequency;
 
-//	RCC->APB2ENR |= (RCC_APB2ENR_SYSCFGEN);
+	RCC->APB2ENR |= (RCC_APB2ENR_SYSCFGEN);
 
 	return best_frequency;
 }

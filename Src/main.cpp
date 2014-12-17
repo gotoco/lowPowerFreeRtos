@@ -38,14 +38,14 @@
 #include "hdr/hdr_rcc.h"
 #include "rcc.h"
 #include "config.h"
-
-
+#include "hdr_gpio.h"
+#include "stm32l152xb.h"
 /* Private variables ---------------------------------------------------------*/
 
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
+static void GPIO_Init(void);
 static void _sysInit(void);
 static void _setVCore(void);
 static void _configureHSE(void);
@@ -59,11 +59,11 @@ int main(void)
 
 
   /* Configure the system clock */
-  SystemClock_Config();
-	//_sysInit();
+  //SystemClock_Config();
+  _sysInit();
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_USB_DEVICE_Init();
+  GPIO_Init();
+  USB_DEVICE_Init();
 
   /* Infinite loop */
   while (1)
@@ -73,67 +73,29 @@ int main(void)
 
 }
 
-/**
- * System Clock Configuration
- */
-void SystemClock_Config(void)
-{
-
-  RCC_OscInitTypeDef RCC_OscInitStruct;
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;
-
-  __PWR_CLK_ENABLE();
-
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
-  RCC_OscInitStruct.PLL.PLLDIV = RCC_PLL_DIV4;
-  HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1);
-
-  __SYSCFG_CLK_ENABLE();
-
-}
-
-/** Configure pins as
-        * Analog
-        * Input
-        * Output
-        * EVENT_OUT
-        * EXTI
-*/
-void MX_GPIO_Init(void)
+void GPIO_Init(void)
 {
 
   /* GPIO Ports Clock Enable */
-  __GPIOH_CLK_ENABLE();
-  __GPIOA_CLK_ENABLE();
+	RCC->AHBENR |= RCC_AHBENR_GPIOAEN | RCC_AHBENR_GPIOBEN | RCC_AHBENR_GPIOCEN | RCC_AHBENR_GPIODEN |
+			RCC_AHBENR_GPIOEEN | RCC_AHBENR_GPIOHEN;
 
 }
 
-/* USER CODE BEGIN 4 */
 
-/* USER CODE END 4 */
+
 
 static void _sysInit(void)
 {
 	_setVCore();
 
+	/**
+	 * System Clock Configuration
+	 */
 	_configureHSE();
 
 	rccStartPll(RCC_PLL_INPUT_HSE, HSE_VALUE, FREQUENCY);
 
-	RCC_APB2ENR_PWREN_bb = 1;
 }
 
 static void _setVCore(void)
