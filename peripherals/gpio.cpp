@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#include "inc/stm32l1xx.h"
+#include "stm32l152xb.h"
 
 #include "hdr/hdr_gpio.h"
 
@@ -41,7 +41,7 @@
 void gpioInitialize(void)
 {
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN | RCC_AHBENR_GPIOBEN | RCC_AHBENR_GPIOCEN | RCC_AHBENR_GPIODEN |
-			RCC_AHBENR_GPIOEEN | RCC_AHBENR_GPIOFEN | RCC_AHBENR_GPIOGEN | RCC_AHBENR_GPIOHEN;
+			RCC_AHBENR_GPIOEEN | RCC_AHBENR_GPIOHEN;
 }
 
 /**

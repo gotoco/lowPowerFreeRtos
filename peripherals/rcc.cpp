@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#include "stm32l1xx.h"
+#include "stm32l152xb.h"
 
 #include "hdr/hdr_rcc.h"
 #include "hdr/hdr_bitband.h"

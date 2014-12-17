@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include "stm32l1xx.h"
+#include "stm32l152xb.h"
 
 #include "rcc.h"
 #include "timer.h"

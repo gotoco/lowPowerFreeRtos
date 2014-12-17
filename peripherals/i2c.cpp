@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#include "inc/stm32l1xx.h"
+#include "stm32l152xb.h"
 
 #include "hdr/hdr_rcc.h"
 #include "hdr/hdr_i2c.h"

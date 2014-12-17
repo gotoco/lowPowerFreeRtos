@@ -9,7 +9,7 @@
 #ifndef GPIO_H_
 #define GPIO_H_
 
-#include "inc/stm32l1xx.h"
+#include "stm32l152xb.h"
 
 #include "hdr/hdr_gpio.h"
 
