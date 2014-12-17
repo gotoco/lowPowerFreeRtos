@@ -37,7 +37,6 @@
 #include "stm32l1xx_hal.h"
 #include "usbd_def.h"
 #include "usbd_core.h"
-#include "main.h"
 
 #pragma GCC diagnostic ignored "-fpermissive"
 /* Private typedef -----------------------------------------------------------*/

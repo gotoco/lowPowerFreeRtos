@@ -56,20 +56,14 @@ static void _startPLL(void);
 
 int main(void)
 {
-
-
   /* Configure the system clock */
-  //SystemClock_Config();
   _sysInit();
   /* Initialize all configured peripherals */
   GPIO_Init();
   USB_DEVICE_Init();
 
   /* Infinite loop */
-  while (1)
-  {
-
-  }
+  while (1){}
 
 }
 
