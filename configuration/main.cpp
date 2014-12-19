@@ -38,7 +38,6 @@
 #include "timer.h"
 
 //Drivers
-#include "FC30.h"
 #include "MCP980x.h"
 #include "M41T56C64.h"
 
@@ -46,6 +45,7 @@
 #include "lcdprinter.h"
 #include "button.h"
 #include "service.h"
+#include "termometr.h"
 
 #define ACC_INT_PIN							GPIO_PIN_0
 #define ACC_INT_GPIO						GPIOA
@@ -61,8 +61,6 @@ static enum Error _initializeGuardianTask(void);
 static enum Error _peripLauncher(void);
 static enum Error _sysInit(void);
 static enum Error _schedulerInitAndRun(void);
-static void delay(uint32_t ms);
-static void countTicks(void);
 
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -80,13 +78,7 @@ static FATFS _fileSystem;
 | global variables
 +---------------------------------------------------------------------------------------------------------------------*/
 
-volatile uint32_t delayTicks=0;
-volatile uint32_t ticks=0;
-volatile uint8_t delayFlag=0;
-volatile uint8_t buttonFlag=0;
-volatile uint8_t msFlag=0;
-volatile uint8_t serviceFlag=0;
-char rx;
+
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | global functions
@@ -97,12 +89,6 @@ char rx;
  */
 int main(void)
 {
-	float themperature=0;
-
-	uint8_t time[3];
-
-	char string[20];
-
 	enum Error sysError = _sysInit();
 	if (sysError != ERROR_NONE){
 		goto sys_panic;
@@ -113,27 +99,7 @@ int main(void)
 		goto sys_panic;
 	}
 
-	while(1)
-	{
-		if(serviceFlag){
-			serviceMode();
-			serviceFlag=0;
-		}
-
-		else if(msFlag){
-			msFlag=0;
-
-			if(buttonFlag){
-				M41T56C64_ReadTime(time);
-				M41T56C64_ConvertToInt(time);
-				LCD_WriteTime(time);
-			}
-			else{
-				themperature=MCP980x_Single_Measure();
-				LCD_WriteFloat(&themperature,2,1);
-			}
-		}
-	}
+	termometr_Run();
 
 	goto sys_panic;
 
@@ -301,76 +267,3 @@ static enum Error _initializeHeartbeatTask(void)
 
 	return errorConvert_portBASE_TYPE(ret);
 }
-
-/**
- * \brief Counts ticks
- */
-static void countTicks()
-{
-	delayTicks++;
-}
-
-/**
- * \brief Delays designed time in milliseconds
- *
- * \param Number of milliseconds to wait
- */
-static void delay(uint32_t ms)
-{
-	delayTicks=0;
-	delayFlag=1;
-	while(delayTicks<ms);
-	delayFlag=0;
-}
-
-extern "C" void EXTI0_IRQHandler(void) __attribute((interrupt));
-void EXTI0_IRQHandler(void)
-{
-	//Do something
-	buttonFlag^=1;
-
-	delay(50);
-
-	//Clear flags
-	EXTI->PR=EXTI_PR_PR0;
-}
-
-extern "C" void EXTI4_IRQHandler(void) __attribute((interrupt));
-void EXTI4_IRQHandler(void)
-{
-	//Do something
-	serviceFlag=1;
-
-	//Clear flags
-	EXTI->PR=EXTI_PR_PR4;
-}
-
-extern "C" void TIM2_IRQHandler(void) __attribute((interrupt));
-void TIM2_IRQHandler(void)
-{
-	//Do something
-	if(delayFlag==1) countTicks();
-
-	ticks++;
-	if(ticks>=1000){
-		ticks=0;
-		msFlag=1;
-	}
-
-	//Clear flags
-	TIM2->SR = 0;
-}
-
-extern "C" void SysTick_Handler(void) __attribute((interrupt));
-void SysTick_Handler(void)
-{
-	if(delayFlag==1) countTicks();
-}
-
-extern "C" void USART1_IRQHandler(void) __attribute((interrupt));
-void USART1_IRQHandler(void)
-{
-
-}
-
-
