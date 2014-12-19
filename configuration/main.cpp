@@ -54,9 +54,6 @@ void GPIO_Init(void)
 
 }
 
-
-
-
 static void _sysInit(void)
 {
 	_setVCore();
@@ -100,13 +97,3 @@ static void _startPLL(void)
 
 }
 
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-*/
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
