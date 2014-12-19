@@ -168,6 +168,13 @@ void LCD_Init()
 	LCD->FCR|=LCD_FCR_PON_2;
 }
 
+/**
+ * \brief	Disables LCD
+ */
+void LCD_Deinit()
+{
+	LCD->CR&=~(LCD_CR_LCDEN);
+}
 
 /**
  * \brief Converts char to digit on the LCD.
@@ -357,6 +364,11 @@ void LCD_WriteString(char* s)
 			kropki++;
 			s++;
 		}
+		else if(*(s+1)==':'){
+			LCD_WriteChar(*s,0,1,i+1);
+			kropki++;
+			s++;
+		}
 		else
 		{
 			LCD_WriteChar(*s,0,0,i+1);
@@ -434,3 +446,37 @@ void LCD_WriteFloat(float* f, uint8_t d, uint8_t p)
 
 	LCD_WriteString(tab);
 }
+
+/**
+ * \brief	Writing on LCD time
+ *
+ * \param time	Pointer to table which contains number of hours, minutes and seconds in normal format (non BCD)
+ */
+void LCD_WriteTime(uint8_t* time)
+{
+	char text[9];
+
+	// Hours
+	text[0]=(char)( ( *time / 10 ) + 48 );
+	text[1]=(char)( ( *time % 10 ) + 48 );
+	text[2]=':';
+
+	time++;
+
+	// Minutes
+	text[3]=(char)( ( *time / 10 ) + 48 );
+	text[4]=(char)( ( *time % 10 ) + 48 );
+	text[5]=':';
+
+	time++;
+
+	// Seconds
+	text[6]=(char)( ( *time / 10 ) + 48 );
+	text[7]=(char)( ( *time % 10 ) + 48 );
+
+	text[8]='\0';
+
+	LCD_WriteString(text);
+}
+
+

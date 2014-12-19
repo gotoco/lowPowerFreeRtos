@@ -68,5 +68,15 @@ enum Error serialInitialize(void)
 void serialSendCharacter(char c)
 {
 	while (!(USARTx_SR_TXE_bb(SERIALx)));
-	USART1->DR = c;
+	SERIALx->DR = c;
+}
+
+void serialSendString(char *s)
+{
+	while(*s != '\0')
+	{
+		while (!(USARTx_SR_TXE_bb(SERIALx)));
+		serialSendCharacter(*s);
+		s++;
+	}
 }

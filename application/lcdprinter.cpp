@@ -35,7 +35,7 @@ void LCD_WriteChar_example()
 void LCD_WriteString_example()
 {
 	char string[10];
-	strcpy(string,"ub.ir.ds");
+	strcpy(string,"ub.ir:ds");
 	LCD_WriteString(string);
 }
 

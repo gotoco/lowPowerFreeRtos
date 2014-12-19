@@ -21,12 +21,14 @@
 
 enum Error serialInitialize(void);
 
+void serialDeinit(void);
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 void serialSendCharacter(char c);
-//void serialReciveCharacted();
+void serialSendString(char *s);
 
 #ifdef __cplusplus
 }
