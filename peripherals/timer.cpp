@@ -6,7 +6,7 @@
  */
 
 #include "timer.h"
-#include "inc/stm32l1xx.h"
+#include "stm32l152xb.h"
 
 #include <stdint.h>
 #include "config.h"
