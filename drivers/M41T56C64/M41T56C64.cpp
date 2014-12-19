@@ -43,6 +43,8 @@ void M41T56C64_Init(uint8_t* time)
 
 
 	// setting seconds
+	tab[0]=M41T56_SECONDS;
+	tab[1]=*(time+2);
 	i2cWrite(M41T56_SlaveAddress, tab, 2);
 
 	// setting minutes

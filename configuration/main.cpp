@@ -80,12 +80,12 @@ static FATFS _fileSystem;
 | global variables
 +---------------------------------------------------------------------------------------------------------------------*/
 
-uint32_t delayTicks=0;
-uint32_t ticks=0;
-uint8_t delayFlag=0;
-uint8_t buttonFlag=0;
-uint8_t msFlag=0;
-uint8_t serviceFlag=0;
+volatile uint32_t delayTicks=0;
+volatile uint32_t ticks=0;
+volatile uint8_t delayFlag=0;
+volatile uint8_t buttonFlag=0;
+volatile uint8_t msFlag=0;
+volatile uint8_t serviceFlag=0;
 char rx;
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -123,19 +123,16 @@ int main(void)
 		else if(msFlag){
 			msFlag=0;
 
-			M41T56C64_ReadTime(time);
-			M41T56C64_ConvertToInt(time);
-			LCD_WriteTime(time);
+			if(buttonFlag){
+				M41T56C64_ReadTime(time);
+				M41T56C64_ConvertToInt(time);
+				LCD_WriteTime(time);
+			}
+			else{
+				themperature=MCP980x_Single_Measure();
+				LCD_WriteFloat(&themperature,2,1);
+			}
 		}
-
-		/*if(buttonFlag==1){
-			themperature=MCP980x_Single_Measure();
-			LCD_WriteFloat(&themperature,2,1);
-		}
-		else{
-			strcpy(string,"ub.ir.ds");
-			LCD_WriteString(string);
-		}*/
 	}
 
 	goto sys_panic;
@@ -200,11 +197,7 @@ static enum Error _peripLauncher()
 {
 	Error error = ERROR_NONE;
 
-	char string[20];
-
 	gpioInitialize();
-
-	uint8_t time[3];
 
 	// LED Initialise
 	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
@@ -215,30 +208,14 @@ static enum Error _peripLauncher()
 	// LCD Initialize
 	LCD_Init();
 
-	LCD_WriteString_example();
-
-	time[0]=15;
-	time[1]=51;
-	time[2]=20;
-
-	// RTC Initialise
-	M41T56C64_Init(time);
-
-	M41T56C64_ReadTime(time);
-
-	M41T56C64_ConvertToInt(time);
-
-	LCD_WriteTime(time);
-
 	// Thermometer Initialize
-	//MCP980x_Init();
-
+	MCP980x_Init();
 
 	// Timer2 Initialize
 	Timer_Init();
 
 	// Blue button Initialize
-	//_initializeGuardianTask();
+	Button_Init();
 
 	ServicePin_Init();
 
@@ -290,7 +267,7 @@ static void _heartbeatTask(void *parameters)
 
 static enum Error _initializeGuardianTask(void)
 {
-	//gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
+	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
 
 	gpioConfigurePin(ACC_INT_GPIO, ACC_INT_PIN, ACC_INT_CONFIGURATION);
 
@@ -351,6 +328,8 @@ void EXTI0_IRQHandler(void)
 {
 	//Do something
 	buttonFlag^=1;
+
+	delay(50);
 
 	//Clear flags
 	EXTI->PR=EXTI_PR_PR0;

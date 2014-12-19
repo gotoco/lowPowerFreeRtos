@@ -25,6 +25,7 @@ void Button_Init()
 	//enabling interupt
 	RCC->APB2ENR|=RCC_APB2ENR_SYSCFGEN;
 	SYSCFG->EXTICR[0]=SYSCFG_EXTICR1_EXTI0_PA;
+	NVIC_SetPriority(EXTI0_IRQn, 2);
 	NVIC_EnableIRQ(EXTI0_IRQn);
 }
 

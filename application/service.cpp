@@ -56,6 +56,8 @@ void serviceMode()
 	strcpy(string,"\r\nPodaj godzine");
 	serialSendString(string);
 
+	USART1->DR;
+
 	while(!(USART1->SR & USART_SR_RXNE));
 	time[0]=USART1->DR;
 
