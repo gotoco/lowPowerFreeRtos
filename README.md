@@ -1,4 +1,4 @@
-Low Power and low memory sample application for STM32L152 chip
+Low Power and low memory sample application for STM32L15x series (best with STM32L152 Discovery and GCC)
 ================
 
 FreeRTOS port for STM32L152 uC with low power features
@@ -12,6 +12,8 @@ also can use chips that are in /driver section
 ------------
 How to use ?
 ------------
+Application is dedicated to run wit opensources tools (and fully tested) so If You have GCC, ARM-Toolchain and OpenOCD You can easly build it and debug using in example embedded st-Link with STM32L_Discovery demo board or any other.
+
 First step: download and install Toolchain for Cortex-M3 uC 
 I recomend Bare-metal toolchain for Cortex-R/M and Cortex-A it can be download at: https://launchpad.net/gcc-arm-embedded/4.7/4.7-2013-q3-update
 
