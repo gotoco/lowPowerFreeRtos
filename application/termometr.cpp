@@ -12,12 +12,20 @@
 
 #include "stm32l1xx.h"
 
+#include "bsp.h"
+
+#include "termometr.h"
+
 //Peripherials
 #include "lcd.h"
+#include "gpio.h"
+#include "timer.h"
+#include "button.h"
 
 //Drivers
 #include "MCP980x.h"
 #include "M41T56C64.h"
+#include "LIS35DE.h"
 
 //Application
 #include "service.h"
@@ -33,14 +41,42 @@ volatile uint8_t delayFlag=0;
 volatile uint8_t buttonFlag=0;
 volatile uint8_t msFlag=0;
 volatile uint8_t serviceFlag=0;
+volatile uint8_t alertFlag=0;
 
 
 /*---------------------------------------------------------------------------------------------------------------------+
  | global functions
  +---------------------------------------------------------------------------------------------------------------------*/
 
+void termometr_Init()
+{
+	gpioInitialize();
+
+	// LCD Initialize
+	LCD_Init();
+
+	// Thermometer Initialize
+	MCP980x_Init();
+
+	// Timer2 Initialize
+	Timer_Init();
+
+	// Blue button Initialize
+	Button_Init();
+
+	// Service pin Initialize
+	ServicePin_Init();
+
+	// Accelerometer Initialize
+	LIS35DE_Init();
+
+	// Accelerometer Led Initialize
+	gpioConfigurePin(LED_ACC_GPIO, LED_ACC_pin, GPIO_OUT_PP_2MHz);
+}
+
 /**
- * \brief	Application for digital thermometer/clock. Refreshes time or temperature once a second and print ot on LCD.
+ * \brief	Application for digital thermometer/accelerometer/clock. Refreshes time or temperature once a second and print ot on LCD.
+ * 			Reads all axis of accelerometer and calculates mean of them, and when this value reach some level, then led is switch on.
  * 			Activating service mode when interrupt in service pin is detected.
  */
 void termometr_Run()
@@ -51,26 +87,47 @@ void termometr_Run()
 
 	char string[20];
 
+	int8_t x;
+	int8_t y;
+	int8_t z;
+
+	float srednia;
+
 	while(1)
 	{
-		if(serviceFlag){
+		if(serviceFlag)
+		{
 			serviceMode();
 			serviceFlag=0;
 		}
 
-		else if(msFlag){
+		else if(msFlag)
+		{
+			LIS35DE_Read(&x, &y, &z);
+			srednia = x*x + y*y + z*z;
+
+			if(srednia>3800) alertFlag|=(1<<ALERT_ACC);
+			else alertFlag&=~(1<<ALERT_ACC);
+
 			msFlag=0;
 
-			if(buttonFlag){
+			if(buttonFlag)
+			{
 				M41T56C64_ReadTime(time);
 				M41T56C64_ConvertToInt(time);
 				LCD_WriteTime(time);
 			}
-			else{
+			else
+			{
 				themperature=MCP980x_Single_Measure();
 				LCD_WriteFloat(&themperature,2,1);
+				if(themperature>=30) alertFlag|=(1<<ALERT_TEMP);
+				else alertFlag&=~(1<<ALERT_TEMP);
 			}
 		}
+
+		if(alertFlag) LED_ACC_bb=1;
+		else LED_ACC_bb=0;
 	}
 }
 

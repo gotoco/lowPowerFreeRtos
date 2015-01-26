@@ -22,7 +22,7 @@
 
 /**
  * \brief	Disabling LCD, enabling UART. Waiting for number 49 '1'. Then downloading actual clock
- * 			from userusing UART, and setting RTC to desired clock. At the end disabling UART,
+ * 			from user using UART, and setting RTC to desired clock. At the end disabling UART,
  * 		 	and enabling LCD.
  */
 void serviceMode()

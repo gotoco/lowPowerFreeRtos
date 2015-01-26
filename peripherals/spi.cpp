@@ -43,6 +43,8 @@ void spiInitialize(void)
 	RCC_APBxENR_SPIxEN_bb = 1;
 
 	SPIx->CR1 = SPI_CR1_SSM | SPI_CR1_SSI | SPI_CR1_SPE | SPI_CR1_MSTR;	// software slave management, enable SPI, master mode
+	SPIx->CR1 |= SPI_CR1_CPOL;  // SCK=1 when IDLE
+	SPIx->CR1 |= SPI_CR1_CPHA;
 }
 
 /**
@@ -102,3 +104,4 @@ size_t spiTransfer(const uint8_t *tx, uint8_t *rx, size_t length)
 
 	return rx_length;
 }
+

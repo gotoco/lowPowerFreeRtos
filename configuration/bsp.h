@@ -13,6 +13,8 @@
 #ifndef BSP_H_
 #define BSP_H_
 
+#include "hdr\hdr_bitband.h"
+
 /*---------------------------------------------------------------------------------------------------------------------+
 | LEDs INTERFACE
 +---------------------------------------------------------------------------------------------------------------------*/
@@ -23,11 +25,16 @@
 #define LED_pin_2							GPIO_PIN_13	///< pin number of the LED2
 #define LED_pin_3							GPIO_PIN_14	///< pin number of the LED3
 
+#define LED_ACC_GPIO						GPIOA
+#define LED_ACC_pin							GPIO_PIN_5
+
 /// bit-band "variable" to directly handle the pin
 #define LED_bb								BITBAND(&LED_GPIO->ODR, LED_pin)
 #define LED1_bb								BITBAND(&LED_GPIO->ODR, LED_pin_1)
 #define LED2_bb								BITBAND(&LED_GPIO->ODR, LED_pin_2)
 #define LED3_bb								BITBAND(&LED_GPIO->ODR, LED_pin_3)
+
+#define LED_ACC_bb							BITBAND(&LED_ACC_GPIO->ODR, LED_ACC_pin)
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | BUTTON INTERFACE
@@ -123,6 +130,7 @@
 
 #define SD_CS_ASSERTED						0
 #define SD_CS_DEASSERTED					1
+
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | ACC

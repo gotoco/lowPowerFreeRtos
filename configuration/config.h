@@ -81,29 +81,29 @@
 | SPI
 +---------------------------------------------------------------------------------------------------------------------*/
 
-#define SPIx								SPI1
+#define SPIx								SPI2
 
-#define RCC_APBxENR_SPIxEN_bb				RCC_APB2ENR_SPI1EN_bb
+#define RCC_APBxENR_SPIxEN_bb				RCC_APB1ENR_SPI2EN_bb
 
-#define SPIx_SSB_GPIO						GPIOA
-#define SPIx_SSB_PIN						GPIO_PIN_4
-#define SPIx_SSB_CONFIGURATION				GPIO_OUT_PP_40MHz_PULL_UP
-#define SPIx_SCK_GPIO						GPIOA
-#define SPIx_SCK_PIN						GPIO_PIN_5
-#define SPIx_SCK_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
-#define SPIx_MISO_GPIO						GPIOA
-#define SPIx_MISO_PIN						GPIO_PIN_6
-#define SPIx_MISO_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
-#define SPIx_MOSI_GPIO						GPIOA
-#define SPIx_MOSI_PIN						GPIO_PIN_7
-#define SPIx_MOSI_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
+#define SPIx_SSB_GPIO						GPIOB
+#define SPIx_SSB_PIN						GPIO_PIN_12
+#define SPIx_SSB_CONFIGURATION				GPIO_OUT_PP_40MHz
+#define SPIx_SCK_GPIO						GPIOB
+#define SPIx_SCK_PIN						GPIO_PIN_13
+#define SPIx_SCK_CONFIGURATION				GPIO_AF5_PP_40MHz
+#define SPIx_MISO_GPIO						GPIOB
+#define SPIx_MISO_PIN						GPIO_PIN_14
+#define SPIx_MISO_CONFIGURATION				GPIO_AF5_OD_40MHz
+#define SPIx_MOSI_GPIO						GPIOB
+#define SPIx_MOSI_PIN						GPIO_PIN_15
+#define SPIx_MOSI_CONFIGURATION				GPIO_AF5_PP_40MHz
 
 #define SPIx_SSB_bb							BITBAND(&SPIx_SSB_GPIO->ODR, SPIx_SSB_PIN)
 
 #define	SPIx_SSB_START						0
 #define SPIx_SSB_END						1
 
-#define SPIx_BOUDRATE						1000000
+#define SPIx_BOUDRATE						1000
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | I2C
@@ -127,6 +127,9 @@
 +---------------------------------------------------------------------------------------------------------------------*/
 
 #define COMMAND_ARGUMENT_LENGTH				32
+
+#define COMMAND_LIS35DE_I2C					1
+#define COMMAND_LIS35DE_SPI					0
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | interript priorities

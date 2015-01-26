@@ -390,7 +390,7 @@ void LCD_WriteString(char* s)
   * \param  d 	   - Number of digits before dot.
   * \param  p	   - Number of digits after dot.
   */
-static void floatToChar(char *ptr, float number, uint8_t d, uint8_t p)
+void floatToChar(char *ptr, float number, uint8_t d, uint8_t p)
 {
 	int i;
 	for(i=0;i<p;i++){

@@ -32,7 +32,7 @@ void LCD_WriteString(char* s);
 
 void LCD_WriteFloat(float* f, uint8_t d, uint8_t p);
 
-static void floatToChar(char *ptr, float number, uint8_t d, uint8_t p);
+void floatToChar(char *ptr, float number, uint8_t d, uint8_t p);
 
 void LCD_WriteTime(uint8_t* time);
 

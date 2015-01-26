@@ -40,6 +40,9 @@
 //Drivers
 #include "MCP980x.h"
 #include "M41T56C64.h"
+#include "LIS35DE.h"
+#include "lis35.h"
+#include "ADXL343.h"
 
 //Application
 #include "lcdprinter.h"
@@ -163,27 +166,7 @@ static enum Error _peripLauncher()
 {
 	Error error = ERROR_NONE;
 
-	gpioInitialize();
-
-	// LED Initialise
-	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
-	LED_bb = 1;
-	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
-	LED1_bb = 1;
-
-	// LCD Initialize
-	LCD_Init();
-
-	// Thermometer Initialize
-	MCP980x_Init();
-
-	// Timer2 Initialize
-	Timer_Init();
-
-	// Blue button Initialize
-	Button_Init();
-
-	ServicePin_Init();
+	termometr_Init();
 
 	out:
 		return error;

@@ -10,6 +10,4 @@
 
 void serviceMode();
 
-
-
 #endif /* SERVICE_H_ */
