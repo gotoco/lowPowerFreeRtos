@@ -163,6 +163,15 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 #define USART_RX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
 #define USART_RX_STACK_SIZE					256
 
+// button task
+#define BUTTON_TASK_PRIORITY				tskIDLE_PRIORITY
+#define BUTTON_STACK_SIZE					64
+
+// led tasks
+#define LED_TASK_PRIORITY					tskIDLE_PRIORITY
+#define LED_STACK_SIZE						64
+
+
 /*---------------------------------------------------------------------------------------------------------------------+
 | Runtime stats configuration
 +---------------------------------------------------------------------------------------------------------------------*/

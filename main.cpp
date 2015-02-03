@@ -13,8 +13,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "stm32l1xx.h"
+
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
 
 #include "ff.h"
 
@@ -39,8 +42,22 @@
 
 static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
 		size_t output_buffer_length);
-static void _heartbeatTask(void *parameters);
+
+static void _led1Task(void *parameters);
+static enum Error _initializeLed1Task(void);
+
+static void _led2Task(void *parameters);
+static enum Error _initializeLed2Task(void);
+
+static void _led3Task(void *parameters);
+static enum Error _initializeLed3Task(void);
+
+static void _buttonPressTask(void);
 static enum Error _initializeHeartbeatTask(void);
+
+static void _heartbeatTask(void *parameters);
+static enum Error _initializeButtonPressTask(void);
+
 static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
 		size_t output_buffer_length);
 static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
@@ -91,6 +108,12 @@ const uint8_t adresMSP = 0x48;
 uint8_t danaZMSP = 0x30;
 uint8_t * pointer = (uint8_t*)pvPortMalloc(129*sizeof(uint8_t));
 
+// semafor
+xSemaphoreHandle xSemaphoreSW0 = NULL;
+
+// kolejka
+xQueueHandle xQueue2 = NULL;
+
 
 int main(void)
 {
@@ -107,6 +130,8 @@ int main(void)
 
 	i2cInitialize();
 
+	xQueue2 = xQueueCreate(1, sizeof(uint8_t));
+
 	enum Error error = usartInitialize();
 //
 //	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
@@ -115,10 +140,27 @@ int main(void)
 	error = _initializeHeartbeatTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
+	error = _initializeButtonPressTask();
+	ASSERT("_initializeButtonPressTask()", error == ERROR_NONE);
+
+	error = _initializeLed1Task();
+	ASSERT("_initializeLed1Task()", error == ERROR_NONE);
+
+	error = _initializeLed2Task();
+	ASSERT("_initializeLed2Task()", error == ERROR_NONE);
+
+	error = _initializeLed3Task();
+	ASSERT("_initializeLed3Task()", error == ERROR_NONE);
+
 //	commandRegister(&_dirCommandDefinition);
 //	commandRegister(&_runtimestatsCommandDefinition);
 //	commandRegister(&_tasklistCommandDefinition);
 
+
+	// uruchomienie zadan
+	//vStartLDTasks(TASK_PRIORITY);
+
+	// uruchomienie planisty
 	vTaskStartScheduler();
 
 	while (1)
@@ -207,20 +249,140 @@ static void _heartbeatTask(void *parameters)
 
 	xLastHeartBeat = xTaskGetTickCount();
 
+	uint8_t ile;
+
 	for(;;){
-		vTaskDelay(500/portTICK_RATE_MS);
+		vTaskDelay(1000/portTICK_RATE_MS);
+
+		xQueueReceive(xQueue2, &ile, (portTickType) 0);
+
+		if(ile<7) ile++;
+		else	ile=0;
+
+		xQueueSend(xQueue2, ( void * ) &ile, (portTickType) 0 );
 
 		//Test interface
-		LED1_bb ^= 1;
-		LED2_bb ^= LED1_bb;;
-		LED3_bb ^= LED2_bb;
+		//LED2_bb ^= 1;
+		//LED1_bb ^= LED_bb;
+		//LED3_bb ^= LED2_bb;
 
-
-		const char* twochars = "test_";
-		usartSendString(twochars, 100);
-
+		//const char* twochars = "test_";
+		//usartSendString(twochars, 100);
 	}
 
+}
+
+static enum Error _initializeHeartbeatTask(void)
+{
+	gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
+	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
+	gpioConfigurePin(LED2_GPIO, LED_pin_2, GPIO_OUT_PP_2MHz);
+	//gpioConfigurePin(LED_GPIO, LED_pin_2, GPIO_OUT_PP_2MHz);
+	//gpioConfigurePin(LED_GPIO, LED_pin_3, GPIO_OUT_PP_2MHz);
+
+	LED_bb = 0;
+	LED1_bb = 0;
+	LED2_bb = 0;
+
+	uint8_t ile=0;
+	ile=0;
+
+	xQueueSend(xQueue2, ( void * ) &ile, (portTickType) 0 );
+
+	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", HEARTBEAT_STACK_SIZE, NULL,
+			HEARTBEAT_TASK_PRIORITY, NULL);
+
+	return errorConvert_portBASE_TYPE(ret);
+}
+
+static void _led1Task(void *parameters)
+{
+	(void)parameters;						// suppress warning
+
+	portTickType xLastLedBlink;
+
+	xLastLedBlink = xTaskGetTickCount();
+
+	uint8_t ile;
+
+	for(;;)
+	{
+		xQueueReceive(xQueue2, &ile, (portTickType) 0);
+
+		if(ile & 1) LED_bb = 1;
+		else 		LED_bb = 0;
+
+		xQueueSend(xQueue2, ( void * ) &ile, (portTickType) 0 );
+		vTaskDelay(1000/portTICK_RATE_MS);
+	}
+}
+
+static enum Error _initializeLed1Task(void)
+{
+	portBASE_TYPE ret = xTaskCreate(_led1Task, (signed char*)"led1", LED_STACK_SIZE, NULL,
+			LED_TASK_PRIORITY+1, NULL);
+
+	return errorConvert_portBASE_TYPE(ret);
+}
+
+static void _led2Task(void *parameters)
+{
+	(void)parameters;						// suppress warning
+
+	portTickType xLastLedBlink;
+
+	xLastLedBlink = xTaskGetTickCount();
+
+	uint8_t ile;
+
+	for(;;)
+	{
+		xQueueReceive(xQueue2, &ile, (portTickType) 0);
+
+		if(ile & 2) LED1_bb = 1;
+		else 		LED1_bb = 0;
+
+		xQueueSend(xQueue2, ( void * ) &ile, (portTickType) 0 );
+		vTaskDelay(1000/portTICK_RATE_MS);
+	}
+}
+
+static enum Error _initializeLed2Task(void)
+{
+	portBASE_TYPE ret = xTaskCreate(_led2Task, (signed char*)"led2", LED_STACK_SIZE, NULL,
+			LED_TASK_PRIORITY+2, NULL);
+
+		return errorConvert_portBASE_TYPE(ret);
+}
+
+static void _led3Task(void *parameters)
+{
+	(void)parameters;						// suppress warning
+
+	portTickType xLastLedBlink;
+
+	xLastLedBlink = xTaskGetTickCount();
+
+	uint8_t ile;
+
+	for(;;)
+	{
+		xQueueReceive(xQueue2, &ile, (portTickType) 0);
+
+		if(ile & 4) LED2_bb = 1;
+		else 		LED2_bb = 0;
+
+		xQueueSend(xQueue2, ( void * ) &ile, (portTickType) 0);
+		vTaskDelay(1000/portTICK_RATE_MS);
+	}
+}
+
+static enum Error _initializeLed3Task(void)
+{
+	portBASE_TYPE ret = xTaskCreate(_led3Task, (signed char*)"led3", LED_STACK_SIZE, NULL,
+			LED_TASK_PRIORITY+3, NULL);
+
+	return errorConvert_portBASE_TYPE(ret);
 }
 
 /**
@@ -232,16 +394,54 @@ static void _heartbeatTask(void *parameters)
  * the file error.h
  */
 
-static enum Error _initializeHeartbeatTask(void)
-{
-	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
-	gpioConfigurePin(LED_GPIO, LED_pin_2, GPIO_OUT_PP_2MHz);
-	gpioConfigurePin(LED_GPIO, LED_pin_3, GPIO_OUT_PP_2MHz);
 
-	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", HEARTBEAT_STACK_SIZE, NULL,
-			HEARTBEAT_TASK_PRIORITY, NULL);
+static void _buttonPressTask(void * pvParameters)
+{
+	vSemaphoreCreateBinary(xSemaphoreSW0);
+
+	for(;;)
+	{
+		if(xSemaphoreTake(xSemaphoreSW0, 0) == pdTRUE)
+		{
+			//vhToggleLED1();
+			LED1_bb = 1-LED1_bb;
+		}
+	}
+}
+
+static enum Error _initializeButtonPressTask(void)
+{
+	gpioConfigurePin(BUTTON_GPIO,BUTTON_PIN,BUTTON_CONFIGURATION);
+
+	//setting interrupt for PA0;
+	EXTI->IMR|=EXTI_EMR_MR0;
+	EXTI->RTSR|=EXTI_RTSR_TR0;
+	EXTI->FTSR&= ~(EXTI_FTSR_TR0);
+
+	//enabling interrupt
+	RCC->APB2ENR|=RCC_APB2ENR_SYSCFGEN;
+	SYSCFG->EXTICR[0]=SYSCFG_EXTICR1_EXTI0_PA;
+	NVIC_SetPriority(EXTI0_IRQn, 2);
+	NVIC_EnableIRQ(EXTI0_IRQn);
+
+	portBASE_TYPE ret = xTaskCreate(_buttonPressTask, (signed char*)"buttonpress", BUTTON_STACK_SIZE, NULL,
+			BUTTON_TASK_PRIORITY, NULL);
 
 	return errorConvert_portBASE_TYPE(ret);
+}
+
+extern "C" void EXTI0_IRQHandler(void) __attribute((interrupt));
+void EXTI0_IRQHandler(void)
+{
+	static portBASE_TYPE xHigherPriorityTaskWoken;
+	xHigherPriorityTaskWoken = pdFALSE;
+
+	//if(EXTI_GetITStatus(EXTI_Line0) != RESET)
+	//{
+		xSemaphoreGiveFromISR(xSemaphoreSW0, &xHigherPriorityTaskWoken);
+
+		EXTI->PR=EXTI_PR_PR0;
+	//}
 }
 
 /**
