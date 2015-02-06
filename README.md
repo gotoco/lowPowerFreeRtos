@@ -1,5 +1,4 @@
-Low Power sample project for STM32L15x series 
-(best with STM32L152Discovery and GCC)
+Low Power sample project for STM32L15x series  (best with STM32L152Discovery and GCC)
 ================
 
 FreeRTOS port for STM32L152 uC with low power features
