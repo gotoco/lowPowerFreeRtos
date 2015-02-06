@@ -37,11 +37,13 @@ Next things to flash Your uC download Open-OCD and You can create and develop re
 Project structure and best practices ?
 ------------
 
-Currently this demo project contains followed branches (applications)
+Currently this demo project contains followed branches (applications):
 
      -master : empty "ready to go" project with all needed stuff 
      -usb : easy sample configuration of USB end device (serial port) warrning needed some hardware fixes on board!
      -tmp : sample smart-thermometer application that uses externals: RTC (MCP9800), Accelerometer (LIS35DE) and RTC (M41T56C64), and show data on discovery-onboard LCD
+
+About codding standards:
 
      For details of embedded C development Please read CodingStandards at $project_root
 
