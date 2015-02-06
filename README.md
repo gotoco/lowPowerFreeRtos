@@ -1,4 +1,5 @@
-Low Power and low memory sample application for STM32L15x series (best with STM32L152 Discovery and GCC)
+Low Power sample project for STM32L15x series 
+(best with STM32L152Discovery and GCC)
 ================
 
 FreeRTOS port for STM32L152 uC with low power features
@@ -15,7 +16,9 @@ How to use ?
 Application is dedicated to run wit opensources tools (and fully tested) so If You have GCC, ARM-Toolchain and OpenOCD You can easly build it and debug using in example embedded st-Link with STM32L_Discovery demo board or any other.
 
 First step: download and install Toolchain for Cortex-M3 uC 
-I recomend Bare-metal toolchain for Cortex-R/M and Cortex-A it can be download at: https://launchpad.net/gcc-arm-embedded/4.7/4.7-2013-q3-update
+I strongly recomend Bare-metal toolchain for Cortex-R/M and Cortex-A it can be download at: 
+
+     https://launchpad.net/gcc-arm-embedded/4.7/4.7-2013-q3-update
 
 Second clone this repo:
 
@@ -34,7 +37,13 @@ Next things to flash Your uC download Open-OCD and You can create and develop re
 Project structure and best practices ?
 ------------
 
-     For more detail of embedded C development Please read CodingStandards
+Currently this demo project contains followed branches (applications)
+
+     -master : empty "ready to go" project with all needed stuff 
+     -usb : easy sample configuration of USB end device (serial port) warrning needed some hardware fixes on board!
+     -tmp : sample smart-thermometer application that uses externals: RTC (MCP9800), Accelerometer (LIS35DE) and RTC (M41T56C64), and show data on discovery-onboard LCD
+
+     For details of embedded C development Please read CodingStandards at $project_root
 
 
 Structure of project and dirs descriptions:
@@ -47,5 +56,5 @@ Structure of project and dirs descriptions:
        - /FreeRTOS    <- 3party software Task scheduler in example FreeRTOS
        - /debug       <- debuger scripts (ex. open-ocd or production code)
        - /hdr         <- Shortcut for Definition of registers (for high performance and low memory cons)
-       - /peripherals <- Your on Chip peripherials code should go here (I2C, 
+       - /peripherals <- Your on Chip peripherials code should go here (I2C, USART, SPI, FLASH and so on)
        
