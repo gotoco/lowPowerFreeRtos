@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#include "stm32l152xb.h"
+#include "stm32l152xc.h"
 
 #include "hdr/hdr_gpio.h"
 

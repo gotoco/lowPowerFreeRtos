@@ -141,4 +141,12 @@
 #define USARTx_IRQ_PRIORITY					10
 #define SERIALx_IRQ_PRIORITY 				2
 #define TIM6_IRQ_PRIORITY					10
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| interript priorities
++---------------------------------------------------------------------------------------------------------------------*/
+
+#define assert_param( x )		/*print dbg assert*/ if( ( x ) == 0 ) while( true )		//When assert fail stop
+
+
 #endif /* CONFIG_H_ */

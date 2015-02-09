@@ -13,7 +13,7 @@
 #include <cstdint>
 #include <cstddef>
 
-#include "stm32l152xb.h"
+#include "stm32l152xc.h"
 
 #include "hdr/hdr_rcc.h"
 #include "hdr/hdr_spi.h"

@@ -17,7 +17,7 @@
 #include "rcc.h"
 #include "config.h"
 #include "hdr_gpio.h"
-#include "stm32l152xb.h"
+#include "stm32l152xc.h"
 /* Private variables ---------------------------------------------------------*/
 
 

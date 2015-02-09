@@ -15,7 +15,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "stm32l152xb.h"
+#include "stm32l152xc.h"
 
 #include "config.h"
 #include "serial.h"
