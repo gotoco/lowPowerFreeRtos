@@ -14,6 +14,7 @@
 #define CONFIG_H_
 
 #include "hdr/hdr_bitband.h"
+#include "hdr/hdr_rcc.h"
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | Device
@@ -121,14 +122,49 @@
 #define SPIx_SCK_GPIO						GPIOA
 #define SPIx_SCK_PIN						GPIO_PIN_5
 #define SPIx_SCK_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
+#define SPIx_CS_GPIO						GPIOA
+#define SPIx_CS_PIN							GPIO_PIN_4
+#define SPIx_CS_CONFIGURATION				GPIO_OUT_PP_40MHz
+
+#define RCC_AHBENR_SPIx_DMAxEN_bb			RCC_AHBENR_DMA1EN_bb
+
+#define SPIx_DMAx_TX_CH						DMA1_Channel3
+#define SPIx_DMAx_TX_CH_IRQn				DMA1_Channel3_IRQn
+#define SPIx_DMAx_TX_CH_IRQHandler			DMA1_Channel3_IRQHandler
+#define SPIx_DMAx_TX_IFCR_CTCIFx_bb			DMA1_IFCR_CTCIF3_bb
+#define SPIx_DMAx_RX_CH						DMA1_Channel2
+#define SPIx_DMAx_RX_CH_IRQn				DMA1_Channel2_IRQn
+#define SPIx_DMAx_RX_CH_IRQHandler			DMA1_Channel2_IRQHandler
+#define SPIx_DMAx_RX_IFCR_CTCIFx_bb			DMA1_IFCR_CTCIF2_bb
+
+#define SPIx_RX_QUEUE_LENGTH				16
+#define SPIx_RX_QUEUE_BUFFER_LENGTH			16
+#define SPIx_TX_QUEUE_LENGTH				16
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | SD card
 +---------------------------------------------------------------------------------------------------------------------*/
 
-#define SD_CS_GPIO							GPIOC
+#define SD_SPI								SPI2
+
+#define RCC_APBxENR_SD_SPIxEN_bb			RCC_APB1ENR_SPI2EN_bb
+
+#define SD_CS_GPIO							GPIOB
 #define SD_CS_PIN							GPIO_PIN_12
+#define SD_CS_CONFIGURATION					GPIO_OUT_PP_40MHz
+#define SD_SCK_GPIO							GPIOB
+#define SD_SCK_PIN							GPIO_PIN_13
+#define SD_SCK_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
+#define SD_MISO_GPIO						GPIOB
+#define SD_MISO_PIN							GPIO_PIN_14
+#define SD_MISO_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
+#define SD_MOSI_GPIO						GPIOB
+#define SD_MOSI_PIN							GPIO_PIN_15
+#define SD_MOSI_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
+
 #define SD_CS_bb							BITBAND(&SD_CS_GPIO->ODR, SD_CS_PIN)
+
+#define	SD_SPI_SR_RXNE_bb					SPI2_SR_RXNE_bb
 
 #define SD_CS_ASSERTED						0
 #define SD_CS_DEASSERTED					1
@@ -163,4 +199,7 @@
 #define USARTx_DMAx_TX_CH_IRQ_PRIORITY		10
 #define USARTx_IRQ_PRIORITY					10
 #define TIM6_IRQ_PRIORITY					10
+#define SPIx_DMAx_TX_CH_IRQ_PRIORITY		10
+#define SPIx_DMAx_RX_CH_IRQ_PRIORITY		10
+
 #endif /* CONFIG_H_ */

@@ -35,6 +35,8 @@
 #include "i2c.h"
 #include "comm-cmd.h"
 #include "serial.h"
+#include "SD.h"
+//#include "SD_test.h"
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local functions' declarations
@@ -115,6 +117,21 @@ xSemaphoreHandle xSemaphoreSW0 = NULL;
 xQueueHandle xQueue2 = NULL;
 
 
+
+
+typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
+
+#define  BufferSize     512
+
+uint8_t Buffer_Block_Tx[BufferSize], Buffer_Block_Rx[BufferSize];
+TestStatus TransferStatus1 = FAILED;
+uint8_t Status = 0;
+
+void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLenght, uint8_t Offset);
+TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
+
+
+
 int main(void)
 {
 	RCC_APB1ENR_PWREN_bb = 1;
@@ -130,9 +147,28 @@ int main(void)
 
 	i2cInitialize();
 
+	usartInitialize();
+
 	xQueue2 = xQueueCreate(1, sizeof(uint8_t));
 
 	enum Error error = usartInitialize();
+
+	Status = SD_Init();
+
+	//Status = SD_test(Buffer_Block_Tx, Buffer_Block_Rx, BufferSize);
+	Fill_Buffer(&Buffer_Block_Tx[0], BufferSize, 0x0);
+	SD_WriteBlock(&Buffer_Block_Tx[0], 0, BufferSize);
+	SD_ReadBlock(&Buffer_Block_Rx[0], 0, BufferSize);
+	TransferStatus1 = Buffercmp(Buffer_Block_Tx, Buffer_Block_Rx, BufferSize);
+	/*if (TransferStatus1 == PASSED)
+	{
+		return 0;
+	}
+	else
+	{
+	    return 1;
+	}*/
+
 //
 //	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
 //	ASSERT("f_mount()", fresult == FR_OK);
@@ -166,6 +202,33 @@ int main(void)
 	while (1)
 	{ }
 }
+
+void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLenght, uint8_t Offset)
+{
+	uint16_t IndexTmp;
+
+	/* Put in global buffer same values */
+	for( IndexTmp = 0; IndexTmp < BufferLenght; IndexTmp++ )
+	{
+		pBuffer[IndexTmp] = IndexTmp + Offset;
+	}
+}
+
+TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
+{
+	while (BufferLength--)
+	{
+		if (*pBuffer1 != *pBuffer2)
+		{
+			return FAILED;
+	    }
+
+	    pBuffer1++;
+	    pBuffer2++;
+	}
+	return PASSED;
+}
+
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local functions
@@ -251,6 +314,8 @@ static void _heartbeatTask(void *parameters)
 
 	uint8_t ile;
 
+	char string[10];
+
 	for(;;){
 		vTaskDelay(1000/portTICK_RATE_MS);
 
@@ -260,6 +325,9 @@ static void _heartbeatTask(void *parameters)
 		else	ile=0;
 
 		xQueueSend(xQueue2, ( void * ) &ile, (portTickType) 0 );
+
+		strcpy(string,"uBirds\r\n");
+		usartSendString(string, 10);
 
 		//Test interface
 		//LED2_bb ^= 1;

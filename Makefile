@@ -50,11 +50,11 @@ AS_DEFS =
 
 # additional directories with source files (absolute or relative paths to
 # folders with source files, current folder is always included)
-SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals
+SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals drivers/SD application
 
 # include directories (absolute or relative paths to additional folders with
 # headers, current folder is always included)
-INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals
+INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals drivers/SD application
 
 # library directories (absolute or relative paths to additional folders with
 # libraries)
@@ -66,7 +66,7 @@ LIBS =
 
 # optimization flags ("-O0" - no optimization, "-O1" - optimize, "-O2" -
 # optimize even more, "-Os" - optimize for size or "-O3" - optimize yet more) 
-OPTIMIZATION = -Os
+OPTIMIZATION = -O0
 
 # set to 1 to optimize size by removing unused code and data during link phase
 REMOVE_UNUSED = 1
