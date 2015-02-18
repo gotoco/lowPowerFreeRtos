@@ -14,6 +14,8 @@
 #include "hdr/hdr_spi.h"
 #include "gpio.h"
 #include "config.h"
+#include "spi.h"
+#include "rcc.h"
 
 SD_Error SD_Init()
 {
@@ -26,9 +28,29 @@ SD_Error SD_Init()
 	// Configuring SPI
 	RCC_APBxENR_SD_SPIxEN_bb = 1;
 	SD_SPI->CR1 = SPI_CR1_SSM | SPI_CR1_SSI | SPI_CR1_SPE | SPI_CR1_MSTR | SPI_CR1_CPOL | SPI_CR1_CPHA;	// software slave management, enable SPI, master mode
-	//SD_SPI->CRCPR = 7;
+	SD_SPI->CRCPR = 7;
 
-	return SD_RESPONSE_NO_ERROR;//(SD_GoIdleState());
+	SD_spiSetBaudRate(SPIx_BAUDRATE);
+
+	for(int i=0;i<100000;i++);
+
+	return (SD_GoIdleState());
+}
+
+uint32_t SD_spiSetBaudRate(uint32_t baud_rate)
+{
+	uint32_t real_baud_rate = rccGetCoreFrequency() / 2;	// max baud rate is f_PCLK / 2
+	uint32_t br = 0;
+
+	while (real_baud_rate > baud_rate && br < 7)	// max br value is 7, so enter the loop only if br is lower
+	{
+		real_baud_rate /= 2;
+		br++;
+	}
+
+	SD_SPI->CR1 = (SD_SPI->CR1 & ~SPI_CR1_BR) | (br << SPI_CR1_BR_bit);
+
+	return real_baud_rate;
 }
 
 void SD_WriteByte(uint8_t Data)

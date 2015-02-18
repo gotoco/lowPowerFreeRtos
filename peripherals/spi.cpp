@@ -28,6 +28,9 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "semphr.h"
+#include "error.h"
+#include "task.h"
+
 
 /*---------------------------------------------------------------------------------------------------------------------+
  | local functions' declarations
@@ -35,6 +38,7 @@
 
 static void _spiRxTask(void *parameters);
 static void _spiTxTask(void *parameters);
+static void _spiTxTestTask(void *parameters);
 
 /*---------------------------------------------------------------------------------------------------------------------+
  | local defines
@@ -75,7 +79,9 @@ void spiInitialize(void)
 
 	// Configuring SPI
 	RCC_APBxENR_SPIxEN_bb = 1;
-	SPIx->CR1 = SPI_CR1_SSM | SPI_CR1_SSI | SPI_CR1_SPE | SPI_CR1_MSTR;	// software slave management, enable SPI, master mode
+	SPIx->CR1 |= SPI_CR1_SSM | SPI_CR1_SSI | SPI_CR1_SPE | SPI_CR1_MSTR;	// software slave management, enable SPI, master mode
+	SPIx->CR2 |= SPI_CR2_TXDMAEN;  // enable Tx buffer DMA
+	SPIx->CR2 |= SPI_CR2_TXEIE;		// enable Tx buffer empty interrupt
 
 	// DMA
 	RCC_AHBENR_SPIx_DMAxEN_bb = 1;				// enable DMA
@@ -86,10 +92,10 @@ void spiInitialize(void)
 	NVIC_SetPriority(SPIx_DMAx_RX_CH_IRQn, SPIx_DMAx_RX_CH_IRQ_PRIORITY);// set DMA IRQ priority
 	NVIC_EnableIRQ(SPIx_DMAx_RX_CH_IRQn);	// enable DMA RX IRQ
 
-	//vSemaphoreCreateBinary(_dmaTxSemaphore);
+	vSemaphoreCreateBinary(_spiDmaTxSemaphore);
 
-	_spiTxQueue = xQueueCreate(SPIx_TX_QUEUE_LENGTH, 8);
-	_spiRxQueue = xQueueCreate(SPIx_RX_QUEUE_LENGTH, 8);
+	_spiTxQueue = xQueueCreate(SPIx_TX_QUEUE_LENGTH, sizeof(struct _spiTxMessage));
+	//_spiRxQueue = xQueueCreate(SPIx_RX_QUEUE_LENGTH, 8);
 }
 
 /**
@@ -150,35 +156,85 @@ size_t spiTransfer(const uint8_t *tx, uint8_t *rx, size_t length)
 	return rx_length;
 }
 
-void spiSend(uint8_t *tx, size_t length, portTickType ticks_to_wait)
+void spiSend(_spiTxMessage *message, portTickType ticks_to_wait)
 {
-	while(length--)
-	{
-		xQueueSend(_spiTxQueue, tx++, ticks_to_wait);
-	}
+	xQueueSend(_spiTxQueue, message, ticks_to_wait);
+}
+
+enum Error _initializeSpiDmaTask(void)
+{
+	spiInitialize();
+
+	spiSetBaudRate(SPIx_BAUDRATE);
+
+	portBASE_TYPE ret = xTaskCreate(_spiTxTask, (signed char*)"spiTxTask", SPI_TX_STACK_SIZE, NULL,
+			SPI_TX_TASK_PRIORITY, NULL);
+
+	return errorConvert_portBASE_TYPE(ret);
 }
 
 static void _spiTxTask(void *parameters)
 {
 	(void) parameters;
-	uint8_t tx;
 
 	while(1)
 	{
-		xQueueReceive(_spiTxQueue, &tx, portMAX_DELAY);	// get data to send
+		struct _spiTxMessage struktura;
+		xQueueReceive(_spiTxQueue, &struktura, portMAX_DELAY);	// get data to send
 
 		SPIx_DMAx_TX_CH->CCR = 0;				// disable channel
-		SPIx_DMAx_TX_CH->CMAR = (uint32_t) tx;	// source
+		SPIx_DMAx_TX_CH->CMAR = (uint32_t) struktura.tx;	// source
 		SPIx_DMAx_TX_CH->CPAR = (uint32_t) & SPIx->DR;	// destination
-		SPIx_DMAx_TX_CH->CNDTR = 1;	// length
+		SPIx_DMAx_TX_CH->CNDTR = struktura.length;	// length
 		// low priority, 8-bit source and destination, memory increment mode, memory to peripheral, transfer complete
 		// interrupt enable, enable channel
-		USARTx_DMAx_TX_CH->CCR = DMA_CCR_PL_LOW | DMA_CCR_MSIZE_8
+		SPIx_DMAx_TX_CH->CCR = DMA_CCR_PL_LOW | DMA_CCR_MSIZE_8
 				| DMA_CCR_PSIZE_8 | DMA_CCR_MINC | DMA_CCR_DIR |
 				DMA_CCR_TCIE | DMA_CCR_EN;
 	}
 }
 
+extern "C" void SPIx_DMAx_TX_CH_IRQHandler(void) __attribute__ ((interrupt));
+void SPIx_DMAx_TX_CH_IRQHandler(void)
+{
+	signed portBASE_TYPE higher_priority_task_woken;
 
+	xSemaphoreGiveFromISR(_spiDmaTxSemaphore, &higher_priority_task_woken);
+
+	SPIx_DMAx_TX_IFCR_CTCIFx_bb = 1;			// clear interrupt flag
+
+	portEND_SWITCHING_ISR(higher_priority_task_woken);
+}
+
+enum Error _initializeSpiDmaTestTask(void)
+{
+	portBASE_TYPE ret = xTaskCreate(_spiTxTestTask, (signed char*)"spiTxTestTask", SPI_TX_STACK_SIZE, NULL,
+			SPI_TX_TASK_PRIORITY, NULL);
+
+	return errorConvert_portBASE_TYPE(ret);
+}
+
+static void _spiTxTestTask(void *parameters)
+{
+	(void) parameters;
+	uint8_t bufor[10];
+	for(int i=0;i<10;i++)
+	{
+		bufor[i]=i+1;
+	}
+	static struct _spiTxMessage struktura;
+	struktura.length=10;
+	struktura.tx=bufor;
+
+	portTickType xLastHeartBeat;
+
+	xLastHeartBeat = xTaskGetTickCount();
+
+	while(1)
+	{
+		vTaskDelay(1000/portTICK_RATE_MS);
+		spiSend(&struktura, 100);
+	}
+}
 
 

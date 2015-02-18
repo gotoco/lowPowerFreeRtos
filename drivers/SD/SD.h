@@ -84,6 +84,8 @@ typedef enum
 
 SD_Error SD_Init(void);
 
+uint32_t SD_spiSetBaudRate(uint32_t baud_rate);
+
 void SD_WriteByte(uint8_t Data);
 
 uint8_t SD_ReadByte(void);

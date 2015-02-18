@@ -131,8 +131,6 @@ uint8_t Status = 0;
 void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLenght, uint8_t Offset);
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
-
-
 int main(void)
 {
 	RCC_APB1ENR_PWREN_bb = 1;
@@ -146,29 +144,41 @@ int main(void)
 
 	gpioInitialize();
 
-	spiInitialize();
+	enum Error error;
 
-	uint8_t tx=65;
+	error = _initializeSpiDmaTask();
+	ASSERT("_initializeSpiDmaTask()", error == ERROR_NONE);
 
-	while(1)
-	{
-		spiWrite(&tx,1);
-	}
+	error = _initializeSpiDmaTestTask();
+	ASSERT("_initializeSpiDmaTestTask()", error == ERROR_NONE);
+
+	// uruchomienie planisty
+	vTaskStartScheduler();
+
+
+	//uint8_t tx=65;
+
+//	while(1)
+//	{
+//		spiWrite(&tx,1);
+//	}
 
 	//i2cInitialize();
 
 	//usartInitialize();
 
-	xQueue2 = xQueueCreate(1, sizeof(uint8_t));
+	//xQueue2 = xQueueCreate(1, sizeof(uint8_t));
 
-	enum Error error;// = usartInitialize();
+	// = usartInitialize();
 
 	Status = SD_Init();
 
-	while(1)
-	{
-		SD_WriteByte(65);
-	}
+//	while(1)
+//	{
+//		SD_CS_bb=0;
+//		SD_WriteByte(65);
+//		SD_CS_bb=1;
+//	}
 
 	//Status = SD_test(Buffer_Block_Tx, Buffer_Block_Rx, BufferSize);
 	Fill_Buffer(&Buffer_Block_Tx[0], BufferSize, 0x0);
