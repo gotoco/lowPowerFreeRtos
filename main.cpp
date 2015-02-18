@@ -36,6 +36,7 @@
 #include "comm-cmd.h"
 #include "serial.h"
 #include "SD.h"
+#include "spi.h"
 //#include "SD_test.h"
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -145,15 +146,29 @@ int main(void)
 
 	gpioInitialize();
 
-	i2cInitialize();
+	spiInitialize();
 
-	usartInitialize();
+	uint8_t tx=65;
+
+	while(1)
+	{
+		spiWrite(&tx,1);
+	}
+
+	//i2cInitialize();
+
+	//usartInitialize();
 
 	xQueue2 = xQueueCreate(1, sizeof(uint8_t));
 
-	enum Error error = usartInitialize();
+	enum Error error;// = usartInitialize();
 
 	Status = SD_Init();
+
+	while(1)
+	{
+		SD_WriteByte(65);
+	}
 
 	//Status = SD_test(Buffer_Block_Tx, Buffer_Block_Rx, BufferSize);
 	Fill_Buffer(&Buffer_Block_Tx[0], BufferSize, 0x0);

@@ -26,9 +26,9 @@ SD_Error SD_Init()
 	// Configuring SPI
 	RCC_APBxENR_SD_SPIxEN_bb = 1;
 	SD_SPI->CR1 = SPI_CR1_SSM | SPI_CR1_SSI | SPI_CR1_SPE | SPI_CR1_MSTR | SPI_CR1_CPOL | SPI_CR1_CPHA;	// software slave management, enable SPI, master mode
-	SD_SPI->CRCPR = 7;
+	//SD_SPI->CRCPR = 7;
 
-	return (SD_GoIdleState());
+	return SD_RESPONSE_NO_ERROR;//(SD_GoIdleState());
 }
 
 void SD_WriteByte(uint8_t Data)
