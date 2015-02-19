@@ -163,13 +163,6 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 #define USART_RX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
 #define USART_RX_STACK_SIZE					256
 
-// Bluetooth Task
-#define BLUETOOTH_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
-#define BLUETOOTH_TASK_STACK_SIZE			312
-
-// Accelerometr Task
-#define ACC_TASK_PRIORITY					(tskIDLE_PRIORITY + 1)
-#define ACC_TASK_STACK_SIZE					256
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | Runtime stats configuration

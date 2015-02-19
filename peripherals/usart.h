@@ -20,6 +20,8 @@ enum Error usartInitialize(void);
 enum Error usartPrintf(portTickType ticks_to_wait, const char *format, ...);
 enum Error usartSendString(const char *string, portTickType ticks_to_wait);
 
+int usartPutCharacter(int c);
+
 #ifdef __cplusplus
 extern "C" {
 #endif

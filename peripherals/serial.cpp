@@ -46,8 +46,8 @@
 enum Error serialInitialize(void)
 {
 	RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
-	gpioConfigurePin(GPIOA, GPIO_PIN_2, GPIO_AF7_PP_40MHz_PULL_UP);
-	gpioConfigurePin(GPIOA, GPIO_PIN_3, GPIO_AF7_PP_40MHz_PULL_UP);
+	gpioConfigurePin(GPIOA, GPIOPIN_2, GPIO_AF7_PP_40MHz_PULL_UP);
+	gpioConfigurePin(GPIOA, GPIOPIN_3, GPIO_AF7_PP_40MHz_PULL_UP);
 
 	RCC_APB1ENR_USART2EN_bb = 1;			// enable USART in RCC
 

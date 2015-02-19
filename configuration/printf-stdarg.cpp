@@ -28,7 +28,9 @@
 
 #include <stdarg.h>
 
-#define putchar(c)							usartSendCharacter(c)
+#include "usart.h"
+
+#define putchar(c)							usartPutCharacter(c)
 
 static void printchar(char **str, int c)
 {

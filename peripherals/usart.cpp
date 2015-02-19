@@ -91,6 +91,16 @@ static char _outputBuffer[_OUTPUT_BUFFER_SIZE];
  +---------------------------------------------------------------------------------------------------------------------*/
 
 /**
+ * \brief PutCharacter on USART
+ */
+int usartPutCharacter(int c) {
+	while (!(USARTx_SR_TXE_bb(USARTx)));
+	USARTx->DR = c;
+
+	return 0;
+}
+
+/**
  * \brief Initializes USART
  *
  * Initializes USART
