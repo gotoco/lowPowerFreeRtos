@@ -167,7 +167,7 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 #define USART_RX_TASK_PRIORITY				(tskIDLE_PRIORITY + 2)
 #define USART_RX_STACK_SIZE					256
 
-
+#define CONTEXT_SWITCH()					vTaskDelay(0);
 /*---------------------------------------------------------------------------------------------------------------------+
 | Runtime stats configuration
 +---------------------------------------------------------------------------------------------------------------------*/

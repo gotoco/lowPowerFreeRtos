@@ -25,6 +25,7 @@
 #include "ff.h"
 
 //configuration package
+#include "power_management.h"
 #include "command.h"
 #include "config.h"
 #include "error.h"
@@ -63,6 +64,7 @@ static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_c
 		size_t output_buffer_length);
 static void _heartbeatTask(void *parameters);
 static enum Error _initializeHeartbeatTask(void);
+static enum Error _initializePowerSaveTask(void);
 static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
 		size_t output_buffer_length);
 static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
@@ -99,10 +101,7 @@ static const struct CommandDefinition _tasklistCommandDefinition =
 
 static FATFS _fileSystem;
 
-GPIOInitTypeDef GPIOInitStructure;
-
-void rtcConfig(void);
-void GPIO_SHOUTDOWN(void);
+extern void power_save_task(void *parameters);
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | root task
@@ -122,48 +121,21 @@ int main(void)
 	error = _initializeHeartbeatTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
-	rtcConfig();
+	error = _initializePowerSaveTask();
+	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
 	gpioInitialize();
 
-	for(int i=0; i<20; i++){
-		LED1_bb ^= 1;
+	/*	Special delay for debugging because after scheduler start
+	 * 	it may be hard to catch core in run mode to connect to debugger
+	 */
+	for(int i=0; i<20; i++){ LED1_bb ^= 1; for(int i=0; i<1000000; i++); }
 
-		for(int i=0; i<1000000; i++);
-	}
-	  while (1)
-	  {
+	commandRegister(&_dirCommandDefinition);
+	commandRegister(&_runtimestatsCommandDefinition);
+	commandRegister(&_tasklistCommandDefinition);
 
-
-	    /* Enable Wakeup Counter */
-	    RTC_WakeUpCmd(ENABLE);
-	    GPIO_SHOUTDOWN();
-	    /* Enter Stop Mode */
-	    PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
-
-	    /* Enable Wakeup Counter */
-	    RTC_WakeUpCmd(DISABLE);
-
-	    /* After wake-up from STOP reconfigure the system clock */
-		_configureHSI();
-
-		rccStartPll(RCC_PLL_INPUT_HSI, HSI_VALUE, FREQUENCY);
-
-		gpioInitialize();
-
-		for(int i=0; i<3; i++){
-			LED1_bb ^= 1;
-
-			for(int j=0; j<100000; j++);
-		}
-
-	  }
-
-//	commandRegister(&_dirCommandDefinition);
-//	commandRegister(&_runtimestatsCommandDefinition);
-//	commandRegister(&_tasklistCommandDefinition);
-//
-//	vTaskStartScheduler();
+	vTaskStartScheduler();
 
 	while (1)
 	{ }
@@ -177,29 +149,6 @@ void GPIO_Init(void)
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN | RCC_AHBENR_GPIOBEN | RCC_AHBENR_GPIOCEN | RCC_AHBENR_GPIODEN |
 			RCC_AHBENR_GPIOEEN | RCC_AHBENR_GPIOHEN;
 
-}
-
-void GPIO_SHOUTDOWN(void)
-{
-	  /* Configure all GPIO as analog to reduce current consumption on non used IOs */
-	  /* Enable GPIOs clock */
-	  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC |
-	                        RCC_AHBPeriph_GPIOD | RCC_AHBPeriph_GPIOE | RCC_AHBPeriph_GPIOH, ENABLE);
-
-	  GPIOInitStructure.GPIO_Mode = GPIO_Mode_AN;
-	  GPIOInitStructure.GPIO_Speed = GPIO_Speed_40MHz;
-	  GPIOInitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	  GPIOInitStructure.GPIO_Pin = GPIO_Pin_All;
-	  GPIO_Init(GPIOC, &GPIOInitStructure);
-	  GPIO_Init(GPIOD, &GPIOInitStructure);
-	  GPIO_Init(GPIOE, &GPIOInitStructure);
-	  GPIO_Init(GPIOH, &GPIOInitStructure);
-	  GPIO_Init(GPIOA, &GPIOInitStructure);
-	  GPIO_Init(GPIOB, &GPIOInitStructure);
-
-	  /* Disable GPIOs clock */
-	  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC |
-	                        RCC_AHBPeriph_GPIOD | RCC_AHBPeriph_GPIOE | RCC_AHBPeriph_GPIOH, DISABLE);
 }
 
 static void _sysInit(void)
@@ -356,6 +305,21 @@ static enum Error _initializeHeartbeatTask(void)
 }
 
 /**
+ * \brief Initialization of power save task
+ *
+ * \return ERROR_NONE if the task was successfully created and added to a ready list, otherwise an error code defined in
+ * the file error.h
+ */
+
+static enum Error _initializePowerSaveTask(void)
+{
+	portBASE_TYPE ret = xTaskCreate(power_save_task, (signed char*)"power_save_task", POWER_OFF_TASK_STACK_SIZE, NULL,
+			POWER_OFF_TASK_PRIORITY, NULL);
+
+	return errorConvert_portBASE_TYPE(ret);
+}
+
+/**
  * \brief Handler of 'runtimestats' command.
  *
  * Handler of 'runtimestats' command. Displays all tasks with their info.
@@ -440,62 +404,4 @@ static enum Error _tasklistHandler(const char **arguments_array, uint32_t argume
 	return error;
 }
 
-/**
-  * @brief  Configures the RTC Wakeup.
-  * @param  None
-  * @retval None
-  */
-void rtcConfig(void)
-{
-  NVIC_InitTypeDef  NVIC_InitStructure;
-  EXTI_InitTypeDef  EXTI_InitStructure;
 
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
-
-  /*!< Allow access to RTC */
-  PWR_RTCAccessCmd(ENABLE);
-
-  /*!< Reset RTC Domain */
-  RCC_RTCResetCmd(ENABLE);
-  RCC_RTCResetCmd(DISABLE);
-
-	/* The RTC Clock may varies due to LSI frequency dispersion. */
-	/* Enable the LSI OSC */
-	RCC_LSICmd(ENABLE);
-
-	/* Wait till LSI is ready */
-	while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET) {
-	}
-
-	/* Select the RTC Clock Source */
-	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
-
-
-  /*!< Enable the RTC Clock */
-  RCC_RTCCLKCmd(ENABLE);
-
-  /*!< Wait for RTC APB registers synchronisation */
-  RTC_WaitForSynchro();
-
-  /* EXTI configuration *******************************************************/
-  EXTI_ClearITPendingBit(EXTI_Line20);
-  EXTI_InitStructure.EXTI_Line = EXTI_Line20;
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-
-  /* Enable the RTC Wakeup Interrupt */
-  NVIC_InitStructure.NVIC_IRQChannel = RTC_WKUP_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-
-  /* RTC Wakeup Interrupt Generation: Clock Source: RTCDiv_16, Wakeup Time Base: 4s */
-  RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div16);
-  RTC_SetWakeUpCounter(0x1FFF);
-
-  /* Enable the Wakeup Interrupt */
-  RTC_ITConfig(RTC_IT_WUT, ENABLE);
-}
