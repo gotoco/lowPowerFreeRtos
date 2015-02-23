@@ -35,6 +35,8 @@
 #include "stm32l1xx_hal.h"
 #include "stm32l1xx.h"
 #include "stm32l1xx_it.h"
+#include "rtc.h"
+#include "exti.h"
 
 /* External variables --------------------------------------------------------*/
 
@@ -55,5 +57,21 @@ void USB_LP_IRQHandler(void)
 
 }
 
+/**
+  * @brief  This function handles RTC Auto wake-up interrupt request.
+  * @param  None
+  * @retval None
+  */
+extern "C" void RTC_WKUP_IRQHandler(void) __attribute((interrupt));
+void RTC_WKUP_IRQHandler(void)
+{
+  if(RTC_GetITStatus(RTC_IT_WUT) != RESET)
+  {
+    /* Toggle LED1 */
+//    STM_EVAL_LEDToggle(LED1);
+    RTC_ClearITPendingBit(RTC_IT_WUT);
+    EXTI_ClearITPendingBit(EXTI_Line20);
+  }
+}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

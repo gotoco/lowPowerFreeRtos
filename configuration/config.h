@@ -28,6 +28,45 @@
 #define USING_HSI							0
 
 #define USING_HSE							1
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| RTC
++---------------------------------------------------------------------------------------------------------------------*/
+#define RTC_CLOCK_SOURCE					RTC_CLOCK_SOURCE_LSI
+#define RTC_CLOCK_SOURCE_LSE   				0	/* LSE used as RTC source clock */
+#define RTC_CLOCK_SOURCE_LSI   				1	/* LSI used as RTC source clock. The RTC Clock may varies due to LSI frequency dispersion. */
+
+#define RTC_HOUR_FORMAT_CONF				RTC_HourFormat_24 /* Specifies the RTC Hour Format. This parameter can be a value of \ref RTC_Hour_Formats */
+#define RTC_ASYNCH_PREDIV_CONF				0x7F //__EXT_AsynchPrediv  	AsynchPrediv = 0x7F;
+#define RTC_SYNCH_PREDIV_CONF				0xFF //__EXT_SynchPrediv 	SynchPrediv  = 0xFF;
+
+#define RTC_ALARM_ENABLE					1
+
+#define RTC_BACKUP_DOMAIN_PASSWORD			0x32F2		//REG0 value to identify RTC configuration
+
+#define RTC_DEFAULT_TIME_CONFIGUTATION 		1	//define if at start RTC will get default Date and Time
+
+#define RTC_DEFAULT_DATE_YEARS				1
+#define RTC_DEFAULT_DATE_MONTH				RTC_Month_January
+#define RTC_DEFAULT_DATE_DAY				1
+#define RTC_DEFAULT_DATE_WEEKDAY			RTC_Weekday_Monday
+
+#define RTC_DEFAULT_TIME_SECOND				12
+#define RTC_DEFAULT_TIME_MINUTES			12
+#define RTC_DEFAULT_TIME_HOURS				12
+#define RTC_DEFAULT_TIME_AM_PM_BASE			RTC_H12_AM
+
+#define RTC_DEFAULT_ALARM_CONFIGUTATION 	1	//define if at start RTC will get default Alarm configured
+
+#define RTC_ALARM_DEFAULT_TIME_SECOND		30
+#define RTC_ALARM_DEFAULT_TIME_MINUTES		12
+#define RTC_ALARM_DEFAULT_TIME_HOURS		12
+#define RTC_ALARM_DEFAULT_TIME_AM_PM_BASE	RTC_H12_AM
+
+#define RTC_ALARM_DEFAULT_DATE_WEEK			0x31
+#define RTC_ALARM_DEFAULT_DATE_DAYSEL		RTC_AlarmDateWeekDaySel_Date
+#define RTC_ALARM_DEFAULT_ALARM_MASK		RTC_AlarmMask_DateWeekDay
+
 /*---------------------------------------------------------------------------------------------------------------------+
 | USART
 +---------------------------------------------------------------------------------------------------------------------*/
@@ -146,7 +185,10 @@
 | interript priorities
 +---------------------------------------------------------------------------------------------------------------------*/
 
-#define assert_param( x )		/*print dbg assert*/ if( ( x ) == 0 ) while( true )		//When assert fail stop
+#define assert_param( x )		/*print dbg assert*/ if( ( x ) == 0 ) while( 1 )		//When assert fail stop
 
+#define periph_assert( x )		if( ( x ) == 0 ) { for( ;; ); }
+
+#define __IS_FUNCTIONAL_STATE(STATE) (((STATE) == DISABLE) || ((STATE) == ENABLE))
 
 #endif /* CONFIG_H_ */

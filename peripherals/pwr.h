@@ -118,7 +118,7 @@ typedef struct
 
     uint32_t Mode;      /*!< Mode: Specifies the operating mode for the selected pins.
                            This parameter can be a value of @ref PWR_PVD_Mode */
-}PWR_PVDTypeDef;
+}PWR_PVDTypeDef_t;
 
 /**
   *  PWR_Flags
