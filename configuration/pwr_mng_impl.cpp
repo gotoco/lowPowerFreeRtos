@@ -54,29 +54,31 @@ static void _startPLL(void)
 /**
  * \brief power save task to run when there is no other work to do by system
  */
-void power_save_task(void *parameters)
+void system_idle_task(void *parameters)
 {
-
-
 	  while (1)
 	  {
-	    /* Enable Wakeup Counter */
-	    RTC_WakeUpCmd(ENABLE);
-//	    GPIO_SHOUTDOWN();
+		  vTaskSuspendAll();
+		  {
+			    /* Enable Wakeup Counter */
+			    RTC_WakeUpCmd(ENABLE);
+			    GPIO_SHOUTDOWN();
 
-	    /* Enter Stop Mode */
-	    /* After this microcontroller will be invisible for debuger and will be able
-	     * to wakup only by RESET PIN or RTC wakeup
-	     */
-	    PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
+			    /* Enter Stop Mode */
+			    /* After this microcontroller will be invisible for debuger and will be able
+			     * to wakup only by RESET PIN or RTC wakeup
+			     */
+			    PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
 
-	    /* Enable Wakeup Counter */
-	    RTC_WakeUpCmd(DISABLE);
+			    /* Enable Wakeup Counter */
+			    RTC_WakeUpCmd(DISABLE);
 
-	    /* After wake-up from STOP reconfigure the system clock */
-		_configureHSI();
+			    /* After wake-up from STOP reconfigure the system clock */
+				_configureHSI();
 
-		rccStartPll(RCC_PLL_INPUT_HSI, HSI_VALUE, FREQUENCY);
+				rccStartPll(RCC_PLL_INPUT_HSI, HSI_VALUE, FREQUENCY);
+		  }
+		  xTaskResumeAll();
 
 		gpioInitialize();
 		gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
@@ -88,7 +90,6 @@ void power_save_task(void *parameters)
 		vTaskDelay(10/portTICK_RATE_MS);//CONTEXT_SWITCH();
 	  }
 }
-
 
 void GPIO_SHOUTDOWN(void)
 {
@@ -105,8 +106,9 @@ void GPIO_SHOUTDOWN(void)
 	  GPIO_Init(GPIOD, &GPIOInitStructure);
 	  GPIO_Init(GPIOE, &GPIOInitStructure);
 	  GPIO_Init(GPIOH, &GPIOInitStructure);
-	  GPIO_Init(GPIOA, &GPIOInitStructure);
-	  GPIO_Init(GPIOB, &GPIOInitStructure);
+
+//	  GPIO_Init(GPIOA, &GPIOInitStructure);
+//	  GPIO_Init(GPIOB, &GPIOInitStructure);
 
 	  /* Disable GPIOs clock */
 	  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC |

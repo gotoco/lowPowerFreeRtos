@@ -14,6 +14,6 @@
 /**
  * \brief power save task to run when there is no other work to do by system
  */
-void power_save_task(void *parameters);
+void system_idle_task(void *parameters);
 
 #endif  // POWER_MANAGEMENT_H_

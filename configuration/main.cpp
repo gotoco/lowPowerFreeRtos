@@ -101,7 +101,6 @@ static const struct CommandDefinition _tasklistCommandDefinition =
 
 static FATFS _fileSystem;
 
-extern void power_save_task(void *parameters);
 void rtcConfig(void);
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -130,7 +129,7 @@ int main(void)
 	/*	Special delay for debugging because after scheduler start
 	 * 	it may be hard to catch core in run mode to connect to debugger
 	 */
-	for(int i=0; i<20; i++){ LED1_bb ^= 1; for(int i=0; i<1000000; i++); }
+	for(int i=0; i<10; i++){ LED1_bb ^= 1; for(int i=0; i<1000000; i++); }
 
 	commandRegister(&_dirCommandDefinition);
 	commandRegister(&_runtimestatsCommandDefinition);
@@ -285,7 +284,7 @@ static void _heartbeatTask(void *parameters)
 		for(int i=0; i<700000; i++) a = 2*b+1; //do some fake calculations
 		LED1_bb ^= 1;
 
-		vTaskDelay(10/portTICK_RATE_MS);	//Then go sleep
+		vTaskDelay(100/portTICK_RATE_MS);	//Then go sleep
 	}
 
 }
@@ -316,7 +315,7 @@ static enum Error _initializeHeartbeatTask(void)
 
 static enum Error _initializePowerSaveTask(void)
 {
-	portBASE_TYPE ret = xTaskCreate(power_save_task, (signed char*)"power_save_task", POWER_OFF_TASK_STACK_SIZE, NULL,
+	portBASE_TYPE ret = xTaskCreate(system_idle_task, (signed char*)"system_idle_task", POWER_OFF_TASK_STACK_SIZE, NULL,
 			POWER_OFF_TASK_PRIORITY, NULL);
 
 	return errorConvert_portBASE_TYPE(ret);
@@ -460,8 +459,8 @@ void rtcConfig(void)
   NVIC_Init(&NVIC_InitStructure);
 
   /* RTC Wakeup Interrupt Generation: Clock Source: RTCDiv_16, Wakeup Time Base: 4s */
-  RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div16);
-  RTC_SetWakeUpCounter(0x1FFF);
+  RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div4);
+  RTC_SetWakeUpCounter(0x1FFF); //(0x320) ;
 
   /* Enable the Wakeup Interrupt */
   RTC_ITConfig(RTC_IT_WUT, ENABLE);
