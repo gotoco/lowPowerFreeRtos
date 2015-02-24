@@ -37,6 +37,11 @@
 #include "stm32l1xx_it.h"
 #include "rtc.h"
 #include "exti.h"
+#include "st_rcc.h"
+#include "rcc.h"
+#include "pwr.h"
+
+#include "hdr/hdr_rcc.h"
 
 /* External variables --------------------------------------------------------*/
 

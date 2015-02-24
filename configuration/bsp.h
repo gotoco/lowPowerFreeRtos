@@ -18,8 +18,8 @@
 +---------------------------------------------------------------------------------------------------------------------*/
 
 #define LED_GPIO							GPIOB	///< GPIO port to which the LED is connected
-#define LED_pin								GPIOPIN_6	///< pin number of the LED
-#define LED_pin_1							GPIOPIN_7	///< pin number of the LED1
+#define LED_pin								GPIOPIN_7	///< pin number of the LED
+#define LED_pin_1							GPIOPIN_6	///< pin number of the LED1
 #define LED_pin_2							GPIOPIN_13	///< pin number of the LED2
 #define LED_pin_3							GPIOPIN_14	///< pin number of the LED3
 

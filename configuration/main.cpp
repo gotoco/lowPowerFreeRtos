@@ -102,6 +102,7 @@ static const struct CommandDefinition _tasklistCommandDefinition =
 static FATFS _fileSystem;
 
 extern void power_save_task(void *parameters);
+void rtcConfig(void);
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | root task
@@ -159,6 +160,8 @@ static void _sysInit(void)
 	_configureHSI();
 
 	rccStartPll(RCC_PLL_INPUT_HSI, HSI_VALUE, FREQUENCY);
+
+	rtcConfig();
 }
 
 static void _setVCore(void)
@@ -279,7 +282,7 @@ static void _heartbeatTask(void *parameters)
 		gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
 
 		LED1_bb ^= 1;
-		for(int i=0; i<10000; i++) a = 2*b+1; //do some fake calculations
+		for(int i=0; i<700000; i++) a = 2*b+1; //do some fake calculations
 		LED1_bb ^= 1;
 
 		vTaskDelay(10/portTICK_RATE_MS);	//Then go sleep
@@ -402,6 +405,66 @@ static enum Error _tasklistHandler(const char **arguments_array, uint32_t argume
 	vPortFree(buffer);
 
 	return error;
+}
+
+/**
+  * @brief  Configures the RTC Wakeup.
+  * @param  None
+  * @retval None
+  */
+void rtcConfig(void)
+{
+  NVIC_InitTypeDef  NVIC_InitStructure;
+  EXTI_InitTypeDef  EXTI_InitStructure;
+
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
+
+  /*!< Allow access to RTC */
+  PWR_RTCAccessCmd(ENABLE);
+
+  /*!< Reset RTC Domain */
+  RCC_RTCResetCmd(ENABLE);
+  RCC_RTCResetCmd(DISABLE);
+
+	/* The RTC Clock may varies due to LSI frequency dispersion. */
+	/* Enable the LSI OSC */
+	RCC_LSICmd(ENABLE);
+
+	/* Wait till LSI is ready */
+	while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET) {
+	}
+
+	/* Select the RTC Clock Source */
+	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+
+
+  /*!< Enable the RTC Clock */
+  RCC_RTCCLKCmd(ENABLE);
+
+  /*!< Wait for RTC APB registers synchronisation */
+  RTC_WaitForSynchro();
+
+  /* EXTI configuration *******************************************************/
+  EXTI_ClearITPendingBit(EXTI_Line20);
+  EXTI_InitStructure.EXTI_Line = EXTI_Line20;
+  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
+
+  /* Enable the RTC Wakeup Interrupt */
+  NVIC_InitStructure.NVIC_IRQChannel = RTC_WKUP_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+
+  /* RTC Wakeup Interrupt Generation: Clock Source: RTCDiv_16, Wakeup Time Base: 4s */
+  RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div16);
+  RTC_SetWakeUpCounter(0x1FFF);
+
+  /* Enable the Wakeup Interrupt */
+  RTC_ITConfig(RTC_IT_WUT, ENABLE);
 }
 
 
