@@ -124,7 +124,7 @@
 #define SPIx_SCK_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
 #define SPIx_CS_GPIO						GPIOA
 #define SPIx_CS_PIN							GPIO_PIN_4
-#define SPIx_CS_CONFIGURATION				GPIO_OUT_PP_40MHz
+#define SPIx_CS_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_UP
 
 #define RCC_AHBENR_SPIx_DMAxEN_bb			RCC_AHBENR_DMA1EN_bb
 
@@ -142,6 +142,8 @@
 #define SPIx_TX_QUEUE_LENGTH				16
 
 #define SPIx_BAUDRATE						1000
+
+#define SPIx_DMA_ENABLE						1
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | SD card

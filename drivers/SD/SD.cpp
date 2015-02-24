@@ -7,6 +7,10 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <stdint.h>
+#include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
 
 #include "SD.h"
 
@@ -80,9 +84,22 @@ void SD_SendCommand(uint8_t Cmd, uint32_t Arg, uint8_t Crc)
 	Frame[4] = (uint8_t)(Arg); /*!< Construct byte 5 */
 	Frame[5] = (Crc); /*!< Construct CRC: byte 6 */
 
-	for (uint8_t i = 0; i < 6; i++)
+	/*if(SPIx_DMA_ENABLE)
 	{
-		SD_WriteByte(Frame[i]); /*!< Send the Cmd bytes */
+		struct _spiTxMessage struktura;
+		struktura.length=6;
+
+		struktura.tx = (uint8_t*) pvPortMalloc(struktura.length);
+		memcpy(struktura.tx, Frame, struktura.length);
+
+		spiSend(&struktura, 10);
+	}
+	else*/
+	{
+		for (uint8_t i = 0; i < 6; i++)
+		{
+			SD_WriteByte(Frame[i]); /*!< Send the Cmd bytes */
+		}
 	}
 }
 
@@ -174,6 +191,48 @@ SD_Error SD_GoIdleState()
 }
 
 SD_Error SD_WriteBlock(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t BlockSize)
+{
+	uint32_t i = 0;
+	SD_Error rvalue = SD_RESPONSE_FAILURE;
+
+	SD_CS_bb=0;
+
+	/*!< Send CMD24 (SD_CMD_WRITE_SINGLE_BLOCK) to write multiple block */
+	SD_SendCommand(SD_CMD_WRITE_SINGLE_BLOCK, WriteAddr, 0xFF);
+
+	/*!< Check if the SD acknowledged the write block command: R1 response (0x00: no errors) */
+	if (!SD_GetResponse(SD_RESPONSE_NO_ERROR))
+	{
+		SD_WriteByte(SD_DUMMY_BYTE);
+
+		/*!< Send the data token to signify the start of the data */
+		SD_WriteByte(0xFE);
+
+		/*!< Write the block data to SD : write count data by block */
+		for (i = 0; i < BlockSize; i++)
+		{
+			/*!< Send the pointed byte */
+			SD_WriteByte(*pBuffer);
+			/*!< Point to the next location where the byte read will be saved */
+			pBuffer++;
+		}
+		/*!< Put CRC bytes (not really needed by us, but required by SD) */
+		SD_ReadByte();
+		SD_ReadByte();
+
+		/*!< Read data response */
+		if (SD_GetDataResponse() == SD_DATA_OK)
+		{
+			rvalue = SD_RESPONSE_NO_ERROR;
+		}
+	}
+	SD_CS_bb=1;
+	SD_WriteByte(SD_DUMMY_BYTE);
+
+	return rvalue;
+}
+
+SD_Error SD_DMA_WriteBlock(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t BlockSize)
 {
 	uint32_t i = 0;
 	SD_Error rvalue = SD_RESPONSE_FAILURE;

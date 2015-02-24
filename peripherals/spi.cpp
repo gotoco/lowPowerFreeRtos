@@ -56,6 +56,7 @@ extern char __ram_start[];					// imported from linker script
 static xQueueHandle _spiRxQueue;
 static xQueueHandle _spiTxQueue;
 static xSemaphoreHandle _spiDmaTxSemaphore;
+static xSemaphoreHandle _spiDmaRxSemaphore;
 
 //static char _inputBuffer[_INPUT_BUFFER_SIZE];
 //static char _outputBuffer[_OUTPUT_BUFFER_SIZE];
@@ -76,12 +77,13 @@ void spiInitialize(void)
 	gpioConfigurePin(SPIx_MISO_GPIO, SPIx_MISO_PIN, SPIx_MISO_CONFIGURATION);
 	gpioConfigurePin(SPIx_MOSI_GPIO, SPIx_MOSI_PIN, SPIx_MOSI_CONFIGURATION);
 	gpioConfigurePin(SPIx_SCK_GPIO, SPIx_SCK_PIN, SPIx_SCK_CONFIGURATION);
+	gpioConfigurePin(SPIx_CS_GPIO, SPIx_CS_PIN, SPIx_CS_CONFIGURATION);
 
 	// Configuring SPI
 	RCC_APBxENR_SPIxEN_bb = 1;
-	SPIx->CR1 |= SPI_CR1_SSM | SPI_CR1_SSI | SPI_CR1_SPE | SPI_CR1_MSTR;	// software slave management, enable SPI, master mode
-	SPIx->CR2 |= SPI_CR2_TXDMAEN;  // enable Tx buffer DMA
-	SPIx->CR2 |= SPI_CR2_TXEIE;		// enable Tx buffer empty interrupt
+	SPIx->CR1 |= /*SPI_CR1_SSM | SPI_CR1_SSI |*/ SPI_CR1_SPE | SPI_CR1_MSTR;	// software slave management, enable SPI, master mode
+	//SPIx->CR1 |= SPI_CR1_SSM | SPI_CR1_SSI;
+	SPIx->CR2 |= SPI_CR2_TXDMAEN | SPI_CR2_TXEIE | SPI_CR2_RXDMAEN | SPI_CR2_RXNEIE | SPI_CR2_SSOE;  	// enable Tx buffer DMA
 
 	// DMA
 	RCC_AHBENR_SPIx_DMAxEN_bb = 1;				// enable DMA
@@ -89,10 +91,11 @@ void spiInitialize(void)
 	NVIC_SetPriority(SPIx_DMAx_TX_CH_IRQn, SPIx_DMAx_TX_CH_IRQ_PRIORITY);	// set DMA IRQ priority
 	NVIC_EnableIRQ(SPIx_DMAx_TX_CH_IRQn);				// enable DMA TX IRQ
 
-	NVIC_SetPriority(SPIx_DMAx_RX_CH_IRQn, SPIx_DMAx_RX_CH_IRQ_PRIORITY);// set DMA IRQ priority
-	NVIC_EnableIRQ(SPIx_DMAx_RX_CH_IRQn);	// enable DMA RX IRQ
+	//NVIC_SetPriority(SPIx_DMAx_RX_CH_IRQn, SPIx_DMAx_RX_CH_IRQ_PRIORITY);// set DMA IRQ priority
+	//NVIC_EnableIRQ(SPIx_DMAx_RX_CH_IRQn);	// enable DMA RX IRQ
 
 	vSemaphoreCreateBinary(_spiDmaTxSemaphore);
+	//vSemaphoreCreateBinary(_spiDmaRxSemaphore);
 
 	_spiTxQueue = xQueueCreate(SPIx_TX_QUEUE_LENGTH, sizeof(struct _spiTxMessage));
 	//_spiRxQueue = xQueueCreate(SPIx_RX_QUEUE_LENGTH, 8);
@@ -180,6 +183,7 @@ static void _spiTxTask(void *parameters)
 	while(1)
 	{
 		struct _spiTxMessage struktura;
+
 		xQueueReceive(_spiTxQueue, &struktura, portMAX_DELAY);	// get data to send
 
 		SPIx_DMAx_TX_CH->CCR = 0;				// disable channel
@@ -194,6 +198,7 @@ static void _spiTxTask(void *parameters)
 	}
 }
 
+
 extern "C" void SPIx_DMAx_TX_CH_IRQHandler(void) __attribute__ ((interrupt));
 void SPIx_DMAx_TX_CH_IRQHandler(void)
 {
@@ -205,6 +210,19 @@ void SPIx_DMAx_TX_CH_IRQHandler(void)
 
 	portEND_SWITCHING_ISR(higher_priority_task_woken);
 }
+
+
+/*extern "C" void SPIx_DMAx_RX_CH_IRQHandler(void) __attribute__ ((interrupt));
+void SPIx_DMAx_RX_CH_IRQHandler(void)
+{
+	signed portBASE_TYPE higher_priority_task_woken;
+
+	xSemaphoreGiveFromISR(_spiDmaRxSemaphore, &higher_priority_task_woken);
+
+	SPIx_DMAx_RX_IFCR_CTCIFx_bb = 1;			// clear interrupt flag
+
+	portEND_SWITCHING_ISR(higher_priority_task_woken);
+}*/
 
 enum Error _initializeSpiDmaTestTask(void)
 {
@@ -237,4 +255,25 @@ static void _spiTxTestTask(void *parameters)
 	}
 }
 
+/*static void _spiRxTestTask(void *parameters)
+{
+	(void) parameters;
+	uint8_t bufor[10];
+	for(int i=0;i<10;i++)
+	{
+		bufor[i]=i+1;
+	}
+	static struct _spiTxMessage struktura;
+	struktura.length=10;
+	struktura.tx=bufor;
 
+	portTickType xLastHeartBeat;
+
+	xLastHeartBeat = xTaskGetTickCount();
+
+	while(1)
+	{
+		vTaskDelay(1000/portTICK_RATE_MS);
+		spiSend(&struktura, 100);
+	}
+}*/
