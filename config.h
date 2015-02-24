@@ -141,6 +141,8 @@
 #define SPIx_RX_QUEUE_BUFFER_LENGTH			16
 #define SPIx_TX_QUEUE_LENGTH				16
 
+#define SPIx_IRQHandler						SPI1_IRQHandler
+
 #define SPIx_BAUDRATE						1000
 
 #define SPIx_DMA_ENABLE						1

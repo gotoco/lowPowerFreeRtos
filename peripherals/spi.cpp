@@ -58,6 +58,8 @@ static xQueueHandle _spiTxQueue;
 static xSemaphoreHandle _spiDmaTxSemaphore;
 static xSemaphoreHandle _spiDmaRxSemaphore;
 
+static uint8_t rx_flag=0;
+
 //static char _inputBuffer[_INPUT_BUFFER_SIZE];
 //static char _outputBuffer[_OUTPUT_BUFFER_SIZE];
 
@@ -83,7 +85,7 @@ void spiInitialize(void)
 	RCC_APBxENR_SPIxEN_bb = 1;
 	SPIx->CR1 |= /*SPI_CR1_SSM | SPI_CR1_SSI |*/ SPI_CR1_SPE | SPI_CR1_MSTR;	// software slave management, enable SPI, master mode
 	//SPIx->CR1 |= SPI_CR1_SSM | SPI_CR1_SSI;
-	SPIx->CR2 |= SPI_CR2_TXDMAEN | SPI_CR2_TXEIE | SPI_CR2_RXDMAEN | SPI_CR2_RXNEIE | SPI_CR2_SSOE;  	// enable Tx buffer DMA
+	SPIx->CR2 |= SPI_CR2_TXDMAEN | SPI_CR2_TXEIE | SPI_CR2_RXNEIE | SPI_CR2_SSOE;  	// enable Tx buffer DMA
 
 	// DMA
 	RCC_AHBENR_SPIx_DMAxEN_bb = 1;				// enable DMA
@@ -98,7 +100,7 @@ void spiInitialize(void)
 	//vSemaphoreCreateBinary(_spiDmaRxSemaphore);
 
 	_spiTxQueue = xQueueCreate(SPIx_TX_QUEUE_LENGTH, sizeof(struct _spiTxMessage));
-	//_spiRxQueue = xQueueCreate(SPIx_RX_QUEUE_LENGTH, 8);
+	_spiRxQueue = xQueueCreate(SPIx_RX_QUEUE_LENGTH, sizeof(uint8_t));
 }
 
 /**
@@ -159,9 +161,31 @@ size_t spiTransfer(const uint8_t *tx, uint8_t *rx, size_t length)
 	return rx_length;
 }
 
-void spiSend(_spiTxMessage *message, portTickType ticks_to_wait)
+void spiDmaSend(_spiTxMessage *message, portTickType ticks_to_wait)
 {
 	xQueueSend(_spiTxQueue, message, ticks_to_wait);
+}
+
+void spiDmaSendDummy(uint32_t length, portTickType ticks_to_wait)
+{
+	_spiTxMessage struktura;
+	for(int i=0;i<length;i++)
+	{
+		struktura.tx=255;
+	}
+	struktura.length=length;
+	struktura.dummy=1;
+	spiDmaSend(&struktura, ticks_to_wait);
+}
+
+void spiDmaRead(uint8_t *rx, uint32_t length, portTickType ticks_to_wait)
+{
+	// tu odczyt po DMA (trzeba ładować w przerwaniu do struktury, a nie prosto do kolejki)
+	// Na razie odczyt bez DMA
+	for(int i=0;i<length;i++)
+	{
+		xQueueReceive(_spiRxQueue, rx++, portMAX_DELAY);	// get data from queue
+	}
 }
 
 enum Error _initializeSpiDmaTask(void)
@@ -186,6 +210,13 @@ static void _spiTxTask(void *parameters)
 
 		xQueueReceive(_spiTxQueue, &struktura, portMAX_DELAY);	// get data to send
 
+		xSemaphoreTake(_spiDmaTxSemaphore, portMAX_DELAY);	// wait for DMA to be free
+
+		if(struktura.dummy)
+		{
+			rx_flag=1;
+		}
+
 		SPIx_DMAx_TX_CH->CCR = 0;				// disable channel
 		SPIx_DMAx_TX_CH->CMAR = (uint32_t) struktura.tx;	// source
 		SPIx_DMAx_TX_CH->CPAR = (uint32_t) & SPIx->DR;	// destination
@@ -204,25 +235,14 @@ void SPIx_DMAx_TX_CH_IRQHandler(void)
 {
 	signed portBASE_TYPE higher_priority_task_woken;
 
+	rx_flag=0;
+
 	xSemaphoreGiveFromISR(_spiDmaTxSemaphore, &higher_priority_task_woken);
 
 	SPIx_DMAx_TX_IFCR_CTCIFx_bb = 1;			// clear interrupt flag
 
 	portEND_SWITCHING_ISR(higher_priority_task_woken);
 }
-
-
-/*extern "C" void SPIx_DMAx_RX_CH_IRQHandler(void) __attribute__ ((interrupt));
-void SPIx_DMAx_RX_CH_IRQHandler(void)
-{
-	signed portBASE_TYPE higher_priority_task_woken;
-
-	xSemaphoreGiveFromISR(_spiDmaRxSemaphore, &higher_priority_task_woken);
-
-	SPIx_DMAx_RX_IFCR_CTCIFx_bb = 1;			// clear interrupt flag
-
-	portEND_SWITCHING_ISR(higher_priority_task_woken);
-}*/
 
 enum Error _initializeSpiDmaTestTask(void)
 {
@@ -251,29 +271,25 @@ static void _spiTxTestTask(void *parameters)
 	while(1)
 	{
 		vTaskDelay(1000/portTICK_RATE_MS);
-		spiSend(&struktura, 100);
+		spiDmaSend(&struktura, 100);
 	}
 }
 
-/*static void _spiRxTestTask(void *parameters)
+extern "C" void SPIx_IRQHandler(void) __attribute__ ((interrupt));
+void SPIx_IRQHandler(void)
 {
-	(void) parameters;
-	uint8_t bufor[10];
-	for(int i=0;i<10;i++)
+	uint8_t rx;
+	portBASE_TYPE higher_priority_task_woken = pdFALSE;
+	while(SPIx_SR_RXNE_bb(SPIx))
 	{
-		bufor[i]=i+1;
+		if(rx_flag)
+		{
+			rx=SPIx->DR;
+			xQueueSendFromISR(_spiRxQueue, &rx, &higher_priority_task_woken);
+		}
+		else
+		{
+			rx=SPIx->DR;
+		}
 	}
-	static struct _spiTxMessage struktura;
-	struktura.length=10;
-	struktura.tx=bufor;
-
-	portTickType xLastHeartBeat;
-
-	xLastHeartBeat = xTaskGetTickCount();
-
-	while(1)
-	{
-		vTaskDelay(1000/portTICK_RATE_MS);
-		spiSend(&struktura, 100);
-	}
-}*/
+}

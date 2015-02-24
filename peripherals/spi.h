@@ -18,8 +18,9 @@
 /// message for SPI TX queue
 struct _spiTxMessage
 {
-	size_t length;			///< number of uint8_t to send
+	size_t length=0;			///< number of uint8_t to send
 	uint8_t *tx;			///< pointer to table of uints, either in flash or in dynamic buffer
+	uint8_t dummy=0;			///< if set message contains dummy bytes
 };
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -39,7 +40,7 @@ uint32_t spiSetBaudRate(uint32_t baud_rate);
 
 size_t spiTransfer(const uint8_t *tx, uint8_t *rx, size_t length);
 
-void spiSend(_spiTxMessage *message, portTickType ticks_to_wait);
+void spiDmaSend(_spiTxMessage *message, portTickType ticks_to_wait);
 
 enum Error _initializeSpiDmaTask(void);
 
