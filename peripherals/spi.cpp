@@ -161,12 +161,12 @@ size_t spiTransfer(const uint8_t *tx, uint8_t *rx, size_t length)
 	return rx_length;
 }
 
-void spiDmaSend(_spiTxMessage *message, portTickType ticks_to_wait)
+/*void spiDmaSend(_spiTxMessage *message, portTickType ticks_to_wait)
 {
 	xQueueSend(_spiTxQueue, message, ticks_to_wait);
-}
+}*/
 
-void spiDmaSendDummy(uint32_t length, portTickType ticks_to_wait)
+/*void spiDmaSendDummy(uint32_t length, portTickType ticks_to_wait)
 {
 	_spiTxMessage struktura;
 	for(int i=0;i<length;i++)
@@ -176,9 +176,9 @@ void spiDmaSendDummy(uint32_t length, portTickType ticks_to_wait)
 	struktura.length=length;
 	struktura.dummy=1;
 	spiDmaSend(&struktura, ticks_to_wait);
-}
+}*/
 
-void spiDmaRead(uint8_t *rx, uint32_t length, portTickType ticks_to_wait)
+/*void spiDmaRead(uint8_t *rx, uint32_t length, portTickType ticks_to_wait)
 {
 	// tu odczyt po DMA (trzeba ładować w przerwaniu do struktury, a nie prosto do kolejki)
 	// Na razie odczyt bez DMA
@@ -186,110 +186,110 @@ void spiDmaRead(uint8_t *rx, uint32_t length, portTickType ticks_to_wait)
 	{
 		xQueueReceive(_spiRxQueue, rx++, portMAX_DELAY);	// get data from queue
 	}
-}
+}*/
 
-enum Error _initializeSpiDmaTask(void)
-{
-	spiInitialize();
+//enum Error _initializeSpiDmaTask(void)
+//{
+//	spiInitialize();
+//
+//	spiSetBaudRate(SPIx_BAUDRATE);
+//
+//	portBASE_TYPE ret = xTaskCreate(_spiTxTask, (signed char*)"spiTxTask", SPI_TX_STACK_SIZE, NULL,
+//			SPI_TX_TASK_PRIORITY, NULL);
+//
+//	return errorConvert_portBASE_TYPE(ret);
+//}
 
-	spiSetBaudRate(SPIx_BAUDRATE);
-
-	portBASE_TYPE ret = xTaskCreate(_spiTxTask, (signed char*)"spiTxTask", SPI_TX_STACK_SIZE, NULL,
-			SPI_TX_TASK_PRIORITY, NULL);
-
-	return errorConvert_portBASE_TYPE(ret);
-}
-
-static void _spiTxTask(void *parameters)
-{
-	(void) parameters;
-
-	while(1)
-	{
-		struct _spiTxMessage struktura;
-
-		xQueueReceive(_spiTxQueue, &struktura, portMAX_DELAY);	// get data to send
-
-		xSemaphoreTake(_spiDmaTxSemaphore, portMAX_DELAY);	// wait for DMA to be free
-
-		if(struktura.dummy)
-		{
-			rx_flag=1;
-		}
-
-		SPIx_DMAx_TX_CH->CCR = 0;				// disable channel
-		SPIx_DMAx_TX_CH->CMAR = (uint32_t) struktura.tx;	// source
-		SPIx_DMAx_TX_CH->CPAR = (uint32_t) & SPIx->DR;	// destination
-		SPIx_DMAx_TX_CH->CNDTR = struktura.length;	// length
-		// low priority, 8-bit source and destination, memory increment mode, memory to peripheral, transfer complete
-		// interrupt enable, enable channel
-		SPIx_DMAx_TX_CH->CCR = DMA_CCR_PL_LOW | DMA_CCR_MSIZE_8
-				| DMA_CCR_PSIZE_8 | DMA_CCR_MINC | DMA_CCR_DIR |
-				DMA_CCR_TCIE | DMA_CCR_EN;
-	}
-}
+//static void _spiTxTask(void *parameters)
+//{
+//	(void) parameters;
+//
+//	while(1)
+//	{
+//		struct _spiTxMessage struktura;
+//
+//		xQueueReceive(_spiTxQueue, &struktura, portMAX_DELAY);	// get data to send
+//
+//		xSemaphoreTake(_spiDmaTxSemaphore, portMAX_DELAY);	// wait for DMA to be free
+//
+//		if(struktura.dummy)
+//		{
+//			rx_flag=1;
+//		}
+//
+//		SPIx_DMAx_TX_CH->CCR = 0;				// disable channel
+//		SPIx_DMAx_TX_CH->CMAR = (uint32_t) struktura.tx;	// source
+//		SPIx_DMAx_TX_CH->CPAR = (uint32_t) & SPIx->DR;	// destination
+//		SPIx_DMAx_TX_CH->CNDTR = struktura.length;	// length
+//		// low priority, 8-bit source and destination, memory increment mode, memory to peripheral, transfer complete
+//		// interrupt enable, enable channel
+//		SPIx_DMAx_TX_CH->CCR = DMA_CCR_PL_LOW | DMA_CCR_MSIZE_8
+//				| DMA_CCR_PSIZE_8 | DMA_CCR_MINC | DMA_CCR_DIR |
+//				DMA_CCR_TCIE | DMA_CCR_EN;
+//	}
+//}
 
 
-extern "C" void SPIx_DMAx_TX_CH_IRQHandler(void) __attribute__ ((interrupt));
-void SPIx_DMAx_TX_CH_IRQHandler(void)
-{
-	signed portBASE_TYPE higher_priority_task_woken;
+//extern "C" void SPIx_DMAx_TX_CH_IRQHandler(void) __attribute__ ((interrupt));
+//void SPIx_DMAx_TX_CH_IRQHandler(void)
+//{
+//	signed portBASE_TYPE higher_priority_task_woken;
+//
+//	rx_flag=0;
+//
+//	xSemaphoreGiveFromISR(_spiDmaTxSemaphore, &higher_priority_task_woken);
+//
+//	SPIx_DMAx_TX_IFCR_CTCIFx_bb = 1;			// clear interrupt flag
+//
+//	portEND_SWITCHING_ISR(higher_priority_task_woken);
+//}
 
-	rx_flag=0;
+//enum Error _initializeSpiDmaTestTask(void)
+//{
+//	portBASE_TYPE ret = xTaskCreate(_spiTxTestTask, (signed char*)"spiTxTestTask", SPI_TX_STACK_SIZE, NULL,
+//			SPI_TX_TASK_PRIORITY, NULL);
+//
+//	return errorConvert_portBASE_TYPE(ret);
+//}
 
-	xSemaphoreGiveFromISR(_spiDmaTxSemaphore, &higher_priority_task_woken);
+//static void _spiTxTestTask(void *parameters)
+//{
+//	(void) parameters;
+//	uint8_t bufor[10];
+//	for(int i=0;i<10;i++)
+//	{
+//		bufor[i]=i+1;
+//	}
+//	static struct _spiTxMessage struktura;
+//	struktura.length=10;
+//	struktura.tx=bufor;
+//
+//	portTickType xLastHeartBeat;
+//
+//	xLastHeartBeat = xTaskGetTickCount();
+//
+//	while(1)
+//	{
+//		vTaskDelay(1000/portTICK_RATE_MS);
+//		spiDmaSend(&struktura, 100);
+//	}
+//}
 
-	SPIx_DMAx_TX_IFCR_CTCIFx_bb = 1;			// clear interrupt flag
-
-	portEND_SWITCHING_ISR(higher_priority_task_woken);
-}
-
-enum Error _initializeSpiDmaTestTask(void)
-{
-	portBASE_TYPE ret = xTaskCreate(_spiTxTestTask, (signed char*)"spiTxTestTask", SPI_TX_STACK_SIZE, NULL,
-			SPI_TX_TASK_PRIORITY, NULL);
-
-	return errorConvert_portBASE_TYPE(ret);
-}
-
-static void _spiTxTestTask(void *parameters)
-{
-	(void) parameters;
-	uint8_t bufor[10];
-	for(int i=0;i<10;i++)
-	{
-		bufor[i]=i+1;
-	}
-	static struct _spiTxMessage struktura;
-	struktura.length=10;
-	struktura.tx=bufor;
-
-	portTickType xLastHeartBeat;
-
-	xLastHeartBeat = xTaskGetTickCount();
-
-	while(1)
-	{
-		vTaskDelay(1000/portTICK_RATE_MS);
-		spiDmaSend(&struktura, 100);
-	}
-}
-
-extern "C" void SPIx_IRQHandler(void) __attribute__ ((interrupt));
-void SPIx_IRQHandler(void)
-{
-	uint8_t rx;
-	portBASE_TYPE higher_priority_task_woken = pdFALSE;
-	while(SPIx_SR_RXNE_bb(SPIx))
-	{
-		if(rx_flag)
-		{
-			rx=SPIx->DR;
-			xQueueSendFromISR(_spiRxQueue, &rx, &higher_priority_task_woken);
-		}
-		else
-		{
-			rx=SPIx->DR;
-		}
-	}
-}
+//extern "C" void SPIx_IRQHandler(void) __attribute__ ((interrupt));
+//void SPIx_IRQHandler(void)
+//{
+//	uint8_t rx;
+//	portBASE_TYPE higher_priority_task_woken = pdFALSE;
+//	while(SPIx_SR_RXNE_bb(SPIx))
+//	{
+//		if(rx_flag)
+//		{
+//			rx=SPIx->DR;
+//			xQueueSendFromISR(_spiRxQueue, &rx, &higher_priority_task_woken);
+//		}
+//		else
+//		{
+//			rx=SPIx->DR;
+//		}
+//	}
+//}

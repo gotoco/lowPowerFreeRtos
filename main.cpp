@@ -37,6 +37,7 @@
 #include "serial.h"
 #include "SD.h"
 #include "spi.h"
+#include "spi_dma.h"
 //#include "SD_test.h"
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -144,7 +145,22 @@ int main(void)
 
 	gpioInitialize();
 
-	enum Error error;
+	spiDmaInitialize();
+
+	spiDmaSetBaudRate(1000);
+
+	static uint8_t tx[10];
+	for(int i=0;i<10;i++)
+	{
+		tx[i]=i+1;
+	}
+	spiDmaSend(tx, 10);
+
+	for(int i=0; i<10000000;i++);
+
+	//spiDmaRead(tx,5);
+
+	/*enum Error error;
 
 	error = _initializeSpiDmaTask();
 	ASSERT("_initializeSpiDmaTask()", error == ERROR_NONE);
@@ -153,7 +169,7 @@ int main(void)
 	ASSERT("_initializeSpiDmaTestTask()", error == ERROR_NONE);
 
 	// uruchomienie planisty
-	vTaskStartScheduler();
+	vTaskStartScheduler();*/
 
 
 	//uint8_t tx=65;
@@ -198,7 +214,7 @@ int main(void)
 //	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
 //	ASSERT("f_mount()", fresult == FR_OK);
 //
-	error = _initializeHeartbeatTask();
+	/*error = _initializeHeartbeatTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
 	error = _initializeButtonPressTask();
@@ -211,7 +227,7 @@ int main(void)
 	ASSERT("_initializeLed2Task()", error == ERROR_NONE);
 
 	error = _initializeLed3Task();
-	ASSERT("_initializeLed3Task()", error == ERROR_NONE);
+	ASSERT("_initializeLed3Task()", error == ERROR_NONE);*/
 
 //	commandRegister(&_dirCommandDefinition);
 //	commandRegister(&_runtimestatsCommandDefinition);

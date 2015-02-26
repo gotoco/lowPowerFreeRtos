@@ -40,10 +40,10 @@ uint32_t spiSetBaudRate(uint32_t baud_rate);
 
 size_t spiTransfer(const uint8_t *tx, uint8_t *rx, size_t length);
 
-void spiDmaSend(_spiTxMessage *message, portTickType ticks_to_wait);
+//void spiDmaSend(_spiTxMessage *message, portTickType ticks_to_wait);
 
-enum Error _initializeSpiDmaTask(void);
+//enum Error _initializeSpiDmaTask(void);
 
-enum Error _initializeSpiDmaTestTask(void);
+//enum Error _initializeSpiDmaTestTask(void);
 
 #endif /* SPI_H_ */
