@@ -147,18 +147,20 @@ int main(void)
 
 	spiDmaInitialize();
 
-	spiDmaSetBaudRate(1000);
+	spiDmaSetBaudRate(1000000);
 
-	static uint8_t tx[10];
+	uint8_t tx[10];
 	for(int i=0;i<10;i++)
 	{
 		tx[i]=i+1;
 	}
-	spiDmaSend(tx, 10);
+	//spiDmaSend(tx, 10);
 
-	for(int i=0; i<10000000;i++);
+	for(int i=0; i<100000;i++);
 
-	//spiDmaRead(tx,5);
+	spiDmaRead(tx,5);
+
+	for(int i=0; i<100000;i++);
 
 	/*enum Error error;
 
