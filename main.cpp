@@ -37,7 +37,7 @@
 #include "serial.h"
 #include "SD.h"
 #include "spi.h"
-#include "spi_dma.h"
+#include "spi_dma_rtos.h"
 //#include "SD_test.h"
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -149,6 +149,8 @@ int main(void)
 
 	spiDmaSetBaudRate(1000000);
 
+	vTaskStartScheduler();
+
 	uint8_t tx[10];
 	for(int i=0;i<10;i++)
 	{
@@ -156,9 +158,10 @@ int main(void)
 	}
 	//spiDmaSend(tx, 10);
 
+
 	for(int i=0; i<100000;i++);
 
-	spiDmaRead(tx,5);
+	//spiDmaRead(tx,5);
 
 	for(int i=0; i<100000;i++);
 

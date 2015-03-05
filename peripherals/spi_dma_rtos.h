@@ -18,4 +18,6 @@ void spiDmaSendDummy(uint8_t *dummy, uint32_t length);
 
 void spiDmaRead2Buffer(uint32_t length, portTickType ticks_to_wait);
 
+struct spiRxMessage spiDmaReadFromBuffer();
+
 #endif /* SPI_DMA_RTOS_H_ */

@@ -42,17 +42,6 @@ struct spiRxMessage
 	uint32_t length;
 };
 
-struct spiTxMessage
-{
-	uint8_t *tx;
-	uint32_t length;
-};
-
-struct spiRxCountMessage
-{
-	uint32_t length;
-};
-
 struct spiMessage
 {
 	uint32_t length;
@@ -77,9 +66,6 @@ static uint8_t spiInputBuffer[SPI_INPUT_BUFFER_SIZE];
 static uint8_t spiInputBufferIndex=0;
 
 static xQueueHandle spiRxQueue;
-static xQueueHandle spiRxCountQueue;
-static xQueueHandle spiTxQueue;
-
 static xQueueHandle spiMessageQueue;
 
 static xSemaphoreHandle spiTxDmaSemaphore;
@@ -119,17 +105,11 @@ void spiDmaInitialize(void)
 	vSemaphoreCreateBinary(spiTxDmaSemaphore);
 	vSemaphoreCreateBinary(spiRxDmaSemaphore);
 
-	spiTxQueue = xQueueCreate(SPIx_TX_QUEUE_LENGTH, sizeof(struct spiTxMessage));
-	spiRxCountQueue = xQueueCreate(SPIx_RX_QUEUE_LENGTH, sizeof(struct spiRxCountMessage));
 	spiRxQueue = xQueueCreate(SPIx_RX_QUEUE_LENGTH, sizeof(struct spiRxMessage));
-
-//	xTaskCreate(spiTxTask, (signed char* )"SPI TX", SPI_TX_STACK_SIZE,
-//				NULL, SPI_TX_TASK_PRIORITY, NULL);
+	spiMessageQueue = xQueueCreate(SPIx_TX_QUEUE_LENGTH, sizeof(struct spiMessage));
 
 	xTaskCreate(spiTestTask, (signed char* )"SPI TEST", SPI_TX_STACK_SIZE,
 					NULL, SPI_TX_TASK_PRIORITY, NULL);
-
-	spiMessageQueue = xQueueCreate(SPIx_TX_QUEUE_LENGTH, sizeof(struct spiMessage));
 
 	xTaskCreate(spiTransferTask, (signed char* )"SPI TRANSFER", SPI_TX_STACK_SIZE,
 						NULL, SPI_TX_TASK_PRIORITY, NULL);
@@ -163,72 +143,56 @@ void spiDmaStop()
 
 void spiDmaSend(uint8_t *tx, uint32_t length, portTickType ticks_to_wait)
 {
-	//struct spiTxMessage Message;
 	struct spiMessage Message;
 
 	Message.length=length;
 	Message.direction=SPI_DIRECTION_SEND;
 
-//	if (tx >= __ram_start)				// is the string in RAM?
-//	{
-		//Message.tx = (uint8_t*) pvPortMalloc(Message.length);
-		Message.data = (uint8_t*) pvPortMalloc(Message.length);
-		//memcpy(Message.tx, tx, Message.length);
-		memcpy(Message.data, tx, Message.length);
-//	}
-//	else
-//	{
-//		Message.tx = (uint8_t*) tx;// no, string in ROM - just use the address
-//	}
+	Message.data = (uint8_t*) pvPortMalloc(Message.length);
+	memcpy(Message.data, tx, Message.length);
 
-	//xQueueSend(spiTxQueue, &Message, ticks_to_wait);
 	xQueueSend(spiMessageQueue, &Message, ticks_to_wait);
+}
 
-//	if (Message.tx >= __ram_start)	// is the string in RAM?
+//static void spiTxTask(void *parameters)
+//{
+//	uint8_t *previous_tx = NULL;
+//
+//	(void) parameters;						// suppress warning
+//
+//	while(1)
 //	{
-//		vPortFree(Message.tx);
+//		struct spiTxMessage Message;
+//
+//		xQueueReceive(spiTxQueue, &Message, portMAX_DELAY);	// get data to send
+//
+//		xSemaphoreTake(spiTxDmaSemaphore, portMAX_DELAY);	// wait for SPI to be free
+//
+//		if (previous_tx != NULL)	// if previous message wasn't null
+//					vPortFree(previous_tx);		// yes - free the temporary buffer
+//
+//		uint32_t temp = 0;
+//
+//		SPIx_DMAx_TX_CH->CCR = 0;			// reset dma tx channel (disabling tx channel)
+//
+//		SPIx_DMAx_TX_CH->CNDTR = Message.length; 	// nuber of data to transfer (can be written only when channel is disabled)
+//
+//		SPIx_DMAx_TX_CH->CMAR = (uint32_t)Message.tx;			// memory address
+//
+//		SPIx_DMAx_TX_CH->CPAR = (uint32_t) & SPIx->DR; 	// peripheral address
+//
+//		temp |= DMA_CCR1_PL;		// channel priority very high
+//		temp |= DMA_CCR1_MINC;		// memory increment mode enabled
+//		temp |= DMA_CCR1_DIR; 		// read from memory
+//		temp |= DMA_CCR1_TCIE;		// transfer complete interrupt enable
+//		temp |= DMA_CCR1_EN;		// channel enable
+//
+//		SPIx_DMAx_TX_CH->CCR = temp;
+//
+//		// save address for next iteration so that it could be freed after transfer
+//		previous_tx=Message.tx;
 //	}
-}
-
-static void spiTxTask(void *parameters)
-{
-	uint8_t *previous_tx = NULL;
-
-	(void) parameters;						// suppress warning
-
-	while(1)
-	{
-		struct spiTxMessage Message;
-
-		xQueueReceive(spiTxQueue, &Message, portMAX_DELAY);	// get data to send
-
-		xSemaphoreTake(spiTxDmaSemaphore, portMAX_DELAY);	// wait for SPI to be free
-
-		if (previous_tx != NULL)	// if previous message wasn't null
-					vPortFree(previous_tx);		// yes - free the temporary buffer
-
-		uint32_t temp = 0;
-
-		SPIx_DMAx_TX_CH->CCR = 0;			// reset dma tx channel (disabling tx channel)
-
-		SPIx_DMAx_TX_CH->CNDTR = Message.length; 	// nuber of data to transfer (can be written only when channel is disabled)
-
-		SPIx_DMAx_TX_CH->CMAR = (uint32_t)Message.tx;			// memory address
-
-		SPIx_DMAx_TX_CH->CPAR = (uint32_t) & SPIx->DR; 	// peripheral address
-
-		temp |= DMA_CCR1_PL;		// channel priority very high
-		temp |= DMA_CCR1_MINC;		// memory increment mode enabled
-		temp |= DMA_CCR1_DIR; 		// read from memory
-		temp |= DMA_CCR1_TCIE;		// transfer complete interrupt enable
-		temp |= DMA_CCR1_EN;		// channel enable
-
-		SPIx_DMAx_TX_CH->CCR = temp;
-
-		// save address for next iteration so that it could be freed after transfer
-		previous_tx=Message.tx;
-	}
-}
+//}
 
 static void spiTransferTask(void *parameters)
 {
@@ -244,8 +208,12 @@ static void spiTransferTask(void *parameters)
 
 		xSemaphoreTake(spiTxDmaSemaphore, portMAX_DELAY);	// wait for SPI TX channel to be free
 
-		if (previous_tx != NULL)	// if previous message wasn't null
+		if (previous_tx != NULL)  // if previous message wasn't null
+		{
 			vPortFree(previous_tx);		// yes - free the temporary buffer
+			previous_tx = NULL;
+		}
+
 
 		if(Message.direction == SPI_DIRECTION_SEND)   // when message to transmit
 		{
@@ -295,7 +263,7 @@ static void spiTransferTask(void *parameters)
 
 			SPIx_DMAx_RX_CH->CPAR = (uint32_t) &SPIx->DR; 	// peripheral address
 
-			temp |= DMA_CCR1_PL;		// channel priority very high
+			temp = DMA_CCR1_PL;		// channel priority very high
 			temp |= DMA_CCR1_MINC;		// memory increment mode enabled
 			temp |= DMA_CCR1_TCIE;		// transfer complete interrupt and transfer error interrupt enable
 			temp |= DMA_CCR1_EN;		// channel enable
@@ -304,15 +272,15 @@ static void spiTransferTask(void *parameters)
 
 			spiInputBufferIndex += Message.length;
 
-			uint8_t dummy = 255;
+			static uint8_t dummy = 255;
 
 			struct spiRxMessage RxMessage;
 			RxMessage.length = Message.length;
 			RxMessage.rx = &spiInputBuffer[index];
 
-			xQueueSend(spiRxQueue, &RxMessage, portMAX_DELAY);
-
 			spiDmaSendDummy(&dummy, Message.length);
+
+			xQueueSend(spiRxQueue, &RxMessage, portMAX_DELAY);
 		}
 	}
 }
@@ -331,17 +299,11 @@ void spiDmaSendDummy(uint8_t *dummy, uint32_t length)
 
 	temp |= DMA_CCR1_PL;		// channel priority very high
 	temp |= DMA_CCR1_DIR; 		// read from memory
+	temp |= DMA_CCR1_TCIE;		// transfer complete interrupt and transfer error interrupt enable
 	temp |= DMA_CCR1_EN;		// channel enable
 
 	SPIx_DMAx_TX_CH->CCR = temp;
 }
-
-static void spiRxTask(void *parameters)
-{
-
-}
-
-
 
 void spiDmaRead2Buffer(uint32_t length, portTickType ticks_to_wait)
 {
@@ -354,6 +316,15 @@ void spiDmaRead2Buffer(uint32_t length, portTickType ticks_to_wait)
 	xQueueSend(spiMessageQueue, &Message, ticks_to_wait);
 }
 
+struct spiRxMessage spiDmaReadFromBuffer()
+{
+	struct spiRxMessage Message;
+
+	xQueueReceive(spiRxQueue, &Message, portMAX_DELAY);	// get data from queue
+
+	return Message;
+}
+
 static void spiTestTask(void *parameters)
 {
 	uint8_t tx[10];
@@ -362,12 +333,15 @@ static void spiTestTask(void *parameters)
 		tx[i]=i+1;
 	}
 
+	struct spiRxMessage Message;
+
 	while(1)
 	{
-		//spiDmaSend(tx,10,10);
-		//vTaskDelay(1000/portTICK_RATE_MS);
+		spiDmaSend(tx,10,10);
+		vTaskDelay(1000/portTICK_RATE_MS);
 		spiDmaRead2Buffer(5,10);
 		vTaskDelay(1000/portTICK_RATE_MS);
+		Message = spiDmaReadFromBuffer();
 	}
 }
 
