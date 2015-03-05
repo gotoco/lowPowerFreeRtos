@@ -151,18 +151,27 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 | Priorities and stacks for tasks in the system
 +---------------------------------------------------------------------------------------------------------------------*/
 
+// power off task
+#define POWER_OFF_TASK_PRIORITY				tskIDLE_PRIORITY
+#define POWER_OFF_TASK_STACK_SIZE			64
+
 // heartbeat task
-#define HEARTBEAT_TASK_PRIORITY				tskIDLE_PRIORITY
+#define HEARTBEAT_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
 #define HEARTBEAT_STACK_SIZE				64
 
 // USART TX task
-#define USART_TX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
+#define USART_TX_TASK_PRIORITY				(tskIDLE_PRIORITY + 2)
 #define USART_TX_STACK_SIZE					128
 
-// USART TX task
-#define USART_RX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
+// USART RX task
+#define USART_RX_TASK_PRIORITY				(tskIDLE_PRIORITY + 2)
 #define USART_RX_STACK_SIZE					256
 
+// I2C task
+#define I2C_TASK_PRIORITY				(tskIDLE_PRIORITY + 2)
+#define I2C_TASK_STACK_SIZE					128
+
+#define CONTEXT_SWITCH()					vTaskDelay(0);
 /*---------------------------------------------------------------------------------------------------------------------+
 | Runtime stats configuration
 +---------------------------------------------------------------------------------------------------------------------*/
