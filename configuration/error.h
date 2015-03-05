@@ -29,6 +29,7 @@
 enum Error
 {
 	// --- negative values ---
+	ERROR_MCP = -127,
 	ERROR_FreeRTOS_errSCHEDULER_FAIL,		// Scheduler leak
 
 	// FreeRTOS errors from projdefs.h
