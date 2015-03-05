@@ -52,13 +52,13 @@ AS_DEFS =
 # folders with source files, current folder is always included)
 SRCS_DIRS =  configuration hdr Inc FatFS peripherals Drivers/ST/STM32_USB_Device_Library/Class/CDC Drivers/ST/STM32_USB_Device_Library/Core \
 			 Drivers Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include Drivers/STM32L1xx_HAL_Driver \
-			  FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang
+			  FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang Drivers/Custom/MCP980x
 
 # include directories (absolute or relative paths to additional folders with
 # headers, current folder is always included)
 INC_DIRS =  configuration hdr Inc FatFS peripherals Drivers/ST/STM32_USB_Device_Library/Class/CDC Drivers/ST/STM32_USB_Device_Library/Core \
 			Drivers Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include Drivers/STM32L1xx_HAL_Driver \
-			 FreeRTOS/include FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang
+			 FreeRTOS/include FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang Drivers/Custom/MCP980x
 
 # library directories (absolute or relative paths to additional folders with
 # libraries)
