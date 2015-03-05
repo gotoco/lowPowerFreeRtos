@@ -45,6 +45,8 @@
 #include "st_rcc.h"
 #include "pwr.h"
 #include "stm32l1xx_gpio.h"
+#include "i2c_by_PG.h"
+#include "MCP980x_drv_by_PG.h"
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -69,6 +71,10 @@ static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t ar
 		size_t output_buffer_length);
 static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
 		size_t output_buffer_length);
+
+void myTask();
+void initializeMyTask();
+void ButtonIRQInit();
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local variables
@@ -110,10 +116,15 @@ int main(void)
 {
 	/* Configure the system clock and pll*/
 	_sysInit();
+	//ButtonIRQInit();
+
 
 	gpioInitialize();
+	gpioConfigurePin(GPIOA, BUTTON_PIN, BUTTON_CONFIGURATION);
 
 	enum Error error = usartInitialize();
+	//??
+	//i2cInitialize();
 
 	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
 	ASSERT("f_mount()", fresult == FR_OK);
@@ -124,7 +135,10 @@ int main(void)
 	error = _initializePowerSaveTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
+	initializeMyTask();
 	gpioInitialize();
+
+
 
 	/*	Special delay for debugging because after scheduler start
 	 * 	it may be hard to catch core in run mode to connect to debugger
@@ -261,6 +275,47 @@ static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_c
 	return error;
 }
 
+
+
+/**
+ * Moja własna funkcja, sterowanie drugim ledem
+ */
+void myTask()
+{
+
+	float temp;
+	initMCP980x(MCP_MSB_ADDR);
+	setConfRegister(0x61,MCP_MSB_ADDR);
+	for(;;)
+	{
+		int bv=1;
+		gpioInitialize();
+		gpioConfigurePin(LED_GPIO, LED_pin, GPIO_OUT_PP_2MHz);
+		gpioConfigurePin(GPIOA, BUTTON_PIN, BUTTON_CONFIGURATION);
+
+		bv=(int)(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0 ));
+		//odczytanie pozycji przycisku
+		if(bv){
+			setConfRegister(0x01, MCP_MSB_ADDR);
+			LED_bb |=0x01;
+			readTemperature(&temp, 0x48);
+		}	else
+			LED_bb &=~0x01;
+		//włączenie diody jeśli przycisk jest włączony
+		vTaskDelay(100/portTICK_RATE_MS);
+	}
+}
+
+void initializeMyTask()
+{
+	xTaskHandle xHandleMyTask;
+
+	xTaskCreate(myTask, (signed char*)"myTask", HEARTBEAT_STACK_SIZE, NULL, HEARTBEAT_TASK_PRIORITY, &xHandleMyTask );
+
+
+}
+
+
 /**
  * \brief Heartbeat task that simulate real system behavior
  *
@@ -274,6 +329,7 @@ static void _heartbeatTask(void *parameters)
 	portTickType xLastHeartBeat;
 
 	xLastHeartBeat = xTaskGetTickCount();
+	float temp;
 
 	for(;;){
 		int a = 0,b = 0;
@@ -283,6 +339,7 @@ static void _heartbeatTask(void *parameters)
 		LED1_bb ^= 1;
 		for(int i=0; i<700000; i++) a = 2*b+1; //do some fake calculations
 		LED1_bb ^= 1;
+		readTemperature(&temp, 0x48);
 
 		vTaskDelay(100/portTICK_RATE_MS);	//Then go sleep
 	}
