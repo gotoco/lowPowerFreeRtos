@@ -36,6 +36,7 @@
 #include "hdr/hdr_gpio.h"
 
 #include "gpio.h"
+#include "spi.h"
 #include "rcc.h"
 #include "helper.h"
 #include "usart.h"
@@ -45,6 +46,8 @@
 #include "st_rcc.h"
 #include "pwr.h"
 #include "stm32l1xx_gpio.h"
+
+#include "mma955x_drv.h"
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -101,7 +104,9 @@ static const struct CommandDefinition _tasklistCommandDefinition =
 
 static FATFS _fileSystem;
 
-void rtcConfig(void);
+static uint8_t buffer [28];
+
+void __rtcConfig(void);
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | root task
@@ -112,6 +117,7 @@ int main(void)
 	_sysInit();
 
 	gpioInitialize();
+	spiInitialize();
 
 	enum Error error = usartInitialize();
 
@@ -121,15 +127,12 @@ int main(void)
 	error = _initializeHeartbeatTask();
 	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
 
-	error = _initializePowerSaveTask();
-	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
-
 	gpioInitialize();
 
 	/*	Special delay for debugging because after scheduler start
 	 * 	it may be hard to catch core in run mode to connect to debugger
 	 */
-	for(int i=0; i<10; i++){ LED1_bb ^= 1; for(int i=0; i<1000000; i++); }
+	for(int i=0; i<9000; i++){ LED1_bb ^= 1; for(int i=900000; i<1; i++); }
 
 	commandRegister(&_dirCommandDefinition);
 	commandRegister(&_runtimestatsCommandDefinition);
@@ -160,7 +163,7 @@ static void _sysInit(void)
 
 	rccStartPll(RCC_PLL_INPUT_HSI, HSI_VALUE, FREQUENCY);
 
-	rtcConfig();
+//	rtcConfig();
 }
 
 static void _setVCore(void)
@@ -269,22 +272,24 @@ static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_c
 
 static void _heartbeatTask(void *parameters)
 {
+
 	(void)parameters;						// suppress warning
 
 	portTickType xLastHeartBeat;
 
 	xLastHeartBeat = xTaskGetTickCount();
 
+	struct acc_t * accelerometer = new_acc();
+
+	accelerometer->acc_init(accelerometer);
+
 	for(;;){
-		int a = 0,b = 0;
-		gpioInitialize();
-		gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
 
-		LED1_bb ^= 1;
-		for(int i=0; i<700000; i++) a = 2*b+1; //do some fake calculations
-		LED1_bb ^= 1;
+		accelerometer->acc_getAcceleration(accelerometer, 0);
 
-		vTaskDelay(100/portTICK_RATE_MS);	//Then go sleep
+		accelerometer->acc_checkVersion(accelerometer, buffer);
+
+		vTaskDelay(40/portTICK_RATE_MS);	//Then go sleep
 	}
 
 }
@@ -411,7 +416,7 @@ static enum Error _tasklistHandler(const char **arguments_array, uint32_t argume
   * @param  None
   * @retval None
   */
-void rtcConfig(void)
+void __rtcConfig(void)
 {
   NVIC_InitTypeDef  NVIC_InitStructure;
   EXTI_InitTypeDef  EXTI_InitStructure;
@@ -458,9 +463,11 @@ void rtcConfig(void)
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 
-  /* RTC Wakeup Interrupt Generation: Clock Source: RTCDiv_16, Wakeup Time Base: 4s */
+  /* RTC Wakeup Interrupt Generation: Clock Source: RTCDiv_16, Wakeup Time Base: 4s , RTCDiv_4 WTB: 1s*/
   RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div4);
-  RTC_SetWakeUpCounter(0x1FFF); //(0x320) ;
+  RTC_SetWakeUpCounter(0x640); // 0.2s
+  //(0x1FFF); // -> 8100 Div4 = 1s
+  //(0x320) ; // -> 800 Div4 = 0.1s
 
   /* Enable the Wakeup Interrupt */
   RTC_ITConfig(RTC_IT_WUT, ENABLE);

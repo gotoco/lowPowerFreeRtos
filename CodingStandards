@@ -296,6 +296,27 @@ it is NOT possible to use (in any thread!) Stream output (or input / output) spo
 - that's why always should be use a separate stream for in (buffered to the line) and separate for out 
 (full buffering, manual fflush ())
 
+		Cortex-M3 and FreeRTOS (ISRs):
+		
+0. Thing to know is that, in ARM Cortex-M cores, numerically low priority values are used to specify logically high interrupt priorities. 
+For example, the logical priority of an interrupt assigned a numeric priority value of 2 is above that of an interrupt assigned a numeric priority of 5. 
+In other words, interrupt priority 2 is higher than interrupt priority 5, even though the number 2 is lower than the number 5. 
+To hopefully make that clear: An interrupt assigned a numeric priority of 2 can interrupt (nest with) an interrupt assigned a numeric priority of 5, 
+but an interrupt assigned a numeric priority of 5 cannot interrupt an interrupt assigned a numeric priority of 2.
+This is the most counterintuitive aspect of ARM Cortex-M interrupt priorities because it is the opposite to most non ARM Cortex-M3 microcontroller architectures.
+
+1. FreeRTOS functions that end in "FromISR" are interrupt safe, but even these functions 
+cannot be called from interrupts that have a logical priority above the priority defined by configMAX_SYSCALL_INTERRUPT_PRIORITY 
+(configMAX_SYSCALL_INTERRUPT_PRIORITY is defined in the FreeRTOSConfig.h header file). 
+Therefore, any interrupt service routine that uses an RTOS API function must have its priority manually set to a value that is 
+numerically equal to or greater than the configMAX_SYSCALL_INTERRUPT_PRIORITY setting. This ensures the interrupt's 
+logical priority is equal to or less than the configMAX_SYSCALL_INTERRUPT_PRIORITY setting.
+Cortex-M interrupts default to having a priority value of zero. 
+
+Zero is the highest possible priority value. Therefore, never leave the priority of an interrupt that uses the interrupt safe RTOS API at its default value.
+
+2. If you are using an STM32 with the STM32 driver library then ensure all the priority bits are assigned
+to be preempt priority bits by calling NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 ); before the RTOS is started.
 ----------------------------------------------------------------------
 
         C Project Structure Guidelines :

@@ -157,7 +157,7 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 
 // heartbeat task
 #define HEARTBEAT_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
-#define HEARTBEAT_STACK_SIZE				64
+#define HEARTBEAT_STACK_SIZE				256
 
 // USART TX task
 #define USART_TX_TASK_PRIORITY				(tskIDLE_PRIORITY + 2)

@@ -130,7 +130,7 @@
 #define RCC_APBxENR_SPIxEN_bb				RCC_APB2ENR_SPI1EN_bb
 
 #define SPIx_SSB_GPIO						GPIOA
-#define SPIx_SSB_PIN						GPIOPIN_4
+#define SPIx_SSB_PIN						GPIOPIN_1
 #define SPIx_SSB_CONFIGURATION				GPIO_OUT_PP_40MHz_PULL_UP
 #define SPIx_SCK_GPIO						GPIOA
 #define SPIx_SCK_PIN						GPIOPIN_5

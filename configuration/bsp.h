@@ -112,7 +112,6 @@
 /// number of digits
 #define LCD_NUMBER_OF_DIGITS				6
 
-
 /*---------------------------------------------------------------------------------------------------------------------+
 | SD card
 +---------------------------------------------------------------------------------------------------------------------*/
@@ -127,6 +126,31 @@
 /*---------------------------------------------------------------------------------------------------------------------+
 | ACC
 +---------------------------------------------------------------------------------------------------------------------*/
+//new board, v0.8B
+//#define ACC_RESET_PIN						GPIOPIN_2
+//#define ACC_RESET_GPIO						GPIOA
+#define ACC_RESET_PIN						GPIOPIN_8
+#define ACC_RESET_GPIO						GPIOB
+#define ACC_RESET_bb						BITBAND(&ACC_RESET_GPIO->ODR, ACC_RESET_PIN)
+#define ACC_RESET_CONFIGURATION				GPIO_OUT_PP_40MHz_PULL_UP
 
+#define ACC_INT_PIN							GPIOPIN_0
+#define ACC_INT_GPIO						GPIOA
+#define ACC_INT_CONFIGURATION				GPIO_IN_PULL_DOWN
+
+#define ACC_OE_RESET_MOSI_PIN						GPIOPIN_1
+#define ACC_OE_RESET_MOSI_GPIO						GPIOB
+#define ACC_OE_RESET_MOSI_CONFIGURATION				GPIO_OUT_PP_40MHz_PULL_UP
+#define ACC_OE_RESET_MOSI_bb						BITBAND(&ACC_OE_RESET_MOSI_GPIO->ODR, ACC_OE_RESET_MOSI_PIN)
+
+#define ACC_OE_SCK_NSS_PIN							GPIOPIN_0
+#define ACC_OE_SCK_NSS_GPIO							GPIOB
+#define ACC_OE_SCK_NSS_CONFIGURATION				GPIO_OUT_PP_40MHz_PULL_UP
+#define ACC_OE_SCK_NSS_bb							BITBAND(&ACC_OE_SCK_NSS_GPIO->ODR, ACC_OE_SCK_NSS_PIN)
+
+#define ACC_OE_INT_MISO_PIN							GPIOPIN_3
+#define ACC_OE_INT_MISO_GPIO						GPIOA
+#define ACC_OE_INT_MISO_CONFIGURATION				GPIO_OUT_PP_40MHz_PULL_UP
+#define ACC_OE_INT_MISO_bb							BITBAND(&ACC_OE_INT_MISO_GPIO->ODR, ACC_OE_INT_MISO_PIN)
 
 #endif //BSP_H_
