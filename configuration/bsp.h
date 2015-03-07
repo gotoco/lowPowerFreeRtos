@@ -13,7 +13,7 @@
 #ifndef BSP_H_
 #define BSP_H_
 
-#include "hdr/hdr_bitband.h"
+#include "hdr\hdr_bitband.h"
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | LEDs INTERFACE

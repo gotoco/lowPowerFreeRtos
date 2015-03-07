@@ -54,7 +54,7 @@ SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang Fat
 
 # include directories (absolute or relative paths to additional folders with
 # headers, current folder is always included)
-INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals configuration drivers application drivers/MCP980x drivers/M41T56C64 drivers/LIS35DE drivers/ADXL343 hdr
+INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals configuration drivers application drivers/MCP980x drivers/M41T56C64 drivers/LIS35DE drivers/ADXL343
 
 # library directories (absolute or relative paths to additional folders with
 # libraries)
