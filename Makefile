@@ -37,7 +37,8 @@ LD_SCRIPT = STM32L15xxB_rom.ld
 OUT_DIR = out
 
 # global definitions for C++, C and ASM (e.g. "symbol_with_value=0xDEAD symbol_without_value")
-GLOBAL_DEFS = STM32L1XX_MD
+GLOBAL_DEFS = STM32L1XX_MD \
+_PG_DRV #def whitch choose Pawel G functions in I2C driver and MPC980x driver
 
 # C++ definitions
 CXX_DEFS =
@@ -50,11 +51,11 @@ AS_DEFS =
 
 # additional directories with source files (absolute or relative paths to
 # folders with source files, current folder is always included)
-SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals drivers/SD application
+SRCS_DIRS = FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang FatFS peripherals drivers/SD application drivers/MCP980x 
 
 # include directories (absolute or relative paths to additional folders with
 # headers, current folder is always included)
-INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals drivers/SD application
+INC_DIRS = inc FreeRTOS/include FreeRTOS/portable/GCC/ARM_CM3 FatFS peripherals drivers/SD application drivers/MCP980x 
 
 # library directories (absolute or relative paths to additional folders with
 # libraries)
