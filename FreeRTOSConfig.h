@@ -175,6 +175,9 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 #define LED_TASK_PRIORITY					tskIDLE_PRIORITY
 #define LED_STACK_SIZE						64
 
+// i2c tasks
+#define I2C_TASK_PRIORITY					(tskIDLE_PRIORITY + 1)
+#define I2C_TASK_STACK_SIZE					128
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | Runtime stats configuration

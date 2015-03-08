@@ -84,6 +84,9 @@ enum Error
 	// various
 
 	ERROR_BUFFER_OVERFLOW,
+
+	// --- PERIPHERALS errors and issues
+	ERROR_CHIP_NOT_FOUND,
 };
 
 /*---------------------------------------------------------------------------------------------------------------------+

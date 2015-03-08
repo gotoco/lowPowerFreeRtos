@@ -18,85 +18,26 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
-
 #include "ff.h"
-
 #include "hdr/hdr_rcc.h"
-
 #include "config.h"
-
 #include "error.h"
 
 #include "gpio.h"
 #include "rcc.h"
-#include "helper.h"
-#include "usart.h"
-#include "command.h"
-#include "i2c.h"
-#include "comm-cmd.h"
-#include "serial.h"
-#include "SD.h"
-#include "spi.h"
+#include "i2c_T.h"
 #include "spi_dma_rtos.h"
-//#include "SD_test.h"
+#include "command.h"
+#include "MCP980x_T.h"
+
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | local functions' declarations
 +---------------------------------------------------------------------------------------------------------------------*/
 
-static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
-		size_t output_buffer_length);
-
-static void _led1Task(void *parameters);
-static enum Error _initializeLed1Task(void);
-
-static void _led2Task(void *parameters);
-static enum Error _initializeLed2Task(void);
-
-static void _led3Task(void *parameters);
-static enum Error _initializeLed3Task(void);
-
-static void _buttonPressTask(void);
-static enum Error _initializeHeartbeatTask(void);
-
-static void _heartbeatTask(void *parameters);
-static enum Error _initializeButtonPressTask(void);
-
-static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
-		size_t output_buffer_length);
-static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
-		size_t output_buffer_length);
-
-/*---------------------------------------------------------------------------------------------------------------------+
-| local variables
-+---------------------------------------------------------------------------------------------------------------------*/
-
-static const struct CommandDefinition _dirCommandDefinition =
-{
-		"dir",						// command string
-		1,							// maximum number of arguments
-		_dirHandler,				// callback function
-		"dir: prints contents of selected directory on SD card\r\n"
-				"\t\tusage: dir [path]\r\n",	// string displayed by help function
-};
-
-static const struct CommandDefinition _runtimestatsCommandDefinition =
-{
-		"runtimestats",						// command string
-		0,									// maximum number of arguments
-		_runtimestatsHandler,				// callback function
-		"runtimestats: lists all tasks with their runtime stats\r\n",	// string displayed by help function
-};
-
-static const struct CommandDefinition _tasklistCommandDefinition =
-{
-		"tasklist",							// command string
-		0,									// maximum number of arguments
-		_tasklistHandler,					// callback function
-		"tasklist: lists all tasks with their info\r\n",	// string displayed by help function
-};
-
-static FATFS _fileSystem;
+static void _initRCC();
+static void _readTemperatureTask(void *parameters);
+static void _initializeReadTemperatureTask();
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | global functions
@@ -107,32 +48,26 @@ static FATFS _fileSystem;
  *
  * Main code block
  */
-const unsigned char dana[] = {0x50};
-const uint8_t adresMSP = 0x48;
-uint8_t danaZMSP = 0x30;
-uint8_t * pointer = (uint8_t*)pvPortMalloc(129*sizeof(uint8_t));
-
-// semafor
-xSemaphoreHandle xSemaphoreSW0 = NULL;
-
-// kolejka
-xQueueHandle xQueue2 = NULL;
-
-
-
-
-typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
-
-#define  BufferSize     512
-
-uint8_t Buffer_Block_Tx[BufferSize], Buffer_Block_Rx[BufferSize];
-TestStatus TransferStatus1 = FAILED;
-uint8_t Status = 0;
-
-void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLenght, uint8_t Offset);
-TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
-
 int main(void)
+{
+
+	_initRCC();
+
+	gpioInitialize();
+
+	_initializeReadTemperatureTask();
+
+	vTaskStartScheduler();
+
+	while (1)
+	{ }
+}
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| local functions
++---------------------------------------------------------------------------------------------------------------------*/
+
+static void _initRCC()
 {
 	RCC_APB1ENR_PWREN_bb = 1;
 	PWR->CR = (PWR->CR & (~PWR_CR_VOS)) | PWR_CR_VOS_0;	// set VCORE voltage range 1 (1.8V)
@@ -142,118 +77,102 @@ int main(void)
 	while (RCC_CR_HSIRDY_bb == 0);
 
 	rccStartPll(RCC_PLL_INPUT_HSI, HSI_VALUE, FREQUENCY);
-
-	gpioInitialize();
-
-	spiDmaInitialize();
-
-	spiDmaSetBaudRate(1000000);
-
-	vTaskStartScheduler();
-
-	uint8_t tx[10];
-	for(int i=0;i<10;i++)
-	{
-		tx[i]=i+1;
-	}
-	//spiDmaSend(tx, 10);
-
-
-	for(int i=0; i<100000;i++);
-
-	//spiDmaRead(tx,5);
-
-	for(int i=0; i<100000;i++);
-
-	/*enum Error error;
-
-	error = _initializeSpiDmaTask();
-	ASSERT("_initializeSpiDmaTask()", error == ERROR_NONE);
-
-	error = _initializeSpiDmaTestTask();
-	ASSERT("_initializeSpiDmaTestTask()", error == ERROR_NONE);
-
-	// uruchomienie planisty
-	vTaskStartScheduler();*/
-
-
-	//uint8_t tx=65;
-
-//	while(1)
-//	{
-//		spiWrite(&tx,1);
-//	}
-
-	//i2cInitialize();
-
-	//usartInitialize();
-
-	//xQueue2 = xQueueCreate(1, sizeof(uint8_t));
-
-	// = usartInitialize();
-
-	Status = SD_Init();
-
-//	while(1)
-//	{
-//		SD_CS_bb=0;
-//		SD_WriteByte(65);
-//		SD_CS_bb=1;
-//	}
-
-	//Status = SD_test(Buffer_Block_Tx, Buffer_Block_Rx, BufferSize);
-	Fill_Buffer(&Buffer_Block_Tx[0], BufferSize, 0x0);
-	SD_WriteBlock(&Buffer_Block_Tx[0], 0, BufferSize);
-	SD_ReadBlock(&Buffer_Block_Rx[0], 0, BufferSize);
-	TransferStatus1 = Buffercmp(Buffer_Block_Tx, Buffer_Block_Rx, BufferSize);
-	/*if (TransferStatus1 == PASSED)
-	{
-		return 0;
-	}
-	else
-	{
-	    return 1;
-	}*/
-
-//
-//	FRESULT fresult = f_mount(0, &_fileSystem);	// try mounting the filesystem on SD card
-//	ASSERT("f_mount()", fresult == FR_OK);
-//
-	/*error = _initializeHeartbeatTask();
-	ASSERT("_initializeHeartbeatTask()", error == ERROR_NONE);
-
-	error = _initializeButtonPressTask();
-	ASSERT("_initializeButtonPressTask()", error == ERROR_NONE);
-
-	error = _initializeLed1Task();
-	ASSERT("_initializeLed1Task()", error == ERROR_NONE);
-
-	error = _initializeLed2Task();
-	ASSERT("_initializeLed2Task()", error == ERROR_NONE);
-
-	error = _initializeLed3Task();
-	ASSERT("_initializeLed3Task()", error == ERROR_NONE);*/
-
-//	commandRegister(&_dirCommandDefinition);
-//	commandRegister(&_runtimestatsCommandDefinition);
-//	commandRegister(&_tasklistCommandDefinition);
-
-
-	// uruchomienie zadan
-	//vStartLDTasks(TASK_PRIORITY);
-
-	// uruchomienie planisty
-	vTaskStartScheduler();
-
-	while (1)
-	{ }
 }
+
+
+/**
+ * My test Task, reads temperature from MCP980x
+ */
+static void _readTemperatureTask(void *parameters)
+{
+
+	float temp;
+	initMCP980x(MCP_DEF_ADDR);
+	setConfRegisterMCP980x(0x61,MCP_DEF_ADDR);
+	for(;;)
+	{
+
+		readTemperatureMCP980x(&temp, 0x48);
+		vTaskDelay(100/portTICK_RATE_MS);
+
+	}
+}
+
+static void _initializeReadTemperatureTask()
+{
+	xTaskHandle xHandleReadTemperatureTask;
+
+	xTaskCreate(_readTemperatureTask, (signed char*)"_readTemperatureTask", HEARTBEAT_STACK_SIZE, NULL, HEARTBEAT_TASK_PRIORITY, &xHandleReadTemperatureTask );
+}
+
+
+
+
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| unused local functions' declarations, could be useful for the future
++---------------------------------------------------------------------------------------------------------------------
+	static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
+	size_t output_buffer_length);
+	static void _led1Task(void *parameters);
+	static enum Error _initializeLed1Task(void);
+	static void _led2Task(void *parameters);
+	static enum Error _initializeLed2Task(void);
+	static void _led3Task(void *parameters);
+	static enum Error _initializeLed3Task(void);
+	static void _buttonPressTask(void);
+	static enum Error _initializeHeartbeatTask(void);
+	static void _heartbeatTask(void *parameters);
+	static enum Error _initializeButtonPressTask(void);
+	static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
+	size_t output_buffer_length);
+	static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer,
+	size_t output_buffer_length);
+
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| unused local variables, could be useful for the future
++---------------------------------------------------------------------------------------------------------------------
+static const struct CommandDefinition _dirCommandDefinition =
+{
+		"dir", // command string
+		1, // maximum number of arguments
+		_dirHandler, // callback function
+		"dir: prints contents of selected directory on SD card\r\n"
+		"\t\tusage: dir [path]\r\n", // string displayed by help function
+};
+static const struct CommandDefinition _runtimestatsCommandDefinition =
+{
+		"runtimestats", // command string
+		0, // maximum number of arguments
+		_runtimestatsHandler, // callback function
+		"runtimestats: lists all tasks with their runtime stats\r\n", // string displayed by help function
+};
+static const struct CommandDefinition _tasklistCommandDefinition =
+{
+		"tasklist", // command string
+		0, // maximum number of arguments
+		_tasklistHandler, // callback function
+		"tasklist: lists all tasks with their info\r\n", // string displayed by help function
+};
+static FATFS _fileSystem;
+
+
+// semafor
+	xSemaphoreHandle xSemaphoreSW0 = NULL;
+// kolejka
+	xQueueHandle xQueue2 = NULL;
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| unused functions, could be useful for the future
++---------------------------------------------------------------------------------------------------------------------
+
 
 void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLenght, uint8_t Offset)
 {
 	uint16_t IndexTmp;
 
-	/* Put in global buffer same values */
+	// Put in global buffer same values
 	for( IndexTmp = 0; IndexTmp < BufferLenght; IndexTmp++ )
 	{
 		pBuffer[IndexTmp] = IndexTmp + Offset;
@@ -276,9 +195,6 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 }
 
 
-/*---------------------------------------------------------------------------------------------------------------------+
-| local functions
-+---------------------------------------------------------------------------------------------------------------------*/
 
 /**
  * \brief Handler of 'dir' command.
@@ -291,7 +207,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
  * \param [in] output_buffer_length is the size of output buffer
  *
  * \return ERROR_NONE on success, otherwise an error code defined in the file error.h
- */
+
 
 static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer, size_t output_buffer_length)
 {
@@ -348,7 +264,7 @@ static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_c
  * \brief Heartbeat task that read measured data from slaves
  *
  * This is a main task in this device
- */
+
 
 static void _heartbeatTask(void *parameters)
 {
@@ -506,7 +422,7 @@ static enum Error _initializeLed3Task(void)
  *
  * \return ERROR_NONE if the task was successfully created and added to a ready list, otherwise an error code defined in
  * the file error.h
- */
+
 
 
 static void _buttonPressTask(void * pvParameters)
@@ -567,7 +483,7 @@ void EXTI0_IRQHandler(void)
  * \param [in] output_buffer_length is the size of output buffer
  *
  * \return ERROR_NONE on success, otherwise an error code defined in the file error.h
- */
+
 
 static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer, size_t output_buffer_length)
 {
@@ -609,7 +525,7 @@ static enum Error _runtimestatsHandler(const char **arguments_array, uint32_t ar
  * \param [in] output_buffer_length is the size of output buffer
  *
  * \return ERROR_NONE on success, otherwise an error code defined in the file error.h
- */
+
 
 static enum Error _tasklistHandler(const char **arguments_array, uint32_t arguments_count, char *output_buffer, size_t output_buffer_length)
 {
@@ -642,3 +558,5 @@ static enum Error _tasklistHandler(const char **arguments_array, uint32_t argume
 
 	return error;
 }
+*/
+
