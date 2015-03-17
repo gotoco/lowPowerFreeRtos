@@ -108,7 +108,8 @@ uint32_t rccStartPll(enum rccPllInput pll_input, uint32_t input_frequency, uint3
 		}
 
 	}
-
+//	best_mul_i = 4;
+//	best_div = 3;
 	_flashLatency(best_frequency);			// configure flash latency using found frequency
 
 	RCC->CFGR = ((best_div - 1) << RCC_CFGR_PLLDIV_bit) | (best_mul_i << RCC_CFGR_PLLMUL_bit) |

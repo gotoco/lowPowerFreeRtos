@@ -15,8 +15,13 @@
 #include "hdr/hdr_rcc.h"
 #include "rcc.h"
 #include "config.h"
+#include "bsp.h"
 #include "hdr_gpio.h"
 #include "stm32l152xb.h"
+
+#include "stm32l1xx_hal_rcc.h"
+#include "gpio.h"
+
 /* Private variables ---------------------------------------------------------*/
 
 
@@ -28,7 +33,7 @@ static void _setVCore(void);
 static void _configureHSE(void);
 static void _configureHSI(void);
 static void _startPLL(void);
-
+void SystemClock_Config(void);
 
 
 int main(void)
@@ -51,6 +56,8 @@ void GPIO_Init(void)
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN | RCC_AHBENR_GPIOBEN | RCC_AHBENR_GPIOCEN | RCC_AHBENR_GPIODEN |
 			RCC_AHBENR_GPIOEEN | RCC_AHBENR_GPIOHEN;
 
+	gpioConfigurePin(LED_GPIO, LED_pin_1, GPIO_OUT_PP_2MHz);
+	USBOE_bb = 1;
 }
 
 
@@ -66,7 +73,7 @@ static void _sysInit(void)
 	_configureHSE();
 
 	rccStartPll(RCC_PLL_INPUT_HSE, HSE_VALUE, FREQUENCY);
-
+//	SystemClock_Config();
 }
 
 static void _setVCore(void)
@@ -99,6 +106,34 @@ static void _startPLL(void)
 
 }
 
+void SystemClock_Config(void)
+{
+
+  RCC_OscInitTypeDef RCC_OscInitStruct;
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+
+  __PWR_CLK_ENABLE();
+
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
+  RCC_OscInitStruct.PLL.PLLDIV = RCC_PLL_DIV3;
+  HAL_RCC_OscConfig(&RCC_OscInitStruct);
+
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1);
+
+  __SYSCFG_CLK_ENABLE();
+
+}
 
 /**
   * @}
