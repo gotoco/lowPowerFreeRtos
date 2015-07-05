@@ -2,6 +2,7 @@
  * \file usart.h
  * \brief Header for usart.cpp
  * \author Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
+ * \author Mazeryt Freager
  * \date 2012-08-30
  */
 

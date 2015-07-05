@@ -110,6 +110,39 @@
 
 #define SPIx_BOUDRATE						1000000
 
+#define SPIx_CS_GPIO						GPIOA
+#define SPIx_CS_PIN							GPIO_PIN_4
+#define SPIx_CS_CONFIGURATION				GPIO_AF5_PP_40MHz_PULL_DOWN
+
+#define SPIx_CS_bb							BITBAND(&SPIx_CS_GPIO->ODR, SPIx_CS_PIN)
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| DMA for SPI
++---------------------------------------------------------------------------------------------------------------------*/
+#define RCC_AHBENR_SPIx_DMAxEN_bb			RCC_AHBENR_DMA1EN_bb
+
+#define SPIx_DMAx_TX_CH						DMA1_Channel3
+#define SPIx_DMAx_TX_CH_IRQn				DMA1_Channel3_IRQn
+#define SPIx_DMAx_TX_CH_IRQHandler			DMA1_Channel3_IRQHandler
+#define SPIx_DMAx_TX_IFCR_CTCIFx_bb			DMA1_IFCR_CTCIF3_bb
+#define SPIx_DMAx_RX_CH						DMA1_Channel2
+#define SPIx_DMAx_RX_CH_IRQn				DMA1_Channel2_IRQn
+#define SPIx_DMAx_RX_CH_IRQHandler			DMA1_Channel2_IRQHandler
+#define SPIx_DMAx_RX_IFCR_CTCIFx_bb			DMA1_IFCR_CTCIF2_bb
+
+#define SPIx_RX_QUEUE_LENGTH				16
+#define SPIx_RX_QUEUE_BUFFER_LENGTH			16
+#define SPIx_TX_QUEUE_LENGTH				16
+
+#define SPIx_IRQHandler						SPI1_IRQHandler
+
+#define SPIx_BAUDRATE						1000
+
+#define SPIx_DMA_ENABLE						1
+
+#define SPI_RTOS							1
+
+
 /*---------------------------------------------------------------------------------------------------------------------+
 | I2C
 +---------------------------------------------------------------------------------------------------------------------*/
@@ -127,6 +160,8 @@
 
 #define I2C_FREQUENCY						100000
 
+#define I2C_RXTX_QUEUE_LENGTH				16
+
 /*---------------------------------------------------------------------------------------------------------------------+
 | commands
 +---------------------------------------------------------------------------------------------------------------------*/
@@ -137,10 +172,12 @@
 | interript priorities
 +---------------------------------------------------------------------------------------------------------------------*/
 
+#define SERIALx_IRQ_PRIORITY 				2
 #define USARTx_DMAx_TX_CH_IRQ_PRIORITY		10
 #define USARTx_IRQ_PRIORITY					10
-#define SERIALx_IRQ_PRIORITY 				2
 #define TIM6_IRQ_PRIORITY					10
+#define SPIx_DMAx_TX_CH_IRQ_PRIORITY		10
+#define SPIx_DMAx_RX_CH_IRQ_PRIORITY		10
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | interript priorities

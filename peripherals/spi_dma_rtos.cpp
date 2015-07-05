@@ -5,7 +5,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "inc/stm32l1xx.h"
+#include "stm32l152xc.h"
 
 #include "hdr/hdr_rcc.h"
 #include "hdr/hdr_spi.h"
@@ -227,11 +227,11 @@ static void spiTransferTask(void *parameters)
 
 			SPIx_DMAx_TX_CH->CPAR = (uint32_t) & SPIx->DR; 	// peripheral address
 
-			temp |= DMA_CCR1_PL;		// channel priority very high
-			temp |= DMA_CCR1_MINC;		// memory increment mode enabled
-			temp |= DMA_CCR1_DIR; 		// read from memory
-			temp |= DMA_CCR1_TCIE;		// transfer complete interrupt enable
-			temp |= DMA_CCR1_EN;		// channel enable
+			temp |= DMA_CCR_PL;		// channel priority very high
+			temp |= DMA_CCR_MINC;		// memory increment mode enabled
+			temp |= DMA_CCR_DIR; 		// read from memory
+			temp |= DMA_CCR_TCIE;		// transfer complete interrupt enable
+			temp |= DMA_CCR_EN;		// channel enable
 
 			SPIx_DMAx_TX_CH->CCR = temp;
 
@@ -263,10 +263,10 @@ static void spiTransferTask(void *parameters)
 
 			SPIx_DMAx_RX_CH->CPAR = (uint32_t) &SPIx->DR; 	// peripheral address
 
-			temp = DMA_CCR1_PL;		// channel priority very high
-			temp |= DMA_CCR1_MINC;		// memory increment mode enabled
-			temp |= DMA_CCR1_TCIE;		// transfer complete interrupt and transfer error interrupt enable
-			temp |= DMA_CCR1_EN;		// channel enable
+			temp = DMA_CCR_PL;		// channel priority very high
+			temp |= DMA_CCR_MINC;		// memory increment mode enabled
+			temp |= DMA_CCR_TCIE;		// transfer complete interrupt and transfer error interrupt enable
+			temp |= DMA_CCR_EN;		// channel enable
 
 			SPIx_DMAx_RX_CH->CCR = temp;
 
@@ -297,10 +297,10 @@ void spiDmaSendDummy(uint8_t *dummy, uint32_t length)
 
 	SPIx_DMAx_TX_CH->CPAR = (uint32_t) & SPIx->DR; 	// peripheral address
 
-	temp |= DMA_CCR1_PL;		// channel priority very high
-	temp |= DMA_CCR1_DIR; 		// read from memory
-	temp |= DMA_CCR1_TCIE;		// transfer complete interrupt and transfer error interrupt enable
-	temp |= DMA_CCR1_EN;		// channel enable
+	temp |= DMA_CCR_PL;		// channel priority very high
+	temp |= DMA_CCR_DIR; 		// read from memory
+	temp |= DMA_CCR_TCIE;		// transfer complete interrupt and transfer error interrupt enable
+	temp |= DMA_CCR_EN;		// channel enable
 
 	SPIx_DMAx_TX_CH->CCR = temp;
 }

@@ -171,6 +171,14 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 #define ACC_TASK_PRIORITY					(tskIDLE_PRIORITY + 1)
 #define ACC_TASK_STACK_SIZE					256
 
+// i2c tasks
+#define I2C_TASK_PRIORITY					(tskIDLE_PRIORITY + 1)
+#define I2C_TASK_STACK_SIZE					128
+
+// SPI TX task
+#define SPI_TX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
+#define SPI_TX_STACK_SIZE					128
+
 /*---------------------------------------------------------------------------------------------------------------------+
 | Runtime stats configuration
 +---------------------------------------------------------------------------------------------------------------------*/
