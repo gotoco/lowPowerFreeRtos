@@ -3,7 +3,7 @@
 * \brief   This file provides simple interface to
 *           STM32 Flash peripherial and use ST HAL Lib macros
 * \date 16-09-2014
-* \author: Maciek Grochowski
+ * \author Mazeryt Freager
 */
 #ifndef ST_FLASH_H
 #define ST_FLASH_H

@@ -3,7 +3,7 @@
 * \brief   This file provides implementation to
 *           STM32 Flash peripherial interface and use ST HAL Lib&Macros
 * \date 16-09-2014
-* \author: Maciek Grochowski
+ * \author Mazeryt Freager
 */
 #include "stm32l1xx.h"
 #include "flash.h"
