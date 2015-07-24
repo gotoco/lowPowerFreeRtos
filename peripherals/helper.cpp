@@ -51,6 +51,7 @@ void configureTimerForRuntimestats(void)
 //
 //	NVIC_SetPriority(TIM6_IRQn, TIM6_IRQ_PRIORITY);
 //	NVIC_EnableIRQ(TIM6_IRQn);
+	//TODO: tutaj implementacja timera
 }
 
 /*---------------------------------------------------------------------------------------------------------------------+
