@@ -107,6 +107,7 @@ static FATFS _fileSystem;
 static uint8_t buffer [28];
 
 void __rtcConfig(void);
+void __RTC_Config();
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | root task
@@ -142,6 +143,12 @@ int main(void)
 
 	while (1)
 	{ }
+
+}
+
+// function to configure a timer to generate a periodic interrupt
+void vPortSetupTimerInterrupt(void)
+{
 
 }
 
@@ -273,6 +280,8 @@ static enum Error _dirHandler(const char **arguments_array, uint32_t arguments_c
 static void _heartbeatTask(void *parameters)
 {
 
+	uint32_t licznik;
+
 	(void)parameters;						// suppress warning
 
 	portTickType xLastHeartBeat;
@@ -283,11 +292,19 @@ static void _heartbeatTask(void *parameters)
 
 	accelerometer->acc_init(accelerometer);
 
+	//rtcFastStart();
+
+	__RTC_Config();
+
+	//__rtcConfig();
+
 	for(;;){
 
-		accelerometer->acc_getAcceleration(accelerometer, 0);
+		//accelerometer->acc_getAcceleration(accelerometer, 0);
 
-		accelerometer->acc_checkVersion(accelerometer, buffer);
+		//accelerometer->acc_checkVersion(accelerometer, buffer);
+
+		licznik = RTC_GetWakeUpCounter();
 
 		vTaskDelay(40/portTICK_RATE_MS);	//Then go sleep
 	}
@@ -416,7 +433,7 @@ static enum Error _tasklistHandler(const char **arguments_array, uint32_t argume
   * @param  None
   * @retval None
   */
-void __rtcConfig(void)
+void __rtcConfig(void)  //TODO: ta funkcja nie działa
 {
   NVIC_InitTypeDef  NVIC_InitStructure;
   EXTI_InitTypeDef  EXTI_InitStructure;
@@ -471,6 +488,81 @@ void __rtcConfig(void)
 
   /* Enable the Wakeup Interrupt */
   RTC_ITConfig(RTC_IT_WUT, ENABLE);
+}
+
+void __RTC_Config()
+{
+	NVIC_InitTypeDef NVIC_InitStructure;
+	EXTI_InitTypeDef EXTI_InitStructure;
+
+	/* Enable the PWR clock */
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
+
+
+  /* Allow access to RTC */
+  PWR_RTCAccessCmd(ENABLE);
+
+  /* Enable the LSI OSC */
+  RCC_LSICmd(ENABLE);				// The RTC Clock may varies due to LSI frequency dispersion
+
+
+  /* Wait till LSI is ready */
+  while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
+
+
+  /* Select the RTC Clock Source */
+  RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+
+	/* Enable the RTC Clock */
+  RCC_RTCCLKCmd(ENABLE);
+
+
+  /* Wait for RTC APB registers synchronisation */
+  RTC_WaitForSynchro();
+
+	/* EXTI configuration *******************************************************/
+  EXTI_ClearITPendingBit(EXTI_Line20);
+  EXTI_InitStructure.EXTI_Line = EXTI_Line20;
+  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
+
+	// Configuring RTC_WakeUp interrupt
+  NVIC_InitStructure.NVIC_IRQChannel = RTC_WKUP_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+
+//  /* RTC Wakeup Interrupt Generation: Clock Source: RTCDiv_16, Wakeup Time Base: 4s , RTCDiv_4 WTB: 1s*/
+//    RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div4);
+//    RTC_SetWakeUpCounter(0x640); // 0.2s
+//    //(0x1FFF); // -> 8100 Div4 = 1s
+//    //(0x320) ; // -> 800 Div4 = 0.1s
+
+  	// RTC wake up counter disable
+  	RTC_WakeUpCmd(DISABLE);
+
+	// RTC Wakeup Configuration
+	RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div16);
+
+	// RTC Set WakeUp Counter
+	RTC_SetWakeUpCounter(18);
+
+	// Enabling RTC_WakeUp interrupt
+	RTC_ITConfig(RTC_IT_WUT, ENABLE);
+
+	// Disabling Alarm Flags
+	RTC_AlarmCmd(RTC_Alarm_A, DISABLE);
+	RTC_AlarmCmd(RTC_Alarm_B, DISABLE);
+
+	// RTC Enable the Wakeup Function
+	RTC_WakeUpCmd(ENABLE);
+
+	// Clear flags
+	RTC_ClearITPendingBit(RTC_IT_WUT);
+	EXTI_ClearITPendingBit(EXTI_Line20);
 }
 
 

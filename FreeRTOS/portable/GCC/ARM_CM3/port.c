@@ -71,6 +71,8 @@
 /* Scheduler includes. */
 #include "FreeRTOS.h"
 #include "task.h"
+#include "rtc.h"
+#include "exti.h"
 
 /* For backward compatibility, ensure configKERNEL_INTERRUPT_PRIORITY is
 defined.  The value should also ensure backward compatibility.
@@ -269,7 +271,31 @@ void xPortPendSVHandler( void )
 }
 /*-----------------------------------------------------------*/
 
-void xPortSysTickHandler( void )
+// RTC Wakeup through EXTI line interrupt
+//extern "C" void RTC_WKUP_IRQHandler(void) __attribute((interrupt));
+void RTC_WKUP_IRQHandler(void)
+{
+//	unsigned long ulDummy;
+//
+//	//	/* If using preemption, also force a context switch. */
+//	#if configUSE_PREEMPTION == 1
+//		*(portNVIC_INT_CTRL) = portNVIC_PENDSVSET;
+//	#endif
+//
+//	ulDummy = portSET_INTERRUPT_MASK_FROM_ISR();
+//	{
+//		vTaskIncrementTick();
+//	}
+//	portCLEAR_INTERRUPT_MASK_FROM_ISR( ulDummy );
+
+	if(RTC_GetITStatus(RTC_IT_WUT) != RESET)
+	{
+		RTC_ClearITPendingBit(RTC_IT_WUT);
+		EXTI_ClearITPendingBit(EXTI_Line20);
+	}
+}
+
+void xPortSysTickHandler( void ) //TODO
 {
 unsigned long ulDummy;
 

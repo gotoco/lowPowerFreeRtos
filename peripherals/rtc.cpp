@@ -2627,6 +2627,8 @@ void RTC_DefaultAlarmConfigure(RTC_AlarmTypeDef * RTC_AlarmStructure )
 }
 
 
+
+// RTC Alarms (A and B) through EXTI line interrupt
 extern "C" void RTC_Alarm_IRQHandler(void) __attribute__ ((interrupt));
 void RTC_Alarm_IRQHandler(void)
 {
