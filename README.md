@@ -14,11 +14,12 @@ Why has this repo?
 ------------
 In recent years, I had a lot of projects, especially for low power consumption electronic devices. Every time when I started a new project I was trying to figure out past mistakes from past projects and how to omit them in a new project. Also, my goal was to don't make overengineering as well as follow KISS (keep it simple stupid) guidelines. 
 As an effect, I created a repository for STM32L1xx uC, which I pull every time when I have to write a new project, rather than gathering whole code from scratch.
+If you ever wrote embedded system based on small microcontroller you probably know that whole system is the same application, there is no separation between OS, LibC, drivers and Your code. In this repository I try to keep clean separation between these components, because I have see a lot of complication because of keeping different layers of software as a spaghetti. 
 My intention is:
--has ready to go code that collects together: RTOS - FS - Drivers
--trying to create layers of insulation for the individual components
--has the possibility of development and evolution over time
--anyone can use and save time
+- has ready to go code that collects together: RTOS - FS - Drivers..(Your Drivers, Vendors Drivers, 3rd party Drivers)
+- trying to create layers of insulation for the individual components
+- has the possibility of development and evolution over time
+- anyone can use and save time
 
 ------------
 How to use?
