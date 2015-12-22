@@ -179,6 +179,118 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 #define SPI_TX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
 #define SPI_TX_STACK_SIZE					128
 
+/// priority of console task
+enum { CONSOLE_TASK_PRIORITY = 1 };
+
+/// stack size of console task, words (4 bytes each)
+enum { CONSOLE_TASK_STACK_SIZE = 512 };
+
+/// priority of DataConsumer task
+enum { DATA_CONSUMER_TASK_PRIORITY = 1 };
+
+/// stack size of DataConsumer task, words (4 bytes each)
+enum { DATA_CONSUMER_TASK_STACK_SIZE = 512 };
+
+/// priority of DataProducer task
+enum { DATA_PRODUCER_TASK_PRIORITY = 1 };
+
+/// stack size of DataProducer task, words (4 bytes each)
+enum { DATA_PRODUCER_TASK_STACK_SIZE = 512 };
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| UARTs
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// size of FreeRTOS queue (in chars) for UART
+enum { UART_QUEUE_SIZE = 128 };
+
+/// priority of UART's interrupts
+#define UART_INTERRUPT_PRIORITY		configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| UART stream
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// default UART baudrate used when opening device
+enum { UART_STREAM_BAUDRATE = 19200 };
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| I/O syscalls
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// how long should open and close block on mutex operations (in RTOS ticks)
+#define	STREAM_MUTEX_TICKS_TO_WAIT			portMAX_DELAY
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| console
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// size of input buffer for console task
+enum { CONSOLE_INPUT_BUFFER_SIZE = 128 };
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| UART assert
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// default UART baudrate used for assert()
+enum { UART_ASSERT_BAUDRATE = UART_STREAM_BAUDRATE };
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| ETRX2
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// size of buffer for rx task of ETRX2 module
+enum { ETRX2_BUFFER_SIZE = 128 };
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| streams
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// size of buffer used for stdio streams
+enum { STREAM_BUFFER_SIZE = 128 };
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| DataConsumer
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// size of event queue (number of elements)
+enum { DATA_CONSUMER_EVENT_QUEUE_SIZE = 16 };
+
+/// max number of producers on the forward_list
+enum { DATA_CONSUMER_MAX_PRODUCERS = 16 };
+
+/// period of subscribe broadcasts, seconds
+enum { DATA_CONSUMER_SUBSCRIBE_PERIOD = 60 };
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| DataProducer
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// delay of connection retry, seconds
+enum { DATA_PRODUCER_CONNECTION_RETRY_DELAY = 10 };
+
+/// size of event queue (number of elements)
+enum { DATA_PRODUCER_EVENT_QUEUE_SIZE = 16 };
+
+/// max number of NACKs in a row
+enum { DATA_PRODUCER_MAX_NACK = 3 };
+
+/// max number of subscribers
+enum { DATA_PRODUCER_MAX_SUBSCRIBERS = 16 };
+
+/// period of transfers, milliseconds
+enum { DATA_PRODUCER_TRANSFER_PERIOD_MS = 500 };
+
+/*---------------------------------------------------------------------------------------------------------------------+
+| ETRX
++---------------------------------------------------------------------------------------------------------------------*/
+
+/// priority of ETRX2 rx task
+enum { ETRX2_RX_TASK_PRIORITY = 1 };
+
+/// stack size of ETRX2 rx task, words (4 bytes each)
+enum { ETRX2_RX_TASK_STACK_SIZE = 512 };
+
 /*---------------------------------------------------------------------------------------------------------------------+
 | Runtime stats configuration
 +---------------------------------------------------------------------------------------------------------------------*/

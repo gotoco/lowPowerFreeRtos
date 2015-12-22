@@ -269,21 +269,21 @@ void xPortPendSVHandler( void )
 }
 /*-----------------------------------------------------------*/
 
-//void xPortSysTickHandler( void )
-//{
-//unsigned long ulDummy;
-//
-////	/* If using preemption, also force a context switch. */
-//	#if configUSE_PREEMPTION == 1
-//		*(portNVIC_INT_CTRL) = portNVIC_PENDSVSET;
-//	#endif
-//
-//	ulDummy = portSET_INTERRUPT_MASK_FROM_ISR();
-//	{
-//		vTaskIncrementTick();
-//	}
-//	portCLEAR_INTERRUPT_MASK_FROM_ISR( ulDummy );
-//}
+void xPortSysTickHandler( void )
+{
+unsigned long ulDummy;
+
+//	/* If using preemption, also force a context switch. */
+	#if configUSE_PREEMPTION == 1
+		*(portNVIC_INT_CTRL) = portNVIC_PENDSVSET;
+	#endif
+
+	ulDummy = portSET_INTERRUPT_MASK_FROM_ISR();
+	{
+		vTaskIncrementTick();
+	}
+	portCLEAR_INTERRUPT_MASK_FROM_ISR( ulDummy );
+}
 /*-----------------------------------------------------------*/
 
 /*

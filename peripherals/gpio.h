@@ -26,10 +26,10 @@
 /// enum that lists all possible pin numbers
 enum GpioPin
 {
-	GPIO_PIN_0 = 0,	GPIO_PIN_1,		GPIO_PIN_2,		GPIO_PIN_3,
-	GPIO_PIN_4,		GPIO_PIN_5,		GPIO_PIN_6,		GPIO_PIN_7,
-	GPIO_PIN_8,		GPIO_PIN_9,		GPIO_PIN_10,	GPIO_PIN_11,
-	GPIO_PIN_12,	GPIO_PIN_13,	GPIO_PIN_14,	GPIO_PIN_15,
+	GPIO_PIN0 = 0,	GPIO_PIN1,		GPIO_PIN2,		GPIO_PIN3,
+	GPIO_PIN4,		GPIO_PIN5,		GPIO_PIN6,		GPIO_PIN7,
+	GPIO_PIN8,		GPIO_PIN9,		GPIO_PIN10,	    GPIO_PIN11,
+	GPIO_PIN12,	    GPIO_PIN13,	    GPIO_PIN14,	    GPIO_PIN15,
 };
 
 /// enum that lists all possible configurations of GPIO

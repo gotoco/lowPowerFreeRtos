@@ -3,6 +3,7 @@
 # this makefile is based strongly on many examples found in the network
 #
 # author: Freddie Chopin, http://www.freddiechopin.info http://www.distortec.com
+# author: Mazeryt Freager, http://www.gotoc.co
 # date: 2012-09-06
 #
 
@@ -50,15 +51,21 @@ AS_DEFS =
 
 # additional directories with source files (absolute or relative paths to
 # folders with source files, current folder is always included)
-SRCS_DIRS =  configuration hdr Inc FatFS peripherals Drivers/ST/STM32_USB_Device_Library/Class/CDC Drivers/ST/STM32_USB_Device_Library/Core \
-			 Drivers Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include Drivers/STM32L1xx_HAL_Driver \
-			  FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang
+# Excluded:  
+SRCS_DIRS = application configuration hdr Inc peripherals Drivers FatFS \
+			Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include \
+			Drivers/STM32L1xx_HAL_Driver Drivers/ST/STM32_USB_Device_Library/Class/CDC Drivers/ST/STM32_USB_Device_Library/Core \
+			Drivers/Telegesis/ETRX \
+			FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang
 
 # include directories (absolute or relative paths to additional folders with
 # headers, current folder is always included)
-INC_DIRS =  configuration hdr Inc FatFS peripherals Drivers/ST/STM32_USB_Device_Library/Class/CDC Drivers/ST/STM32_USB_Device_Library/Core \
-			Drivers Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include Drivers/STM32L1xx_HAL_Driver \
-			 FreeRTOS/include FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang
+# Excluded:  
+INC_DIRS =  application configuration hdr Inc peripherals Drivers FatFS \
+			Drivers/CMSIS Drivers/CMSIS/Device/ST/STM32L1xx Drivers/CMSIS/Include \
+			Drivers/STM32L1xx_HAL_Driver Drivers/ST/STM32_USB_Device_Library/Class/CDC Drivers/ST/STM32_USB_Device_Library/Core \
+			Drivers/Telegesis/ETRX \
+			FreeRTOS/include FreeRTOS FreeRTOS/portable/GCC/ARM_CM3 FreeRTOS/portable/MemMang
 
 # library directories (absolute or relative paths to additional folders with
 # libraries)
@@ -87,7 +94,7 @@ CXX_STD = gnu++0x
 
 # C language standard ("c89" / "iso9899:1990", "iso9899:199409",
 # "c99" / "iso9899:1999", "gnu89" - default, "gnu99", "c99", "c11")
-C_STD = c11
+C_STD = c99
 
 # extension of C++ files
 CXX_EXT = cpp
@@ -134,7 +141,7 @@ endif
 CORE_FLAGS = -mcpu=$(CORE) -mthumb
 
 # flags for C++ compiler
-CXX_FLAGS = -std=$(CXX_STD) -g -ggdb3 -fno-rtti -fno-exceptions -fverbose-asm -Wa,-ahlms=$(OUT_DIR_F)$(notdir $(<:.$(CXX_EXT)=.lst))
+CXX_FLAGS = -std=$(CXX_STD) -g -ggdb3 -fno-rtti -fno-exceptions -fverbose-asm -fdata-sections -ffunction-sections -fpermissive -Wa,-ahlms=$(OUT_DIR_F)$(notdir $(<:.$(CXX_EXT)=.lst))
 
 # flags for C compiler
 C_FLAGS = -std=$(C_STD) -g -ggdb3 -fverbose-asm -Wa,-ahlms=$(OUT_DIR_F)$(notdir $(<:.$(C_EXT)=.lst))
@@ -143,7 +150,7 @@ C_FLAGS = -std=$(C_STD) -g -ggdb3 -fverbose-asm -Wa,-ahlms=$(OUT_DIR_F)$(notdir 
 AS_FLAGS = -g -ggdb3 -Wa,-amhls=$(OUT_DIR_F)$(notdir $(<:.$(AS_EXT)=.lst))
 
 # flags for linker
-LD_FLAGS = -T$(LD_SCRIPT) -g -Wl,-Map=$(OUT_DIR_F)$(PROJECT).map,--cref,--no-warn-mismatch
+LD_FLAGS = -T$(LD_SCRIPT) -g -Wl,-Map=$(OUT_DIR_F)$(PROJECT).map,--cref,--no-warn-mismatch,--gc-sections
 
 # process option for removing unused code
 ifeq ($(REMOVE_UNUSED), 1)
