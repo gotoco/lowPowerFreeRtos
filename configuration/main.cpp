@@ -54,44 +54,16 @@ static void _startPLL(void);
 static void _heartbeatTask(void *parameters);
 static enum Error _initializeHeartbeatTask(void);
 
-FILE *  uart1_rx;
-FILE *  uart1_tx;
 int main(void)
 {
   /* Configure the system clock */
   _sysInit();
 
-  int ret = ioSyscallsInitialize();
-
   /* Initialize all configured peripherals */
   GPIO_Init();
   //  USB_DEVICE_Init();
 
-//	FILE * const uart0_rx = fopen("/dev/uart0", "r");
-////	assert(uart0_rx != nullptr);
-//	setvbuf(uart0_rx, nullptr, _IOLBF, STREAM_BUFFER_SIZE);
-//
-//	FILE * const uart0_tx = fopen("/dev/uart0", "w");
-////	assert(uart0_tx != nullptr);
-//	setvbuf(uart0_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
-//
-//	Etrx2 etrx2(uart0_rx, uart0_tx);
-//	ret = etrx2.initialize();
-////	assert(ret == 0);
-//
-//	ret = etrx2CliInitialize(etrx2);
-////	assert(ret == 0);
-//
-//	DataProducer data_producer(etrx2);
-//	data_producer.initialize();
   _initializeHeartbeatTask();
-//	FILE * const
-	uart1_rx = fopen("/dev/uart0", "r");
-	setvbuf(uart1_rx, nullptr, _IOLBF, STREAM_BUFFER_SIZE);
-
-//	FILE * const
-	uart1_tx = fopen("/dev/uart0", "w");
-	setvbuf(uart1_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
 
   /* Infinite loop */
   vTaskStartScheduler();
@@ -106,16 +78,28 @@ int main(void)
 static void _heartbeatTask(void *parameters)
 {
 	(void)parameters;						// suppress warning
-
+	FILE *  uart1_rx;
+	FILE *  uart1_tx;
 	portTickType xLastHeartBeat;
 
 	xLastHeartBeat = xTaskGetTickCount();
+	int ret = ioSyscallsInitialize();
 
+	uart1_tx = fopen("/dev/uart0", "w");
+	setvbuf(uart1_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
+
+	uart1_rx = fopen("/dev/uart0", "r");
+	setvbuf(uart1_rx, nullptr, _IOLBF, STREAM_BUFFER_SIZE);
+
+	char buffer[10];
+	size_t size = 10;
 	for(;;){
 
-		  char x[10]="ABCDEFGHIJ";
-		  fwrite(x, sizeof(x[0]), sizeof(x)/sizeof(x[0]), uart1_tx);
-		  fflush(uart1_tx);
+		int read_size = fread(buffer, sizeof(char), size, uart1_rx);
+		int length = strlen(buffer);
+
+		fwrite(buffer, sizeof(buffer[0]), length, uart1_tx);
+		fflush(uart1_tx);
 
 		vTaskDelay(40/portTICK_RATE_MS);	//Then go sleep
 	}
@@ -124,7 +108,7 @@ static void _heartbeatTask(void *parameters)
 
 static enum Error _initializeHeartbeatTask(void)
 {
-	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", HEARTBEAT_STACK_SIZE, NULL,
+	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", 128, NULL,
 			HEARTBEAT_TASK_PRIORITY, NULL);
 
 	return errorConvert_portBASE_TYPE(ret);

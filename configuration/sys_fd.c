@@ -112,12 +112,7 @@ ssize_t uart_read_r(struct _reent * r, int file_descriptor, void * buffer, size_
 	size_t count = 0;
 	portTickType ticks_to_wait = portMAX_DELAY;
 	usart_driver_t * d = uarts_[file_descriptor];
-    char * pivot = (char*)buffer;
-	while (count < size && d->read(d, ticks_to_wait, pivot[count]) != 0)
-	{
-		count++;
-		ticks_to_wait = 0;
-	}
+	count = d->read(d, ticks_to_wait, buffer, size);
 
 	return count;
 }

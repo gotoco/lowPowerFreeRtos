@@ -54,6 +54,7 @@
 #define USARTx_RX_QUEUE_LENGTH				16
 #define USARTx_RX_QUEUE_BUFFER_LENGTH		16
 #define USARTx_TX_QUEUE_LENGTH				16
+#define USARTx_BUF_READ_QUEUE_LENGTH		16
 
 #define USARTx_IRQn							USART1_IRQn
 #define USARTx_IRQHandler					USART1_IRQHandler

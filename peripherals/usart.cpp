@@ -83,12 +83,12 @@ static void _txTask(void *parameters);
 
 extern char __ram_start[];					// imported from linker script
 
-static xQueueHandle _rxQueue;
-static xQueueHandle _txQueue;
-static xSemaphoreHandle _dmaTxSemaphore;
+//static xQueueHandle _rxQueue;
+//static xQueueHandle _txQueue;
+//static xSemaphoreHandle _dmaTxSemaphore;
 
-static char _inputBuffer[_INPUT_BUFFER_SIZE];
-static char _outputBuffer[_OUTPUT_BUFFER_SIZE];
+//static char _inputBuffer[_INPUT_BUFFER_SIZE];
+//static char _outputBuffer[_OUTPUT_BUFFER_SIZE];
 
 /*---------------------------------------------------------------------------------------------------------------------+
  | Peripherals IRQ-es
@@ -130,12 +130,13 @@ const usart_def_t usart1_t = {
 	._USARTx_DMAx_TX_CH_IRQ_PRIORITY= USARTx_DMAx_TX_CH_IRQ_PRIORITY,
 	._USARTx_IRQ_PRIORITY 			= USARTx_IRQ_PRIORITY,
 
-	._USARTx_IRQn			= USART1_IRQn,
+	._USARTx_IRQn			= USARTx_IRQn,
 	._USARTx_IRQHandler		= USARTx_IRQHandler,
 
 	._USARTx_RX_QUEUE_LENGTH= USARTx_RX_QUEUE_LENGTH,
 	._USARTx_RX_QUEUE_BUFFER_LENGTH = USARTx_RX_QUEUE_BUFFER_LENGTH,
 	._USARTx_TX_QUEUE_LENGTH= USARTx_TX_QUEUE_LENGTH,
+	._USARTx_BUF_READ_QUEUE_LENGTH = USARTx_BUF_READ_QUEUE_LENGTH,
 
 	._USART_TX_TASK_PRIORITY= USART_TX_TASK_PRIORITY,
 	._USART_TX_STACK_SIZE   = USART_TX_STACK_SIZE,
@@ -199,6 +200,11 @@ enum Error usart_initialize(usart_def_t * u, usart_driver_t * drv)
 	drv->_rxQueue = xQueueCreate(u->_USARTx_RX_QUEUE_LENGTH, sizeof(struct _RxMessage));
 
 	if (drv->_rxQueue == NULL)					// queue not created?
+		return ERROR_FreeRTOS_errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY;// return with error
+
+	drv->_readBuffer = xQueueCreate(u->_USARTx_BUF_READ_QUEUE_LENGTH, sizeof(struct _RxMessage));
+
+	if (drv->_readBuffer == NULL)					// queue not created?
 		return ERROR_FreeRTOS_errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY;// return with error
 
 	portBASE_TYPE ret = xTaskCreate(drv->_txTask, (signed char* )"USART TX",
@@ -266,18 +272,16 @@ static void _rxTask(void *parameters)
 
 		if (message.status == RX_STATUS_HAD_CR_LF)// is the message complete (terminated with "\r\n" sequence)?
 				{									// yes - start processing
-			_inputBuffer[input_length] = '\0';	// terminate input string
+			drv->_inputBuffer[input_length] = '\0';	// terminate input string
 
-			enum Error error = ERROR_NONE;
-//					commandProcessInput(_inputBuffer, _outputBuffer, _OUTPUT_BUFFER_SIZE);	// process input
+			portBASE_TYPE ret = xQueueSend(drv->_readBuffer, &message, portMAX_DELAY);
 
-			if (error == ERROR_NONE)		// input processed successfully?
-				drv->write(drv, drv->_outputBuffer, 0);
-			else
-				// input processing error
-				drv->printf(drv, 0,
-						"ERROR: command handler execution failed with code %d! (" __FILE__ ":" STRINGIZE(__LINE__) ")\r\n",
-						error);
+			if (ret == errQUEUE_FULL){		// queue full?
+				struct _RxMessage dropped;
+				//Drop the oldest message and try again
+				xQueueReceive(drv->_readBuffer, &dropped, portMAX_DELAY);
+				xQueueSend(drv->_readBuffer, &message, portMAX_DELAY);
+			}
 
 			input_length = 0;				// reset sequence
 		}
@@ -344,7 +348,6 @@ void USARTx_DMAx_TX_CH_IRQHandler(void)
 
 	xSemaphoreGiveFromISR(usart1_handler._dmaTxSemaphore, &higher_priority_task_woken);
 
-	//	USARTx_DMAx_TX_IFCR_CTCIFx_bb = 1;			// clear interrupt flag
 	BITBAND(usart1_t._IFCR_CTCIFx_bb, DMA_IFCR_CTCIF4_bit) = 1; // clear interrupt flag
 
 	portEND_SWITCHING_ISR(higher_priority_task_woken);
@@ -362,9 +365,10 @@ void USARTx_IRQHandler(void)
 	portBASE_TYPE higher_priority_task_woken = pdFALSE;
 	static struct _RxMessage message;
 
-	while (USARTx_SR_RXNE_bb(usart1_t._USARTx))		// loop while data is available
+	while (USARTx_SR_RXNE_bb(USARTx))		// loop while data is available
 	{
-		char c = USARTx->DR;
+		char c = usart1_t._USARTx->DR;
+		char c2 = usart1_t._USARTx->DR;
 		message.string[message.length++] = c;	// get char to buffer
 
 		// check for "\r\n" sequence in the string
@@ -378,7 +382,7 @@ void USARTx_IRQHandler(void)
 		// transfer block only if out of space or "\r\n" sequence was found
 		if ((message.length >= USARTx_RX_QUEUE_BUFFER_LENGTH)
 				|| (message.status == RX_STATUS_HAD_CR_LF)) {
-			xQueueSendFromISR(_rxQueue, &message, &higher_priority_task_woken);
+			xQueueSendFromISR(usart1_handler._rxQueue, &message, &higher_priority_task_woken);
 
 			message.length = 0;
 
@@ -402,12 +406,20 @@ void USARTx_IRQHandler(void)
  * \return number of read characters - 1 on success, 0 if queue was empty
  */
 
-uint32_t usart_read(usart_driver_t * drv, const portTickType ticks_to_wait, char *c)
+uint32_t usart_read(usart_driver_t * drv, const portTickType ticks_to_wait, char *c, size_t length)
 {
 	uint32_t count = 0;
+	struct _RxMessage message;
 
-	if (xQueueReceive(drv->_rxQueue, c, ticks_to_wait) == pdTRUE)
-		count = 1;
+	if (xQueueReceive(drv->_readBuffer, &message, ticks_to_wait) == pdTRUE){
+		count = message.length;
+
+		if(count > length){
+			memcpy(c, message.string, length);
+		} else {
+			memcpy(c, message.string, count);
+		}
+	}
 
 	return count;
 }

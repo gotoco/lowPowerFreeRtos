@@ -157,7 +157,7 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 
 // USART TX task
 #define USART_TX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
-#define USART_TX_STACK_SIZE					128
+#define USART_TX_STACK_SIZE					256
 
 // USART RX task
 #define USART_RX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)

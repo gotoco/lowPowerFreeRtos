@@ -74,6 +74,7 @@ typedef struct usart_definition{
 	unsigned long _USARTx_RX_QUEUE_LENGTH;
 	unsigned long _USARTx_RX_QUEUE_BUFFER_LENGTH;
 	unsigned long _USARTx_TX_QUEUE_LENGTH;
+	unsigned long _USARTx_BUF_READ_QUEUE_LENGTH;
 
 	unsigned long _USART_TX_TASK_PRIORITY;
 	unsigned long _USART_TX_STACK_SIZE;
@@ -95,12 +96,13 @@ typedef struct usart_definition{
 
 typedef struct usart_driver{
 
-	uint32_t (* read)(struct usart_driver * self, portTickType ticks_to_wait, char *c);
+	uint32_t (* read)(struct usart_driver * self, portTickType ticks_to_wait, char *c, size_t size);
 	uint32_t (* write)(struct usart_driver * self, portTickType ticks_to_wait, const char *c);
 	uint32_t (* printf)(struct usart_driver * self, portTickType ticks_to_wait, const char *format, ...);
 
 	xQueueHandle _rxQueue;
 	xQueueHandle _txQueue;
+	xQueueHandle _readBuffer;
 	xSemaphoreHandle _dmaTxSemaphore;
 
 	char _inputBuffer[_INPUT_BUFFER_SIZE];
@@ -117,7 +119,7 @@ typedef struct usart_driver{
 void usart_low_level_put(char c);
 
 //Drivers functions
-uint32_t usart_read(usart_driver_t * drv, portTickType ticks_to_wait, char *c);
+uint32_t usart_read(usart_driver_t * drv, portTickType ticks_to_wait, char *c, size_t length);
 uint32_t usart_write(usart_driver_t * drv, portTickType ticks_to_wait, const char *c);
 enum Error usart_printf(usart_driver_t * drv, portTickType ticks_to_wait, const char *format, ...);
 
