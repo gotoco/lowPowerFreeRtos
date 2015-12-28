@@ -414,10 +414,12 @@ uint32_t usart_read(usart_driver_t * drv, const portTickType ticks_to_wait, char
 	if (xQueueReceive(drv->_readBuffer, &message, ticks_to_wait) == pdTRUE){
 		count = message.length;
 
-		if(count > length){
+		if(count+1 > length){
 			memcpy(c, message.string, length);
 		} else {
 			memcpy(c, message.string, count);
+			*(c+count) = '\0';  //we had character device so strings are 0 finished
+			count++;
 		}
 	}
 

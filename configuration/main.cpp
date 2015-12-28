@@ -54,6 +54,9 @@ static void _startPLL(void);
 static void _heartbeatTask(void *parameters);
 static enum Error _initializeHeartbeatTask(void);
 
+FILE *  uart1_rx;
+FILE *  uart1_tx;
+
 int main(void)
 {
   /* Configure the system clock */
@@ -62,6 +65,14 @@ int main(void)
   /* Initialize all configured peripherals */
   GPIO_Init();
   //  USB_DEVICE_Init();
+
+	int ret = ioSyscallsInitialize();
+
+	uart1_tx = fopen("/dev/uart0", "w");
+	setvbuf(uart1_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
+
+	uart1_rx = fopen("/dev/uart0", "r");
+	setvbuf(uart1_rx, nullptr, _IOLBF, STREAM_BUFFER_SIZE);
 
   _initializeHeartbeatTask();
 
@@ -78,18 +89,10 @@ int main(void)
 static void _heartbeatTask(void *parameters)
 {
 	(void)parameters;						// suppress warning
-	FILE *  uart1_rx;
-	FILE *  uart1_tx;
 	portTickType xLastHeartBeat;
 
 	xLastHeartBeat = xTaskGetTickCount();
-	int ret = ioSyscallsInitialize();
 
-	uart1_tx = fopen("/dev/uart0", "w");
-	setvbuf(uart1_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
-
-	uart1_rx = fopen("/dev/uart0", "r");
-	setvbuf(uart1_rx, nullptr, _IOLBF, STREAM_BUFFER_SIZE);
 
 	char buffer[10];
 	size_t size = 10;
@@ -108,7 +111,7 @@ static void _heartbeatTask(void *parameters)
 
 static enum Error _initializeHeartbeatTask(void)
 {
-	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", 128, NULL,
+	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", HEARTBEAT_STACK_SIZE, NULL,
 			HEARTBEAT_TASK_PRIORITY, NULL);
 
 	return errorConvert_portBASE_TYPE(ret);
