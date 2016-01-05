@@ -173,7 +173,6 @@
 | interript priorities
 +---------------------------------------------------------------------------------------------------------------------*/
 
-#define SERIALx_IRQ_PRIORITY 				2
 #define USARTx_DMAx_TX_CH_IRQ_PRIORITY		10
 #define USARTx_IRQ_PRIORITY					10
 #define TIM6_IRQ_PRIORITY					10

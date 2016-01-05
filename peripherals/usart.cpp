@@ -83,13 +83,6 @@ static void _txTask(void *parameters);
 
 extern char __ram_start[];					// imported from linker script
 
-//static xQueueHandle _rxQueue;
-//static xQueueHandle _txQueue;
-//static xSemaphoreHandle _dmaTxSemaphore;
-
-//static char _inputBuffer[_INPUT_BUFFER_SIZE];
-//static char _outputBuffer[_OUTPUT_BUFFER_SIZE];
-
 /*---------------------------------------------------------------------------------------------------------------------+
  | Peripherals IRQ-es
  +---------------------------------------------------------------------------------------------------------------------*/
@@ -344,7 +337,7 @@ static void _txTask(void *parameters)
 extern "C" void USARTx_DMAx_TX_CH_IRQHandler(void) __attribute__ ((interrupt));
 void USARTx_DMAx_TX_CH_IRQHandler(void)
 {
-	signed portBASE_TYPE higher_priority_task_woken;
+	signed portBASE_TYPE higher_priority_task_woken  = pdFALSE;
 
 	xSemaphoreGiveFromISR(usart1_handler._dmaTxSemaphore, &higher_priority_task_woken);
 
@@ -368,7 +361,6 @@ void USARTx_IRQHandler(void)
 	while (USARTx_SR_RXNE_bb(USARTx))		// loop while data is available
 	{
 		char c = usart1_t._USARTx->DR;
-		char c2 = usart1_t._USARTx->DR;
 		message.string[message.length++] = c;	// get char to buffer
 
 		// check for "\r\n" sequence in the string

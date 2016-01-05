@@ -54,8 +54,11 @@ static void _startPLL(void);
 static void _heartbeatTask(void *parameters);
 static enum Error _initializeHeartbeatTask(void);
 
-FILE *  uart1_rx;
-FILE *  uart1_tx;
+//FILE *  uart1_rx;
+//FILE *  uart1_tx;
+
+extern const usart_driver_t usart1_handler;
+extern const usart_def_t usart1_t;
 
 int main(void)
 {
@@ -66,13 +69,13 @@ int main(void)
   GPIO_Init();
   //  USB_DEVICE_Init();
 
-	int ret = ioSyscallsInitialize();
+  usart_initialize(&usart1_t, &usart1_handler);
 
-	uart1_tx = fopen("/dev/uart0", "w");
-	setvbuf(uart1_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
-
-	uart1_rx = fopen("/dev/uart0", "r");
-	setvbuf(uart1_rx, nullptr, _IOLBF, STREAM_BUFFER_SIZE);
+//	uart1_tx = fopen("/dev/uart0", "w");
+//	setvbuf(uart1_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
+//
+//	uart1_rx = fopen("/dev/uart0", "r");
+//	setvbuf(uart1_rx, nullptr, _IOLBF, STREAM_BUFFER_SIZE);
 
   _initializeHeartbeatTask();
 
@@ -98,11 +101,11 @@ static void _heartbeatTask(void *parameters)
 	size_t size = 10;
 	for(;;){
 
-		int read_size = fread(buffer, sizeof(char), size, uart1_rx);
-		int length = strlen(buffer);
+		char x[10]="ABCDEFGHI\0";
 
-		fwrite(buffer, sizeof(buffer[0]), length, uart1_tx);
-		fflush(uart1_tx);
+		usart1_handler.write(&usart1_handler, portMAX_DELAY, x);
+//        fwrite(x, sizeof(x[0]), sizeof(x)/sizeof(x[0]), uart1_tx);
+//		fflush(uart1_tx);
 
 		vTaskDelay(40/portTICK_RATE_MS);	//Then go sleep
 	}
@@ -111,7 +114,7 @@ static void _heartbeatTask(void *parameters)
 
 static enum Error _initializeHeartbeatTask(void)
 {
-	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", HEARTBEAT_STACK_SIZE, NULL,
+	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", 512, NULL,
 			HEARTBEAT_TASK_PRIORITY, NULL);
 
 	return errorConvert_portBASE_TYPE(ret);
