@@ -111,7 +111,7 @@ static void prvSetupTimerInterrupt( void );
  * Exception handlers.
  */
 void xPortPendSVHandler( void ) __attribute__ (( naked ));
-//void xPortSysTickHandler( void );
+void xPortSysTickHandler( void );
 void vPortSVCHandler( void ) __attribute__ (( naked ));
 
 /*
@@ -273,7 +273,7 @@ void xPortSysTickHandler( void )
 {
 unsigned long ulDummy;
 
-//	/* If using preemption, also force a context switch. */
+	/* If using preemption, also force a context switch. */
 	#if configUSE_PREEMPTION == 1
 		*(portNVIC_INT_CTRL) = portNVIC_PENDSVSET;
 	#endif

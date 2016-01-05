@@ -1,6 +1,5 @@
 /*
     FreeRTOS V7.2.0 - Copyright (C) 2012 Real Time Engineers Ltd.
-	
 
     ***************************************************************************
      *                                                                       *
@@ -20,10 +19,7 @@
      *    Thank you for using FreeRTOS, and thank you for your support!      *
      *                                                                       *
     ***************************************************************************
-
-
     This file is part of the FreeRTOS distribution.
-
     FreeRTOS is free software; you can redistribute it and/or modify it under
     the terms of the GNU General Public License (version 2) as published by the
     Free Software Foundation AND MODIFIED BY the FreeRTOS exception.
@@ -38,9 +34,8 @@
     can be viewed here: http://www.freertos.org/a00114.html and also obtained
     by writing to Richard Barry, contact details for whom are available on the
     FreeRTOS WEB site.
-
     1 tab == 4 spaces!
-    
+
     ***************************************************************************
      *                                                                       *
      *    Having a problem?  Start by reading the FAQ "My application does   *
@@ -50,17 +45,15 @@
      *                                                                       *
     ***************************************************************************
 
-    
-    http://www.FreeRTOS.org - Documentation, training, latest information, 
+    http://www.FreeRTOS.org - Documentation, training, latest information,
     license and contact details.
-    
+
     http://www.FreeRTOS.org/plus - A selection of FreeRTOS ecosystem products,
     including FreeRTOS+Trace - an indispensable productivity tool.
-
-    Real Time Engineers ltd license FreeRTOS to High Integrity Systems, who sell 
-    the code with commercial support, indemnification, and middleware, under 
+    Real Time Engineers ltd license FreeRTOS to High Integrity Systems, who sell
+    the code with commercial support, indemnification, and middleware, under
     the OpenRTOS brand: http://www.OpenRTOS.com.  High Integrity Systems also
-    provide a safety engineered and independently SIL3 certified version under 
+    provide a safety engineered and independently SIL3 certified version under
     the SafeRTOS brand: http://www.SafeRTOS.com.
 */
 
@@ -72,7 +65,7 @@
  * This file can only be used if the linker is configured to to generate
  * a heap memory area.
  *
- * See heap_1.c, heap_2.c and heap_4.c for alternative implementations, and the 
+ * See heap_1.c, heap_2.c and heap_4.c for alternative implementations, and the
  * memory management pages of http://www.FreeRTOS.org for more information.
  */
 
@@ -109,7 +102,7 @@ void *pvReturn;
 		}
 	}
 	#endif
-	
+
 	return pvReturn;
 }
 /*-----------------------------------------------------------*/
@@ -125,6 +118,4 @@ void vPortFree( void *pv )
 		xTaskResumeAll();
 	}
 }
-
-
 

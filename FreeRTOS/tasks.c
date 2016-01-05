@@ -2182,7 +2182,7 @@ tskTCB *pxNewTCB;
 			}
 			#endif			
 			
-			sprintf( pcStatusString, ( char * ) "%-*s\t%-7c\t%-7u\t%-7u\t%u\r\n", configMAX_TASK_NAME_LEN, pxNextTCB->pcTaskName, cStatus, ( unsigned int ) pxNextTCB->uxPriority, usStackRemaining, ( unsigned int ) pxNextTCB->uxTCBNumber );
+			sprintf( pcStatusString, ( char * ) "%s\t\t%c\t%u\t%u\t%u\r\n", pxNextTCB->pcTaskName, cStatus, ( unsigned int ) pxNextTCB->uxPriority, usStackRemaining, ( unsigned int ) pxNextTCB->uxTCBNumber );
 			strcat( ( char * ) pcWriteBuffer, ( char * ) pcStatusString );
 
 		} while( pxNextTCB != pxFirstTCB );
@@ -2212,7 +2212,7 @@ tskTCB *pxNewTCB;
 				if( pxNextTCB->ulRunTimeCounter == 0UL )
 				{
 					/* The task has used no CPU time at all. */
-					sprintf( pcStatsString, ( char * ) "%-*s\t0          \t0%%\r\n", configMAX_TASK_NAME_LEN, pxNextTCB->pcTaskName );
+					sprintf( pcStatsString, ( char * ) "%s\t\t0\t\t0%%\r\n", pxNextTCB->pcTaskName );
 				}
 				else
 				{
@@ -2225,13 +2225,13 @@ tskTCB *pxNewTCB;
 					{
 						#ifdef portLU_PRINTF_SPECIFIER_REQUIRED
 						{
-							sprintf( pcStatsString, ( char * ) "%-*s\t%-11lu\t%lu%%\r\n", configMAX_TASK_NAME_LEN, pxNextTCB->pcTaskName, pxNextTCB->ulRunTimeCounter, ulStatsAsPercentage );
+							sprintf( pcStatsString, ( char * ) "%s\t\t%lu\t\t%lu%%\r\n", pxNextTCB->pcTaskName, pxNextTCB->ulRunTimeCounter, ulStatsAsPercentage );							
 						}
 						#else
 						{
 							/* sizeof( int ) == sizeof( long ) so a smaller
 							printf() library can be used. */
-							sprintf( pcStatsString, ( char * ) "%-*s\t%-11u\t%u%%\r\n", configMAX_TASK_NAME_LEN, pxNextTCB->pcTaskName, ( unsigned int ) pxNextTCB->ulRunTimeCounter, ( unsigned int ) ulStatsAsPercentage );
+							sprintf( pcStatsString, ( char * ) "%s\t\t%u\t\t%u%%\r\n", pxNextTCB->pcTaskName, ( unsigned int ) pxNextTCB->ulRunTimeCounter, ( unsigned int ) ulStatsAsPercentage );
 						}
 						#endif
 					}
@@ -2241,13 +2241,13 @@ tskTCB *pxNewTCB;
 						consumed less than 1% of the total run time. */
 						#ifdef portLU_PRINTF_SPECIFIER_REQUIRED
 						{
-							sprintf( pcStatsString, ( char * ) "%-*s\t%-11lu\t<1%%\r\n", configMAX_TASK_NAME_LEN, pxNextTCB->pcTaskName, pxNextTCB->ulRunTimeCounter );
+							sprintf( pcStatsString, ( char * ) "%s\t\t%lu\t\t<1%%\r\n", pxNextTCB->pcTaskName, pxNextTCB->ulRunTimeCounter );							
 						}
 						#else
 						{
 							/* sizeof( int ) == sizeof( long ) so a smaller
 							printf() library can be used. */
-							sprintf( pcStatsString, ( char * ) "%-*s\t%-11u\t<1%%\r\n", configMAX_TASK_NAME_LEN, pxNextTCB->pcTaskName, ( unsigned int ) pxNextTCB->ulRunTimeCounter );
+							sprintf( pcStatsString, ( char * ) "%s\t\t%u\t\t<1%%\r\n", pxNextTCB->pcTaskName, ( unsigned int ) pxNextTCB->ulRunTimeCounter );
 						}
 						#endif
 					}
