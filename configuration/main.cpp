@@ -102,11 +102,12 @@ static void _heartbeatTask(void *parameters)
 	for(;;){
 
 		char x[10]="ABCDEFGHI\0";
+		size_t i = strlen(x);
 
 		usart1_handler.write(&usart1_handler, portMAX_DELAY, x);
 //        fwrite(x, sizeof(x[0]), sizeof(x)/sizeof(x[0]), uart1_tx);
 //		fflush(uart1_tx);
-
+		buffer[0] = i;
 		vTaskDelay(40/portTICK_RATE_MS);	//Then go sleep
 	}
 
@@ -114,7 +115,7 @@ static void _heartbeatTask(void *parameters)
 
 static enum Error _initializeHeartbeatTask(void)
 {
-	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", 512, NULL,
+	portBASE_TYPE ret = xTaskCreate(_heartbeatTask, (signed char*)"heartbeat", 256, NULL,
 			HEARTBEAT_TASK_PRIORITY, NULL);
 
 	return errorConvert_portBASE_TYPE(ret);

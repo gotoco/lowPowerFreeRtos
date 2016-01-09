@@ -37,6 +37,7 @@
 #include "queue.h"
 #include "semphr.h"
 
+#include "mem_cpy.h"
 /*---------------------------------------------------------------------------------------------------------------------+
  | local variables' types
  +---------------------------------------------------------------------------------------------------------------------*/
@@ -66,7 +67,7 @@ struct _TxMessage {
  +---------------------------------------------------------------------------------------------------------------------*/
 
 #define _INPUT_BUFFER_SIZE					128
-#define _OUTPUT_BUFFER_SIZE					512
+#define _OUTPUT_BUFFER_SIZE					256
 
 
 /*---------------------------------------------------------------------------------------------------------------------+
@@ -278,7 +279,6 @@ static void _rxTask(void *parameters)
 
 			input_length = 0;				// reset sequence
 		}
-
 	}
 }
 
@@ -292,7 +292,7 @@ static void _txTask(void *parameters)
 {
 	char *previous_string = NULL;
 
-	usart_driver_t * drv = (usart_driver_t *) parameters;
+	usart_driver_t * drv = &usart1_handler;
 
 	while (1) {
 		struct _TxMessage message;
@@ -304,13 +304,13 @@ static void _txTask(void *parameters)
 		if (previous_string >= __ram_start)	// was the previously used string in RAM?
 			vPortFree(previous_string);		// yes - free the temporary buffer
 
-		USARTx_DMAx_TX_CH->CCR = 0;				// disable channel
-		USARTx_DMAx_TX_CH->CMAR = (uint32_t) message.string;	// source
-		USARTx_DMAx_TX_CH->CPAR = (uint32_t) & USARTx->DR;	// destination
-		USARTx_DMAx_TX_CH->CNDTR = message.length;	// length
+		usart1_t._USARTx_DMAx_TX_CH->CCR = 0;				// disable channel
+		usart1_t._USARTx_DMAx_TX_CH->CMAR = (uint32_t) message.string;	// source
+		usart1_t._USARTx_DMAx_TX_CH->CPAR = (uint32_t) & usart1_t._USARTx->DR;	// destination
+		usart1_t._USARTx_DMAx_TX_CH->CNDTR = message.length;	// length
 		// low priority, 8-bit source and destination, memory increment mode, memory to peripheral, transfer complete
 		// interrupt enable, enable channel
-		USARTx_DMAx_TX_CH->CCR = DMA_CCR_PL_LOW | DMA_CCR_MSIZE_8
+		usart1_t._USARTx_DMAx_TX_CH->CCR = DMA_CCR_PL_LOW | DMA_CCR_MSIZE_8
 				| DMA_CCR_PSIZE_8 | DMA_CCR_MINC | DMA_CCR_DIR |
 				DMA_CCR_TCIE | DMA_CCR_EN;
 
@@ -446,7 +446,7 @@ uint32_t usart_write(usart_driver_t * drv, portTickType ticks_to_wait, const cha
 		if (message.string == NULL)
 			return ERROR_FreeRTOS_errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY;
 
-		memcpy(message.string, string, message.length);
+		_memcpy(message.string, string, message.length);
 	} else
 		message.string = (char*) string;// no, string in ROM - just use the address
 

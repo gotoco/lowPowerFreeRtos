@@ -121,6 +121,7 @@ to exclude the API function. */
 #define INCLUDE_vTaskSuspend			1
 #define INCLUDE_vTaskDelayUntil			1
 #define INCLUDE_vTaskDelay				1
+#define INCLUDE_xTaskGetSchedulerState  1
 
 /* Use the system definition, if there is one */
 #ifdef __NVIC_PRIO_BITS
@@ -145,7 +146,7 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 
 #define vPortSVCHandler						SVC_Handler
 #define xPortPendSVHandler					PendSV_Handler
-#define xPortSysTickHandler					SysTick_Handler
+//#define xPortSysTickHandler					SysTick_Handler //commented because of usage ST_HAL libraries
 
 /*---------------------------------------------------------------------------------------------------------------------+
 | Priorities and stacks for tasks in the system
@@ -162,14 +163,6 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 // USART RX task
 #define USART_RX_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
 #define USART_RX_STACK_SIZE					256
-
-// Bluetooth Task
-#define BLUETOOTH_TASK_PRIORITY				(tskIDLE_PRIORITY + 1)
-#define BLUETOOTH_TASK_STACK_SIZE			312
-
-// Accelerometr Task
-#define ACC_TASK_PRIORITY					(tskIDLE_PRIORITY + 1)
-#define ACC_TASK_STACK_SIZE					256
 
 // i2c tasks
 #define I2C_TASK_PRIORITY					(tskIDLE_PRIORITY + 1)

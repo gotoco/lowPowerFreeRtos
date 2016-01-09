@@ -29,7 +29,7 @@
 enum Error
 {
 	// --- negative values ---
-	ERROR_FreeRTOS_errSCHEDULER_FAIL,		// Scheduler leak
+	ERROR_FreeRTOS_errSCHEDULER_FAIL = -7,		// Scheduler leak
 
 	// FreeRTOS errors from projdefs.h
 

@@ -32,6 +32,9 @@
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------*/
+#include "FreeRTOS.h"
+#include "task.h"
+
 #include "stm32l1xx_hal.h"
 #include "stm32l1xx.h"
 #include "stm32l1xx_it.h"
@@ -40,9 +43,22 @@
 
 extern PCD_HandleTypeDef hpcd_USB_FS;
 
+extern "C"  void xPortSysTickHandler(void);
+
 /******************************************************************************/
 /*            Cortex-M3 Processor Interruption and Exception Handlers         */ 
 /******************************************************************************/
+
+/**
+* @brief This function handles System tick timer.
+*/
+void SysTick_Handler(void)
+{
+  if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {
+    xPortSysTickHandler();
+  }
+  HAL_IncTick();
+}
 
 /**
 * @brief This function handles USB Low Priority interrupt.
