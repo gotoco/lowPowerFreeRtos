@@ -29,7 +29,7 @@
 #include <stdarg.h>
 #include "usart.h"
 
-#define putchar(c)							usart_low_level_put(c)
+#define putchar(c)							usart_low_level_put( c )
 
 static void printchar(char **str, int c)
 {

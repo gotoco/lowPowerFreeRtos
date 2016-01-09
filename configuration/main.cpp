@@ -34,6 +34,9 @@
 #include <cstring>
 #include <cassert>
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void GPIO_Init(void);
@@ -55,10 +58,10 @@ static void _heartbeatTask(void *parameters);
 static enum Error _initializeHeartbeatTask(void);
 
 //FILE *  uart1_rx;
-//FILE *  uart1_tx;
+FILE *  uart1_tx;
 
-extern const usart_driver_t usart1_handler;
-extern const usart_def_t usart1_t;
+//extern const usart_driver_t usart1_handler;
+//extern const usart_def_t usart1_t;
 
 int main(void)
 {
@@ -67,12 +70,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   GPIO_Init();
-  //  USB_DEVICE_Init();
+  ioSyscallsInitialize();
 
-  usart_initialize(&usart1_t, &usart1_handler);
+//  usart_initialize(&usart1_t, &usart1_handler);
 
-//	uart1_tx = fopen("/dev/uart0", "w");
-//	setvbuf(uart1_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
+	uart1_tx = fopen("/dev/uart0", "w");
+	setvbuf(uart1_tx, nullptr, _IOFBF, STREAM_BUFFER_SIZE);
 //
 //	uart1_rx = fopen("/dev/uart0", "r");
 //	setvbuf(uart1_rx, nullptr, _IOLBF, STREAM_BUFFER_SIZE);
@@ -104,9 +107,9 @@ static void _heartbeatTask(void *parameters)
 		char x[10]="ABCDEFGHI\0";
 		size_t i = strlen(x);
 
-		usart1_handler.write(&usart1_handler, portMAX_DELAY, x);
-//        fwrite(x, sizeof(x[0]), sizeof(x)/sizeof(x[0]), uart1_tx);
-//		fflush(uart1_tx);
+//		usart1_handler.write(&usart1_handler, portMAX_DELAY, x);
+        fwrite(x, sizeof(x[0]), sizeof(x)/sizeof(x[0]), uart1_tx);
+		fflush(uart1_tx);
 		buffer[0] = i;
 		vTaskDelay(40/portTICK_RATE_MS);	//Then go sleep
 	}

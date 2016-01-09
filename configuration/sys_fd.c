@@ -32,19 +32,19 @@
 // object for UART0
 
 // object for UART1
-extern const usart_driver_t usart1_handler;
-extern const usart_def_t usart1_t;
+//extern const usart_driver_t usart1_handler;
+//extern const usart_def_t usart1_t;
 
 /// array with available UARTs
-usart_driver_t *uarts_[] =
+uint32_t *uarts_[] =
 {
-		&usart1_handler,
+		0,
 };
 
 /// array with available UARTs
-usart_def_t *uarts_confs[] =
+uint32_t *uarts_confs[] =
 {
-		&usart1_t,
+		0,
 };
 
 // true if given device is already initialized - it's not re-initialized in that case
@@ -76,9 +76,7 @@ int uart_open_r(struct _reent *r, const char *filename, int flags, int mode)
 	{
 		if (!initialized_[file_descriptor])	// device not yet initialized?
 		{
-			usart_driver_t * d = uarts_[file_descriptor];
-			usart_def_t * u = uarts_confs[file_descriptor];
-			errno = usart_initialize(u, d);
+			errno = usartInitialize();
 
 			if (errno != 0)	// initialize() failed?
 				return ret;
@@ -110,9 +108,9 @@ int uart_open_r(struct _reent *r, const char *filename, int flags, int mode)
 ssize_t uart_read_r(struct _reent * r, int file_descriptor, void * buffer, size_t size)
 {
 	size_t count = 0;
-	portTickType ticks_to_wait = portMAX_DELAY;
-	usart_driver_t * d = uarts_[file_descriptor];
-	count = d->read(d, ticks_to_wait, buffer, size);
+//	portTickType ticks_to_wait = portMAX_DELAY;
+//	usart_driver_t * d = uarts_[file_descriptor];
+//	count = d->read(d, ticks_to_wait, buffer, size);
 
 	return count;
 }
@@ -132,21 +130,22 @@ ssize_t uart_read_r(struct _reent * r, int file_descriptor, void * buffer, size_
 ssize_t uart_write_r(struct _reent * r, int file_descriptor, const void * buffer, size_t size)
 {
 	portTickType ticks_to_wait = portMAX_DELAY;
-	usart_driver_t * d = uarts_[file_descriptor];
+	uint32_t uart_nr = uarts_[file_descriptor];
 	size_t length = strlen(buffer);
 
-	if(size == length){
-		d->write(d, ticks_to_wait, buffer);
-	} else {
-		char * new_str = pvPortMalloc((size+1)*sizeof(char));
-		memcpy(new_str, buffer, size);
-		*(new_str+length) = '\0';
+	if(uart_nr == 0){
+		if(size == length){
+			usartSendString(buffer, ticks_to_wait);
+		} else {
+			char * new_str = pvPortMalloc((size+1)*sizeof(char));
+			memcpy(new_str, buffer, size);
+			*(new_str+length) = '\0';
 
-		d->write(d, ticks_to_wait, new_str);
-		vPortFree(new_str);
+			usartSendBytes(new_str, size, ticks_to_wait);
+			vPortFree(new_str);
+		}
 	}
-
-	return length;
+	return size;
 }
 
 
