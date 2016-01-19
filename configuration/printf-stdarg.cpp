@@ -15,6 +15,12 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+* This file was mofidied by
+* \author Mazeryt Freager
+*
+* diff:
+* -added length (l, ll) as variable modifier
 */
 
 /*
@@ -31,15 +37,18 @@
 
 #define putchar(c)							usart_low_level_put( c )
 
+static int ee_vsprintf(char *buf, const char *fmt, va_list args);
+
 static void printchar(char **str, int c)
 {
 	extern int putchar(char c);
-	
+
 	if (str) {
 		**str = c;
 		++(*str);
 	}
-	else (void)putchar(c);
+	else
+		(void)putchar(c);
 }
 
 #define PAD_RIGHT 1
@@ -75,8 +84,8 @@ static int prints(char **out, const char *string, int width, int pad)
 	return pc;
 }
 
-/* the following should be enough for 32 bit int */
-#define PRINT_BUF_LEN 12
+/* the following should be enough for 64 bit int */
+#define PRINT_BUF_LEN 22
 
 static int printi(char **out, int i, int b, int sg, int width, int pad, int letbase)
 {
@@ -125,9 +134,11 @@ static int print(char **out, const char *format, va_list args )
 {
 	register int width, pad;
 	register int pc = 0;
+	int lflag;
 	char scr[2];
 
 	for (; *format != 0; ++format) {
+		lflag = 0;
 		if (*format == '%') {
 			++format;
 			width = pad = 0;
@@ -145,6 +156,12 @@ static int print(char **out, const char *format, va_list args )
 				width *= 10;
 				width += *format - '0';
 			}
+len_modif:
+			if (*format == 'l') {
+				++format;
+				lflag = 1;
+				goto len_modif;
+			}
 			if (*format == '*') {
 				++format;
 				width = va_arg( args, int );
@@ -155,19 +172,31 @@ static int print(char **out, const char *format, va_list args )
 				continue;
 			}
 			if( *format == 'd' ) {
-				pc += printi (out, va_arg( args, int ), 10, 1, width, pad, 'a');
+				if(lflag)
+					pc += printi (out, va_arg( args, int ), 10, 1, width, pad, 'a');
+				else
+					pc += printi (out, va_arg( args, long ), 10, 1, width, pad, 'a');
 				continue;
 			}
 			if( *format == 'x' ) {
-				pc += printi (out, va_arg( args, int ), 16, 0, width, pad, 'a');
+				if(lflag)
+					pc += printi (out, va_arg( args, long long), 16, 0, width, pad, 'a');
+				else
+					pc += printi (out, va_arg( args, int ), 16, 0, width, pad, 'a');
 				continue;
 			}
 			if( *format == 'X' ) {
-				pc += printi (out, va_arg( args, int ), 16, 0, width, pad, 'A');
+				if(lflag)
+					pc += printi (out, va_arg( args, long ), 16, 0, width, pad, 'A');
+				else
+					pc += printi (out, va_arg( args, int ), 16, 0, width, pad, 'A');
 				continue;
 			}
 			if( *format == 'u' ) {
-				pc += printi (out, va_arg( args, int ), 10, 0, width, pad, 'a');
+				if(lflag)
+					pc += printi (out, va_arg( args, long ), 10, 0, width, pad, 'a');
+				else
+					pc += printi (out, va_arg( args, int ), 10, 0, width, pad, 'a');
 				continue;
 			}
 			if( *format == 'c' ) {
@@ -192,15 +221,23 @@ static int print(char **out, const char *format, va_list args )
 int printf(const char *format, ...)
 {
         va_list args;
-        
+
         va_start( args, format );
         return print( 0, format, args );
+}
+
+int ucsiprintf(uint8_t fd, char *out, const char *format, ...)
+{
+        va_list args;
+
+	      va_start( args, format );
+	      return print( &out, format, args );
 }
 
 int sprintf(char *out, const char *format, ...)
 {
         va_list args;
-        
+
         va_start( args, format );
         return print( &out, format, args );
 }
@@ -209,6 +246,9 @@ int vsprintf(char *out, const char *format, va_list args)
 {
 		return print(&out, format, args);
 }
+
+
+
 
 #ifdef TEST_PRINTF
 int main(void)
@@ -276,3 +316,4 @@ int main(void)
  */
 
 #endif
+
